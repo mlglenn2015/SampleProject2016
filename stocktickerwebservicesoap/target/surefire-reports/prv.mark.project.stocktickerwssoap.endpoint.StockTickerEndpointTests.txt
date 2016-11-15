@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: prv.mark.project.stocktickerwssoap.endpoint.StockTickerEndpointTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.128 sec - in prv.mark.project.stocktickerwssoap.endpoint.StockTickerEndpointTests

@@ -1,0 +1,7 @@
+prv\mark\project\stocktickerwssoap\util\MessageBuilderUtils.class
+prv\mark\project\stocktickerwssoap\config\DataConfig.class
+prv\mark\project\stocktickerwssoap\service\StockTickerService.class
+prv\mark\project\stocktickerwssoap\endpoint\StockTickerEndpoint.class
+prv\mark\project\stocktickerwssoap\service\impl\StockTickerServiceImpl.class
+prv\mark\project\stocktickerwssoap\config\StockTickerWsConfig.class
+prv\mark\project\stocktickerwssoap\StockTickerWsException.class

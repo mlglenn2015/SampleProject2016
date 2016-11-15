@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="StockTicker"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:tns="http://prv.mark.project/stocks"
+             targetNamespace="http://prv.mark.project/stocks">
+
+    <types>
+        <schema targetNamespace="http://prv.mark.project/stocks" xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <!--<element name="SubmitOrderRequest">
+                <complexType>
+                    <sequence>
+                        <element minOccurs="1" maxOccurs="1" name="head" type="tns:RequestHeader" />
+                        <element minOccurs="1" maxOccurs="1" name="orders" type="tns:OrderList" />
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="SubmitOrderResponse">
+                <complexType>
+                    <sequence>
+                        <element minOccurs="1" maxOccurs="1" name="success" type="int"/>
+                    </sequence>
+                </complexType>
+            </element>-->
+
+            <element name="GetStockPriceRequest">
+                <complexType>
+                    <sequence>
+                        <element minOccurs="1" maxOccurs="1" name="head" type="tns:RequestHeader" />
+                        <element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="string" />
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="GetStockPriceResponse">
+                <complexType>
+                    <sequence>
+                        <element minOccurs="0" maxOccurs="1" name="order" type="tns:StockQuote"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <complexType name="RequestHeader">
+                <sequence>
+                    <element minOccurs="1" maxOccurs="1" name="source" type="string" />
+                </sequence>
+            </complexType>
+
+            <complexType name="StockQuote">
+                <sequence>
+                    <element minOccurs="1" maxOccurs="1" name="statusCode" type="int" />
+                    <element minOccurs="1" maxOccurs="1" name="statusText" type="string" />
+                    <element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="string" />
+                    <element minOccurs="1" maxOccurs="1" name="stockPrice" type="float" />
+                </sequence>
+            </complexType>
+
+            <complexType name="StockOrder">
+                <sequence>
+                    <element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="string" />
+                    <element minOccurs="1" maxOccurs="1" name="orderDate" type="dateTime" />
+                    <element minOccurs="0" maxOccurs="1" name="quantity" type="int" />
+                    <element minOccurs="0" maxOccurs="1" name="action" type="string" />
+                    <element minOccurs="0" maxOccurs="1" name="orderType" type="string" />
+                </sequence>
+            </complexType>
+
+        </schema>
+    </types>
+
+    <!--<message name="SubmitOrderRequestMessage">
+        <part name="Request" element="tns:SubmitOrderRequest"/>
+    </message>
+    <message name="SubmitOrderResponseMessage">
+        <part name="Response" element="tns:SubmitOrderResponse"/>
+    </message>-->
+
+    <message name="GetStockPriceRequestMessage">
+        <part name="Request" element="tns:GetStockPriceRequest"/>
+    </message>
+    <message name="GetStockPriceResponseMessage">
+        <part name="Response" element="tns:GetStockPriceResponse"/>
+    </message>
+
+
+    <portType name="StockTickerPortType">
+
+        <!--<operation name="SubmitOrder">
+            <input message="tns:SubmitOrderRequestMessage"/>
+            <output message="tns:SubmitOrderResponseMessage"/>
+        </operation>-->
+
+        <operation name="GetStockPrice">
+            <input message="tns:GetStockPriceRequestMessage"/>
+            <output message="tns:GetStockPriceResponseMessage"/>
+        </operation>
+
+    </portType>
+
+    <binding name="StockTickerBinding" type="tns:StockTickerPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <!--<operation name="SubmitOrder">
+            <input name="SubmitOrderRequestMessage">
+                <soap:body use="literal" />
+            </input>
+            <output name="SubmitOrderResponseMessage">
+                <soap:body use="literal" />
+            </output>
+        </operation>-->
+
+        <operation name="GetStockPrice">
+            <input name="GetStockPriceRequestMessage">
+                <soap:body use="literal" />
+            </input>
+            <output name="GetStockPriceResponseMessage">
+                <soap:body use="literal" />
+            </output>
+        </operation>
+
+    </binding>
+
+    <service name="StockQuoteService">
+        <port binding="tns:StockTickerBinding" name="StockTickerPort">
+            <soap:address location="http://localhost:8080/StockTicker/" />
+        </port>
+    </service>
+
+</definitions>
