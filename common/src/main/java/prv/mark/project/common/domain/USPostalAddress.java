@@ -4,6 +4,7 @@ import prv.mark.project.common.validation.USState;
 import prv.mark.project.common.validation.Zip4;
 import prv.mark.project.common.validation.ZipCode;
 import org.hibernate.validator.constraints.NotEmpty;
+import prv.mark.project.common.validation.ZipPlus4;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -40,6 +41,8 @@ public class USPostalAddress implements Serializable {
     private String zipCode;
     @Zip4
     private String zip4;
+    @ZipPlus4
+    private String zipPlus4;
     private String addressLine1;
     private String addressLine2;
 
@@ -137,6 +140,14 @@ public class USPostalAddress implements Serializable {
 
     public void setZip4(String zip4) {
         this.zip4 = zip4;
+    }
+
+    public String getZipPlus4() {
+        return zipPlus4;
+    }
+
+    public void setZipPlus4(String zipPlus4) {
+        this.zipPlus4 = zipPlus4;
     }
 
     public String getAddressLine1() {

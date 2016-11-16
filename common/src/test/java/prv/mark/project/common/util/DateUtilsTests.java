@@ -1,24 +1,33 @@
 package prv.mark.project.common.util;
 
-import prv.mark.project.common.config.UtilsTestConfig;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
+import prv.mark.project.common.config.UtilsTestConfig;
+import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertNotNull;
 
 @ContextConfiguration(classes = {UtilsTestConfig.class})
-public class DateUtilsTests { //extends AbstractAppTransactionalTest {
+public class DateUtilsTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilsTests.class);
 
+
+    @Test
+    public void testLocalDate() {
+        LOGGER.debug("testLocalDate()");
+        LocalDate returnedDate = DateUtils.getLocalDate();
+        assertNotNull(returnedDate);
+    }
 
     @Test
     public void testLocalDateTime() {

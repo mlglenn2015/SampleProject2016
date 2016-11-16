@@ -1,6 +1,7 @@
 package prv.mark.project.common.util;
 
 import org.junit.Test;
+import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
-public class StringUtilsTests { //extends AbstractAppTransactionalTest {
+public class StringUtilsTests extends AbstractAppTransactionalTest {
 
     @Test
     public void testSafeString() {

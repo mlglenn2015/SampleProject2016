@@ -3,6 +3,7 @@ package prv.mark.project.common.util;
 import java.math.BigDecimal;
 
 /**
+ * Numbers utility class.
  *
  * Created by mlglenn on 10/24/2016.
  */
@@ -10,9 +11,10 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
 
 
     /**
+     * Converts a {@link Double} to {@link BigDecimal}.
      *
-     * @param value
-     * @return
+     * @param value {@link Double}
+     * @return {@link BigDecimal}
      */
     public static BigDecimal toBigDecimal(final Double value) {
         if (value == null) {
@@ -23,9 +25,10 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
     }
 
     /**
+     * Converts a {@link Float} to {@link BigDecimal}.
      *
-     * @param value
-     * @return
+     * @param value {@link Float}
+     * @return {@link BigDecimal}
      */
     public static BigDecimal toBigDecimal(final Float value) {
         if (value == null) {
@@ -36,9 +39,10 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
     }
 
     /**
+     * Converts a {@link Long} to {@link BigDecimal}.
      *
-     * @param value
-     * @return
+     * @param value {@link Long}
+     * @return {@link BigDecimal}
      */
     public static BigDecimal toBigDecimal(final Long value) {
         if (value == null) {
@@ -49,9 +53,10 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
     }
 
     /**
+     * Converts a {@link Integer} to {@link BigDecimal}.
      *
-     * @param value
-     * @return
+     * @param value {@link Integer}
+     * @return {@link BigDecimal}
      */
     public static BigDecimal toBigDecimal(final Integer value) {
         if (value == null) {

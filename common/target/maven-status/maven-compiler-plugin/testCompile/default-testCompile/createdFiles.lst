@@ -1,4 +1,6 @@
-prv\mark\project\common\util\DateUtilsTests.class
 prv\mark\project\common\util\StringUtilsTests.class
-prv\mark\project\common\config\UtilsTestConfig.class
+prv\mark\project\common\util\NumberUtilsTests.class
 prv\mark\project\common\util\ApplicationTestExceptionUtils.class
+prv\mark\project\common\validation\USAddressValidationTests.class
+prv\mark\project\common\util\DateUtilsTests.class
+prv\mark\project\common\config\UtilsTestConfig.class
