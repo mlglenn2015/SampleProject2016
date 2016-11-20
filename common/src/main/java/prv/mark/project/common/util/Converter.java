@@ -1,7 +1,9 @@
 package prv.mark.project.common.util;
 
 /**
- * Functional interface to convert from one type to another.
+ * Functional Interface to convert one type to another.
+ *
+ * @author mlglenn
  */
 @FunctionalInterface
 public interface Converter<F, T> {

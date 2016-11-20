@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author mlglenn.
  */
 @Service
-public class StockOrderServiceImpl { //implements OrdersService {
+public class StockOrderServiceImpl { //implements OrdersService { TODO finish
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockOrderServiceImpl.class);
 

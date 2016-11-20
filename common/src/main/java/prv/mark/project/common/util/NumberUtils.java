@@ -67,6 +67,18 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
     }
 
     /**
+     * Converts a string to Float.
+     * @param val The input value to convert
+     * @return float
+     */
+    public static float toFloat(final String val) {
+        if (val != null) {
+            return org.apache.commons.lang3.math.NumberUtils.toFloat(val);
+        }
+        return org.apache.commons.lang3.math.NumberUtils.toFloat("0.00");
+    }
+
+    /**
      * Converts a passed in {@link String} to an integer.
      *
      * @param str {@link String} (final) representing the input string

@@ -13,7 +13,7 @@
         <module>schemas</module>
         <module>testutils</module>
         <module>common</module>
-        <module>stocktickerwebservicesoap</module>
+        <module>Stockticker</module>
     </modules>
 
     <!-- Nexus repository -->

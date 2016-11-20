@@ -13,6 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -43,6 +44,13 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
         assertNotNull(returnedXmlCal);
     }
 
+    @Test
+    public void testXmlGregorianCalendarToDate() {
+        LOGGER.debug("testXmlGregorianCalendarToDate()");
+        XMLGregorianCalendar returnedXmlCal = DateUtils.getCurrentXMLGregorianCalendar();
+        Date returnedDate = DateUtils.xmlGregorianCalendarToDate(returnedXmlCal);
+        assertNotNull(returnedDate);
+    }
 
     private XMLGregorianCalendar returnControlXmlCal() {
         XMLGregorianCalendar controlXmlCal = null;

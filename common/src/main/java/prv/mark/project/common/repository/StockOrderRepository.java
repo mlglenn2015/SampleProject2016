@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Repository for {@link prv.mark.project.common.entity.StockOrder} entities.
+ * JPA Repository for {@link prv.mark.project.common.entity.StockOrder} entities.
  *
  * @author mlglenn.
  */

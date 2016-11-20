@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 /**
  * JSR303 validation interface for US Postal Code.
  *
- * @author
+ * @author mlglenn
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

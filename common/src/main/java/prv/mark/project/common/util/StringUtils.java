@@ -11,13 +11,13 @@ import java.util.regex.Pattern;
 
 
 /**
- * String utility classes.
+ * String utility methods.
  * <p>
  * <p>
  * This class is an adapter for the {@link org.apache.commons.lang3.StringUtils} class from Apache Commons Lang.
  * </p>
  *
- * @author
+ * @author mlglenn
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 

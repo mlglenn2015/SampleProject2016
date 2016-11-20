@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 /**
+ * Utility class for SOAP messages.
+ *
  * Created by mlglenn on 11/14/2016.
  */
 public class SoapMessageUtils {
@@ -25,9 +27,11 @@ public class SoapMessageUtils {
 
 
     /**
+     * Returns a {@link SoapFaultClientException} from a custom XML message.
      *
-     * @param serverMsg
-     * @return
+     * @param serverMsg to indicate which message type
+     * @param xml XML to create the message from
+     * @return {@link SoapFaultClientException}
      */
     public static SoapFaultClientException getSoapFaultClientException(final boolean serverMsg,
                                                                        final String xml) {

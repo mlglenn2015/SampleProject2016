@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 /**
  * JSR-303 annotation to validate US state abbreviations.
  *
- * @author
+ * @author mlglenn
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Domain object which conforms to USPS street address standard.
  *
- * @author
+ * @author mlglenn
  */
 public class USPostalAddress implements Serializable {
     @Size(min = 0, max = 2, message = "Pre-Directional must be between {min} and {max} characters.")

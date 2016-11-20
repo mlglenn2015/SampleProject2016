@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Implementation of {@link USState} validation annotation.
  *
- * @author
+ * @author mlglenn
  */
 public class USStateValidator implements ConstraintValidator<USState, String> {
 
@@ -23,6 +23,12 @@ public class USStateValidator implements ConstraintValidator<USState, String> {
     public void initialize(USState state) {
     }
 
+    /**
+     * Tests whether the US State code is valid.
+     * @param state The input US State Code
+     * @param context {@link ConstraintValidatorContext}
+     * @return boolean
+     */
     public boolean isValid(String state, ConstraintValidatorContext context) {
         boolean valid = false;
         for (String s : US_STATES) {

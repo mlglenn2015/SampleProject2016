@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 /**
  * JSR303 annotation to validate US Zip+4 code.
  *
- * @author
+ * @author mlglenn
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

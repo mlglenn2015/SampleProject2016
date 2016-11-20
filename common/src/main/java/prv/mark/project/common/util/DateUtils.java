@@ -13,29 +13,31 @@ import java.util.Date;
 
 /**
  * Utility class for common {@link java.util.Date} and {@link java.util.Calendar} conversions.
+ *
+ * @author mlglenn
  */
 public class DateUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtils.class);
 
     /**
-     *
-     * @return
+     * Returns the {@link LocalDateTime}.
+     * @return {@link LocalDateTime}
      */
     public static LocalDateTime getLocalDateTime() {
         return LocalDateTime.now();
     }
 
     /**
-     *
-     * @return
+     * Returns the {@link LocalDate}.
+     * @return {@link LocalDate}
      */
     public static LocalDate getLocalDate() {
         return LocalDate.now();
     }
 
     /**
-     *
-     * @return
+     * Returns an {@link XMLGregorianCalendar} object.
+     * @return {@link XMLGregorianCalendar}
      */
     public static XMLGregorianCalendar getCurrentXMLGregorianCalendar() {
         LocalDateTime localDateTime = getLocalDateTime();
@@ -52,9 +54,9 @@ public class DateUtils {
     }
 
     /**
-     *
-     * @param xmlGregorianCalendar
-     * @return
+     * Returns a {@link Date} object.
+     * @param xmlGregorianCalendar the object to convert.
+     * @return {@link Date}
      */
     public static Date xmlGregorianCalendarToDate(XMLGregorianCalendar xmlGregorianCalendar) {
 

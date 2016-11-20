@@ -16,6 +16,12 @@ public class ZipPlus4Validator implements ConstraintValidator<ZipPlus4, String> 
     public void initialize(ZipPlus4 zipPlus4) {
     }
 
+    /**
+     * Tests whether a US ZIP Code Plus ZIP4 is valid.
+     * @param value The value to validate
+     * @param context {@link ConstraintValidatorContext}
+     * @return boolean
+     */
     public boolean isValid(String value, ConstraintValidatorContext context) {
         Pattern pattern = Pattern.compile("[0-9]{5}-[0-9]{4}");
         return value != null && pattern.matcher(value).matches();
