@@ -330,6 +330,13 @@
 
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <url>file://${basedir}/mvnInternal</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
