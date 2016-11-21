@@ -1,0 +1,27 @@
+--------------------------------------------------------------------------------
+-- create_transaction_log.sql
+--------------------------------------------------------------------------------
+ALTER SESSION SET CURRENT_SCHEMA=STOCKS;
+
+DROP TABLE TRANSACTION_LOG;
+DROP SEQUENCE SEQ_TRANSACTION_LOG;
+
+CREATE TABLE TRANSACTION_LOG (
+  ID                  NUMBER(10,0) NOT NULL PRIMARY KEY,
+  LOG_DATE_TIME       TIMESTAMP NOT NULL,
+  TRANSACTION_TYPE    VARCHAR2(25) NOT NULL
+);
+
+CREATE INDEX transaction_log_idx01 ON  TRANSACTION_LOG (transaction_type);
+
+CREATE SEQUENCE SEQ_TRANSACTION_LOG
+  START WITH 1
+  INCREMENT BY 1
+  MAXVALUE 23667
+  NOCYCLE
+  CACHE 10;
+
+INSERT INTO TRANSACTION_LOG (ID, LOG_DATE_TIME, TRANSACTION_TYPE)
+  VALUES (SEQ_TRANSACTION_LOG.nextval, CURRENT_TIMESTAMP, 'INTIAL TEST');
+
+COMMIT;
