@@ -1,0 +1,17 @@
+
+Installing XE: http://docs.oracle.com/cd/E17781_01/install.112/e18803/toc.htm#XEINW133
+
+Had issue starting database: "Oracle XE ORA-01033: ORACLE initialization or shutdown in progress"
+
+	http://stackoverflow.com/questions/53676/how-to-resolve-ora-011033-oracle-initialization-or-shutdown-in-progress
+
+	ORA-01079: ORACLE database was not properly created, operation aborted
+
+		Database is not properly created or your controlfile was not properly created.
+
+		I executed CreateDB and then the XE database was available - 2016-11-24
+
+
+
+
+

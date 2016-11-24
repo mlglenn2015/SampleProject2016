@@ -1,0 +1,7 @@
+
+1. Start machine
+
+2. Start database as Administrator
+
+3. Test with SQL Plus or SQL Developer
+
