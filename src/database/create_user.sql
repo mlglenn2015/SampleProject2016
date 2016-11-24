@@ -1,7 +1,7 @@
 
 #open SQL Plus
 
-connect SYSTEM/admin
+connect SYSTEM/admin (or oracle)
 
 CREATE USER stocks IDENTIFIED BY stocks;
 
