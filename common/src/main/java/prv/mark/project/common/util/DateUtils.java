@@ -8,6 +8,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 
@@ -17,7 +19,12 @@ import java.util.Date;
  * @author mlglenn
  */
 public class DateUtils {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtils.class);
+
+    public static Date getDate() {
+        return new Date();
+    }
 
     /**
      * Returns the {@link LocalDateTime}.
@@ -28,11 +35,38 @@ public class DateUtils {
     }
 
     /**
+     * Returns a {@link LocalDateTime} from an input {@link Date}.
+     * @param dateIn the input {@link Date}
+     * @return {@link LocalDateTime}
+     */
+    public static LocalDateTime getLocalDateTimeFromDate(final Date dateIn) {
+        if (dateIn == null) {
+            return null;
+        }
+        LocalDateTime ldt = LocalDateTime.ofInstant(dateIn.toInstant(), ZoneId.systemDefault());
+        return ldt;
+    }
+
+    /**
      * Returns the {@link LocalDate}.
      * @return {@link LocalDate}
      */
     public static LocalDate getLocalDate() {
         return LocalDate.now();
+    }
+
+    /**
+     * Returns a {@link Date} object from an input {@link LocalDateTime}.
+     * @param localDateTime the input {@link LocalDateTime}
+     * @return {@link Date}
+     */
+    public static Date getDateFromLocalDateTime(final LocalDateTime localDateTime) {
+        if (localDateTime == null) {
+            return null;
+        }
+        ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
+        Date output = Date.from(zdt.toInstant());
+        return output;
     }
 
     /**

@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -28,8 +27,8 @@ public class TransactionLog implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @SequenceGenerator(
-            name = "SEQ_TRANSACTION_LOG_ID", sequenceName = "SEQ_TRANSACTION_LOG_ID", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(generator = "SEQ_TRANSACTION_LOG_ID", strategy = GenerationType.SEQUENCE)
+            name = "SEQ_TRANSACTION_LOG", sequenceName = "SEQ_TRANSACTION_LOG", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_TRANSACTION_LOG", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)

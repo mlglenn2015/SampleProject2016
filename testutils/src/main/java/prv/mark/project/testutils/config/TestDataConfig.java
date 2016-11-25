@@ -2,10 +2,12 @@ package prv.mark.project.testutils.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -23,8 +25,8 @@ import java.util.Properties;
 
 
 @Configuration
-//@ComponentScan(basePackages = {"prv.mark.project"})
-//@EnableJpaRepositories(basePackages = {"prv.mark.project.repository"})
+@ComponentScan(basePackages = {"prv.mark.project"})
+@EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
 @PropertySources({
         @PropertySource("classpath:/test-common.properties")
@@ -51,11 +53,16 @@ public class TestDataConfig {
     }
 
     @Bean
+    public DataSource appDataSource() {
+        return dataSource();
+    }
+
+    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
 
         emfb.setDataSource(dataSource());
-        emfb.setPackagesToScan("prv.mark.project.entity");
+        emfb.setPackagesToScan("prv.mark.project.common.entity");
         emfb.setJpaDialect(new EclipseLinkJpaDialect());
 
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();

@@ -8,7 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 /**
  * Base class for web service integration tests.
  *
- * @author
+ * @author mlglenn
  */
 @ActiveProfiles({"integration"})
 public abstract class AbstractAppIntegrationTest extends AbstractAppWebServiceEndpointTest {
@@ -20,4 +20,5 @@ public abstract class AbstractAppIntegrationTest extends AbstractAppWebServiceEn
     public void setUp() {
         LOGGER.debug("@Before:AbstractAppIntegrationTest.setUp()");
     }
+
 }

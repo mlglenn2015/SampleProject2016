@@ -8,11 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * JPA Entity for the STOCK_PRICE table.
@@ -28,8 +25,8 @@ public class StockPrice implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @SequenceGenerator(
-            name = "SEQ_STOCK_PRICE_ID", sequenceName = "SEQ_STOCK_PRICE_ID", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(generator = "SEQ_STOCK_PRICE_ID", strategy = GenerationType.SEQUENCE)
+            name = "SEQ_STOCK_PRICE", sequenceName = "SEQ_STOCK_PRICE", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_STOCK_PRICE", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Basic

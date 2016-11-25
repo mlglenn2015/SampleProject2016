@@ -28,8 +28,8 @@ public class StockOrder implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @SequenceGenerator(
-            name = "SEQ_STOCK_ORDER_ID", sequenceName = "SEQ_STOCK_ORDER_ID", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(generator = "SEQ_STOCK_ORDER_ID", strategy = GenerationType.SEQUENCE)
+            name = "SEQ_STOCK_ORDER", sequenceName = "SEQ_STOCK_ORDER", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_STOCK_ORDER", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Basic

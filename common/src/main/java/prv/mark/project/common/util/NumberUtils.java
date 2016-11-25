@@ -20,7 +20,7 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
         if (value == null) {
             return new BigDecimal(0.00);
         }
-        BigDecimal returnVal = new BigDecimal(value);
+        BigDecimal returnVal = new BigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP);
         return returnVal;
     }
 
@@ -34,7 +34,7 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
         if (value == null) {
             return new BigDecimal(0.00);
         }
-        BigDecimal returnVal = new BigDecimal(value);
+        BigDecimal returnVal = new BigDecimal(value).setScale(12, BigDecimal.ROUND_HALF_UP);
         return returnVal;
     }
 
@@ -48,7 +48,7 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
         if (value == null) {
             return new BigDecimal(0.00);
         }
-        BigDecimal returnVal = new BigDecimal(value);
+        BigDecimal returnVal = new BigDecimal(value).setScale(12, BigDecimal.ROUND_HALF_UP);
         return returnVal;
     }
 
@@ -62,7 +62,7 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
         if (value == null) {
             return new BigDecimal(0.00);
         }
-        BigDecimal returnVal = new BigDecimal(value);
+        BigDecimal returnVal = new BigDecimal(value).setScale(12, BigDecimal.ROUND_HALF_UP);
         return returnVal;
     }
 
@@ -96,8 +96,19 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
      * @return {@link Long} containing the Long numeric value, or a 0 if it fails
      */
     public static long toLong(final String str) {
-
         return org.apache.commons.lang3.math.NumberUtils.toLong(str, 0L);
+    }
+
+    /**
+     * Converts an {@link Integer} to {@link Long}.
+     * @param intValue input value
+     * @return {@link Long}
+     */
+    public static long toLong(final Integer intValue) {
+        if (intValue == null) {
+            return 0L;
+        }
+        return Long.valueOf(intValue);
     }
 
     /**

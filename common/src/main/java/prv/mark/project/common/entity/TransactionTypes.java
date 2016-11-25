@@ -8,10 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * JPA Entity for the TRANSACTION_TYPES table.
@@ -27,8 +24,8 @@ public class TransactionTypes implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @SequenceGenerator(
-            name = "SEQ_TRANSACTION_TYPES_ID", sequenceName = "SEQ_TRANSACTION_TYPES_ID", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(generator = "SEQ_TRANSACTION_TYPES_ID", strategy = GenerationType.SEQUENCE)
+            name = "SEQ_TRANSACTION_TYPES", sequenceName = "SEQ_TRANSACTION_TYPES", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_TRANSACTION_TYPES", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Basic

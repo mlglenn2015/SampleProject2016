@@ -23,7 +23,7 @@ public class StockTickerRestController {
 
 
     /**
-     * Request handler for /stockrest/bysymbol requests
+     * Request handler for /stockrest/bysymbol requests (http://localhost:13001/Stockticker/stockrest/bysymbol)
      * @param stockSymbol The input ticker symbol
      * @return {@link StockPriceResponse} containing the stock price
      */

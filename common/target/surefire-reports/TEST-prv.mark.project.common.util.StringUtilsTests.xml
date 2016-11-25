@@ -11,7 +11,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7538"/>
+    <property name="idea.launcher.port" value="7541"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -64,15 +64,15 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase name="testContainsIgnoreCase" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
-  <testcase name="testZeroPadStringFromInt" classname="prv.mark.project.common.util.StringUtilsTests" time="0.002"/>
-  <testcase name="testIsNumeric" classname="prv.mark.project.common.util.StringUtilsTests" time="0.003"/>
-  <testcase name="testSafeString" classname="prv.mark.project.common.util.StringUtilsTests" time="0.003"/>
-  <testcase name="testEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0.004"/>
+  <testcase name="testZeroPadStringFromInt" classname="prv.mark.project.common.util.StringUtilsTests" time="0.003"/>
+  <testcase name="testIsNumeric" classname="prv.mark.project.common.util.StringUtilsTests" time="0.001"/>
+  <testcase name="testSafeString" classname="prv.mark.project.common.util.StringUtilsTests" time="0.008"/>
+  <testcase name="testEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
   <testcase name="testRegEx" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
   <testcase name="testNegativeIsNumeric" classname="prv.mark.project.common.util.StringUtilsTests" time="0.001"/>
-  <testcase name="testIsNotEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0.002"/>
-  <testcase name="testNegativeContainsIgnoreCase" classname="prv.mark.project.common.util.StringUtilsTests" time="0.004"/>
-  <testcase name="testGetZeroPadString" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
-  <testcase name="testIsBlank" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
-  <testcase name="testIsEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0.001"/>
+  <testcase name="testIsNotEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
+  <testcase name="testNegativeContainsIgnoreCase" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
+  <testcase name="testGetZeroPadString" classname="prv.mark.project.common.util.StringUtilsTests" time="0.002"/>
+  <testcase name="testIsBlank" classname="prv.mark.project.common.util.StringUtilsTests" time="0.005"/>
+  <testcase name="testIsEmpty" classname="prv.mark.project.common.util.StringUtilsTests" time="0"/>
 </testsuite>

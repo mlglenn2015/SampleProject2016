@@ -38,6 +38,22 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
     }
 
     @Test
+    public void testLocalDateTimeFromDate() {
+        LOGGER.debug("testLocalDateTimeFromDate()");
+        Date date = new Date();
+        LocalDateTime returnedDate = DateUtils.getLocalDateTimeFromDate(date);
+        assertNotNull(returnedDate);
+    }
+
+    @Test
+    public void testDateFromLocalDateTime() {
+        LOGGER.debug("testDateFromLocalDateTime()");
+        LocalDateTime localDateTime = DateUtils.getLocalDateTime();
+        Date returnedDate = DateUtils.getDateFromLocalDateTime(localDateTime);
+        assertNotNull(returnedDate);
+    }
+
+    @Test
     public void testToXMLGregorianCalendar() {
         LOGGER.debug("testToXMLGregorianCalendar()");
         XMLGregorianCalendar returnedXmlCal = DateUtils.getCurrentXMLGregorianCalendar();

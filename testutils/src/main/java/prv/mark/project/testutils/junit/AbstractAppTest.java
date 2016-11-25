@@ -1,6 +1,5 @@
 package prv.mark.project.testutils.junit;
 
-import prv.mark.project.testutils.config.TestConfig;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,6 +12,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import prv.mark.project.testutils.config.TestConfig;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * Generic unit test foundation.
@@ -21,14 +24,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * ContextConfiguration} annotation specific to the particular test's Spring
  * configuration. </p>
  *
- * @author
+ * @author mlglenn
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
 @DirtiesContext
 @ActiveProfiles("test")
 public abstract class AbstractAppTest extends AbstractJUnit4SpringContextTests {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAppTest.class);
+
+
+    /**
+     * Method called after instantiation of this object.
+     */
+    @PostConstruct
+    public static void postConstruct() {
+        LOGGER.debug("@PostConstruct:AbstractAppTest.postConstruct()");
+    }
 
     /**
      * Method used to bootstrap test class.
@@ -54,6 +67,14 @@ public abstract class AbstractAppTest extends AbstractJUnit4SpringContextTests {
     @After
     public void tearDown() {
         LOGGER.debug("@After:AbstractAppTest.tearDown()");
+    }
+
+    /**
+     * Method called before destruction of this object.
+     */
+    @PreDestroy
+    public static void preDestroy() {
+        LOGGER.debug("@PreDestroy:AbstractAppTest.preDestroy()");
     }
 
     /**

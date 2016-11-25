@@ -1,6 +1,7 @@
 package prv.mark.project.testutils.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 
 @Configuration
-@ComponentScan(basePackages = {"prv.mark.project.util", "prv.mark.project.validation"})
+@ComponentScan(basePackages = {"prv.mark.project"})
 @PropertySources(value = {
         @PropertySource("classpath:common.properties")
 })
@@ -24,6 +25,13 @@ public class TestConfig {
 
     @Autowired
     private Environment environment;
+
+    @Value("${key.store.password}")
+    private String keyStorePassword;
+
+    @Value("${trust.store.password}")
+    private String trustStorePassword;
+
 
     @Bean
     public LocalValidatorFactoryBean validator() {

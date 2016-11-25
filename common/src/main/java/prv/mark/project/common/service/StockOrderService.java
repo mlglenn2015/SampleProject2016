@@ -12,11 +12,15 @@ import java.util.Optional;
  */
 public interface StockOrderService {
 
-    Optional<StockOrder> findById(Long id);
+    Optional<prv.mark.project.common.entity.StockOrder> findById(Long id);
 
-    Optional<StockOrder> findByStockSymbol(String symbol);
+    //List<prv.mark.project.common.entity.StockOrder> findByOrderDate(Date orderDate);
 
-    List<StockOrder> findAll();
+    //List<prv.mark.project.common.entity.StockOrder> findByOrderType(String orderType);
 
-    StockOrder save(StockOrder orders);
+    List<prv.mark.project.common.entity.StockOrder> findByOrderStatus(String orderStatus);
+
+    List<prv.mark.project.common.entity.StockOrder> findAll();
+
+    StockOrder save(StockOrder order);
 }

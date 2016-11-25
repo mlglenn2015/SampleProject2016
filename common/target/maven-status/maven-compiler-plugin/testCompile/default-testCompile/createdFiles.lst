@@ -1,6 +1,13 @@
+prv\mark\project\common\repository\TransactionLogRepositoryTests.class
+prv\mark\project\common\repository\TransactionTypesRepositoryTests.class
+prv\mark\project\common\repository\ApplicationMessagesRepositoryTests.class
+prv\mark\project\common\repository\StockOrderRepositoryTests.class
+prv\mark\project\common\config\UtilsTestConfig.class
+prv\mark\project\common\repository\StockPriceRepositoryTests.class
 prv\mark\project\common\util\StringUtilsTests.class
+prv\mark\project\common\repository\OrderStatusRepositoryTests.class
 prv\mark\project\common\util\NumberUtilsTests.class
 prv\mark\project\common\util\ApplicationTestExceptionUtils.class
 prv\mark\project\common\validation\USAddressValidationTests.class
 prv\mark\project\common\util\DateUtilsTests.class
-prv\mark\project\common\config\UtilsTestConfig.class
+prv\mark\project\common\repository\OrderTypesRepositoryTests.class

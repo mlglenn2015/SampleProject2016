@@ -8,7 +8,7 @@ import org.springframework.test.context.transaction.BeforeTransaction;
 /**
  * Generic unit test foundation for web service endpoints.
  *
- * @author
+ * @author mlglenn
  */
 
 public abstract class AbstractAppWebServiceEndpointTest extends AbstractAppTransactionalTest {

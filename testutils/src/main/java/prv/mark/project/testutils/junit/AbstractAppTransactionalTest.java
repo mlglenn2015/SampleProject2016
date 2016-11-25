@@ -18,6 +18,9 @@ import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /**
  * Generic transactional unit test foundation.
  * <p> Most NBI Unit tests will derive from this class, as it provides database and transactional facilities used by
@@ -25,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
  * <p> NOTE: Classes deriving from this class <b><i>must provide</i></b> the
  * {@link ContextConfiguration} annotation specific to the particular test's Spring configuration. </p>
  *
- * @author
+ * @author mlglenn
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestDataConfig.class})
@@ -36,6 +39,14 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class AbstractAppTransactionalTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAppTransactionalTest.class);
+
+    /**
+     * Method called after instantiation of this object.
+     */
+    @PostConstruct
+    public static void postConstruct() {
+        LOGGER.debug("@PostConstruct:AbstractAppTransactionalTest.postConstruct()");
+    }
 
     /**
      * Method used to bootstrap test class.
@@ -82,4 +93,13 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
         LOGGER.debug("@AfterTransaction:AbstractAppTransactionalTest.afterTransaction()");
         LOGGER.trace("End of transaction");
     }
+
+    /**
+     * Method called before destruction of this object.
+     */
+    @PreDestroy
+    public static void preDestroy() {
+        LOGGER.debug("@PreDestroy:AbstractAppTransactionalTest.preDestroy()");
+    }
+
 }

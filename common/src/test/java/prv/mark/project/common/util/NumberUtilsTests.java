@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -68,6 +69,15 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
         BigDecimal bigDecimal = NumberUtils.toBigDecimal(NumberUtils.toLong(val));
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
+    }
+
+    @Test
+    public void testToLongFromInteger() {
+        Integer val = new Integer(456);
+        Long longVal = 456L;
+        Long longValue = NumberUtils.toLong(val);
+        assertEquals(longValue, longVal);
+        LOGGER.debug("Value is {}", longValue);
     }
 
     @Test
