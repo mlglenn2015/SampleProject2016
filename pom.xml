@@ -14,6 +14,7 @@
         <module>testutils</module>
         <module>common</module>
         <module>Stockticker</module>
+        <module>TransactionLogger</module>
     </modules>
 
     <!-- Nexus repository -->

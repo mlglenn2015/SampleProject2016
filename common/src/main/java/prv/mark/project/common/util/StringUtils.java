@@ -27,7 +27,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static final String COMMA = ",";
     public static final String DOT = ".";
     public static final String SLASH = "/";
-    public static final String APPLICATION_EXCEPTION = "!!! APPLICATION_EXCEPTION !!!";
+    public static final String PARM_REQUEST_SUCCESSFUL = "parm.request.successful";
+    public static final String PARM_REQUEST_FAILED = "parm.request.failed";
+    public static final String PARM_VALID_HEADER_SOURCE = "parm.validation.requestheader.source";
+    public static final String APPLICATION_EXCEPTION = "!!! APPLICATION EXCEPTION !!!";
 
 
     /**

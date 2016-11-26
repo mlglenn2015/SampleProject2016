@@ -1,16 +1,26 @@
 package prv.mark.project.stockticker.rest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ws.client.WebServiceClientException;
 import prv.mark.project.common.domain.json.AbstractJsonResponse;
 import prv.mark.project.common.domain.json.StockPriceRequest;
 import prv.mark.project.common.domain.json.StockPriceResponse;
+import prv.mark.project.common.exception.SOAPClientException;
+import prv.mark.project.common.exception.SOAPServerException;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
+import prv.mark.project.common.util.NumberUtils;
+import prv.mark.project.stockticker.service.StockTickerService;
+import prv.mark.xml.stocks.GetStockPriceRequest;
+import prv.mark.xml.stocks.GetStockPriceResponse;
 
 /**
  * REST Controller for Stock Ticker application.
@@ -21,6 +31,11 @@ public class StockTickerRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerRestController.class);
 
+    @Autowired
+    private StockTickerService stockTickerService;
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
+
 
     /**
      * Request handler for /stockrest/bysymbol requests (http://localhost:13001/Stockticker/stockrest/bysymbol)
@@ -30,10 +45,36 @@ public class StockTickerRestController {
     @RequestMapping(value="/bysymbol", method=RequestMethod.GET, params="stockSymbol")
     public StockPriceResponse getStockPriceBySymbol(final @RequestParam("stockSymbol") String stockSymbol) {
         LOGGER.debug("StockTickerRestController.getStockPriceBySymbol({})", stockSymbol);
+
+        //Validate the request
+        validateStockPriceRequest(stockSymbol);
+        LOGGER.debug("Request is valid: {}", stockSymbol);
+
+        GetStockPriceRequest getStockPriceRequest =new GetStockPriceRequest();
+        getStockPriceRequest.setTickerSymbol(stockSymbol);
+        GetStockPriceResponse getStockPriceResponse;
+        try {
+            getStockPriceResponse  = stockTickerService.getStockPrice(getStockPriceRequest);
+
+        } catch (SOAPClientException sce) {
+
+            LOGGER.error("SoapClientException caught: {}", sce.getMessage());
+            throw new SOAPClientException(sce.getMessage());
+
+        } catch (SOAPServerException | WebServiceClientException sse) {
+
+            LOGGER.error("SoapServerException caught: {}", sse.getMessage());
+            throw new SOAPServerException(sse.getMessage());
+
+        }
+
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
+        stockPriceResponse.setStockSymbol(getStockPriceResponse.getOrder().getTickerSymbol());
+        stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getOrder().getStockPrice()));
+        stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.OK);
+        //stockPriceResponse.setResult();
 
-        //TODO query the database and return the stock price if found
-
+        LOGGER.debug("Returning response: {}", stockPriceResponse.toString());
         return stockPriceResponse;
     }
 
@@ -51,5 +92,15 @@ public class StockTickerRestController {
         //TODO save
 
         return stockPriceResponse;
+    }
+
+
+    private void validateStockPriceRequest(final String stockSymbol) {
+        LOGGER.debug("*** StockTickerRestController.validateStockPriceRequest()");
+        if (StringUtils.isNotEmpty(stockSymbol)) {
+            String message = "*** Stock Symbol IS NULL!!! ***";
+            LOGGER.error(message);
+            throw new SOAPClientException(message);
+        }
     }
 }

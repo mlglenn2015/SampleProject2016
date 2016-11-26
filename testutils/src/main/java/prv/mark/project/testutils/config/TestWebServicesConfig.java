@@ -36,7 +36,8 @@ public class TestWebServicesConfig {
             prv.mark.xml.stocks.GetStockPriceRequest.class,
             prv.mark.xml.stocks.GetStockPriceResponse.class,
             prv.mark.xml.stocks.StockOrder.class,
-            prv.mark.xml.stocks.StockQuote.class
+            prv.mark.xml.stocks.StockQuote.class,
+            prv.mark.xml.stocks.RequestHeader.class
     };
 
     @Autowired

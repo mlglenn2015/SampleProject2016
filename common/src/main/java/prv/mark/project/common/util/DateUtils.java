@@ -70,6 +70,16 @@ public class DateUtils {
     }
 
     /**
+     * Returns a {@link Date} object from {@link LocalDateTime}.
+     * @return {@link Date}
+     */
+    public static Date getDateFromLocalDateTime() {
+        ZonedDateTime zdt = getLocalDateTime().atZone(ZoneId.systemDefault());
+        Date output = Date.from(zdt.toInstant());
+        return output;
+    }
+
+    /**
      * Returns an {@link XMLGregorianCalendar} object.
      * @return {@link XMLGregorianCalendar}
      */

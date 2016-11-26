@@ -5,5 +5,5 @@
   <groupId>com.oracle</groupId>
   <artifactId>ojdbc6</artifactId>
   <version>11.2.0.4</version>
-  <description>POM was created by Sonatype Nexus</description>
+  <description>POM was manually added by mlglenn</description>
 </project>

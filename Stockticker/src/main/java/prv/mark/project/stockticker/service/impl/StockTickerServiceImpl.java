@@ -3,14 +3,30 @@ package prv.mark.project.stockticker.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
+import prv.mark.project.common.domain.EnumStatusCodes;
+import prv.mark.project.common.domain.TransactionDto;
+import prv.mark.project.common.entity.StockPrice;
+import prv.mark.project.common.entity.TransactionLog;
+import prv.mark.project.common.exception.ExceptionRouter;
+import prv.mark.project.common.service.StockPriceService;
+import prv.mark.project.common.service.TransactionLogService;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
+import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
+import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
 import prv.mark.xml.stocks.RequestHeader;
 import prv.mark.xml.stocks.StockQuote;
+
+import javax.persistence.PersistenceException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * Service implementation of the {@link StockTickerService} interface.
@@ -21,36 +37,68 @@ import prv.mark.xml.stocks.StockQuote;
 public class StockTickerServiceImpl implements StockTickerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerServiceImpl.class);
-    private static final int SUCCESSFUL = 1;
-    private static final int FAILURE = 0;
+    private static final String STOCK_PRICE_INQUIRY = "STOCK PRICE INQUIRY";
+    //private static final int SUCCESSFUL = 1;
+    //private static final int FAILURE = 0;
 
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    //@Autowired
-    //private OrdersService ordersService;
-
-    //@Autowired
-    //private PlatformTransactionManager transactionManager;
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
+    @Autowired
+    private StockPriceService stockPriceService;
+    @Autowired
+    private TransactionLogService transactionLogService;
+    /*@Autowired
+    private PlatformTransactionManager transactionManager;*/
 
 
     @Override
     public GetStockPriceResponse getStockPrice(final GetStockPriceRequest getStockPriceRequest) {
         LOGGER.debug("*** StockTickerServiceImpl.getStockPrice() entry ...");
-        GetStockPriceResponse getStockPriceResponse = new GetStockPriceResponse();
-
         logGetStockPriceRequest(getStockPriceRequest);
 
+        TransactionDto transactionDto = setTransactionDto(getStockPriceRequest);
+
+
+
+
+        //TODO place the tranaction on the log queue
+        TransactionLog transactionLog = new TransactionLog();
+        transactionLog.setId(null);
+        transactionLog.setTransactionType(transactionDto.getTransactionType());
+        transactionLog.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
+        //transactionLog.setLogDateTime(transactionDto.getLogDateTime());
+        if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
+            transactionLog.setTransactionData(transactionDto.getTransactionDetail());
+        }
+        saveTransactionLogEntity(transactionLog);
+
+
+
+
+
+        Optional<StockPrice> returnedEntity = stockPriceService.findByStockSymbol(getStockPriceRequest.getTickerSymbol());
+
+        GetStockPriceResponse getStockPriceResponse = new GetStockPriceResponse();
+        if (returnedEntity != null && returnedEntity.get() != null) {
+            getStockPriceResponse = buildSuccessfulStockPriceResponse(getStockPriceRequest, returnedEntity.get());
+        } else {
+            getStockPriceResponse = buildFailureStockPriceResponse(getStockPriceRequest, returnedEntity.get());
+        }
+
         //TODO testing
-        StockQuote stockQuote = new StockQuote();
+        /*StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(1);
         stockQuote.setStatusText("success");
         stockQuote.setTickerSymbol("WMT");
         stockQuote.setStockPrice(NumberUtils.toFloat("68.00"));
-        getStockPriceResponse.setOrder(stockQuote);
+        getStockPriceResponse.setOrder(stockQuote);*/
 
 
-        //Orders returnedOrdersEntity = new Orders();
+
+
 
         //TODO Save the order to the in-memory database
         //for (Order order : submitOrderRequest.getOrders().getOrder()) {
@@ -59,18 +107,47 @@ public class StockTickerServiceImpl implements StockTickerService {
         //    returnedOrdersEntity = insertOrder(ordersEntity);
         //} //for
 
-        //Pretend to submit an order and return a successful response
-        //if (returnedOrdersEntity != null) {
-            //getStockPriceResponse = buildSuccessfulSubmitOrderResponse();
-        //} else {
-        //    submitOrderResponse = buildFailureSubmitOrderResponse();
-        //}
+
+
 
         logGetStockPriceResponse(getStockPriceResponse);
-
         return getStockPriceResponse;
     }
 
+
+    /* Private methods */
+
+    private TransactionDto setTransactionDto(final GetStockPriceRequest getStockPriceRequest) {
+        TransactionDto transactionDto = new TransactionDto();
+        transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
+        transactionDto.setTransactionType(STOCK_PRICE_INQUIRY);
+        transactionDto.setTransactionDetail(
+                getStockPriceRequest.getHead().getSource() + "," + getStockPriceRequest.getTickerSymbol());
+        return transactionDto;
+    }
+
+    private GetStockPriceResponse buildSuccessfulStockPriceResponse(final GetStockPriceRequest getStockPriceRequest,
+                                                                 final StockPrice returnedEntity) {
+        GetStockPriceResponse response = new GetStockPriceResponse();
+        StockQuote stockQuote = new StockQuote();
+        stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
+        stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
+        stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
+        response.setOrder(stockQuote);
+        return response;
+    }
+
+    private GetStockPriceResponse buildFailureStockPriceResponse(final GetStockPriceRequest getStockPriceRequest,
+                                                                 final StockPrice returnedEntity) {
+        GetStockPriceResponse response = new GetStockPriceResponse();
+        StockQuote stockQuote = new StockQuote();
+        stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
+        stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
+        response.setOrder(stockQuote);
+        return response;
+    }
 
     /*private Orders insertOrder(final Orders entity) {
 
@@ -91,6 +168,24 @@ public class StockTickerServiceImpl implements StockTickerService {
 
         return returnEntity;
     }*/
+
+    private TransactionLog saveTransactionLogEntity(final TransactionLog entity) {
+
+        LOGGER.debug("StockTickerServiceImpl.saveTransactionLogEntity()");
+        TransactionLog returnEntity = new TransactionLog();
+        try {
+            returnEntity = transactionLogService.save(entity);
+
+        } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
+            String msg = "Exception caught while saving TransactionLog entity " + entity.getId() + ".";
+
+            ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
+        }
+        LOGGER.debug("*** Saved TransactionLog entity ***");
+        LOGGER.debug(returnEntity.toString());
+
+        return returnEntity;
+    }
 
     private void logGetStockPriceRequest(final GetStockPriceRequest getStockPriceRequest) {
         LOGGER.debug("*** StockTickerServiceImpl.logGetStockPriceRequest() entry ...");

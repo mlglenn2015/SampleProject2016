@@ -2,15 +2,22 @@ package prv.mark.project.stockticker.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableMBeanExport;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jmx.support.RegistrationPolicy;
+import org.springframework.jndi.JndiObjectFactoryBean;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
@@ -19,8 +26,11 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
+import prv.mark.project.common.config.CommonDataConfig;
+import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.util.StringUtils;
 
+import javax.management.MBeanServer;
 import java.util.List;
 
 /**
@@ -29,15 +39,14 @@ import java.util.List;
  * @author mlglenn
  */
 @Configuration
-@ComponentScan("prv.mark.project.stockticker")
-//@Import(DataConfig.class)
+@ComponentScan("prv.mark.project")  //prv.mark.project.stockticker
+@Import(CommonDataConfig.class)
 @PropertySources({
         @PropertySource("classpath:/StockTicker.properties")
 })
 @EnableWs
-//@EnableWebMvc
-//@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
-//        registration = RegistrationPolicy.IGNORE_EXISTING)
+@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
+        registration = RegistrationPolicy.IGNORE_EXISTING)
 @Profile({"local", "dev", "qa", "stage", "prod"})
 public class StockTickerWsConfig extends WsConfigurerAdapter {
 
@@ -52,6 +61,12 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     @Autowired
     private Environment env;
 
+    /*
+    @Value("${path_1}")
+    private String keyStorePath;
+    @Value("${path_2}")
+    private String trustStorePath;
+     */
     @Value("${StockTicker.service.validatePayloads:false}")
     private String validatePayloads;
     @Value("${StockTicker.service.trace:false}")
@@ -80,11 +95,6 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new SimpleXsdSchema(new ClassPathResource("xsd/Types.xsd"));
     }*/
 
-    /*@Bean(name = "ServiceTypes")
-    public SimpleXsdSchema serviceTypes() {
-        return new SimpleXsdSchema(new ClassPathResource("xsd/ServiceTypes.xsd"));
-    }*/
-
     @Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
         interceptors.add(payloadLoggingInterceptor());
@@ -97,7 +107,6 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         final Boolean logEnvelopes = Boolean.valueOf(StringUtils.safeString(traceSoapEnvelopes));
         interceptor.setLogRequest(logEnvelopes);
         interceptor.setLogResponse(logEnvelopes);
-
         return interceptor;
     }
 
@@ -168,14 +177,14 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        //validator.setValidationMessageSource(messageSource());
+        validator.setValidationMessageSource(messageSource());
         return validator;
     }
 
-    /*@Bean
+    @Bean
     public MessageSource messageSource() {
-        return new MessageSource();
-    }*/
+        return new ApplicationMessageSource();
+    }
 
     /*@Bean
     public Jaxb2Marshaller marshaller() {
@@ -184,33 +193,34 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return marshaller;
     }*/
 
-    /*@Bean
+    @Bean
     public WebServiceTemplate WebServiceTemplate() {
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
-        webServiceTemplate.setMarshaller(Marshaller());
-        webServiceTemplate.setUnmarshaller(Marshaller());
+        webServiceTemplate.setMarshaller(marshaller());
+        webServiceTemplate.setUnmarshaller(marshaller());
         webServiceTemplate.setCheckConnectionForError(true);
         webServiceTemplate.setCheckConnectionForFault(true);
         return webServiceTemplate;
-    }*/
+    }
 
-    /*@Bean
-    public Jaxb2Marshaller Marshaller() {
+    @Bean
+    public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setClassesToBeBound(CLASSES_TO_BE_BOUND);
+        //marshaller.setPackagesToScan("prv.mark.project");
         return marshaller;
-    }*/
+    }
 
     @Bean
     public SaajSoapMessageFactory messageFactory() {
         return new SaajSoapMessageFactory();
     }
 
-    /*@Bean
+    @Bean
     public JndiObjectFactoryBean jmxServerRuntime() {
         JndiObjectFactoryBean runtime = new JndiObjectFactoryBean();
         runtime.setJndiName("java:comp/env/jmx/runtime");
         runtime.setProxyInterface(MBeanServer.class);
         return runtime;
-    }*/
+    }
 }

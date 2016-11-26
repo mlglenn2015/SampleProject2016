@@ -11,7 +11,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7541"/>
+    <property name="idea.launcher.port" value="7539"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -63,10 +63,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testLocalDateTime" classname="prv.mark.project.common.util.DateUtilsTests" time="0.003"/>
-  <testcase name="testToXMLGregorianCalendar" classname="prv.mark.project.common.util.DateUtilsTests" time="0.006"/>
-  <testcase name="testLocalDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.001"/>
-  <testcase name="testLocalDateTimeFromDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.001"/>
+  <testcase name="testLocalDateTime" classname="prv.mark.project.common.util.DateUtilsTests" time="0.001"/>
+  <testcase name="testToXMLGregorianCalendar" classname="prv.mark.project.common.util.DateUtilsTests" time="0.005"/>
+  <testcase name="testLocalDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.002"/>
+  <testcase name="testLocalDateTimeFromDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.002"/>
   <testcase name="testDateFromLocalDateTime" classname="prv.mark.project.common.util.DateUtilsTests" time="0.002"/>
-  <testcase name="testXmlGregorianCalendarToDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.005"/>
+  <testcase name="testXmlGregorianCalendarToDate" classname="prv.mark.project.common.util.DateUtilsTests" time="0.006"/>
 </testsuite>

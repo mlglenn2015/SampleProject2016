@@ -40,4 +40,13 @@ public class StockPriceResponse extends AbstractJsonResponse implements Serializ
     public void setStockPrice(BigDecimal stockPrice) {
         this.stockPrice = stockPrice;
     }
+
+    @Override
+    public String toString() {
+        return "StockPriceResponse{" +
+                "id=" + id +
+                ", stockSymbol='" + stockSymbol + '\'' +
+                ", stockPrice=" + stockPrice +
+                '}';
+    }
 }

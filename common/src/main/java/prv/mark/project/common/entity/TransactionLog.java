@@ -39,6 +39,10 @@ public class TransactionLog implements Serializable {
     @Column(name = "TRANSACTION_TYPE", nullable = false, length = 25)
     private String transactionType;
 
+    @Basic
+    @Column(name = "TRANSACTION_DATA", nullable = true, length = 500)
+    private String transactionData;
+
 
     public TransactionLog() {};
 
@@ -87,12 +91,21 @@ public class TransactionLog implements Serializable {
         this.transactionType = transactionType;
     }
 
+    public String getTransactionData() {
+        return transactionData;
+    }
+
+    public void setTransactionData(String transactionData) {
+        this.transactionData = transactionData;
+    }
+
     @Override
     public String toString() {
         return "TransactionLog{" +
                 "id=" + id +
                 ", logDateTime=" + logDateTime +
                 ", transactionType='" + transactionType + '\'' +
+                ", transactionData='" + transactionData + '\'' +
                 '}';
     }
 }

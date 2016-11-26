@@ -12,15 +12,12 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
 import prv.mark.xml.stocks.RequestHeader;
-
-import java.util.Arrays;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 
 /**
@@ -35,14 +32,16 @@ public class StockTickerEndpoint {
 
     private static final String NAMESPACE_URI = "http://prv.mark.project/stocks";
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerEndpoint.class);
-    private static final String HEADER_SOURCE = "TESTING";
+    //private static final String HEADER_SOURCE = "STOCKTICKER"; TODO remove
     private static final String SERVER_FAULT_STR = "server";
     private static final String CHARSET_UTF8 = "UTF-8";
 
     @Autowired
     private StockTickerService stockTickerService;
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
-    Predicate<String> validDivision = i -> {
+    /*Predicate<String> validDivision = i -> { TODO cleanup
         String[] validDivs = {"RES"};
         return Arrays.asList(validDivs).contains(i);
     };
@@ -54,7 +53,7 @@ public class StockTickerEndpoint {
     Predicate<String> fractionalHouseNumberPattern = i -> {
         if (Pattern.matches(".*\\d+/\\d+.*", i)) return true;
         return false;
-    };
+    };*/
 
 
     /**
@@ -72,22 +71,19 @@ public class StockTickerEndpoint {
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
 
         GetStockPriceResponse getStockPriceResponse;
-
         try {
             getStockPriceResponse  = stockTickerService.getStockPrice(getStockPriceRequest);
 
         } catch (SOAPClientException sce) {
+
             LOGGER.error("SoapClientException caught: {}", sce.getMessage());
             throw new SOAPClientException(sce.getMessage());
 
-        } catch (SOAPServerException sse) {
+        } catch (SOAPServerException | WebServiceClientException sse) {
 
             LOGGER.error("SoapServerException caught: {}", sse.getMessage());
             throw new SOAPServerException(sse.getMessage());
 
-        } catch (WebServiceClientException wsce) {
-            LOGGER.error("WebServiceClientException caught: {}", wsce.getMessage());
-            throw new SOAPServerException(wsce.getMessage());
         }
 
         LOGGER.debug("Returning response: {}", getStockPriceResponse.toString());
@@ -103,6 +99,10 @@ public class StockTickerEndpoint {
             throw new SOAPGeneralFault();
         }
         if (StringUtils.isEmpty(requestHeader.getSource())) {
+            LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
+            throw new SOAPGeneralFault();
+        }
+        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
