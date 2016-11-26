@@ -27,6 +27,20 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(USAddressValidationTests.class);
 
+    /*BiFunction<ServiceableAddress, USPostalAddress, Boolean> validServiceableAddress = (serviceableAddress, address) -> TODO
+            Optional.of(serviceableAddress)
+                    .filter(s -> StringUtils.isNotEmpty(s.getAddressLine1()))
+                    .filter(s -> Optional.of(s.getUSPSAddress()).isPresent())
+                    .filter(s -> Optional.of(s.getUSPSAddress().getCity()).isPresent())
+                    .filter(s -> Optional.of(s.getUSPSAddress().getState()).isPresent())
+                    .filter(s -> Optional.of(s.getUSPSAddress().getZip()).isPresent())
+                    .filter(s -> Optional.of(s.getUSPSAddress().getZip4()).isPresent())
+                    .filter(s -> s.getUSPSAddress().getCity().equalsIgnoreCase(address.getCity()))
+                    .filter(s -> s.getUSPSAddress().getState().equalsIgnoreCase(address.getState()))
+                    .filter(s -> s.getUSPSAddress().getZip().equalsIgnoreCase(address.getZipCode()))
+                    .filter(s -> s.getUSPSAddress().getZip4().equalsIgnoreCase(address.getZip4()))
+                    .isPresent();*/
+
     @Autowired
     private Validator validator;
 

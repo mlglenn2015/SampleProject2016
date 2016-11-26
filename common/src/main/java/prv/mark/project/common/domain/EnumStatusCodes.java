@@ -24,7 +24,4 @@ public enum EnumStatusCodes {
         return statudCode;
     }
 
-    public void setStatudCode(int statudCode) {
-        this.statudCode = statudCode;
-    }
 }

@@ -26,12 +26,12 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>prv.mark.project</groupId>
             <artifactId>testutils</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
 
         <!--<dependency>
             <groupId>org.springframework.ws</groupId>

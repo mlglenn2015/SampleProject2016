@@ -15,12 +15,17 @@ import prv.mark.project.common.domain.json.AbstractJsonResponse;
 import prv.mark.project.common.domain.json.StockPriceRequest;
 import prv.mark.project.common.domain.json.StockPriceResponse;
 import prv.mark.project.common.exception.SOAPClientException;
+import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
+
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * REST Controller for Stock Ticker application.
@@ -35,6 +40,10 @@ public class StockTickerRestController {
     private StockTickerService stockTickerService;
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
+
+    private Predicate<String> validStockSymbolPattern = i -> {
+        return Pattern.matches("[A-Z0-9]{1,12}", i);
+    };
 
 
     /**
@@ -65,9 +74,9 @@ public class StockTickerRestController {
 
             LOGGER.error("SoapServerException caught: {}", sse.getMessage());
             throw new SOAPServerException(sse.getMessage());
-
         }
 
+        //TODO check if getStockPriceResponse is null
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
         stockPriceResponse.setStockSymbol(getStockPriceResponse.getOrder().getTickerSymbol());
         stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getOrder().getStockPrice()));
@@ -97,10 +106,16 @@ public class StockTickerRestController {
 
     private void validateStockPriceRequest(final String stockSymbol) {
         LOGGER.debug("*** StockTickerRestController.validateStockPriceRequest()");
-        if (StringUtils.isNotEmpty(stockSymbol)) {
-            String message = "*** Stock Symbol IS NULL!!! ***";
+        if (StringUtils.isEmpty(stockSymbol)) {
+            String message = "*** Stock Symbol IS Empty!!! ***";
             LOGGER.error(message);
             throw new SOAPClientException(message);
         }
+
+        String message = "*** Stock Symbol " + stockSymbol + " is invalid ***";
+        String tickerSymbol = Optional.of(stockSymbol)
+                .filter(validStockSymbolPattern)
+                .orElseThrow(() -> new SOAPGeneralFault(message));
+        LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 }

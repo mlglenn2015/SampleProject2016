@@ -67,6 +67,23 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
     }
 
     /**
+     * Converts a {@link String} to {@link BigDecimal}.
+     *
+     * @param value {@link String}
+     * @return {@link BigDecimal}
+     */
+    public static BigDecimal toBigDecimal(final String value) {
+        if (value == null) {
+            return new BigDecimal("0.00");
+        }
+        if (isNumber(value)) {
+            return new BigDecimal(value).setScale(12, BigDecimal.ROUND_HALF_UP);
+        } else {
+            return new BigDecimal("0.00");
+        }
+    }
+
+    /**
      * Converts a string to Float.
      * @param val The input value to convert
      * @return float

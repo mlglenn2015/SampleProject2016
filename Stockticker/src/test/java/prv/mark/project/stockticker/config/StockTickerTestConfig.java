@@ -1,28 +1,31 @@
 package prv.mark.project.stockticker.config;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.*;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import prv.mark.project.common.service.impl.ApplicationMessageSource;
+import prv.mark.project.testutils.config.TestDataConfig;
+import prv.mark.project.testutils.config.TestWebServicesConfig;
 
 @Configuration
-//@Import({TestDataConfig.class, TestWebServicesConfig.class})
 @ComponentScan(basePackages = {"prv.mark.project"})
-//@PropertySources(value = {
-//        @PropertySource("classpath:StockTicker-TEST.properties")
-//})
+@Import({TestDataConfig.class, TestWebServicesConfig.class})
+@PropertySources(value = {
+        @PropertySource("classpath:StockTicker-TEST.properties")
+})
 @Profile("test")
 public class StockTickerTestConfig {
 
-    /*@Bean
+    @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
-        //validatorFactory.setValidationMessageSource(messageSource());
+        validatorFactory.setValidationMessageSource(messageSource());
         return validatorFactory;
-    }*/
+    }
 
-    /*@Bean
+    @Bean
     public MessageSource messageSource() {
-        return new MessageSource();
-    }*/
+        return new ApplicationMessageSource();
+    }
 
 }

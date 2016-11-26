@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import prv.mark.project.common.domain.EnumStatusCodes;
+import prv.mark.project.common.domain.EnumTransactionTypes;
 import prv.mark.project.common.domain.TransactionDto;
 import prv.mark.project.common.entity.StockPrice;
 import prv.mark.project.common.entity.TransactionLog;
@@ -37,9 +38,6 @@ import java.util.Optional;
 public class StockTickerServiceImpl implements StockTickerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerServiceImpl.class);
-    private static final String STOCK_PRICE_INQUIRY = "STOCK PRICE INQUIRY";
-    //private static final int SUCCESSFUL = 1;
-    //private static final int FAILURE = 0;
 
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
@@ -50,8 +48,6 @@ public class StockTickerServiceImpl implements StockTickerService {
     private StockPriceService stockPriceService;
     @Autowired
     private TransactionLogService transactionLogService;
-    /*@Autowired
-    private PlatformTransactionManager transactionManager;*/
 
 
     @Override
@@ -120,7 +116,7 @@ public class StockTickerServiceImpl implements StockTickerService {
     private TransactionDto setTransactionDto(final GetStockPriceRequest getStockPriceRequest) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
-        transactionDto.setTransactionType(STOCK_PRICE_INQUIRY);
+        transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
         transactionDto.setTransactionDetail(
                 getStockPriceRequest.getHead().getSource() + "," + getStockPriceRequest.getTickerSymbol());
         return transactionDto;

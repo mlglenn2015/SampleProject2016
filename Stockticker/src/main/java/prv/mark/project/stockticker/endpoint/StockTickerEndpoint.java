@@ -19,6 +19,10 @@ import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
 import prv.mark.xml.stocks.RequestHeader;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+
 
 /**
  * SOAP Web Service endpoint for stock ticker service.
@@ -32,28 +36,15 @@ public class StockTickerEndpoint {
 
     private static final String NAMESPACE_URI = "http://prv.mark.project/stocks";
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerEndpoint.class);
-    //private static final String HEADER_SOURCE = "STOCKTICKER"; TODO remove
-    private static final String SERVER_FAULT_STR = "server";
-    private static final String CHARSET_UTF8 = "UTF-8";
 
     @Autowired
     private StockTickerService stockTickerService;
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
 
-    /*Predicate<String> validDivision = i -> { TODO cleanup
-        String[] validDivs = {"RES"};
-        return Arrays.asList(validDivs).contains(i);
+    private Predicate<String> validStockSymbolPattern = i -> {
+        return Pattern.matches("[A-Z0-9]{1,12}", i);
     };
-
-    Predicate<String> validStatePattern = i -> {
-        return Pattern.matches("[A-Z]{2}", i);
-    };
-
-    Predicate<String> fractionalHouseNumberPattern = i -> {
-        if (Pattern.matches(".*\\d+/\\d+.*", i)) return true;
-        return false;
-    };*/
 
 
     /**
@@ -83,11 +74,9 @@ public class StockTickerEndpoint {
 
             LOGGER.error("SoapServerException caught: {}", sse.getMessage());
             throw new SOAPServerException(sse.getMessage());
-
         }
 
         LOGGER.debug("Returning response: {}", getStockPriceResponse.toString());
-
         return getStockPriceResponse;
     }
 
@@ -110,8 +99,8 @@ public class StockTickerEndpoint {
 
     private void validateGetStockPriceRequest(final GetStockPriceRequest getStockPriceRequest) {
         LOGGER.debug("*** StockTickerEndpoint.validateGetStockPriceRequest()");
+        String message = "*** GetStockPriceRequest IS NULL!!! ***";
         if (getStockPriceRequest == null) {
-            String message = "*** GetStockPriceRequest IS NULL!!! ***";
             LOGGER.error(message);
             throw new SOAPClientException(message);
         }
@@ -119,10 +108,15 @@ public class StockTickerEndpoint {
         validateHeader(getStockPriceRequest.getHead());
 
         if (getStockPriceRequest.getTickerSymbol().isEmpty()) {
-            String message = "*** Invalid Ticker Symbol ***";
             LOGGER.error(message);
             throw new SOAPGeneralFault(message);
         }
+
+        String newMessage = "*** Invalid Ticker Symbol: " + getStockPriceRequest.getTickerSymbol() + " ***";
+        String tickerSymbol = Optional.of(getStockPriceRequest.getTickerSymbol())
+                                .filter(validStockSymbolPattern)
+                                .orElseThrow(() -> new SOAPGeneralFault(newMessage));
+        LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 
 } 

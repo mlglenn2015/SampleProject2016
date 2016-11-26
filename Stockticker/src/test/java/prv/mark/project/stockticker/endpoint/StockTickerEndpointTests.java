@@ -3,71 +3,77 @@ package prv.mark.project.stockticker.endpoint;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import prv.mark.project.common.domain.EnumStatusCodes;
+import prv.mark.project.common.exception.SOAPGeneralFault;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
+import prv.mark.project.common.util.NumberUtils;
+import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
+import prv.mark.project.stockticker.service.StockTickerService;
+import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
+import prv.mark.xml.stocks.GetStockPriceRequest;
+import prv.mark.xml.stocks.GetStockPriceResponse;
+import prv.mark.xml.stocks.RequestHeader;
+import prv.mark.xml.stocks.StockQuote;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
 
 @ContextConfiguration(classes = {StockTickerTestConfig.class})
 @ActiveProfiles({"test"})
-public class StockTickerEndpointTests { //extends AbstractAppTransactionalTest {
+public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerEndpointTests.class);
-    private static final String HEADER_SOURCE = "TESTING";
-    private static final String DIVISION = "RES";
-    private static final String ITEM_ID = "U-2";
-    private static final String TRACKING_ID = "1ZV50R920365556807";
-    private static final int SUCCESSFUL = 1;
-    private static final int FAILURE = 0;
-
-    //@Autowired
-    //@InjectMocks
 
     @Autowired
+    private ApplicationParameterSource applicationParameterSource;
+
+    @Autowired
+    @InjectMocks
     private StockTickerEndpoint stockTickerEndpoint;
 
-    //@Mock
-    //private Service service;
+    @Mock
+    private StockTickerService stockTickerService;
 
-    //@Mock
-    //private LookupService ;ookupService;
 
-    Predicate<String> validDivision = i -> {
-        String[] validDivs = {"RES"};
-        return Arrays.asList(validDivs).contains(i);
-    };
-
-    /*BiFunction<ServiceableAddress, USPostalAddress, Boolean> validServiceableAddress = (serviceableAddress, address) ->
-            Optional.of(serviceableAddress)
-                    .filter(s -> StringUtils.isNotEmpty(s.getAddressLine1()))
-                    .filter(s -> Optional.of(s.getUSPSAddress()).isPresent())
-                    .filter(s -> Optional.of(s.getUSPSAddress().getCity()).isPresent())
-                    .filter(s -> Optional.of(s.getUSPSAddress().getState()).isPresent())
-                    .filter(s -> Optional.of(s.getUSPSAddress().getZip()).isPresent())
-                    .filter(s -> Optional.of(s.getUSPSAddress().getZip4()).isPresent())
-                    .filter(s -> s.getUSPSAddress().getCity().equalsIgnoreCase(address.getCity()))
-                    .filter(s -> s.getUSPSAddress().getState().equalsIgnoreCase(address.getState()))
-                    .filter(s -> s.getUSPSAddress().getZip().equalsIgnoreCase(address.getZipCode()))
-                    .filter(s -> s.getUSPSAddress().getZip4().equalsIgnoreCase(address.getZip4()))
-                    .isPresent();*/
+    Predicate<GetStockPriceResponse> validResponse = response -> Optional.of(response)
+            .filter(r -> Optional.of(r.getOrder()).isPresent())
+            .filter(r -> r.getOrder().getStatusCode() == 0)
+            .filter(r -> Optional.of(r.getOrder().getStockPrice()).isPresent())
+            .filter(r -> Optional.of(r.getOrder().getTickerSymbol()).isPresent())
+            .isPresent();
 
 
     @Before
     public void setUp() {
-        //MockitoAnnotations.initMocks(this);
-        //assertNotNull(Endpoint);
-        //assertNotNull(serviceabilityService);
+        MockitoAnnotations.initMocks(this);
+        assertNotNull(stockTickerEndpoint);
+        assertNotNull(stockTickerService);
+        assertNotNull(applicationParameterSource);
     }
 
-    //@Override
+    @Override
     public void tearDown() {
-        //super.tearDown();
+        super.tearDown();
     }
 
     @Test
@@ -75,23 +81,80 @@ public class StockTickerEndpointTests { //extends AbstractAppTransactionalTest {
         LOGGER.debug("StockTickerSimulatorEndpointTests.dummyTest()");
     }
 
-    /*@Test
-    public void testSubmitOrder() {
-        LOGGER.debug("EndpointTests.testSubmitOrder()");
-        SubmitOrderRequest submitOrderRequest = buildSubmitOrderRequest();
-        assertNotNull(submitOrderRequest);
-        SubmitOrderResponse submitOrderResponse = Endpoint.submitOrder(submitOrderRequest);
-        assertNotNull(submitOrderResponse);
-        assertTrue(submitOrderResponse.getSuccess() == 1);
+    @Test
+    public void testGetStockPriceRequestValid() {
+        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestValid()");
+        GetStockPriceRequest request = buildGetStockPriceRequest();
+        assertNotNull(request);
+
+        doReturn(buildStockPriceResponse())
+                .when(stockTickerService)
+                .getStockPrice(request);
+        GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
+        verify(stockTickerService).getStockPrice(request);
+
+        assertNotNull(response);
+        assertTrue(Optional.of(response).filter(validResponse).isPresent());
     }
 
-    @Test(expected = SOAPAuthenticationFault.class)
-    public void testSubmitOrderInvalidCustomerId() {
-        LOGGER.debug("EndpointTests.testSubmitOrderInvalidCustomerId()");
-        SubmitOrderRequest submitOrderRequest = buildSubmitOrderRequest();
-        submitOrderRequest.getHead().setCustomerId(StringUtils.EMPTY);
-        assertNotNull(submitOrderRequest);
-        SubmitOrderResponse submitOrderResponse = Endpoint.submitOrder(submitOrderRequest);
-    }*/
+    @Test(expected = SOAPGeneralFault.class)
+    public void testGetStockPriceRequestInvalidStockSymbol2_345() {
+        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestInvalidStockSymbol2_345()");
+        GetStockPriceRequest request = buildGetStockPriceRequest();
+        assertNotNull(request);
+        request.setTickerSymbol("2_345");
+        GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
+    }
 
+    @Test(expected = SOAPGeneralFault.class)
+    public void testGetStockPriceRequestInvalidStockSymbolABCDEFGH012345() {
+        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestInvalidStockSymbolABCDEFGH012345()");
+        GetStockPriceRequest request = buildGetStockPriceRequest();
+        assertNotNull(request);
+        request.setTickerSymbol("ABCDEFGH012345");
+        GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
+    }
+
+    @Test(expected = SOAPGeneralFault.class)
+    public void testGetStockPriceRequestNullHeaderSource() {
+        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestNullHeaderSource()");
+        GetStockPriceRequest request = buildGetStockPriceRequest();
+        assertNotNull(request);
+        request.getHead().setSource(null);
+        GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
+    }
+
+    @Test(expected = SOAPGeneralFault.class)
+    public void testGetStockPriceRequestInvalidHeaderSource() {
+        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestInvalidHeaderSource()");
+        GetStockPriceRequest request = buildGetStockPriceRequest();
+        assertNotNull(request);
+        request.getHead().setSource("INVALID");
+        GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
+    }
+
+
+    private GetStockPriceRequest buildGetStockPriceRequest() {
+        GetStockPriceRequest request = new GetStockPriceRequest();
+        request.setHead(buildRequestHeader());
+        request.setTickerSymbol("A");
+        return request;
+    }
+
+    private RequestHeader buildRequestHeader() {
+        RequestHeader header = new RequestHeader();
+        header.setSource(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE));
+        return header;
+    }
+
+    private GetStockPriceResponse buildStockPriceResponse() {
+        GetStockPriceResponse response = new GetStockPriceResponse();
+        StockQuote stockQuote = new StockQuote();
+        stockQuote.setTickerSymbol("A");
+        stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
+        stockQuote.setStockPrice(NumberUtils.toFloat("9.99"));
+        response.setOrder(stockQuote);
+        return response;
+    }
 }

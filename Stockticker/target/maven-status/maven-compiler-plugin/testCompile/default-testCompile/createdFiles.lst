@@ -1,3 +1,4 @@
 prv\mark\project\stockticker\endpoint\StockTickerEndpointTests.class
 prv\mark\project\stockticker\config\StockTickerTestConfig.class
+prv\mark\project\stockticker\rest\StockTickerRestControllerTests.class
 prv\mark\project\stockticker\service\StockTickerServiceTests.class

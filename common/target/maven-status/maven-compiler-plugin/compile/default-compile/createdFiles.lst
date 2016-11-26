@@ -42,6 +42,7 @@ prv\mark\project\common\validation\ZipCode.class
 prv\mark\project\common\domain\json\AbstractJsonResponse.class
 prv\mark\project\common\util\Converter.class
 prv\mark\project\common\exception\ExceptionRouter.class
+prv\mark\project\common\domain\EnumTransactionTypes.class
 prv\mark\project\common\service\impl\StockPriceServiceImpl.class
 prv\mark\project\common\exception\SOAPClientException.class
 prv\mark\project\common\exception\SOAPException.class
@@ -50,5 +51,7 @@ prv\mark\project\common\repository\ApplicationMessagesRepository.class
 prv\mark\project\common\repository\OrderTypesRepository.class
 prv\mark\project\common\service\TransactionLogService.class
 prv\mark\project\common\util\DateUtils.class
+prv\mark\project\common\domain\EnumOrderTypes.class
 prv\mark\project\common\entity\converter\LDTConverter.class
 prv\mark\project\common\exception\ApplicationException.class
+prv\mark\project\common\domain\EnumOrderStatus.class

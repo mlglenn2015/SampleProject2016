@@ -1,0 +1,14 @@
+
+# Database installation instructions
+
+Execute the following scripts:
+
+1. create_users.sql
+2. create_application_messages.sql
+3. create_application_parameters.sql
+4. create_order_status.sql
+5. create_order_types.sql
+6. create_stock_order.sql
+7. create_stock_price.sql
+8. create_transaction_log.sql
+9. create_transaction_types.sql
