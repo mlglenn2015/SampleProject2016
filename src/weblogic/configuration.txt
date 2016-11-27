@@ -1,0 +1,16 @@
+weblogic domain: mydomain
+
+stocksMgdServer1:8001,8002  9001,9002(TransactionLogger)
+
+Machine: nodeManager, localhost:5556
+
+http://DESKTOP-J1CHH1C:7001/console     weblogic/weblogic123
+
+C:\Oracle_Home\Middleware\wls12212\user_projects\domains\mydomain
+
+
+
+
+
+
+
