@@ -1,0 +1,49 @@
+C:\Oracle\Middleware\wls12212\user_projects\domains\mydomain\bin>startNodeManager.cmd
+
+The system cannot find the path specified.
+NODEMGR_HOME is already set to C:\Oracle\MIDDLE~1\wls12212\USER_P~1\domains\mydomain\NODEMA~1
+CLASSPATH=.;;.;C:\Oracle\Middleware\wls12212\wlserver\server\lib\wlclient.jar;C:\Oracle\Middleware\wls12212\wlserver\server\lib\weblogic.jar
+
+C:\Oracle\MIDDLE~1\wls12212\USER_P~1\domains\mydomain\NODEMA~1>"C:\Java\JDK18~1.
+0_1\bin\java.exe"   -Xms32m -Xmx200m  -Dweblogic.RootDirectory=C:\Oracle\MIDDLE~
+1\wls12212\USER_P~1\domains\mydomain  -Dweblogic.RootDirectory=C:\Oracle\MIDDLE~
+1\wls12212\USER_P~1\domains\mydomain  -Dweblogic.RootDirectory=C:\Oracle\MIDDLE~
+1\wls12212\USER_P~1\domains\mydomain  "-Djava.security.policy=C:\Oracle\wls12212
+\wlserver\server\lib\weblogic.policy" "-Dweblogic.nodemanager.JavaHome=C:\Java\J
+DK18~1.0_1" weblogic.NodeManager -v
+
+Nov 27, 2016 4:12:06 PM weblogic.nodemanager.server.NMServer writeProcessId
+WARNING: NodeManager native library could not be loaded to write process id
+java.lang.UnsatisfiedLinkError: no nodemanager in java.library.path
+        at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1867)
+        at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+        at java.lang.System.loadLibrary(System.java:1122)
+        at weblogic.nodemanager.util.WindowsProcessControl.<init>(WindowsProcessControl.java:18)
+        at weblogic.nodemanager.util.ProcessControlFactory.getProcessControl(ProcessControlFactory.java:25)
+        at weblogic.nodemanager.server.NMServer.writeProcessId(NMServer.java:262)
+        at weblogic.nodemanager.server.NMServer.writePidFile(NMServer.java:238)
+        at weblogic.nodemanager.server.NMServer.<init>(NMServer.java:128)
+        at weblogic.nodemanager.server.NMServer.main(NMServer.java:527)
+        at weblogic.NodeManager.main(NodeManager.java:31)
+
+<Nov 27, 2016 4:12:06 PM EST> <INFO> <Loading domains file: C:\Oracle\Middleware
+\wls12212\user_projects\domains\mydomain\nodemanager\nodemanager.domains>
+<Nov 27, 2016 4:12:06 PM EST> <SEVERE> <Fatal error in NodeManager server>
+weblogic.nodemanager.common.ConfigException: Native version is enabled but NodeManager native library could not be loaded
+        at weblogic.nodemanager.server.NMServerConfig.initProcessControl(NMServerConfig.java:620)
+        at weblogic.nodemanager.server.NMServerConfig.<init>(NMServerConfig.java:388)
+        at weblogic.nodemanager.server.NMServer.<init>(NMServer.java:130)
+        at weblogic.nodemanager.server.NMServer.main(NMServer.java:527)
+        at weblogic.NodeManager.main(NodeManager.java:31)
+Caused by: java.lang.UnsatisfiedLinkError: no nodemanager in java.library.path
+        at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1867)
+        at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+        at java.lang.System.loadLibrary(System.java:1122)
+        at weblogic.nodemanager.util.WindowsProcessControl.<init>(WindowsProcessControl.java:18)
+        at weblogic.nodemanager.util.ProcessControlFactory.getProcessControl(ProcessControlFactory.java:25)
+        at weblogic.nodemanager.server.NMServerConfig.initProcessControl(NMServerConfig.java:618)
+        ... 4 more
+
+( was unexpected at this time.
+
+C:\Oracle\Middleware\wls12212\user_projects\domains\mydomain\bin>
