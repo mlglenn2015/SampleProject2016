@@ -13,11 +13,11 @@
     <types>
         <schema targetNamespace="http://prv.mark.project/stocks" xmlns="http://www.w3.org/2001/XMLSchema">
 
-            <!--<element name="SubmitOrderRequest">
+            <element name="SubmitOrderRequest">
                 <complexType>
                     <sequence>
                         <element minOccurs="1" maxOccurs="1" name="head" type="tns:RequestHeader" />
-                        <element minOccurs="1" maxOccurs="1" name="orders" type="tns:OrderList" />
+                        <element minOccurs="0" maxOccurs="1" name="order" type="tns:StockOrder"/>
                     </sequence>
                 </complexType>
             </element>
@@ -25,10 +25,11 @@
             <element name="SubmitOrderResponse">
                 <complexType>
                     <sequence>
-                        <element minOccurs="1" maxOccurs="1" name="success" type="int"/>
+                        <element minOccurs="1" maxOccurs="1" name="status" type="int"/>
+                        <element minOccurs="1" maxOccurs="1" name="statusDesc" type="string" />
                     </sequence>
                 </complexType>
-            </element>-->
+            </element>
 
             <element name="GetStockPriceRequest">
                 <complexType>
@@ -42,10 +43,11 @@
             <element name="GetStockPriceResponse">
                 <complexType>
                     <sequence>
-                        <element minOccurs="0" maxOccurs="1" name="order" type="tns:StockQuote"/>
+                        <element minOccurs="0" maxOccurs="1" name="quote" type="tns:StockQuote"/>
                     </sequence>
                 </complexType>
             </element>
+
 
             <complexType name="RequestHeader">
                 <sequence>
@@ -67,6 +69,7 @@
                     <element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="string" />
                     <element minOccurs="1" maxOccurs="1" name="orderDate" type="dateTime" />
                     <element minOccurs="0" maxOccurs="1" name="quantity" type="int" />
+                    <element minOccurs="1" maxOccurs="1" name="stockPrice" type="float" />
                     <element minOccurs="0" maxOccurs="1" name="action" type="string" />
                     <element minOccurs="0" maxOccurs="1" name="orderType" type="string" />
                 </sequence>
@@ -75,12 +78,13 @@
         </schema>
     </types>
 
-    <!--<message name="SubmitOrderRequestMessage">
-        <part name="Request" element="tns:SubmitOrderRequest"/>
-    </message>
-    <message name="SubmitOrderResponseMessage">
+
+    <wsdl:message name="SubmitOrderRequestMessage">
+        <wsdl:part name="Request" element="tns:SubmitOrderRequest"/>
+    </wsdl:message>
+    <wsdl:message name="SubmitOrderResponseMessage">
         <part name="Response" element="tns:SubmitOrderResponse"/>
-    </message>-->
+    </wsdl:message>
 
     <wsdl:message name="GetStockPriceRequest">
         <wsdl:part name="Request" element="tns:GetStockPriceRequest"/>
@@ -92,10 +96,10 @@
 
     <wsdl:portType name="StocktickerPortType">
 
-        <!--<operation name="SubmitOrder">
-            <input message="tns:SubmitOrderRequestMessage"/>
-            <output message="tns:SubmitOrderResponseMessage"/>
-        </operation>-->
+        <wsdl:operation name="SubmitOrder">
+            <wsdl:input message="tns:SubmitOrderRequestMessage"/>
+            <wsdl:output message="tns:SubmitOrderResponseMessage"/>
+        </wsdl:operation>
 
         <wsdl:operation name="GetStockPrice">
             <wsdl:input message="tns:GetStockPriceRequest" name="GetStockPriceRequest"/>
@@ -104,17 +108,18 @@
 
     </wsdl:portType>
 
+
     <wsdl:binding name="Stockticker" type="tns:StocktickerPortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-        <!--<operation name="SubmitOrder">
-            <input name="SubmitOrderRequestMessage">
+        <wsdl:operation name="SubmitOrder">
+            <wsdl:input name="SubmitOrderRequestMessage">
                 <soap:body use="literal" />
-            </input>
-            <output name="SubmitOrderResponseMessage">
+            </wsdl:input>
+            <wsdl:output name="SubmitOrderResponseMessage">
                 <soap:body use="literal" />
-            </output>
-        </operation>-->
+            </wsdl:output>
+        </wsdl:operation>
 
         <wsdl:operation name="GetStockPrice">
             <wsdl:input name="GetStockPriceRequest">
@@ -126,6 +131,7 @@
         </wsdl:operation>
 
     </wsdl:binding>
+
 
     <wsdl:service name="StocktickerService">
         <wsdl:port binding="tns:Stockticker" name="StocktickerPort">

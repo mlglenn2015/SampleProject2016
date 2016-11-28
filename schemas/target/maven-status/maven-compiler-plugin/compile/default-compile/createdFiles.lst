@@ -1,7 +1,9 @@
 prv\mark\xml\stocks\RequestHeader.class
 prv\mark\xml\stocks\package-info.class
 prv\mark\xml\stocks\ObjectFactory.class
+prv\mark\xml\stocks\SubmitOrderResponse.class
 prv\mark\xml\stocks\StockQuote.class
 prv\mark\xml\stocks\GetStockPriceResponse.class
 prv\mark\xml\stocks\StockOrder.class
 prv\mark\xml\stocks\GetStockPriceRequest.class
+prv\mark\xml\stocks\SubmitOrderRequest.class

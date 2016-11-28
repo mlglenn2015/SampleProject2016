@@ -31,14 +31,14 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: project.mark.prv.stocks
-     * 
+     *
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link GetStockPriceResponse }
-     * 
+     *
      */
     public GetStockPriceResponse createGetStockPriceResponse() {
         return new GetStockPriceResponse();
@@ -46,23 +46,23 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StockQuote }
-     * 
+     *
      */
     public StockQuote createStockQuote() {
         return new StockQuote();
     }
 
     /**
-     * Create an instance of {@link GetStockPriceRequest }
-     * 
+     * Create an instance of {@link SubmitOrderRequest }
+     *
      */
-    public GetStockPriceRequest createGetStockPriceRequest() {
-        return new GetStockPriceRequest();
+    public SubmitOrderRequest createSubmitOrderRequest() {
+        return new SubmitOrderRequest();
     }
 
     /**
      * Create an instance of {@link RequestHeader }
-     * 
+     *
      */
     public RequestHeader createRequestHeader() {
         return new RequestHeader();
@@ -70,10 +70,27 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link StockOrder }
-     * 
+     *
      */
     public StockOrder createStockOrder() {
         return new StockOrder();
     }
 
+    /**
+     * Create an instance of {@link SubmitOrderResponse }
+     *
+     */
+    public SubmitOrderResponse createSubmitOrderResponse() {
+        return new SubmitOrderResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetStockPriceRequest }
+     *
+     */
+    public GetStockPriceRequest createGetStockPriceRequest() {
+        return new GetStockPriceRequest();
+    }
+
 }
+

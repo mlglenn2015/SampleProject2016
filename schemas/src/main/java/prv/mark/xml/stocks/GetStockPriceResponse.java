@@ -16,54 +16,55 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="order" type="{http://prv.mark.project/stocks}StockQuote" minOccurs="0"/>
+ *         &lt;element name="quote" type="{http://prv.mark.project/stocks}StockQuote" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "order"
+        "quote"
 })
 @XmlRootElement(name = "GetStockPriceResponse")
 public class GetStockPriceResponse {
 
-    protected StockQuote order;
+    protected StockQuote quote;
 
     /**
-     * Gets the value of the order property.
-     * 
+     * Gets the value of the quote property.
+     *
      * @return
      *     possible object is
      *     {@link StockQuote }
-     *     
+     *
      */
-    public StockQuote getOrder() {
-        return order;
+    public StockQuote getQuote() {
+        return quote;
     }
 
     /**
-     * Sets the value of the order property.
-     * 
+     * Sets the value of the quote property.
+     *
      * @param value
      *     allowed object is
      *     {@link StockQuote }
-     *     
+     *
      */
-    public void setOrder(StockQuote value) {
-        this.order = value;
+    public void setQuote(StockQuote value) {
+        this.quote = value;
     }
 
 }
+

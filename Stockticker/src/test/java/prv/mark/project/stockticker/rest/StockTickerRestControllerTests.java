@@ -133,7 +133,7 @@ public class StockTickerRestControllerTests extends AbstractAppTransactionalTest
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
         stockQuote.setStockPrice(NumberUtils.toFloat("9.99"));
-        response.setOrder(stockQuote);
+        response.setQuote(stockQuote);
         return response;
     }
 }

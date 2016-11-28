@@ -35,14 +35,14 @@ public class StockTickerServiceTests { //TODO extends AbstractAppTransactionalTe
     }
 
     /*@Test
-    public void testLookupUSPostalAddressNosa() {
-        when(serviceabilityLookupService.searchByAddress(TPA_DIV, address, IN_ADDR_NOSA)).thenReturn(getValidResult());
-        result = serviceabilityService.lookupUSPostalAddress(TPA_DIV, address, IN_ADDR_NOSA);
-        verify(serviceabilityLookupService).searchByAddress(TPA_DIV, address, IN_ADDR_NOSA);
+    public void testLookupUSPostalAddress() {
+        when(ookupService.searchByAddress(TPA, address, IN_ADDR)).thenReturn(getValidResult());
+        result = service.lookupUSPostalAddress(TPA_, address, IN_ADDR);
+        verify(ookupService).searchByAddress(TPA, address, IN_ADDR_);
 
         assertTrue(Optional.of(result)
-                .filter(r -> validNosaDivision.apply(r.getDivisionId()))
-                .filter(ServiceabilityResult::getServiceable)
+                .filter(r -> validDivision.apply(r.getDivisionId()))
+                .filter(esult::erviceable)
                 .filter(r -> !(CollectionUtils.isEmpty(r.getAddresses())))
                 .filter(res -> Optional.of(res.getAddresses().stream()
                         .filter(r -> r.getAddressLine1().equalsIgnoreCase(address.getAddressLine1()))
@@ -57,11 +57,11 @@ public class StockTickerServiceTests { //TODO extends AbstractAppTransactionalTe
     }*/
 
     /*@Test
-    public void testLookupUSPostalAddressUSPSNonServiceable() {
-        when(serviceabilityLookupService.searchByAddress(TPA_DIV, address, IN_ADDR_USPS))
+    public void testookupUSPostalAddressUSPSNonServiceable() {
+        when(ookupService.searchByAddress(TPA_, address, IN_ADDR_))
                 .thenReturn(getNonServiceableResult());
-        result = serviceabilityService.lookupUSPostalAddress(TPA_DIV, address, IN_ADDR_USPS);
-        verify(serviceabilityLookupService).searchByAddress(TPA_DIV, address, IN_ADDR_USPS);
+        result = seervice.lookupUSPostalAddress(TPA_, address, IN_ADDR_);
+        verify(LookupService).searchByAddress(TPA_, address, IN_ADDR_);
 
         assertFalse(Optional.ofNullable(result)
                 .filter(r -> Optional.ofNullable(r.getDivisionId()).isPresent())
@@ -69,14 +69,14 @@ public class StockTickerServiceTests { //TODO extends AbstractAppTransactionalTe
     }*/
 
     /*@Test
-    public void testLookupUSPostalAddressUSPS() {
-        when(serviceabilityLookupService.searchByAddress(TPA_DIV, address, IN_ADDR_USPS)).thenReturn(getValidResult());
-        result = serviceabilityService.lookupUSPostalAddress(TPA_DIV, address, IN_ADDR_USPS);
-        verify(serviceabilityLookupService).searchByAddress(TPA_DIV, address, IN_ADDR_USPS);
+    public void testookupUSPostalAddressUSPS() {
+        when(serviceabilityLookupService.searchByAddress(TPA_, address, IN_ADDR_)).thenReturn(getValidResult());
+        result = serviceabilityService.lookupUSPostalAddress(TPA_, address, IN_ADDR_);
+        verify(serviceabilityLookupService).searchByAddress(TPA_, address, IN_ADDR_);
 
         assertTrue(Optional.of(result)
                 .filter(r -> validNosaDivision.apply(r.getDivisionId()))
-                .filter(ServiceabilityResult::getServiceable)
+                .filter(Result::getServiceable)
                 .filter(r -> !(CollectionUtils.isEmpty(r.getAddresses())))
                 .filter(res -> Optional.of(res.getAddresses().stream()
                         .filter(r -> r.getAddressLine1().equalsIgnoreCase(address.getAddressLine1()))

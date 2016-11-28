@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for StockQuote complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="StockQuote">
  *   &lt;complexContent>
@@ -33,15 +33,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StockQuote", propOrder = {
-    "statusCode",
-    "statusText",
-    "tickerSymbol",
-    "stockPrice"
+        "statusCode",
+        "statusText",
+        "tickerSymbol",
+        "stockPrice"
 })
 public class StockQuote {
 
@@ -54,7 +54,7 @@ public class StockQuote {
 
     /**
      * Gets the value of the statusCode property.
-     * 
+     *
      */
     public int getStatusCode() {
         return statusCode;
@@ -62,7 +62,7 @@ public class StockQuote {
 
     /**
      * Sets the value of the statusCode property.
-     * 
+     *
      */
     public void setStatusCode(int value) {
         this.statusCode = value;
@@ -70,11 +70,11 @@ public class StockQuote {
 
     /**
      * Gets the value of the statusText property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getStatusText() {
         return statusText;
@@ -82,11 +82,11 @@ public class StockQuote {
 
     /**
      * Sets the value of the statusText property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setStatusText(String value) {
         this.statusText = value;
@@ -94,11 +94,11 @@ public class StockQuote {
 
     /**
      * Gets the value of the tickerSymbol property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getTickerSymbol() {
         return tickerSymbol;
@@ -106,11 +106,11 @@ public class StockQuote {
 
     /**
      * Sets the value of the tickerSymbol property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setTickerSymbol(String value) {
         this.tickerSymbol = value;
@@ -118,7 +118,7 @@ public class StockQuote {
 
     /**
      * Gets the value of the stockPrice property.
-     * 
+     *
      */
     public float getStockPrice() {
         return stockPrice;
@@ -126,10 +126,11 @@ public class StockQuote {
 
     /**
      * Sets the value of the stockPrice property.
-     * 
+     *
      */
     public void setStockPrice(float value) {
         this.stockPrice = value;
     }
 
 }
+

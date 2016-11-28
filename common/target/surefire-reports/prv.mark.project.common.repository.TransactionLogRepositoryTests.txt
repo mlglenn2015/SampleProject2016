@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.common.repository.TransactionLogRepositoryTests
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.418 sec - in prv.mark.project.common.repository.TransactionLogRepositoryTests
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.978 sec - in prv.mark.project.common.repository.TransactionLogRepositoryTests

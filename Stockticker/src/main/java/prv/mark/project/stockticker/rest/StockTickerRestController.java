@@ -23,6 +23,8 @@ import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -55,7 +57,6 @@ public class StockTickerRestController {
     public StockPriceResponse getStockPriceBySymbol(final @RequestParam("stockSymbol") String stockSymbol) {
         LOGGER.debug("StockTickerRestController.getStockPriceBySymbol({})", stockSymbol);
 
-        //Validate the request
         validateStockPriceRequest(stockSymbol);
         LOGGER.debug("Request is valid: {}", stockSymbol);
 
@@ -76,23 +77,63 @@ public class StockTickerRestController {
             throw new SOAPServerException(sse.getMessage());
         }
 
-        //TODO check if getStockPriceResponse is null
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
-        stockPriceResponse.setStockSymbol(getStockPriceResponse.getOrder().getTickerSymbol());
-        stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getOrder().getStockPrice()));
-        stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.OK);
-        //stockPriceResponse.setResult();
+        if (getStockPriceResponse == null) {
+            stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.FAIL);
+        } else {
+            stockPriceResponse.setStockSymbol(getStockPriceResponse.getQuote().getTickerSymbol());
+            stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getQuote().getStockPrice()));
+            stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.OK);
+            //stockPriceResponse.setResult();
+        }
 
         LOGGER.debug("Returning response: {}", stockPriceResponse.toString());
         return stockPriceResponse;
     }
 
     /**
+     * Request handler for /stockrest/getall requests (http://localhost:13001/Stockticker/stockrest/bysymbol)
+     * @return {@link StockPriceResponse} containing the stock price
+     */
+    @RequestMapping(value="/getall", method=RequestMethod.GET)
+    public StockPriceResponse getAllStockPrices() {
+        LOGGER.debug("StockTickerRestController.getAllStockPrices()");
+
+        List<GetStockPriceResponse> stockPriceResponseList = new ArrayList<>();
+        try {
+            stockPriceResponseList  = stockTickerService.getAll();
+
+        } catch (SOAPClientException sce) {
+
+            LOGGER.error("SoapClientException caught: {}", sce.getMessage());
+            throw new SOAPClientException(sce.getMessage());
+
+        } catch (SOAPServerException | WebServiceClientException sse) {
+
+            LOGGER.error("SoapServerException caught: {}", sse.getMessage());
+            throw new SOAPServerException(sse.getMessage());
+        }
+
+        StockPriceResponse stockPriceResponse = new StockPriceResponse();
+        //if (getStockPriceResponse == null) { TODO
+            stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.FAIL);
+        //} else {
+        //    stockPriceResponse.setStockSymbol(getStockPriceResponse.getOrder().getTickerSymbol());
+        //    stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getOrder().getStockPrice()));
+        //    stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.OK);
+            //stockPriceResponse.setResult();
+        //}
+
+        LOGGER.debug("Returning response: {}", stockPriceResponse.toString());
+        return stockPriceResponse;
+    }
+
+    /* *
      * Request handler for /stockrest/save requests
      * @param stockPriceRequest The input {@link StockPriceRequest} object
      * @return {@link StockPriceResponse} containing the stock price
      */
-    @RequestMapping(value="/save", method=RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(value="/save", method=RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public StockPriceResponse saveStockPriceBySymbol(@RequestBody final StockPriceRequest stockPriceRequest) {
         LOGGER.debug("StockTickerRestController.saveStockPriceBySymbol({})", stockPriceRequest.getStockSymbol());
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
@@ -101,7 +142,7 @@ public class StockTickerRestController {
         //TODO save
 
         return stockPriceResponse;
-    }
+    }*/
 
 
     private void validateStockPriceRequest(final String stockSymbol) {

@@ -56,10 +56,10 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
 
     Predicate<GetStockPriceResponse> validResponse = response -> Optional.of(response)
-            .filter(r -> Optional.of(r.getOrder()).isPresent())
-            .filter(r -> r.getOrder().getStatusCode() == 0)
-            .filter(r -> Optional.of(r.getOrder().getStockPrice()).isPresent())
-            .filter(r -> Optional.of(r.getOrder().getTickerSymbol()).isPresent())
+            .filter(r -> Optional.of(r.getQuote()).isPresent())
+            .filter(r -> r.getQuote().getStatusCode() == 0)
+            .filter(r -> Optional.of(r.getQuote().getStockPrice()).isPresent())
+            .filter(r -> Optional.of(r.getQuote().getTickerSymbol()).isPresent())
             .isPresent();
 
 
@@ -154,7 +154,7 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
         stockQuote.setStockPrice(NumberUtils.toFloat("9.99"));
-        response.setOrder(stockQuote);
+        response.setQuote(stockQuote);
         return response;
     }
 }

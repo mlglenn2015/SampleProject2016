@@ -9,15 +9,16 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import prv.mark.project.common.domain.EnumOrderTypes;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
+import prv.mark.project.common.util.DateUtils;
+import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.xml.stocks.GetStockPriceRequest;
-import prv.mark.xml.stocks.GetStockPriceResponse;
-import prv.mark.xml.stocks.RequestHeader;
+import prv.mark.xml.stocks.*;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -57,7 +58,6 @@ public class StockTickerEndpoint {
     public GetStockPriceResponse getStockPrice(@RequestPayload GetStockPriceRequest getStockPriceRequest) {
         LOGGER.debug("*** StockTickerEndpoint.submitOrder() entry ...");
 
-        //Validate the request
         validateGetStockPriceRequest(getStockPriceRequest);
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
 
@@ -79,6 +79,40 @@ public class StockTickerEndpoint {
         LOGGER.debug("Returning response: {}", getStockPriceResponse.toString());
         return getStockPriceResponse;
     }
+
+    /**
+     * Endpoint method to accept a {@link SubmitOrderRequest} and return a response.
+     * @param submitOrderRequest {@link SubmitOrderRequest} Request payload
+     * @return {@link SubmitOrderResponse}
+     */
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SubmitOrderRequest")
+    @ResponsePayload
+    public SubmitOrderResponse placeStockOrder(@RequestPayload SubmitOrderRequest submitOrderRequest) {
+        LOGGER.debug("*** StockTickerEndpoint.submitOrder() entry ...");
+
+        validateSubmitOrderRequest(submitOrderRequest);
+        LOGGER.debug("Request is valid: {}", submitOrderRequest.toString());
+        submitOrderRequest.getOrder().setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
+
+        SubmitOrderResponse submitOrderResponse;
+        try {
+            submitOrderResponse  = stockTickerService.placeOrder(submitOrderRequest);
+
+        } catch (SOAPClientException sce) {
+
+            LOGGER.error("SoapClientException caught: {}", sce.getMessage());
+            throw new SOAPClientException(sce.getMessage());
+
+        } catch (SOAPServerException | WebServiceClientException sse) {
+
+            LOGGER.error("SoapServerException caught: {}", sse.getMessage());
+            throw new SOAPServerException(sse.getMessage());
+        }
+
+        LOGGER.debug("Returning response: {}", submitOrderResponse.toString());
+        return submitOrderResponse;
+    }
+
 
 
     private void validateHeader(final RequestHeader requestHeader) {
@@ -116,6 +150,54 @@ public class StockTickerEndpoint {
         String tickerSymbol = Optional.of(getStockPriceRequest.getTickerSymbol())
                                 .filter(validStockSymbolPattern)
                                 .orElseThrow(() -> new SOAPGeneralFault(newMessage));
+        LOGGER.debug("tickerSymbol:{}", tickerSymbol);
+    }
+
+    private void validateSubmitOrderRequest(final SubmitOrderRequest submitOrderRequest) {
+        LOGGER.debug("*** StockTickerEndpoint.validateSubmitOrderRequest()");
+        if (submitOrderRequest == null) {
+            String message = "*** SubmitOrderRequest IS NULL!!! ***";
+            LOGGER.error(message);
+            throw new SOAPClientException(message);
+        }
+
+        validateHeader(submitOrderRequest.getHead());
+
+        if (submitOrderRequest.getOrder() == null) {
+            String message = "*** SubmitOrderRequest.Order IS NULL!!! ***";
+            LOGGER.error(message);
+            throw new SOAPGeneralFault(message);
+        }
+
+        if (StringUtils.isEmpty(submitOrderRequest.getOrder().getAction())
+            || StringUtils.isEmpty(submitOrderRequest.getOrder().getOrderType())
+            || StringUtils.isEmpty(submitOrderRequest.getOrder().getTickerSymbol())) {
+
+            String message = "Required field is empty:" + submitOrderRequest.getOrder().getAction() + " "
+                    + submitOrderRequest.getOrder().getOrderType() + " "
+                    + submitOrderRequest.getOrder().getTickerSymbol();
+            LOGGER.error(message);
+            throw new SOAPGeneralFault(message);
+        }
+
+        if (submitOrderRequest.getOrder().getQuantity() == null
+                || submitOrderRequest.getOrder().getQuantity() <= 0) {
+            String message = "Invalid value for submitOrderRequest.getOrder().getQuantity()";
+            LOGGER.error(message);
+            throw new SOAPGeneralFault(message);
+        }
+
+        if (submitOrderRequest.getOrder().getOrderType().equalsIgnoreCase(EnumOrderTypes.LIMIT_ORDER.getOrderType())
+            && (submitOrderRequest.getOrder().getStockPrice() < 0.00)) {
+            String message = "Invalid value for submitOrderRequest.getOrder().getQuantity()";
+            LOGGER.error(message);
+            throw new SOAPGeneralFault(message);
+        }
+
+        String newMessage = "*** Invalid Ticker Symbol: " + submitOrderRequest.getOrder().getTickerSymbol() + " ***";
+        String tickerSymbol = Optional.of(submitOrderRequest.getOrder().getTickerSymbol())
+                .filter(validStockSymbolPattern)
+                .orElseThrow(() -> new SOAPGeneralFault(newMessage));
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 

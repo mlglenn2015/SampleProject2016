@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.domain.EnumTransactionTypes;
 import prv.mark.project.common.domain.TransactionDto;
+import prv.mark.project.common.entity.StockOrder;
 import prv.mark.project.common.entity.StockPrice;
 import prv.mark.project.common.entity.TransactionLog;
 import prv.mark.project.common.exception.ExceptionRouter;
+import prv.mark.project.common.service.StockOrderService;
 import prv.mark.project.common.service.StockPriceService;
 import prv.mark.project.common.service.TransactionLogService;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
@@ -20,12 +22,12 @@ import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.xml.stocks.GetStockPriceRequest;
 import prv.mark.xml.stocks.GetStockPriceResponse;
-import prv.mark.xml.stocks.RequestHeader;
-import prv.mark.xml.stocks.StockQuote;
+//import prv.mark.xml.stocks.*;
 
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -47,11 +49,14 @@ public class StockTickerServiceImpl implements StockTickerService {
     @Autowired
     private StockPriceService stockPriceService;
     @Autowired
+    private StockOrderService stockOrderService;
+    @Autowired
     private TransactionLogService transactionLogService;
 
 
     @Override
-    public GetStockPriceResponse getStockPrice(final GetStockPriceRequest getStockPriceRequest) {
+    public prv.mark.xml.stocks.GetStockPriceResponse getStockPrice(
+            final prv.mark.xml.stocks.GetStockPriceRequest getStockPriceRequest) {
         LOGGER.debug("*** StockTickerServiceImpl.getStockPrice() entry ...");
         logGetStockPriceRequest(getStockPriceRequest);
 
@@ -75,13 +80,16 @@ public class StockTickerServiceImpl implements StockTickerService {
 
 
 
-        Optional<StockPrice> returnedEntity = stockPriceService.findByStockSymbol(getStockPriceRequest.getTickerSymbol());
+        Optional<StockPrice> returnedEntity
+                = stockPriceService.findByStockSymbol(getStockPriceRequest.getTickerSymbol());
 
-        GetStockPriceResponse getStockPriceResponse = new GetStockPriceResponse();
+        prv.mark.xml.stocks.GetStockPriceResponse getStockPriceResponse
+                = new prv.mark.xml.stocks.GetStockPriceResponse();
+
         if (returnedEntity != null && returnedEntity.get() != null) {
-            getStockPriceResponse = buildSuccessfulStockPriceResponse(getStockPriceRequest, returnedEntity.get());
+            getStockPriceResponse = buildSuccessfulStockPriceResponse(returnedEntity.get());
         } else {
-            getStockPriceResponse = buildFailureStockPriceResponse(getStockPriceRequest, returnedEntity.get());
+            getStockPriceResponse = buildFailureStockPriceResponse(getStockPriceRequest);
         }
 
         //TODO testing
@@ -96,24 +104,115 @@ public class StockTickerServiceImpl implements StockTickerService {
 
 
 
-        //TODO Save the order to the in-memory database
-        //for (Order order : submitOrderRequest.getOrders().getOrder()) {
-        //    Orders ordersEntity = setOrderEntityProperties(order, submitOrderRequest);
-        //    LOGGER.debug("*** SAVING ordersEntity: {}", ordersEntity.toString());
-        //    returnedOrdersEntity = insertOrder(ordersEntity);
-        //} //for
-
-
-
 
         logGetStockPriceResponse(getStockPriceResponse);
         return getStockPriceResponse;
     }
 
+    @Override
+    public List<prv.mark.xml.stocks.GetStockPriceResponse> getAll() {
+        LOGGER.debug("*** StockTickerServiceImpl.getAll() entry ...");
+        //logGetStockPriceRequest(getStockPriceRequest);
+        String trxDetail = "GET ALL STOCK QUOTES";
+        LOGGER.debug(trxDetail);
+        TransactionDto transactionDto = setTransactionDto(trxDetail);
+
+
+
+
+        //TODO place the tranaction on the log queue
+        TransactionLog transactionLog = new TransactionLog();
+        transactionLog.setId(null);
+        transactionLog.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
+        transactionLog.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
+        if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
+            transactionLog.setTransactionData(transactionDto.getTransactionDetail());
+        }
+        saveTransactionLogEntity(transactionLog);
+
+
+
+
+
+        List<StockPrice> returnedEntityList = stockPriceService.findAll();
+        List<prv.mark.xml.stocks.GetStockPriceResponse> getStockPriceResponseList = new ArrayList<>();
+        if (returnedEntityList != null && returnedEntityList.size() > 0) {
+            for (StockPrice stockPrice : returnedEntityList) {
+                GetStockPriceResponse getStockPriceResponse = buildSuccessfulStockPriceResponse(stockPrice);
+                getStockPriceResponseList.add(getStockPriceResponse);
+                logGetStockPriceResponse(getStockPriceResponse);
+            }
+        } else {
+            GetStockPriceResponse getStockPriceResponse = buildFailureStockPriceResponse(null);
+            getStockPriceResponseList.add(getStockPriceResponse);
+            logGetStockPriceResponse(getStockPriceResponse);
+        }
+
+        return getStockPriceResponseList;
+    }
+
+    @Override
+    public prv.mark.xml.stocks.SubmitOrderResponse placeOrder(
+            prv.mark.xml.stocks.SubmitOrderRequest submitOrderRequest) {
+        LOGGER.debug("*** StockTickerServiceImpl.placeOrder() entry ...");
+        logSubmitOrderRequest(submitOrderRequest);
+
+        TransactionDto transactionDto = setTransactionDto(submitOrderRequest);
+
+
+
+
+        //TODO place the tranaction on the log queue (TransactionLogger)
+        TransactionLog transactionLog = new TransactionLog();
+        transactionLog.setId(null);
+        transactionLog.setTransactionType(transactionDto.getTransactionType());
+        transactionLog.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
+        //transactionLog.setLogDateTime(transactionDto.getLogDateTime());
+        if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
+            transactionLog.setTransactionData(transactionDto.getTransactionDetail());
+        }
+        saveTransactionLogEntity(transactionLog);
+
+
+
+        StockOrder stockOrder = new StockOrder();
+        stockOrder.setId(null);
+        stockOrder.setAction(submitOrderRequest.getOrder().getAction());
+        stockOrder.setStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
+        stockOrder.setQuantity(submitOrderRequest.getOrder().getQuantity().longValue());
+        Optional<StockPrice> stockPriceEntity
+                = stockPriceService.findByStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
+        stockOrder.setPrice(stockPriceEntity.get().getCurrentPrice());
+        stockOrder.setOrderType(submitOrderRequest.getOrder().getOrderType());
+        stockOrder.setOrderDate(DateUtils.getDateFromLocalDateTime());
+
+        StockOrder returnedEntity = saveStockOrderEntity(stockOrder);
+
+        prv.mark.xml.stocks.SubmitOrderResponse submitOrderResponse = new prv.mark.xml.stocks.SubmitOrderResponse();
+
+        if (returnedEntity != null) {
+            submitOrderResponse = buildSuccessfulStockOrderResponse(submitOrderRequest, returnedEntity);
+        } else {
+            submitOrderResponse = buildFailureStockOrderResponse(submitOrderRequest, returnedEntity);
+        }
+
+        logSubmitOrderResponse(submitOrderResponse);
+        return submitOrderResponse;
+    }
+
+
 
     /* Private methods */
 
-    private TransactionDto setTransactionDto(final GetStockPriceRequest getStockPriceRequest) {
+    private TransactionDto setTransactionDto(final String detailString) {
+        TransactionDto transactionDto = new TransactionDto();
+        transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
+        transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
+        transactionDto.setTransactionDetail(detailString);
+        return transactionDto;
+    }
+
+    private TransactionDto setTransactionDto(final prv.mark.xml.stocks.GetStockPriceRequest getStockPriceRequest) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
         transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
@@ -122,48 +221,95 @@ public class StockTickerServiceImpl implements StockTickerService {
         return transactionDto;
     }
 
-    private GetStockPriceResponse buildSuccessfulStockPriceResponse(final GetStockPriceRequest getStockPriceRequest,
-                                                                 final StockPrice returnedEntity) {
-        GetStockPriceResponse response = new GetStockPriceResponse();
-        StockQuote stockQuote = new StockQuote();
+    private TransactionDto setTransactionDto(final prv.mark.xml.stocks.SubmitOrderRequest submitOrderRequest) {
+        TransactionDto transactionDto = new TransactionDto();
+        transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
+        if (submitOrderRequest.getOrder().getAction().equalsIgnoreCase("BUY")) {
+            transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PURCHASE.getTransactionTypeDesc());
+        } else {
+            transactionDto.setTransactionType(EnumTransactionTypes.STOCK_SALE.getTransactionTypeDesc());
+        }
+        transactionDto.setTransactionDetail(
+                submitOrderRequest.getHead().getSource() + "," + submitOrderRequest.getOrder().getAction() + ","
+                + submitOrderRequest.getOrder().getQuantity() + ","
+                + submitOrderRequest.getOrder().getTickerSymbol() + ","
+                + submitOrderRequest.getOrder().getStockPrice() + ","
+                + submitOrderRequest.getOrder().getOrderType() + ","
+                + submitOrderRequest.getOrder().getOrderDate());
+        return transactionDto;
+    }
+
+    private prv.mark.xml.stocks.GetStockPriceResponse buildSuccessfulStockPriceResponse(
+            final StockPrice returnedEntity) {
+
+        prv.mark.xml.stocks.GetStockPriceResponse response = new prv.mark.xml.stocks.GetStockPriceResponse();
+        prv.mark.xml.stocks.StockQuote stockQuote = new prv.mark.xml.stocks.StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
-        stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
-        stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
-        response.setOrder(stockQuote);
+        if (returnedEntity != null) {
+            stockQuote.setTickerSymbol(returnedEntity.getStockSymbol());
+            stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
+        }
+        response.setQuote(stockQuote);
         return response;
     }
 
-    private GetStockPriceResponse buildFailureStockPriceResponse(final GetStockPriceRequest getStockPriceRequest,
-                                                                 final StockPrice returnedEntity) {
-        GetStockPriceResponse response = new GetStockPriceResponse();
-        StockQuote stockQuote = new StockQuote();
+    private prv.mark.xml.stocks.GetStockPriceResponse buildFailureStockPriceResponse(
+            final prv.mark.xml.stocks.GetStockPriceRequest getStockPriceRequest) {
+
+        prv.mark.xml.stocks.GetStockPriceResponse response = new prv.mark.xml.stocks.GetStockPriceResponse();
+        prv.mark.xml.stocks.StockQuote stockQuote = new prv.mark.xml.stocks.StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
-        stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
-        response.setOrder(stockQuote);
+        if (getStockPriceRequest != null) {
+            stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
+        }
+        response.setQuote(stockQuote);
         return response;
     }
 
-    /*private Orders insertOrder(final Orders entity) {
+    private prv.mark.xml.stocks.SubmitOrderResponse buildSuccessfulStockOrderResponse(
+            final prv.mark.xml.stocks.SubmitOrderRequest submitOrderRequest,
+            final StockOrder returnedEntity) {
 
-        LOGGER.debug("torServiceImpl.insertOrder()");
-        Orders returnEntity = new Orders();
+        prv.mark.xml.stocks.SubmitOrderResponse response = new prv.mark.xml.stocks.SubmitOrderResponse();
+        response.setStatus(EnumStatusCodes.SUCCESS.getStatudCode());
+        response.setStatusDesc("Order Filled: " + submitOrderRequest.getOrder().getAction()
+                + " " + submitOrderRequest.getOrder().getQuantity() + " shares at "
+                + returnedEntity.getPrice() + " - " + submitOrderRequest.getOrder().getOrderType());
+        return response;
+    }
+
+    private prv.mark.xml.stocks.SubmitOrderResponse buildFailureStockOrderResponse(
+            final prv.mark.xml.stocks.SubmitOrderRequest submitOrderRequest,
+            final StockOrder returnedEntity) {
+
+        prv.mark.xml.stocks.SubmitOrderResponse response = new prv.mark.xml.stocks.SubmitOrderResponse();
+        response.setStatus(EnumStatusCodes.REQUEST_FAILED.getStatudCode());
+        response.setStatusDesc("Order FAILED: " + submitOrderRequest.getOrder().getAction()
+                + " " + submitOrderRequest.getOrder().getQuantity() + " shares at "
+                + returnedEntity.getPrice() + " - " + submitOrderRequest.getOrder().getOrderType());
+        return response;
+    }
+
+    private StockOrder saveStockOrderEntity(final StockOrder entity) {
+
+        LOGGER.debug("StockTickerServiceImpl.saveStockOrderEntity()");
+        StockOrder returnEntity = new StockOrder();
         try {
-            //transactionManager.getTransaction()
-//            returnEntity = ordersService.save(entity);
+
+            returnEntity = stockOrderService.save(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
-            String msg = "Exception caught while saving Orders entity "
-                    + entity.getId() + ".";
+            String msg = "Exception caught while saving StockOrder entity " + entity.getId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }
-        LOGGER.debug("*** Saved Orders entity ***");
+        LOGGER.debug("*** Saved StockOrder entity ***");
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }*/
+    }
 
     private TransactionLog saveTransactionLogEntity(final TransactionLog entity) {
 
@@ -183,25 +329,44 @@ public class StockTickerServiceImpl implements StockTickerService {
         return returnEntity;
     }
 
-    private void logGetStockPriceRequest(final GetStockPriceRequest getStockPriceRequest) {
-        LOGGER.debug("*** StockTickerServiceImpl.logGetStockPriceRequest() entry ...");
-        logRequestHeader(getStockPriceRequest.getHead());
+    private void logSubmitOrderRequest(final prv.mark.xml.stocks.SubmitOrderRequest submitOrderRequest) {
+        LOGGER.debug("*** StockTickerServiceImpl.logSubmitOrderRequest() entry ...");
+        logRequestHeader(submitOrderRequest.getHead());
         LOGGER.debug("********** ORDER DATA **********");
-        LOGGER.debug("orderid: {}", getStockPriceRequest.getTickerSymbol());
+        LOGGER.debug("action: {}", submitOrderRequest.getOrder().getAction());
+        LOGGER.debug("quantity: {}", submitOrderRequest.getOrder().getQuantity());
+        LOGGER.debug("ticker symbol: {}", submitOrderRequest.getOrder().getTickerSymbol());
+        LOGGER.debug("price: {}", submitOrderRequest.getOrder().getStockPrice());
+        LOGGER.debug("order type: {}", submitOrderRequest.getOrder().getOrderType());
+        LOGGER.debug("order date: {}", submitOrderRequest.getOrder().getOrderDate());
     }
 
-    private void logRequestHeader(final RequestHeader requestHeader) {
+    private void logGetStockPriceRequest(final prv.mark.xml.stocks.GetStockPriceRequest getStockPriceRequest) {
+        LOGGER.debug("*** StockTickerServiceImpl.logGetStockPriceRequest() entry ...");
+        logRequestHeader(getStockPriceRequest.getHead());
+        LOGGER.debug("********** REQUEST DATA **********");
+        LOGGER.debug("Ticker symbol: {}", getStockPriceRequest.getTickerSymbol());
+    }
+
+    private void logRequestHeader(final prv.mark.xml.stocks.RequestHeader requestHeader) {
         LOGGER.debug("********** REQUEST HEADER **********");
         LOGGER.debug("source: {}", requestHeader.getSource());
     }
 
-    private void logGetStockPriceResponse(final GetStockPriceResponse getStockPriceResponse) {
+    private void logGetStockPriceResponse(final prv.mark.xml.stocks.GetStockPriceResponse getStockPriceResponse) {
         LOGGER.debug("*** StockTickerServiceImpl.logGetStockPriceResponse() entry ...");
-        LOGGER.debug("********** RETURNING RESPONSE **********");
-        LOGGER.debug("Status Code:{}", getStockPriceResponse.getOrder().getStatusCode());
-        LOGGER.debug("Status Text:{}", getStockPriceResponse.getOrder().getStatusText());
-        LOGGER.debug("Stock Price:{}", NumberUtils.toBigDecimal(getStockPriceResponse.getOrder().getStockPrice()));
-        LOGGER.debug("Ticker Symbol:{}", getStockPriceResponse.getOrder().getTickerSymbol());
+        LOGGER.debug("********** RETURNING STOCK PRICE RESPONSE **********");
+        LOGGER.debug("Status Code:{}", getStockPriceResponse.getQuote().getStatusCode());
+        LOGGER.debug("Status Text:{}", getStockPriceResponse.getQuote().getStatusText());
+        LOGGER.debug("Stock Price:{}", NumberUtils.toBigDecimal(getStockPriceResponse.getQuote().getStockPrice()));
+        LOGGER.debug("Ticker Symbol:{}", getStockPriceResponse.getQuote().getTickerSymbol());
+    }
+
+    private void logSubmitOrderResponse(final prv.mark.xml.stocks.SubmitOrderResponse submitOrderResponse) {
+        LOGGER.debug("*** StockTickerServiceImpl.logSubmitOrderResponse() entry ...");
+        LOGGER.debug("********** RETURNING SUBMIT ORDER RESPONSE **********");
+        LOGGER.debug("Status Code:{}", submitOrderResponse.getStatus());
+        LOGGER.debug("Status Description:{}", submitOrderResponse.getStatusDesc());
     }
 
 } 

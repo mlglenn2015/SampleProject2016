@@ -18,9 +18,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for StockOrder complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="StockOrder">
  *   &lt;complexContent>
@@ -29,6 +29,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="tickerSymbol" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="orderDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="quantity" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="stockPrice" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         &lt;element name="action" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="orderType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -36,16 +37,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StockOrder", propOrder = {
-    "tickerSymbol",
-    "orderDate",
-    "quantity",
-    "action",
-    "orderType"
+        "tickerSymbol",
+        "orderDate",
+        "quantity",
+        "stockPrice",
+        "action",
+        "orderType"
 })
 public class StockOrder {
 
@@ -55,16 +57,17 @@ public class StockOrder {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar orderDate;
     protected Integer quantity;
+    protected float stockPrice;
     protected String action;
     protected String orderType;
 
     /**
      * Gets the value of the tickerSymbol property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getTickerSymbol() {
         return tickerSymbol;
@@ -72,11 +75,11 @@ public class StockOrder {
 
     /**
      * Sets the value of the tickerSymbol property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setTickerSymbol(String value) {
         this.tickerSymbol = value;
@@ -84,11 +87,11 @@ public class StockOrder {
 
     /**
      * Gets the value of the orderDate property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public XMLGregorianCalendar getOrderDate() {
         return orderDate;
@@ -96,11 +99,11 @@ public class StockOrder {
 
     /**
      * Sets the value of the orderDate property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public void setOrderDate(XMLGregorianCalendar value) {
         this.orderDate = value;
@@ -108,11 +111,11 @@ public class StockOrder {
 
     /**
      * Gets the value of the quantity property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Integer }
-     *     
+     *
      */
     public Integer getQuantity() {
         return quantity;
@@ -120,23 +123,39 @@ public class StockOrder {
 
     /**
      * Sets the value of the quantity property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Integer }
-     *     
+     *
      */
     public void setQuantity(Integer value) {
         this.quantity = value;
     }
 
     /**
+     * Gets the value of the stockPrice property.
+     *
+     */
+    public float getStockPrice() {
+        return stockPrice;
+    }
+
+    /**
+     * Sets the value of the stockPrice property.
+     *
+     */
+    public void setStockPrice(float value) {
+        this.stockPrice = value;
+    }
+
+    /**
      * Gets the value of the action property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getAction() {
         return action;
@@ -144,11 +163,11 @@ public class StockOrder {
 
     /**
      * Sets the value of the action property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setAction(String value) {
         this.action = value;
@@ -156,11 +175,11 @@ public class StockOrder {
 
     /**
      * Gets the value of the orderType property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getOrderType() {
         return orderType;
@@ -168,11 +187,11 @@ public class StockOrder {
 
     /**
      * Sets the value of the orderType property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setOrderType(String value) {
         this.orderType = value;
