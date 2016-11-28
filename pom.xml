@@ -183,7 +183,7 @@
         <dependency>
             <groupId>net.sourceforge.jgeocoder</groupId>
             <artifactId>jgeocoder</artifactId>
-            <version>0.5</version>
+            <version>0.4</version>
         </dependency>
 
         <dependency>
@@ -240,7 +240,7 @@
             <version>3.2.3.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
+            <groupId>org.springframework</groupId> TODO ?
             <artifactId>spring-beans</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
@@ -360,6 +360,12 @@
                     </includes>
                     <systemPropertyVariables>
                         <ENVIRONMENT>dev</ENVIRONMENT>
+                        <path_1>../src/ssl_certs/client.jks</path_1>
+                        <path_2>../src/ssl_certs/trusted_certs</path_2>
+                        <keyStorePassword>password</keyStorePassword>
+                        <trustStorePassword>password</trustStorePassword>
+                        <soa.system.id>STOCKTICKER</soa.system.id>
+                        <logback.configurationFile>../testutils/src/main/resources/logback-test.xml</logback.configurationFile>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
