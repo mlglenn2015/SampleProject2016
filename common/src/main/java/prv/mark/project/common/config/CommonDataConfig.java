@@ -27,10 +27,10 @@ import java.util.Properties;
 /**
  * Spring database configuration.
  *
- * @author MLGlenn.
+ * @author mlglenn.
  */
 @Configuration
-@ComponentScan(basePackages = {"prv.mark.project.stockticker"})
+@ComponentScan(basePackages = {"prv.mark.project"})
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
 @PropertySources({

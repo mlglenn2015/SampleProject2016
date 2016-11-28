@@ -44,8 +44,8 @@ public class StockTickerServiceImpl implements StockTickerService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    @Autowired
-    private ApplicationParameterSource applicationParameterSource;
+    /*@Autowired TODO
+    private ApplicationParameterSource applicationParameterSource;*/
     @Autowired
     private StockPriceService stockPriceService;
     @Autowired
@@ -245,7 +245,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         prv.mark.xml.stocks.GetStockPriceResponse response = new prv.mark.xml.stocks.GetStockPriceResponse();
         prv.mark.xml.stocks.StockQuote stockQuote = new prv.mark.xml.stocks.StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
+        //stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL)); TODO
+        stockQuote.setStatusText("Request Successful");
         if (returnedEntity != null) {
             stockQuote.setTickerSymbol(returnedEntity.getStockSymbol());
             stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
@@ -260,7 +261,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         prv.mark.xml.stocks.GetStockPriceResponse response = new prv.mark.xml.stocks.GetStockPriceResponse();
         prv.mark.xml.stocks.StockQuote stockQuote = new prv.mark.xml.stocks.StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
+        //stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED)); TODO
+        stockQuote.setStatusText("Request Failed");
         if (getStockPriceRequest != null) {
             stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
         }

@@ -1,0 +1,19 @@
+
+Install ojdbc6-11.0.4.jar
+
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.4 -Dpackaging=jar -Dfile=ojdbc6.jar -DgeneratePom=true
+
+
+Install jGeocoder
+
+mvn install:install-file -DgroupId=net.sourceforge.jgeocoder -DartifactId=jgeocoder -Dversion=0.5 -Dpackaging=jar -Dfile=jgeocoder-0.5.jar -DgeneratePom=true
+
+
+Install xmldigsig
+
+mvn install:install-file -DgroupId=javax.xml.crypto -DartifactId=xmldsig -Dversion=1.0 -Dpackaging=jar -Dfile=xmldsig-1.0.jar -DgeneratePom=true
+
+
+
+
+

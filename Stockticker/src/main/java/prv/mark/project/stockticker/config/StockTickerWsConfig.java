@@ -28,6 +28,7 @@ import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionReso
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.StringUtils;
 
 import javax.management.MBeanServer;
@@ -55,11 +56,15 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
             prv.mark.xml.stocks.GetStockPriceResponse.class,
             prv.mark.xml.stocks.StockOrder.class,
             prv.mark.xml.stocks.StockQuote.class,
-            prv.mark.xml.stocks.RequestHeader.class
+            prv.mark.xml.stocks.RequestHeader.class,
+            prv.mark.xml.stocks.SubmitOrderRequest.class,
+            prv.mark.xml.stocks.SubmitOrderResponse.class
     };
 
     @Autowired
     private Environment env;
+    /*@Autowired TODO
+    private ApplicationParameterSource applicationParameterSource;*/
 
     /*
     @Value("${path_1}")
@@ -91,7 +96,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     }*/
 
     /*@Bean(name = "Types")
-    public SimpleXsdSchema serviceabilityTypes() {
+    public SimpleXsdSchema types() {
         return new SimpleXsdSchema(new ClassPathResource("xsd/Types.xsd"));
     }*/
 
@@ -185,6 +190,11 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
     }
+
+    /*@Bean TODO
+    public MessageSource applicationParameterSource() {
+        return new ApplicationParameterSource();
+    }*/
 
     /*@Bean
     public Jaxb2Marshaller marshaller() {
