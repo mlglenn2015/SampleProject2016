@@ -4,11 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -17,6 +13,9 @@ import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import prv.mark.project.common.config.CommonDataConfig;
 
 import javax.sql.DataSource;
 import java.util.Optional;
@@ -28,15 +27,15 @@ import java.util.Properties;
  * @author MLGlenn.
  */
 //@Configuration
-@ComponentScan(basePackages = {"prv.mark.project.stockticker"})
+@ComponentScan(basePackages = {"prv.mark.project"})
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
 @PropertySources({
         @PropertySource("classpath:/common.properties")
 })
 //@Profile({"local", "dev", "qa", "stage", "prod"})
-@Profile({"notused"})  //TODO replaced by CommonDataConfig
-public class DataConfig { //extends JpaBaseConfiguration {
+@Profile({"notused"})
+public class DataConfig  {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataConfig.class);
 
@@ -51,56 +50,6 @@ public class DataConfig { //extends JpaBaseConfiguration {
     @Autowired
     private Environment env;
 
-    @Autowired
-    private PlatformTransactionManager transactionManager;
-
-
-    /* Used with JpaBaseConfiguration
-    @Override
-    protected AbstractJpaVendorAdapter createJpaVendorAdapter() {
-        return new EclipseLinkJpaVendorAdapter();
-    }
-
-    @Override
-    protected java.util.Map<String, Object> getVendorProperties() {
-        Map<String, Object> jpaProperties = new HashMap<>();
-        jpaProperties.put("eclipselink.weaving", "false");
-        jpaProperties.put("eclipselink.logging.level", "SEVERE");
-        jpaProperties.put("eclipselink.persistence-context.flush-mode", "AUTO");
-        return jpaProperties;
-
-    }*/
-
-
-    /*@Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("STOCKTICKER")
-                .addScript("classpath:schema.sql")
-                .addScript("classpath:data.sql")
-                .build();
-    }*/
-
-    @Bean
-    public DataSource dataSource() {
-        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        dsLookup.setResourceRef(true);
-        return dsLookup.getDataSource(applicationJndiDataSource);
-    }
-
-    /*@Bean
-    public JdbcTemplate jdbcTemplate() {
-        JdbcTemplate template = new JdbcTemplate();
-        template.setDataSource(dataSource());
-        return template;
-    }*/
-
-    /*@Bean
-    public DataSourceTransactionManager dataSourceTransactionManager() {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(dataSource());
-        return transactionManager;
-    }*/
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         // EclipseLink logging.  Default to SEVERE if not set as a system property or in a property file.
@@ -110,11 +59,10 @@ public class DataConfig { //extends JpaBaseConfiguration {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource());
         emfb.setPackagesToScan("prv.mark.project.common.entity");
-        //emfb.setJpaDialect(new EclipseLinkJpaDialect());
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
         jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
+        //jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setGenerateDdl(false);
-        //jpaVendorAdapter.setDatabase(Database.HSQL);
 
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("eclipselink.weaving", "false");
@@ -122,17 +70,26 @@ public class DataConfig { //extends JpaBaseConfiguration {
 
         emfb.setJpaProperties(jpaProperties);
         emfb.setJpaVendorAdapter(jpaVendorAdapter);
-        //emfb.afterPropertiesSet();
 
         return emfb;
     }
 
-    //@Bean
-    //public PlatformTransactionManager transactionManager() {
-        /*JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return transactionManager;*/
+    @Bean(destroyMethod = "")
+    public DataSource dataSource() {
+        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+        dsLookup.setResourceRef(true);
+        return dsLookup.getDataSource(applicationJndiDataSource);
+    }
 
-    //    return new JtaTransactionManager();
-    //}
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        return new JtaTransactionManager();
+    }
+
+    /*@Bean
+    public JdbcTemplate jdbcTemplate() {
+        JdbcTemplate template = new JdbcTemplate();
+        template.setDataSource(dataSource());
+        return template;
+    }*/
 }

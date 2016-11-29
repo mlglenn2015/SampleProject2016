@@ -31,7 +31,7 @@ import java.util.Properties;
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
+@EnableJpaRepositories(basePackages = {"prv.mark.project"})
 @EnableTransactionManagement
 @PropertySources({
         @PropertySource("classpath:/common.properties")
@@ -60,10 +60,10 @@ public class CommonDataConfig {
 
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource());
-        emfb.setPackagesToScan("prv.mark.project.common.entity");
+        emfb.setPackagesToScan("prv.mark.project");
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
-        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
-        jpaVendorAdapter.setShowSql(false);
+        jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
+        //jpaVendorAdapter.setShowSql(false);
         jpaVendorAdapter.setGenerateDdl(false);
 
         Properties jpaProperties = new Properties();

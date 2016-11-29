@@ -183,7 +183,7 @@
         <dependency>
             <groupId>net.sourceforge.jgeocoder</groupId>
             <artifactId>jgeocoder</artifactId>
-            <version>0.4</version>
+            <version>0.5</version>
         </dependency>
 
         <dependency>
@@ -238,13 +238,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>3.2.3.RELEASE</version>
-        </dependency>
+        </dependency-->
         <dependency>
-            <groupId>org.springframework</groupId> TODO ?
+            <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.1.6.RELEASE</version>
+            <!--<version>4.1.6.RELEASE</version>-->
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.junit</groupId>
             <artifactId>com.springsource.org.junit</artifactId>
             <version>4.7.0</version>

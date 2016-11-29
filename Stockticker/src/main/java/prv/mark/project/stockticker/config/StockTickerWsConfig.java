@@ -43,6 +43,8 @@ import java.util.List;
 @ComponentScan("prv.mark.project")  //prv.mark.project.stockticker
 @Import(CommonDataConfig.class)
 @PropertySources({
+        @PropertySource("classpath:/common.properties"),
+        @PropertySource("classpath:/application.properties"),
         @PropertySource("classpath:/StockTicker.properties")
 })
 @EnableWs

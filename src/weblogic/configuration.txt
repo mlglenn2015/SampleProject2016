@@ -9,7 +9,9 @@ http://DESKTOP-J1CHH1C:7001/console     weblogic/weblogic123
 C:\Oracle_Home\Middleware\wls12212\user_projects\domains\mydomain
 
 Startup arguments:
--Xms512m -Xmx1024m -Dspring.profiles.active=dev -DLOG_LOCATION=/etc/log -DENVIRONMENT=dev -Dapp.jpa.logging=SEVERE -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -XX:+UnlockCommercialFeatures -XX:+FlightRecorder
+-Xms512m -Xmx1024m -Dspring.profiles.active=dev -DLOG_LOCATION=/etc/log -DENVIRONMENT=dev -Dapp.jpa.logging=SEVERE -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -XX:+UnlockCommercialFeatures -XX:+ResourceManagement -XX:+FlightRecorder
+
+CLASSPATH=C:\Java\jdk1.8.0_111\lib\tools.jar;C:\Oracle\Middleware\wls12212\wlserver\server\lib\weblogic.jar
 
 
 
