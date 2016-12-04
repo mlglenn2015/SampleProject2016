@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.03" tests="5" errors="0" skipped="0" failures="0">
+<testsuite name="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.016" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2016.2.5"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,9 +62,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testTransactionTypesRepository" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.014"/>
-  <testcase name="testFindByTransactionType" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.005"/>
-  <testcase name="defaultTest" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.006"/>
-  <testcase name="testFindById" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.002"/>
-  <testcase name="testFindByInvalidTransactionType" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.003"/>
+  <testcase name="testTransactionTypesRepository" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0"/>
+  <testcase name="testFindByTransactionType" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0"/>
+  <testcase name="defaultTest" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0"/>
+  <testcase name="testFindById" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0.016"/>
+  <testcase name="testFindByInvalidTransactionType" classname="prv.mark.project.common.repository.TransactionTypesRepositoryTests" time="0"/>
 </testsuite>

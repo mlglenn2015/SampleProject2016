@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.12" tests="5" errors="0" skipped="0" failures="0">
+<testsuite name="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.296" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2016.2.5"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,9 +62,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testFindByOrderStatus" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.01"/>
-  <testcase name="defaultTest" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.01"/>
-  <testcase name="testFindById" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.002"/>
-  <testcase name="testFindByInvalidOrderStatus" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.008"/>
-  <testcase name="testOrderStatusRepository" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.09"/>
+  <testcase name="testFindByOrderStatus" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.14"/>
+  <testcase name="defaultTest" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0"/>
+  <testcase name="testFindById" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0"/>
+  <testcase name="testFindByInvalidOrderStatus" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.015"/>
+  <testcase name="testOrderStatusRepository" classname="prv.mark.project.common.repository.OrderStatusRepositoryTests" time="0.141"/>
 </testsuite>
