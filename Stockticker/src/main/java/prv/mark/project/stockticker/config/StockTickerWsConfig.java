@@ -206,7 +206,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     }*/
 
     @Bean
-    public WebServiceTemplate WebServiceTemplate() {
+    public WebServiceTemplate webServiceTemplate() {
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
         webServiceTemplate.setMarshaller(marshaller());
         webServiceTemplate.setUnmarshaller(marshaller());
