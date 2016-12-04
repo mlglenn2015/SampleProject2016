@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.common.repository.OrderStatusRepositoryTests
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.702 sec - in prv.mark.project.common.repository.OrderStatusRepositoryTests
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.825 sec - in prv.mark.project.common.repository.OrderStatusRepositoryTests

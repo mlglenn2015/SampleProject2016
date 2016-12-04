@@ -2,6 +2,11 @@
 workspace.xml
 *.iml
 target/*
+Stockticker/target/*
+TransactionLogger/target/*
+common/target/*
+schemas/target/*
+testutils/target/*
 
 *.class
 
