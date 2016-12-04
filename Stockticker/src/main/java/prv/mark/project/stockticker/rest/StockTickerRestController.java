@@ -40,8 +40,8 @@ public class StockTickerRestController {
 
     @Autowired
     private StockTickerService stockTickerService;
-    /*@Autowired
-    private ApplicationParameterSource applicationParameterSource;*/
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z0-9]{1,12}", i);
@@ -139,7 +139,7 @@ public class StockTickerRestController {
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
         stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.FAIL);
 
-        //TODO save
+        //TODO save for future
 
         return stockPriceResponse;
     }*/

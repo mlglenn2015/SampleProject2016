@@ -65,8 +65,8 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     @Autowired
     private Environment env;
-    /*@Autowired TODO
-    private ApplicationParameterSource applicationParameterSource;*/
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
     /*
     @Value("${path_1}")

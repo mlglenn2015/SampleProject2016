@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.533 sec - in prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.137 sec - in prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
