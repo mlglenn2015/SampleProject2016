@@ -40,8 +40,8 @@ public class StockTickerEndpoint {
 
     @Autowired
     private StockTickerService stockTickerService;
-    /*@Autowired TODO
-    private ApplicationParameterSource applicationParameterSource;*/
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z0-9]{1,12}", i);
@@ -125,8 +125,8 @@ public class StockTickerEndpoint {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
-        //if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) { TODO
-        if (!requestHeader.getSource().equals("STOCKTICKER")) {
+        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) { //TODO
+        //if (!requestHeader.getSource().equals("STOCKTICKER")) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
