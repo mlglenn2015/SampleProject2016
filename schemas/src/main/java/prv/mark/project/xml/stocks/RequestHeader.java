@@ -6,65 +6,64 @@
 //
 
 
-package prv.mark.xml.stocks;
+package prv.mark.project.xml.stocks;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
- *
+ * <p>Java class for RequestHeader complex type.
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="RequestHeader">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="quote" type="{http://prv.mark.project/stocks}StockQuote" minOccurs="0"/>
+ *         &lt;element name="source" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "quote"
+@XmlType(name = "RequestHeader", propOrder = {
+    "source"
 })
-@XmlRootElement(name = "GetStockPriceResponse")
-public class GetStockPriceResponse {
+public class RequestHeader {
 
-    protected StockQuote quote;
+    @XmlElement(required = true)
+    protected String source;
 
     /**
-     * Gets the value of the quote property.
-     *
+     * Gets the value of the source property.
+     * 
      * @return
      *     possible object is
-     *     {@link StockQuote }
-     *
+     *     {@link String }
+     *     
      */
-    public StockQuote getQuote() {
-        return quote;
+    public String getSource() {
+        return source;
     }
 
     /**
-     * Sets the value of the quote property.
-     *
+     * Sets the value of the source property.
+     * 
      * @param value
      *     allowed object is
-     *     {@link StockQuote }
-     *
+     *     {@link String }
+     *     
      */
-    public void setQuote(StockQuote value) {
-        this.quote = value;
+    public void setSource(String value) {
+        this.source = value;
     }
 
 }
-

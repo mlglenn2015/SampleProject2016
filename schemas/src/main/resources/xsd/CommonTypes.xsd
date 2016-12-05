@@ -1,0 +1,13 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://prv.mark.project/stocks/schemas/CommonTypes"
+            targetNamespace="http://prv.mark.project/stocks/schemas/CommonTypes"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="RequestHeader">
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="source" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>
+

@@ -6,7 +6,7 @@
 //
 
 
-package prv.mark.xml.translogger.schema;
+package prv.mark.project.xml.translogger.schema;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

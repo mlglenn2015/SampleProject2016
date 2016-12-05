@@ -6,7 +6,7 @@
 //
 
 
-package prv.mark.xml.stocks;
+package prv.mark.project.xml.stocks;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

@@ -1,9 +1,9 @@
 package prv.mark.project.stockticker.service;
 
-import prv.mark.xml.stocks.GetStockPriceRequest;
-import prv.mark.xml.stocks.GetStockPriceResponse;
-import prv.mark.xml.stocks.SubmitOrderRequest;
-import prv.mark.xml.stocks.SubmitOrderResponse;
+import prv.mark.project.xml.stocks.GetStockPriceRequest;
+import prv.mark.project.xml.stocks.GetStockPriceResponse;
+import prv.mark.project.xml.stocks.SubmitOrderRequest;
+import prv.mark.project.xml.stocks.SubmitOrderResponse;
 
 import java.util.List;
 

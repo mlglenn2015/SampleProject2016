@@ -15,9 +15,9 @@ import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
-import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
+import prv.mark.project.xml.stocks.*;
 import prv.mark.xml.stocks.*;
 
 import java.util.Optional;
