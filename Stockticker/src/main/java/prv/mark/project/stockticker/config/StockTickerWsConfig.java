@@ -48,9 +48,9 @@ import java.util.List;
         @PropertySource("classpath:/StockTicker.properties")
 })
 @EnableWs
-@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
-        registration = RegistrationPolicy.IGNORE_EXISTING)
-@Profile({"local", "dev", "qa", "stage", "prod"})
+//@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
+//        registration = RegistrationPolicy.IGNORE_EXISTING)
+@Profile({"local", "dev", "test", "staging", "production"})
 public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     private static final Class<?>[] CLASSES_TO_BE_BOUND = {
@@ -65,8 +65,9 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     @Autowired
     private Environment env;
-    @Autowired
-    private ApplicationParameterSource applicationParameterSource;
+
+    /*@Autowired
+    private ApplicationParameterSource applicationParameterSource;*/
 
     /*
     @Value("${path_1}")
@@ -181,19 +182,19 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return trustStoreFactory.getObject();
     }*/
 
-    @Bean
+    /*@Bean TODO moved to ApplicationConfig
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(messageSource());
         return validator;
-    }
+    }*/
 
-    @Bean
+    /*@Bean TODO moved to ApplicationConfig
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
     }
-
-    /*@Bean TODO
+*/
+    /*@Bean TODO moved to ApplicationConfig
     public MessageSource applicationParameterSource() {
         return new ApplicationParameterSource();
     }*/
@@ -228,11 +229,11 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new SaajSoapMessageFactory();
     }
 
-    @Bean
+    /*@Bean TODO moved to JmxConfig
     public JndiObjectFactoryBean jmxServerRuntime() {
         JndiObjectFactoryBean runtime = new JndiObjectFactoryBean();
         runtime.setJndiName("java:comp/env/jmx/runtime");
         runtime.setProxyInterface(MBeanServer.class);
         return runtime;
-    }
+    }*/
 }

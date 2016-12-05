@@ -47,7 +47,7 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         LOGGER.debug("TransactionLogRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testTransactionLog() {
         TransactionDto dto = buildDto();
         assertNotNull(dto);
@@ -86,7 +86,7 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         List<TransactionLog> tLog = new ArrayList<>();
         tLog = transactionLogRepository.findByTransactionType("TEST");
         assertTrue(tLog.size() == 0);
-    }
+    }*/
 
 
     private TransactionDto buildDto() {

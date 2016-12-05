@@ -36,7 +36,7 @@ import java.util.Properties;
 @PropertySources({
         @PropertySource("classpath:/common.properties")
 })
-@Profile({"local", "dev", "qa", "stage", "prod"})
+@Profile({"local", "dev", "test", "staging", "production"})
 public class CommonDataConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(CommonDataConfig.class);

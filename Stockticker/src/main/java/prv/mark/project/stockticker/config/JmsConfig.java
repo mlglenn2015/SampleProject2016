@@ -17,9 +17,10 @@ import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.integration.xml.transformer.MarshallingTransformer;
 import org.springframework.integration.xml.transformer.ResultToStringTransformer;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.oxm.Marshaller;
+//import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import prv.mark.project.stockticker.interceptor.StocksLoggingInterceptor;
+import prv.mark.xml.translogger.schema.TransactionLoggerMsgType;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
@@ -76,7 +77,7 @@ public abstract class JmsConfig {
     /**
      * Stock Ticker application message integration channel.
      *
-     * TODO create message type here messages are placed on this channel to send to the TransactionLogger.
+     * {@link TransactionLoggerMsgType} messages are placed onto this channel to send to the TransactionLogger.
      *
      * @return {@link MessageChannel}
      */
@@ -95,7 +96,7 @@ public abstract class JmsConfig {
     @Bean
     public Jaxb2Marshaller stocksMarshaller() {
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("prv.mark.project.stockticker.schema");
+        jaxb2Marshaller.setPackagesToScan("prv.mark.xml.translogger.schema");
         Map<String, Object> props = new HashMap<>();
         props.put(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxb2Marshaller.setMarshallerProperties(props);
@@ -103,7 +104,7 @@ public abstract class JmsConfig {
     }
 
     /**
-     * Marshals {@link TODO transaction log message type } into JMS messages.
+     * Marshals {@link TransactionLoggerMsgType} into JMS messages.
      *
      * @return {@link MarshallingTransformer}
      */

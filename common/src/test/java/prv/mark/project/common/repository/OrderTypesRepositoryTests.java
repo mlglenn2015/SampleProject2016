@@ -42,7 +42,7 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("OrderTypesRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testOrderTypesRepository() {
         prv.mark.project.common.entity.OrderTypes entity = buildEntity();
         assertNotNull(entity);
@@ -76,7 +76,7 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
     public void testFindByInvalidOrderType() {
         Optional<OrderTypes> orderType = orderTypesRepository.findByOrderType("TEST");
         assertEquals(orderType, Optional.empty());
-    }
+    }*/
 
 
     private prv.mark.project.common.entity.OrderTypes buildEntity() {
