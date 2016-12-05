@@ -2,21 +2,16 @@ package prv.mark.project.stockticker.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jmx.support.RegistrationPolicy;
-import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
@@ -27,11 +22,9 @@ import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import prv.mark.project.common.config.CommonDataConfig;
-import prv.mark.project.common.service.impl.ApplicationMessageSource;
-import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.xml.stocks.*;
 
-import javax.management.MBeanServer;
 import java.util.List;
 
 /**
@@ -43,27 +36,30 @@ import java.util.List;
 @ComponentScan("prv.mark.project")  //prv.mark.project.stockticker
 @Import(CommonDataConfig.class)
 @PropertySources({
+        @PropertySource("classpath:/common.properties"),
+        @PropertySource("classpath:/application.properties"),
         @PropertySource("classpath:/StockTicker.properties")
 })
 @EnableWs
-@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
-        registration = RegistrationPolicy.IGNORE_EXISTING)
-@Profile({"local", "dev", "qa", "stage", "prod"})
+//@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
+//        registration = RegistrationPolicy.IGNORE_EXISTING)
+@Profile({"local", "dev", "test", "staging", "production"})
 public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     private static final Class<?>[] CLASSES_TO_BE_BOUND = {
-            prv.mark.xml.stocks.GetStockPriceRequest.class,
-            prv.mark.xml.stocks.GetStockPriceResponse.class,
-            prv.mark.xml.stocks.StockOrder.class,
-            prv.mark.xml.stocks.StockQuote.class,
-            prv.mark.xml.stocks.RequestHeader.class,
-            prv.mark.xml.stocks.SubmitOrderRequest.class,
-            prv.mark.xml.stocks.SubmitOrderResponse.class
+            GetStockPriceRequest.class,
+            GetStockPriceResponse.class,
+            StockOrder.class,
+            StockQuote.class,
+            RequestHeader.class,
+            SubmitOrderRequest.class,
+            SubmitOrderResponse.class
     };
 
     @Autowired
     private Environment env;
-    /*@Autowired TODO
+
+    /*@Autowired
     private ApplicationParameterSource applicationParameterSource;*/
 
     /*
@@ -179,19 +175,19 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return trustStoreFactory.getObject();
     }*/
 
-    @Bean
+    /*@Bean TODO moved to ApplicationConfig
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(messageSource());
         return validator;
-    }
+    }*/
 
-    @Bean
+    /*@Bean TODO moved to ApplicationConfig
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
     }
-
-    /*@Bean TODO
+*/
+    /*@Bean TODO moved to ApplicationConfig
     public MessageSource applicationParameterSource() {
         return new ApplicationParameterSource();
     }*/
@@ -204,7 +200,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     }*/
 
     @Bean
-    public WebServiceTemplate WebServiceTemplate() {
+    public WebServiceTemplate webServiceTemplate() {
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
         webServiceTemplate.setMarshaller(marshaller());
         webServiceTemplate.setUnmarshaller(marshaller());
@@ -226,11 +222,11 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new SaajSoapMessageFactory();
     }
 
-    @Bean
+    /*@Bean TODO moved to JmxConfig
     public JndiObjectFactoryBean jmxServerRuntime() {
         JndiObjectFactoryBean runtime = new JndiObjectFactoryBean();
         runtime.setJndiName("java:comp/env/jmx/runtime");
         runtime.setProxyInterface(MBeanServer.class);
         return runtime;
-    }
+    }*/
 }

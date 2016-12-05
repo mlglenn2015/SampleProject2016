@@ -36,7 +36,7 @@ set SCHEMA_FILE=%1
 set DEST_FLG=%2
 set DEST_DIR=%3
 
-set JAVA_HOME=C:\java\jdk1.8.0_65
+set JAVA_HOME=C:\Java\jdk1.8.0_111
 %JAVA_HOME%\bin\xjc.exe %SCHEMA_FILE% %DEST_FLG% %DEST_DIR%
 
 endlocal

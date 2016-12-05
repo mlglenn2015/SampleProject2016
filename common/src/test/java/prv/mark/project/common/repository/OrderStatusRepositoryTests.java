@@ -44,7 +44,7 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("OrderStatusRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testOrderStatusRepository() {
         prv.mark.project.common.entity.OrderStatus entity = buildEntity();
         assertNotNull(entity);
@@ -78,7 +78,7 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
     public void testFindByInvalidOrderStatus() {
         Optional<OrderStatus> orderStatus = orderStatusRepository.findByOrderStatus("TEST");
         assertEquals(orderStatus, Optional.empty());
-    }
+    }*/
 
 
     private prv.mark.project.common.entity.OrderStatus buildEntity() {

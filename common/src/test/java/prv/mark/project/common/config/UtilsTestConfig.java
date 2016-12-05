@@ -12,6 +12,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.testutils.config.TestDataConfig;
 
 /**
@@ -38,6 +39,11 @@ public class UtilsTestConfig {
     @Bean
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
+    }
+
+    @Bean
+    public ApplicationParameterSource applicationParameterSource() {
+        return new ApplicationParameterSource();
     }
 
     @Bean

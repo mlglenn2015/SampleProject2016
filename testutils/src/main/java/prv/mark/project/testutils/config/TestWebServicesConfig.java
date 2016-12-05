@@ -14,6 +14,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
+import prv.mark.project.xml.stocks.*;
 
 @Configuration
 @ComponentScan({"prv.mark.project", "prv.mark.xml.stocks"}) //For JAXB classes
@@ -33,11 +34,11 @@ public class TestWebServicesConfig {
     private String trustStorePassword;
 
     private static final Class<?>[] CLASSES_TO_BE_BOUND = {
-            prv.mark.xml.stocks.GetStockPriceRequest.class,
-            prv.mark.xml.stocks.GetStockPriceResponse.class,
-            prv.mark.xml.stocks.StockOrder.class,
-            prv.mark.xml.stocks.StockQuote.class,
-            prv.mark.xml.stocks.RequestHeader.class
+            GetStockPriceRequest.class,
+            GetStockPriceResponse.class,
+            StockOrder.class,
+            StockQuote.class,
+            RequestHeader.class
     };
 
     @Autowired

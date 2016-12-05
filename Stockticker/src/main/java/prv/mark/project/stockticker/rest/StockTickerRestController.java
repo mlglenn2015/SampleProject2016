@@ -1,27 +1,23 @@
 package prv.mark.project.stockticker.rest;
 
-import org.apache.commons.lang.StringUtils;
+//import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ws.client.WebServiceClientException;
 import prv.mark.project.common.domain.json.AbstractJsonResponse;
-import prv.mark.project.common.domain.json.StockPriceRequest;
 import prv.mark.project.common.domain.json.StockPriceResponse;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
+import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.xml.stocks.GetStockPriceRequest;
-import prv.mark.xml.stocks.GetStockPriceResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +36,8 @@ public class StockTickerRestController {
 
     @Autowired
     private StockTickerService stockTickerService;
-    /*@Autowired
-    private ApplicationParameterSource applicationParameterSource;*/
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z0-9]{1,12}", i);
@@ -139,7 +135,7 @@ public class StockTickerRestController {
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
         stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.FAIL);
 
-        //TODO save
+        //TODO save for future
 
         return stockPriceResponse;
     }*/

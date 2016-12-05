@@ -21,7 +21,7 @@ import java.util.Locale;
  * @author mlglenn.
  */
 @Component
-public final class ApplicationParameterSource implements MessageSource {
+public final class ApplicationParameterSource { //implements MessageSource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationParameterSource.class);
 
@@ -82,7 +82,7 @@ public final class ApplicationParameterSource implements MessageSource {
         return getParm(key);
     }
 
-    @Override
+    /*@Override
     public String getMessage(String messageKey, Object[] objects, String s1, Locale locale) {
         return getParm(messageKey);
     }
@@ -101,5 +101,5 @@ public final class ApplicationParameterSource implements MessageSource {
             }
         }
         throw new NoSuchMessageException("No resolveable message was found.");
-    }
+    }*/
 }

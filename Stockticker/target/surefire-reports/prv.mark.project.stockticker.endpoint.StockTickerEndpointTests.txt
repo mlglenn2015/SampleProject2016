@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.713 sec - in prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
+=======
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.208 sec - in prv.mark.project.stockticker.endpoint.StockTickerEndpointTests
+>>>>>>> 5d2cc4eab3420188f6116df38f514f370e85612f
