@@ -23,7 +23,14 @@ import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionReso
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.xml.stocks.*;
+import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockOrder;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
+import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
 
 import java.util.List;
 
@@ -33,7 +40,8 @@ import java.util.List;
  * @author mlglenn
  */
 @Configuration
-@ComponentScan("prv.mark.project")  //prv.mark.project.stockticker
+@ComponentScan({"prv.mark.project", "prv.mark.project.stocks.commontypes.schemas",
+        "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"})
 @Import(CommonDataConfig.class)
 @PropertySources({
         @PropertySource("classpath:/common.properties"),
@@ -51,9 +59,10 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
             GetStockPriceResponse.class,
             StockOrder.class,
             StockQuote.class,
-            RequestHeader.class,
             SubmitOrderRequest.class,
-            SubmitOrderResponse.class
+            SubmitOrderResponse.class,
+            TransactionLoggerMsgType.class,
+            RequestHeader.class
     };
 
     @Autowired

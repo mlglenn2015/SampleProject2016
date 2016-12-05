@@ -14,10 +14,19 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
-import prv.mark.project.xml.stocks.*;
+import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockOrder;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
+import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
+//import prv.mark.project.xml.stocks.*;
 
 @Configuration
-@ComponentScan({"prv.mark.project", "prv.mark.xml.stocks"}) //For JAXB classes
+@ComponentScan({"prv.mark.project", "prv.mark.project.stocks.commontypes.schemas",
+        "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"}) //For JAXB classes
 @EnableWs
 @Import(TestDataConfig.class)
 @PropertySource("classpath:test-common.properties")
@@ -25,11 +34,11 @@ import prv.mark.project.xml.stocks.*;
 public class TestWebServicesConfig {
 
     //@Value("${path_1}")
-    //private String keyStorePath;
-    @Value("${key.store.password}")
-    private String keyStorePassword;
+    //private String keyStorePath; TODO
     //@Value("${path_2}")
     //private String trustStorePath;
+    @Value("${key.store.password}")
+    private String keyStorePassword;
     @Value("${trust.store.password}")
     private String trustStorePassword;
 
@@ -38,6 +47,9 @@ public class TestWebServicesConfig {
             GetStockPriceResponse.class,
             StockOrder.class,
             StockQuote.class,
+            SubmitOrderRequest.class,
+            SubmitOrderResponse.class,
+            TransactionLoggerMsgType.class,
             RequestHeader.class
     };
 

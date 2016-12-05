@@ -7,4 +7,4 @@
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://prv.mark.project/stocks/transactionlogger/schemas",
         elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package prv.mark.project.xml.translogger.schema;
+package prv.mark.project.stocks.transloggertypes.schemas;

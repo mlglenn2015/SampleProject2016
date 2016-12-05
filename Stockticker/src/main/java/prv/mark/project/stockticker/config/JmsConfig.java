@@ -20,7 +20,7 @@ import org.springframework.messaging.MessageChannel;
 //import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import prv.mark.project.stockticker.interceptor.StocksLoggingInterceptor;
-import prv.mark.project.xml.translogger.schema.TransactionLoggerMsgType;
+import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;

@@ -1,4 +1,5 @@
 prv\mark\project\stocks\commontypes\schemas\ObjectFactory.class
+prv\mark\project\stocks\transloggertypes\schemas\ObjectFactory.class
 prv\mark\project\stocks\stocktickertypes\schemas\StockOrder.class
 prv\mark\project\stocks\commontypes\schemas\package-info.class
 prv\mark\project\stocks\stocktickertypes\schemas\GetStockPriceResponse.class
@@ -6,6 +7,8 @@ prv\mark\project\stocks\commontypes\schemas\RequestHeader.class
 prv\mark\project\stocks\stocktickertypes\schemas\package-info.class
 prv\mark\project\stocks\stocktickertypes\schemas\GetStockPriceRequest.class
 prv\mark\project\stocks\stocktickertypes\schemas\ObjectFactory.class
+prv\mark\project\stocks\transloggertypes\schemas\TransactionLoggerMsgType.class
 prv\mark\project\stocks\stocktickertypes\schemas\StockQuote.class
 prv\mark\project\stocks\stocktickertypes\schemas\SubmitOrderRequest.class
 prv\mark\project\stocks\stocktickertypes\schemas\SubmitOrderResponse.class
+prv\mark\project\stocks\transloggertypes\schemas\package-info.class

@@ -75,7 +75,7 @@
         <relativePath/>
     </parent -->
 
-    <dependencyManagement>
+    <!--<dependencyManagement> class file for org.springframework.data.repository.query.QueryByExampleExecutor not found
         <dependencies>
             <dependency>
                 <groupId>io.spring.platform</groupId>
@@ -84,13 +84,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--<dependency>
+            <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc6</artifactId>
                 <version>11.2.0.4</version>
-            </dependency>-->
+            </dependency>
         </dependencies>
-    </dependencyManagement>
+    </dependencyManagement>-->
 
     <dependencies>
 

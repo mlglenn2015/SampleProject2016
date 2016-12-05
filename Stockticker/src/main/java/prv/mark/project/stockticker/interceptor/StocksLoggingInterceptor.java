@@ -6,7 +6,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.ChannelInterceptorAdapter;
 import org.springframework.stereotype.Component;
-import prv.mark.project.xml.translogger.schema.TransactionLoggerMsgType;
+import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
 
 /**
  * Interceptor to log outgoing {@link TransactionLoggerMsgType} messages.
