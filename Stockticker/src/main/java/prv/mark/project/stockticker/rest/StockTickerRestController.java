@@ -18,8 +18,6 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.project.xml.stocks.GetStockPriceRequest;
-import prv.mark.project.xml.stocks.GetStockPriceResponse;
 
 import java.util.ArrayList;
 import java.util.List;

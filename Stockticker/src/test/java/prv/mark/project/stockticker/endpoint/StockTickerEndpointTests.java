@@ -17,10 +17,6 @@ import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
-import prv.mark.project.xml.stocks.GetStockPriceRequest;
-import prv.mark.project.xml.stocks.GetStockPriceResponse;
-import prv.mark.project.xml.stocks.RequestHeader;
-import prv.mark.project.xml.stocks.StockQuote;
 
 import java.util.Optional;
 import java.util.function.Predicate;
