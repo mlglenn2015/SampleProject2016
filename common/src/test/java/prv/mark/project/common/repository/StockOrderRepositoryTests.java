@@ -10,11 +10,9 @@ import prv.mark.project.common.domain.StockOrderDto;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
-import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
-import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -44,7 +42,7 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("StockOrderRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testStockOrder() {
         StockOrderDto dto = buildDto();
         assertNotNull(dto);
@@ -61,7 +59,7 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
         assertNotNull(newStockOrder);
 
         assertEquals(retStockOrder.getOrderStatus(), newStockOrder.get().getOrderStatus());
-    }*/
+    }
 
 
     private StockOrderDto buildDto() {

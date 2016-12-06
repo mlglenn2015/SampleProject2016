@@ -27,7 +27,7 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(USAddressValidationTests.class);
 
-    /*BiFunction<ServiceableAddress, USPostalAddress, Boolean> validServiceableAddress = (serviceableAddress, address) -> TODO
+    /*BiFunction<ServiceableAddress, USPostalAddress, Boolean> validServiceableAddress = (serviceableAddress, address) -> TODO cleanup
             Optional.of(serviceableAddress)
                     .filter(s -> StringUtils.isNotEmpty(s.getAddressLine1()))
                     .filter(s -> Optional.of(s.getUSPSAddress()).isPresent())
@@ -49,7 +49,7 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
         assertNotNull(validator);
     }
 
-    /*@Test TODO
+    @Test
     public void testValidUSPostalAddress() {
         USPostalAddress usPostalAddress = buildAddress();
         assertNotNull(usPostalAddress);
@@ -87,7 +87,7 @@ public class USAddressValidationTests extends AbstractAppTransactionalTest {
         assertNotNull(usPostalAddress);
         usPostalAddress.setZipPlus4("XXXXX-XXXX");
         validate(usPostalAddress, "zipPlus4");
-    }*/
+    }
 
     private void validate(USPostalAddress usPostalAddress, String propertyUnderTest) {
         Set<ConstraintViolation<USPostalAddress>> violations = validator.validate(usPostalAddress);

@@ -1,5 +1,10 @@
 package prv.mark.project.stockticker.service;
 
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
+
 import java.util.List;
 
 /**

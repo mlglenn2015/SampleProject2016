@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
@@ -17,9 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@PropertySources(value = {
-        @PropertySource("classpath:common.properties")
-})
+@PropertySource("classpath:/testutils-common.properties")
 @Profile("test")
 public class TestConfig {
 
@@ -28,7 +25,6 @@ public class TestConfig {
 
     @Value("${key.store.password}")
     private String keyStorePassword;
-
     @Value("${trust.store.password}")
     private String trustStorePassword;
 

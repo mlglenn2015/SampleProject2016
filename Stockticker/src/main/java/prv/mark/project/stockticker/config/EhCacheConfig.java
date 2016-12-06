@@ -18,7 +18,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 @Configuration
 @EnableCaching
-@Profile({"local","dev","test","staging","production"})
+@Profile({"local","dev","qatest","staging","production"})
 public class EhCacheConfig {
 
     @Bean

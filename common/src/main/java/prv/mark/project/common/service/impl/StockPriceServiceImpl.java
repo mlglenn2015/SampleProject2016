@@ -10,6 +10,7 @@ import prv.mark.project.common.entity.StockPrice;
 import prv.mark.project.common.repository.StockPriceRepository;
 import prv.mark.project.common.service.StockPriceService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +35,14 @@ public class StockPriceServiceImpl implements StockPriceService {
         LOGGER.debug("StockPriceServiceImpl.findById({})", id);
         //return Optional.ofNullable(ordersRepository.findById(id)).get();
         return Optional.ofNullable(stockPriceRepository.findOne(id));
+        //return Optional.of(new StockPrice());
     }
 
     @Override
     public Optional<StockPrice> findByStockSymbol(final String stockSymbol) {
         LOGGER.debug("StockPriceServiceImpl.findByStockSymbol({})", stockSymbol);
         Optional<StockPrice> stockPrice = stockPriceRepository.findByStockSymbol(stockSymbol);
+        //Optional<StockPrice> stockPrice = Optional.of(new StockPrice());
         if (stockPrice.get() == null) {
             return null;
         }
@@ -50,6 +53,7 @@ public class StockPriceServiceImpl implements StockPriceService {
     public List<StockPrice> findAll() {
         LOGGER.debug("StockPriceServiceImpl.findAll()");
         return stockPriceRepository.findAll();
+        //return nullList();
     }
 
     @Override
@@ -57,6 +61,12 @@ public class StockPriceServiceImpl implements StockPriceService {
     public StockPrice save(StockPrice stockPrice) {
         LOGGER.debug("StockPriceServiceImpl.save({})", stockPrice.toString());
         return stockPriceRepository.saveAndFlush(stockPrice);
+        //return new StockPrice();
     }
 
+    private List<StockPrice> nullList() {
+        List<StockPrice> list = new ArrayList<>();
+        list.add(new StockPrice());
+        return list;
+    }
 }

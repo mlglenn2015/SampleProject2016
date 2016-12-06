@@ -19,7 +19,7 @@ import javax.management.MBeanServer;
 @Configuration
 @EnableIntegrationMBeanExport(defaultDomain="prv.mark.project", server="jmxServerRuntime",
         registration= RegistrationPolicy.IGNORE_EXISTING, managedComponents={"*"})
-@Profile({"local","dev","test","staging","production"})
+@Profile({"local","dev","qatest","staging","production"})
 public class JmxConfig {
 
     /**

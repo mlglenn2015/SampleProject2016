@@ -29,12 +29,12 @@ import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType
         "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"}) //For JAXB classes
 @EnableWs
 @Import(TestDataConfig.class)
-@PropertySource("classpath:test-common.properties")
+@PropertySource("classpath:/testutils-common.properties")
 @Profile("test")
 public class TestWebServicesConfig {
 
     //@Value("${path_1}")
-    //private String keyStorePath; TODO
+    //private String keyStorePath; TODO add
     //@Value("${path_2}")
     //private String trustStorePath;
     @Value("${key.store.password}")

@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import prv.mark.project.common.domain.EnumStatusCodes;
-import prv.mark.project.common.exception.SOAPGeneralFault;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
+import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -21,11 +26,7 @@ import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 
 
 @ContextConfiguration(classes = {StockTickerTestConfig.class})
@@ -34,8 +35,8 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerEndpointTests.class);
 
-    /*@Autowired TODO
-    private ApplicationParameterSource applicationParameterSource;*/
+    @Autowired
+    private ApplicationParameterSource applicationParameterSource;
 
     @Autowired
     @InjectMocks
@@ -55,10 +56,10 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.initMocks(this);  //TODO A ServletContext is required to configure default servlet handling
         assertNotNull(stockTickerEndpoint);
         assertNotNull(stockTickerService);
-        //assertNotNull(applicationParameterSource); TODO
+        assertNotNull(applicationParameterSource);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         LOGGER.debug("StockTickerSimulatorEndpointTests.dummyTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testGetStockPriceRequestValid() {
         LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestValid()");
         GetStockPriceRequest request = buildGetStockPriceRequest();
@@ -121,7 +122,7 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         assertNotNull(request);
         request.getHead().setSource("INVALID");
         GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
-    }
+    }*/
 
 
     private GetStockPriceRequest buildGetStockPriceRequest() {
@@ -133,8 +134,8 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     private RequestHeader buildRequestHeader() {
         RequestHeader header = new RequestHeader();
-        //header.setSource(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE)); TODO
-        header.setSource("STOCKTICKER");
+        header.setSource(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE));
+        //header.setSource("STOCKTICKER");
         return header;
     }
 
@@ -143,8 +144,8 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         StockQuote stockQuote = new StockQuote();
         stockQuote.setTickerSymbol("A");
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
-        //stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL)); TODO
-        stockQuote.setStatusText("Request Successful");
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
+        //stockQuote.setStatusText("Request Successful");
         stockQuote.setStockPrice(NumberUtils.toFloat("9.99"));
         response.setQuote(stockQuote);
         return response;

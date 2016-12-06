@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -22,10 +21,8 @@ import prv.mark.project.testutils.config.TestDataConfig;
  */
 @Configuration
 @Import({TestDataConfig.class})
-@ComponentScan(basePackages = {"prv.mark.project.common"})
-@PropertySources(value = {
-        @PropertySource("classpath:common.properties")
-})
+@ComponentScan(basePackages = {"prv.mark.project"})
+@PropertySource("classpath:/common-test.properties")
 @Profile("test")
 public class UtilsTestConfig {
 
@@ -49,7 +46,7 @@ public class UtilsTestConfig {
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocation(new ClassPathResource("common.properties"));
+        configurer.setLocation(new ClassPathResource("common-test.properties"));
         return configurer;
     }
 

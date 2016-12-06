@@ -37,7 +37,7 @@ public class ApplicationMessagesRepositoryTests extends AbstractAppTransactional
         LOGGER.debug("ApplicationMessagesRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testFindByMessageKey() {
         ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey("error.invalid.usstate");
         assertTrue(StringUtils.isNotEmpty(applicationMessage.getMessage()));
@@ -47,5 +47,5 @@ public class ApplicationMessagesRepositoryTests extends AbstractAppTransactional
     @Test
     public void testFindByInvalidMessageKey() {
         assertNull(applicationMessagesRepository.findByMessageKey("TEST"));
-    }*/
+    }
 }

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -31,12 +30,10 @@ import java.util.Properties;
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@EnableJpaRepositories(basePackages = {"prv.mark.project"})
+@EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
-@PropertySources({
-        @PropertySource("classpath:/common.properties")
-})
-@Profile({"local", "dev", "test", "staging", "production"})
+@PropertySource("classpath:/common.properties")
+@Profile({"local", "dev", "qatest", "staging", "production"})
 public class CommonDataConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(CommonDataConfig.class);
@@ -46,8 +43,7 @@ public class CommonDataConfig {
     @Value("${application.id}")
     private String applicationId;
     @Value("${application.jndi.datasource}")
-    private String applicationJndiDataSource;
-    //private static final String DS_JNDI = "jdbc/stockTickerDataSource";
+    private String applicationJndiDataSource; //private static final String DS_JNDI = "jdbc/stockTickerDataSource";
 
     @Autowired
     private Environment env;

@@ -21,15 +21,22 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.project.xml.stocks.*;
-//import prv.mark.xml.stocks.*;
 
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
+//import prv.mark.project.xml.stocks.*;
+//import prv.mark.xml.stocks.*;
 
 /**
  * Service implementation of the {@link StockTickerService} interface.
@@ -245,7 +252,7 @@ public class StockTickerServiceImpl implements StockTickerService {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL)); //TODO
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
         //stockQuote.setStatusText("Request Successful");
         if (returnedEntity != null) {
             stockQuote.setTickerSymbol(returnedEntity.getStockSymbol());
@@ -261,7 +268,7 @@ public class StockTickerServiceImpl implements StockTickerService {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED)); //TODO
+        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
         //stockQuote.setStatusText("Request Failed");
         if (getStockPriceRequest != null) {
             stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());

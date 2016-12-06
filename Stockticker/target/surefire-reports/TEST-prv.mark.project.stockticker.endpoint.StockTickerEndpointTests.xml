@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite name="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.978" tests="6" errors="0" skipped="0" failures="0">
-=======
-<testsuite name="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.203" tests="6" errors="0" skipped="0" failures="0">
->>>>>>> 5d2cc4eab3420188f6116df38f514f370e85612f
+<testsuite name="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.001" tests="1" errors="1" skipped="0" failures="0">
   <properties>
-    <property name="idea.version" value="2016.2.5"/>
+    <property name="idea.version" value="15.0.6"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="C:\Java\jdk-8u111\jre\bin"/>
-    <property name="java.vm.version" value="25.111-b14"/>
+    <property name="sun.boot.library.path" value="C:\Java\jdk1.8.0_65\jre\bin"/>
+    <property name="java.vm.version" value="25.65-b01"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
@@ -21,44 +17,45 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016"/>
-    <property name="java.runtime.version" value="1.8.0_111-b14"/>
+    <property name="user.dir" value="C:\GitHub_Projects\Sample-Project-2016\SampleProject2016"/>
+    <property name="java.runtime.version" value="1.8.0_65-b17"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="C:\Java\jdk-8u111\jre\lib\endorsed"/>
+    <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_65\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\Owner\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\mlglenn\AppData\Local\Temp\"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.5\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="classworlds.conf" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.6\plugins\maven\lib\maven3\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Java\jdk-8u111\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;.;C:\Oracle\app\oracle\product\11.2.0\server\bin;C:\Java\jdk-8u111\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\utils;C:\apache-maven-3.3.9-bin\apache-maven-3.3.9\bin;C:\Program Files\Git\cmd;."/>
+    <property name="java.library.path" value="C:\Java\jdk1.8.0_65\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;.;C:\Java\jdk1.8.0_65\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files (x86)\Common Files\Check Point\UIFramework 3.0\Bin\;C:\Program Files (x86)\CheckPoint\Endpoint Security\Endpoint Common\bin;C:\Program Files (x86)\Intel\Services\IPT\;C:\Program Files (x86)\Symantec\VIP Access Client\;C:\apache-maven-3.1.1\bin;C:\Program Files\Git\cmd; C:\cygwin64\bin;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\ant_1.8.3\bin;C:\Python35;C:\Python35\Scripts;C:\Program Files\nodejs\;C:\Program Files\SlikSvn\bin\;C:\Python35\Scripts\;C:\Python35\;C:\Users\mlglenn\AppData\Roaming\npm;."/>
+    <property name="javax.net.ssl.trustStore" value="C:\Java\jdk1.8.0_65\jre\lib\security\cacerts"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="6.1"/>
-    <property name="user.home" value="C:\Users\Owner"/>
+    <property name="user.home" value="C:\Users\mlglenn"/>
     <property name="user.timezone" value="America/New_York"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="idea.launcher.bin.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.5\bin"/>
+    <property name="idea.launcher.bin.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.6\bin"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="Owner"/>
-    <property name="java.class.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.5\plugins\maven\lib\maven3\boot\plexus-classworlds-2.4.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.5\lib\idea_rt.jar"/>
+    <property name="user.name" value="MLGlenn"/>
+    <property name="java.class.path" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.6\plugins\maven\lib\maven3\boot\plexus-classworlds-2.4.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.6\lib\idea_rt.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="C:\Java\jdk-8u111\jre"/>
-    <property name="sun.java.command" value="com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher -Didea.version=2016.2.5 clean install"/>
+    <property name="java.home" value="C:\Java\jdk1.8.0_65\jre"/>
+    <property name="sun.java.command" value="com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher -Didea.version=15.0.6 clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.8.0_111"/>
-    <property name="java.ext.dirs" value="C:\Java\jdk-8u111\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
-    <property name="sun.boot.class.path" value="C:\Java\jdk-8u111\jre\lib\resources.jar;C:\Java\jdk-8u111\jre\lib\rt.jar;C:\Java\jdk-8u111\jre\lib\sunrsasign.jar;C:\Java\jdk-8u111\jre\lib\jsse.jar;C:\Java\jdk-8u111\jre\lib\jce.jar;C:\Java\jdk-8u111\jre\lib\charsets.jar;C:\Java\jdk-8u111\jre\lib\jfr.jar;C:\Java\jdk-8u111\jre\classes"/>
+    <property name="java.version" value="1.8.0_65"/>
+    <property name="java.ext.dirs" value="C:\Java\jdk1.8.0_65\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Java\jdk1.8.0_65\jre\lib\resources.jar;C:\Java\jdk1.8.0_65\jre\lib\rt.jar;C:\Java\jdk1.8.0_65\jre\lib\sunrsasign.jar;C:\Java\jdk1.8.0_65\jre\lib\jsse.jar;C:\Java\jdk1.8.0_65\jre\lib\jce.jar;C:\Java\jdk1.8.0_65\jre\lib\charsets.jar;C:\Java\jdk1.8.0_65\jre\lib\jfr.jar;C:\Java\jdk1.8.0_65\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.5\plugins\maven\lib\maven3"/>
+    <property name="maven.home" value="C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.6\plugins\maven\lib\maven3"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -66,19 +63,322 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-<<<<<<< HEAD
-  <testcase name="testGetStockPriceRequestNullHeaderSource" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.665"/>
-  <testcase name="dummyTest" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.007"/>
-  <testcase name="testGetStockPriceRequestInvalidStockSymbolABCDEFGH012345" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.005"/>
-  <testcase name="testGetStockPriceRequestValid" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.296"/>
-  <testcase name="testGetStockPriceRequestInvalidHeaderSource" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.002"/>
-  <testcase name="testGetStockPriceRequestInvalidStockSymbol2_345" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.003"/>
-=======
-  <testcase name="testGetStockPriceRequestNullHeaderSource" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.14"/>
-  <testcase name="dummyTest" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0"/>
-  <testcase name="testGetStockPriceRequestInvalidStockSymbolABCDEFGH012345" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.016"/>
-  <testcase name="testGetStockPriceRequestValid" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.031"/>
-  <testcase name="testGetStockPriceRequestInvalidHeaderSource" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0"/>
-  <testcase name="testGetStockPriceRequestInvalidStockSymbol2_345" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.016"/>
->>>>>>> 5d2cc4eab3420188f6116df38f514f370e85612f
+  <testcase name="dummyTest" classname="prv.mark.project.stockticker.endpoint.StockTickerEndpointTests" time="0.001">
+    <error message="Failed to load ApplicationContext" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:252)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:217)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionLogJmsProducer': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.springframework.messaging.MessageChannel prv.mark.project.stockticker.jms.TransactionLogJmsProducer.stocksChannel; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:252)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:217)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.springframework.messaging.MessageChannel prv.mark.project.stockticker.jms.TransactionLogJmsProducer.stocksChannel; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:252)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:217)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1308)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1054)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:949)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:252)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:217)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+</error>
+    <system-out><![CDATA[12-06-2016 18:38:56.882 [main] DEBUG AbstractAppTransactionalTest - @BeforeClass:AbstractAppTransactionalTest.bootstrap()
+[EL Finest]: properties: 2016-12-06 18:39:00.117--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.logging.level.sql; value=FINE
+[EL Finest]: jpa: 2016-12-06 18:39:00.139--ServerSession(277164482)--Thread(Thread[main,5,main])--Begin predeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Initial; factoryCount 0
+[EL Finest]: properties: 2016-12-06 18:39:00.141--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.orm.throw.exceptions; default value=true
+[EL Finest]: properties: 2016-12-06 18:39:00.142--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.multitenant.tenants-share-emf; default value=true
+[EL Finest]: properties: 2016-12-06 18:39:00.142--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.multitenant.tenants-share-cache; default value=false
+[EL Finer]: metadata: 2016-12-06 18:39:00.172--ServerSession(277164482)--Thread(Thread[main,5,main])--Searching for default mapping file in file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar (There is no English translation for this message.)
+[EL Finer]: metadata: 2016-12-06 18:39:00.178--ServerSession(277164482)--Thread(Thread[main,5,main])--Searching for default mapping file in file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar (There is no English translation for this message.)
+[EL Config]: metadata: 2016-12-06 18:39:01.203--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.StockPrice] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.238--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.OrderStatus] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.239--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.ApplicationParameters] is set to [PROPERTY].
+[EL Config]: metadata: 2016-12-06 18:39:01.246--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.StockOrder] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.247--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.TransactionLog] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.248--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.TransactionTypes] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.248--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.ApplicationMessages] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.249--ServerSession(277164482)--Thread(Thread[main,5,main])--The access type for the persistent class [class prv.mark.project.common.entity.OrderTypes] is set to [FIELD].
+[EL Config]: metadata: 2016-12-06 18:39:01.249--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.StockPrice] is being defaulted to: StockPrice.
+[EL Config]: metadata: 2016-12-06 18:39:01.29--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.OrderStatus] is being defaulted to: OrderStatus.
+[EL Config]: metadata: 2016-12-06 18:39:01.291--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.ApplicationParameters] is being defaulted to: ApplicationParameters.
+[EL Config]: metadata: 2016-12-06 18:39:01.297--ServerSession(277164482)--Thread(Thread[main,5,main])--The column name for element [getId] is being defaulted to: ID.
+[EL Config]: metadata: 2016-12-06 18:39:01.299--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.StockOrder] is being defaulted to: StockOrder.
+[EL Config]: metadata: 2016-12-06 18:39:01.3--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.TransactionLog] is being defaulted to: TransactionLog.
+[EL Config]: metadata: 2016-12-06 18:39:01.301--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.TransactionTypes] is being defaulted to: TransactionTypes.
+[EL Config]: metadata: 2016-12-06 18:39:01.302--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.ApplicationMessages] is being defaulted to: ApplicationMessages.
+[EL Config]: metadata: 2016-12-06 18:39:01.303--ServerSession(277164482)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2016-12-06 18:39:01.303--ServerSession(277164482)--Thread(Thread[main,5,main])--The alias name for the entity class [class prv.mark.project.common.entity.OrderTypes] is being defaulted to: OrderTypes.
+[EL Finest]: jpa: 2016-12-06 18:39:01.657--ServerSession(277164482)--Thread(Thread[main,5,main])--End predeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Predeployed; factoryCount 1
+[EL Finest]: jpa: 2016-12-06 18:39:01.729--ServerSession(277164482)--Thread(Thread[main,5,main])--Begin predeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Predeployed; factoryCount 1
+[EL Finest]: jpa: 2016-12-06 18:39:01.73--ServerSession(277164482)--Thread(Thread[main,5,main])--End predeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Predeployed; factoryCount 2
+[EL Finest]: jpa: 2016-12-06 18:39:01.828--ServerSession(277164482)--Thread(Thread[main,5,main])--Begin deploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Predeployed; factoryCount 2
+[EL Finest]: properties: 2016-12-06 18:39:01.996--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.logging.level; value=ALL
+[EL Finest]: properties: 2016-12-06 18:39:01.997--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.logging.level.sql; value=FINE
+[EL Finest]: properties: 2016-12-06 18:39:01.997--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.logging.level; value=ALL
+[EL Finest]: properties: 2016-12-06 18:39:01.998--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.logging.level.sql; value=FINE
+[EL Finest]: properties: 2016-12-06 18:39:02.001--ServerSession(277164482)--Thread(Thread[main,5,main])--property=eclipselink.target-database; value=HSQL; translated value=org.eclipse.persistence.platform.database.HSQLPlatform
+[EL Info]: 2016-12-06 18:39:02.008--ServerSession(277164482)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Config]: connection: 2016-12-06 18:39:02.021--ServerSession(277164482)--Connection(1163664780)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+	platform=>HSQLPlatform
+	user name=> ""
+	connector=>JNDIConnector datasource name=>null
+))
+[EL Config]: connection: 2016-12-06 18:39:02.041--ServerSession(277164482)--Connection(863748063)--Thread(Thread[main,5,main])--Connected: jdbc:hsqldb:mem:MARKTEST
+	User: SA
+	Database: HSQL Database Engine  Version: 2.3.2
+	Driver: HSQL Database Engine Driver  Version: 2.3.2
+[EL Finest]: connection: 2016-12-06 18:39:02.042--ServerSession(277164482)--Connection(1389984438)--Thread(Thread[main,5,main])--Connection acquired from connection pool [read].
+[EL Finest]: connection: 2016-12-06 18:39:02.042--ServerSession(277164482)--Connection(1389984438)--Thread(Thread[main,5,main])--Connection released to connection pool [read].
+[EL Config]: connection: 2016-12-06 18:39:02.042--ServerSession(277164482)--Connection(1302779492)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+	platform=>HSQLPlatform
+	user name=> ""
+	connector=>JNDIConnector datasource name=>null
+))
+[EL Config]: connection: 2016-12-06 18:39:02.044--ServerSession(277164482)--Connection(1583020257)--Thread(Thread[main,5,main])--Connected: jdbc:hsqldb:mem:MARKTEST
+	User: SA
+	Database: HSQL Database Engine  Version: 2.3.2
+	Driver: HSQL Database Engine Driver  Version: 2.3.2
+[EL Finest]: sequencing: 2016-12-06 18:39:02.054--ServerSession(277164482)--Thread(Thread[main,5,main])--sequencing connected, state is Preallocation_NoTransaction_State
+[EL Finest]: sequencing: 2016-12-06 18:39:02.055--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_STOCK_PRICE: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.055--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_STOCK_ORDER: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.055--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_ORDER_STATUS: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.056--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_ORDER_TYPES: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.056--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_APPLICATION_MESSAGES: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.056--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_TRANSACTION_LOG: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.057--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_TRANSACTION_TYPES: preallocation size 1
+[EL Finest]: sequencing: 2016-12-06 18:39:02.057--ServerSession(277164482)--Thread(Thread[main,5,main])--sequence SEQ_APPLICATION_PARAMETERS: preallocation size 1
+[EL Finest]: jpa: 2016-12-06 18:39:02.146--ServerSession(277164482)--Thread(Thread[Finalizer,8,system])--Begin undeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state HalfDeployed; factoryCount 2
+[EL Finest]: jpa: 2016-12-06 18:39:02.147--ServerSession(277164482)--Thread(Thread[Finalizer,8,system])--End undeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state HalfDeployed; factoryCount 1
+[EL Info]: connection: 2016-12-06 18:39:02.283--ServerSession(277164482)--Thread(Thread[main,5,main])--file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default login successful
+[EL Finer]: metamodel: 2016-12-06 18:39:02.414--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.StockPrice_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.415--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.StockOrder_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.416--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.OrderStatus_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.416--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.OrderTypes_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.417--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.ApplicationMessages_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.417--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.TransactionLog_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.418--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.TransactionTypes_] not found during initialization.
+[EL Finer]: metamodel: 2016-12-06 18:39:02.419--ServerSession(277164482)--Thread(Thread[main,5,main])--Canonical Metamodel class [prv.mark.project.common.entity.ApplicationParameters_] not found during initialization.
+[EL Finest]: jpa: 2016-12-06 18:39:02.419--ServerSession(277164482)--Thread(Thread[main,5,main])--End deploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Deployed; factoryCount 1
+[EL Finest]: jpa: 2016-12-06 18:39:03.097--ServerSession(277164482)--Thread(Thread[main,5,main])--Begin undeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Deployed; factoryCount 1
+[EL Finest]: sequencing: 2016-12-06 18:39:03.098--ServerSession(277164482)--Thread(Thread[main,5,main])--sequencing disconnected
+[EL Config]: connection: 2016-12-06 18:39:03.098--ServerSession(277164482)--Connection(1389984438)--Thread(Thread[main,5,main])--disconnect
+[EL Finer]: cache: 2016-12-06 18:39:03.098--ServerSession(277164482)--Thread(Thread[main,5,main])--initialize identitymaps
+[EL Info]: connection: 2016-12-06 18:39:03.098--ServerSession(277164482)--Thread(Thread[main,5,main])--file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default logout successful
+[EL Finest]: jpa: 2016-12-06 18:39:03.099--ServerSession(277164482)--Thread(Thread[main,5,main])--End undeploying Persistence Unit default; session file:/C:/GitHub_Projects/Sample-Project-2016/SampleProject2016/common/target/common.jar_default; state Undeployed; factoryCount 0
+12-06-2016 18:39:03.118 [main] ERROR TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@12f49ca8] to prepare test instance [prv.mark.project.stockticker.endpoint.StockTickerEndpointTests@1fd9893c]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:252) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:254) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:217) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229) [junit-4.11.jar:na]
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163) [spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264) [surefire-junit4-2.17.jar:2.17]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153) [surefire-junit4-2.17.jar:2.17]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124) [surefire-junit4-2.17.jar:2.17]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200) [surefire-booter-2.17.jar:2.17]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153) [surefire-booter-2.17.jar:2.17]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103) [surefire-booter-2.17.jar:2.17]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionLogJmsProducer': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.springframework.messaging.MessageChannel prv.mark.project.stockticker.jms.TransactionLogJmsProducer.stocksChannel; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1202) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757) ~[spring-context-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480) ~[spring-context-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86) ~[spring-test-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	... 27 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.springframework.messaging.MessageChannel prv.mark.project.stockticker.jms.TransactionLogJmsProducer.stocksChannel; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	... 43 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.messaging.MessageChannel] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value=stocksChannel)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1308) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1054) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:949) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533) ~[spring-beans-4.1.4.RELEASE.jar:4.1.4.RELEASE]
+	... 45 common frames omitted
+]]></system-out>
+  </testcase>
 </testsuite>

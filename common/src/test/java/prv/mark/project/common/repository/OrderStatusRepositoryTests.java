@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.entity.ApplicationMessages;
 import prv.mark.project.common.entity.OrderStatus;
-import prv.mark.project.common.entity.TransactionTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -19,7 +17,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -44,7 +41,7 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("OrderStatusRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testOrderStatusRepository() {
         prv.mark.project.common.entity.OrderStatus entity = buildEntity();
         assertNotNull(entity);
@@ -78,7 +75,7 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
     public void testFindByInvalidOrderStatus() {
         Optional<OrderStatus> orderStatus = orderStatusRepository.findByOrderStatus("TEST");
         assertEquals(orderStatus, Optional.empty());
-    }*/
+    }
 
 
     private prv.mark.project.common.entity.OrderStatus buildEntity() {

@@ -6,13 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.domain.StockOrderDto;
 import prv.mark.project.common.domain.TransactionDto;
-import prv.mark.project.common.entity.StockPrice;
 import prv.mark.project.common.entity.TransactionLog;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
-import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
@@ -47,7 +44,7 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         LOGGER.debug("TransactionLogRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testTransactionLog() {
         TransactionDto dto = buildDto();
         assertNotNull(dto);
@@ -86,7 +83,7 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         List<TransactionLog> tLog = new ArrayList<>();
         tLog = transactionLogRepository.findByTransactionType("TEST");
         assertTrue(tLog.size() == 0);
-    }*/
+    }
 
 
     private TransactionDto buildDto() {

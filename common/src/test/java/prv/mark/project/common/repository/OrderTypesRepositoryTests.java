@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.entity.OrderStatus;
 import prv.mark.project.common.entity.OrderTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.StringUtils;
@@ -42,7 +41,7 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("OrderTypesRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testOrderTypesRepository() {
         prv.mark.project.common.entity.OrderTypes entity = buildEntity();
         assertNotNull(entity);
@@ -76,7 +75,7 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
     public void testFindByInvalidOrderType() {
         Optional<OrderTypes> orderType = orderTypesRepository.findByOrderType("TEST");
         assertEquals(orderType, Optional.empty());
-    }*/
+    }
 
 
     private prv.mark.project.common.entity.OrderTypes buildEntity() {

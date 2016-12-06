@@ -28,7 +28,7 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
 
     }
 
-    /*@Test TODO
+    @Test
     public void testLocalDate() {
         LOGGER.debug("testLocalDate()");
         LocalDate returnedDate = DateUtils.getLocalDate();
@@ -71,7 +71,7 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
         XMLGregorianCalendar returnedXmlCal = DateUtils.getCurrentXMLGregorianCalendar();
         Date returnedDate = DateUtils.xmlGregorianCalendarToDate(returnedXmlCal);
         assertNotNull(returnedDate);
-    }*/
+    }
 
     private XMLGregorianCalendar returnControlXmlCal() {
         XMLGregorianCalendar controlXmlCal = null;

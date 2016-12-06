@@ -11,8 +11,6 @@ import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -42,7 +40,7 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
         LOGGER.debug("TransactionTypesRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testTransactionTypesRepository() {
         prv.mark.project.common.entity.TransactionTypes entity = buildEntity();
         assertNotNull(entity);
@@ -77,7 +75,7 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
     public void testFindByInvalidTransactionType() {
         Optional<TransactionTypes> t = transactionTypesRepository.findByTransactionType("TEST");
         assertEquals(t, Optional.empty());
-    }*/
+    }
 
 
 

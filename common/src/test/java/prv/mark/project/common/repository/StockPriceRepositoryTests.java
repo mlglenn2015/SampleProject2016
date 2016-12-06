@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.domain.StockOrderDto;
-import prv.mark.project.common.entity.OrderTypes;
 import prv.mark.project.common.entity.StockPrice;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
@@ -16,7 +15,6 @@ import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
-import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -46,7 +44,7 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug("StockPriceRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testStockPrice() {
         StockOrderDto dto = buildDto();
         assertNotNull(dto);
@@ -84,7 +82,7 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
     public void testFindByInvalidStockSymbol() {
         Optional<StockPrice> stockPrice = stockPriceRepository.findByStockSymbol("TEST");
         assertEquals(stockPrice, Optional.empty());
-    }*/
+    }
 
 
     private StockOrderDto buildDto() {

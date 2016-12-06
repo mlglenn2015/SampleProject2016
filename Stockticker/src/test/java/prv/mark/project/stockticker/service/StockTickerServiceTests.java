@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
+import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 @ContextConfiguration(classes = {StockTickerTestConfig.class})
 @ActiveProfiles({"test"})
-public class StockTickerServiceTests { //TODO extends AbstractAppTransactionalTest {
+public class StockTickerServiceTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerServiceTests.class);
     private static final String IN_ADDR_USPS = "USPS";

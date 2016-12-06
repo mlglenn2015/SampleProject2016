@@ -89,14 +89,14 @@ public abstract class JmsConfig {
     }
 
     /**
-     * JAXB marshaller/unmarshaller for Stock Ticker application messages.
+     * JAXB marshaller/unmarshaller for Stock Ticker application JMS messages.
      *
      * @return {@link Jaxb2Marshaller}
      */
     @Bean
-    public Jaxb2Marshaller stocksMarshaller() {
+    public Jaxb2Marshaller stocksJmsMarshaller() {
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("prv.mark.xml.translogger.schema");
+        jaxb2Marshaller.setPackagesToScan("prv.mark.project.stocks.transloggertypes.schemas");
         Map<String, Object> props = new HashMap<>();
         props.put(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxb2Marshaller.setMarshallerProperties(props);
@@ -110,7 +110,7 @@ public abstract class JmsConfig {
      */
     @Bean
     public MarshallingTransformer stocksTransformer() {
-        return Transformers.marshaller(stocksMarshaller(), new ResultToStringTransformer());
+        return Transformers.marshaller(stocksJmsMarshaller(), new ResultToStringTransformer());
     }
 
     /**
@@ -131,7 +131,8 @@ public abstract class JmsConfig {
      */
     @Bean
     IntegrationFlow stocksFlow() {
-        return f -> f.channel(stocksChannel())
+        //return f -> f.channel(stocksChannel()) TODO ?
+        return f -> f.channel("stocksChannel")
                 .handle(Jms.outboundAdapter(stocksConnectionFactory).destination(stocksQueue));
     }
 

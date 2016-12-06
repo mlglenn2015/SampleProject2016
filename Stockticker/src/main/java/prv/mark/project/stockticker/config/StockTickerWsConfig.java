@@ -51,7 +51,7 @@ import java.util.List;
 @EnableWs
 //@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
 //        registration = RegistrationPolicy.IGNORE_EXISTING)
-@Profile({"local", "dev", "test", "staging", "production"})
+@Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     private static final Class<?>[] CLASSES_TO_BE_BOUND = {
@@ -72,7 +72,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     private ApplicationParameterSource applicationParameterSource;*/
 
     /*
-    @Value("${path_1}")
+    @Value("${path_1}") TODO add
     private String keyStorePath;
     @Value("${path_2}")
     private String trustStorePath;
@@ -95,7 +95,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws*//*");
     }*/
 
-    /*@Bean(name = "CommonTypes")
+    /*@Bean(name = "CommonTypes") TODO add
     public SimpleXsdSchema commonTypes() {
         return new SimpleXsdSchema(new ClassPathResource("xsd/CommonTypes.xsd"));
     }*/

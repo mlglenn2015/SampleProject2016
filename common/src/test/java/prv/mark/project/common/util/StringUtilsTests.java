@@ -14,7 +14,7 @@ public class StringUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void defaultTest() {}
 
-    /*@Test TODO
+    @Test
     public void testSafeString() {
         assertNotNull(StringUtils.safeString(null));
         assertEquals(StringUtils.safeString(null), StringUtils.EMPTY);
@@ -76,6 +76,6 @@ public class StringUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testNegativeContainsIgnoreCase() {
         assertFalse(StringUtils.containsIgnoreCase("RACECAR", "RAT"));
-    }*/
+    }
 
 }

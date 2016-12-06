@@ -10,6 +10,7 @@ import prv.mark.project.common.entity.TransactionLog;
 import prv.mark.project.common.repository.TransactionLogRepository;
 import prv.mark.project.common.service.TransactionLogService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,12 +36,14 @@ public class TransactionLogServiceImpl implements TransactionLogService {
         LOGGER.debug("TransactionLogServiceImpl.findById({})", id);
         //return Optional.ofNullable(ordersRepository.findById(id)).get();
         return Optional.ofNullable(transactionLogRepository.findOne(id));
+        //return Optional.of(new TransactionLog());
     }
 
     @Override
     public List<TransactionLog> findByLogDateTime(final Date logDateTime) {
         LOGGER.debug("TransactionLogServiceImpl.findByLogDateTime({})", logDateTime);
         return transactionLogRepository.findByLogDateTime(logDateTime);
+        //return nullList();
     }
 
 
@@ -48,12 +51,14 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     public List<TransactionLog> findByTransactionType(final String transactionType) {
         LOGGER.debug("TransactionLogServiceImpl.findByTransactionType({})", transactionType);
         return transactionLogRepository.findByTransactionType(transactionType);
+        //return nullList();
     }
 
     @Override
     public List<TransactionLog> findAll() {
         LOGGER.debug("TransactionLogServiceImpl.findAll()");
         return transactionLogRepository.findAll();
+        //return nullList();
     }
 
     @Override
@@ -61,5 +66,12 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     public TransactionLog save(final TransactionLog transactionLog) {
         LOGGER.debug("TransactionLogServiceImpl.save({})", transactionLog.toString());
         return transactionLogRepository.saveAndFlush(transactionLog);
+        //return new TransactionLog();
+    }
+
+    private List<TransactionLog> nullList() {
+        List<TransactionLog> list = new ArrayList<>();
+        list.add(new TransactionLog());
+        return list;
     }
 }

@@ -16,13 +16,17 @@ import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
+import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
 import prv.mark.project.stockticker.service.StockTickerService;
-import prv.mark.project.xml.stocks.*;
-import prv.mark.xml.stocks.*;
 
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+
 
 
 /**
@@ -125,7 +129,7 @@ public class StockTickerEndpoint {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
-        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) { //TODO
+        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) {
         //if (!requestHeader.getSource().equals("STOCKTICKER")) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();

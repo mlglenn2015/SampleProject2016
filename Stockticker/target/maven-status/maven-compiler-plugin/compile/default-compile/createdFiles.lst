@@ -1,8 +1,15 @@
-prv\mark\project\stockticker\config\StockTickerWsConfig.class
+prv\mark\project\stockticker\jms\TransactionLogJmsProducer.class
+prv\mark\project\stockticker\config\JmxConfig.class
 prv\mark\project\stockticker\rest\StockTickerRestController.class
 prv\mark\project\stockticker\service\impl\StockTickerServiceImpl.class
+prv\mark\project\stockticker\config\JmsConfig.class
+prv\mark\project\stockticker\config\EhCacheConfig.class
+prv\mark\project\stockticker\config\StockTickerWsConfig.class
+prv\mark\project\stockticker\interceptor\StocksLoggingInterceptor.class
 prv\mark\project\stockticker\service\StockTickerService.class
 prv\mark\project\stockticker\util\MessageBuilderUtils.class
+prv\mark\project\stockticker\config\ApplicationConfig.class
+prv\mark\project\stockticker\config\StockTickerWebConfig.class
 prv\mark\project\stockticker\StockTickerWsException.class
-prv\mark\project\stockticker\config\DataConfig.class
+prv\mark\project\stockticker\config\StockTickerJmsConfig.class
 prv\mark\project\stockticker\endpoint\StockTickerEndpoint.class
