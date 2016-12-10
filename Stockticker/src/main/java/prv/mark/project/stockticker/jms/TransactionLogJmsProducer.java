@@ -33,7 +33,7 @@ public class TransactionLogJmsProducer {
 
     @Autowired
     @Qualifier("stocksChannel")
-    private MessageChannel stocksChannel; //TODO : BeanCreationException: Could not autowire field
+    private MessageChannel stocksChannel; //TODO : BeanCreationException: Could not autowire field NoSuchBeanDefinitionException MessageChannel
 
     @Autowired
     @Qualifier("errorChannel")

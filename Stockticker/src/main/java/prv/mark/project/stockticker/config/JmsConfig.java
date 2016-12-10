@@ -69,23 +69,13 @@ public abstract class JmsConfig {
     @Autowired
     protected MessageChannel jmsLogger;
 
+    /**
+     * TODO
+     * @return
+     */
     @Bean
     public WireTap wireTap() {
         return new WireTap(jmsLogger);
-    }
-
-    /**
-     * Stock Ticker application message integration channel.
-     *
-     * {@link TransactionLoggerMsgType} messages are placed onto this channel to send to the TransactionLogger.
-     *
-     * @return {@link MessageChannel}
-     */
-    @Bean
-    public MessageChannel stocksChannel() {
-        return MessageChannels.queue("stocksChannel", 500)
-                .interceptor(new StocksLoggingInterceptor())
-                .get();
     }
 
     /**
@@ -125,12 +115,26 @@ public abstract class JmsConfig {
     }
 
     /**
+     * Stock Ticker application message integration channel.
+     *
+     * {@link TransactionLoggerMsgType} messages are placed onto this channel to send to the TransactionLogger.
+     *
+     * @return {@link MessageChannel}
+     */
+    @Bean
+    public MessageChannel stocksChannel() {
+        return MessageChannels.queue("stocksChannel", 500)
+                .interceptor(new StocksLoggingInterceptor())
+                .get();
+    }
+
+    /**
      * Publishes JMS messages to the stocksQueue JMS queue.
      *
      * @return {@link IntegrationFlow}
      */
     @Bean
-    IntegrationFlow stocksFlow() {
+    public IntegrationFlow stocksFlow() {
         //return f -> f.channel(stocksChannel()) TODO ?
         return f -> f.channel("stocksChannel")
                 .handle(Jms.outboundAdapter(stocksConnectionFactory).destination(stocksQueue));
@@ -142,7 +146,7 @@ public abstract class JmsConfig {
      * @return {@link IntegrationFlow}
      */
     @Bean
-    IntegrationFlow stocksErrorFlow() {
+    public IntegrationFlow stocksErrorFlow() {
         return f -> f.channel("errorChannel")
                 .handle(Jms.outboundAdapter(stocksConnectionFactory).destination(stocksErrorQueue));
     }
