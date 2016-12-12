@@ -23,7 +23,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 public class ApplicationConfig {
 
     @Bean
-    public MessageSource messageSource() {
+    public ApplicationMessageSource applicationMessageSource() {
         return new ApplicationMessageSource();
     }
 
@@ -35,7 +35,7 @@ public class ApplicationConfig {
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource());
+        validator.setValidationMessageSource(applicationMessageSource());
         return validator;
     }
 }

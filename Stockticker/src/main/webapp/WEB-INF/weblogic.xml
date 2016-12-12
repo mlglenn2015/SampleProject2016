@@ -3,7 +3,7 @@
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                       xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-web-app
                   http://xmlns.oracle.com/weblogic/weblogic-web-app/1.7/weblogic-web-app.xsd">
-    <!--<wls:security-role-assignment>
+    <!--<wls:security-role-assignment> TODO
         <wls:role-name>WS_User</wls:role-name>
         <wls:externally-defined/>
     </wls:security-role-assignment>-->

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <!--<security-constraint>
+    <!--<security-constraint> TODO
         <web-resource-collection>
             <web-resource-name>SecureConnection</web-resource-name>
             <url-pattern>/*</url-pattern>
@@ -19,19 +19,19 @@
     <!--<security-role>
         <role-name>WS_User</role-name>
     </security-role>-->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/stockticker-servlet.xml</param-value>
-    </context-param>
     <!--<login-config>
         <auth-method>CLIENT-CERT</auth-method>
     </login-config>-->
+
+
+    <!-- OLD CONFIGURATION Nov 2016 -->
+    <!--<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/stockticker-servlet.xml</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!--<listener>
-        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-    </listener>-->
     <servlet>
         <servlet-name>stockticker</servlet-name>
         <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
@@ -43,20 +43,57 @@
             <param-name>transformSchemaLocations</param-name>
             <param-value>true</param-value>
         </init-param>
-        <!--<load-on-startup>1</load-on-startup>-->
     </servlet>
-    <!--<servlet>
-        <description>JAX-WS endpoint</description>
-        <display-name>WSServlet</display-name>
-        <servlet-name>WSServlet</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-    </servlet>-->
     <servlet-mapping>
         <servlet-name>stockticker</servlet-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>
-    <!--<servlet-mapping>
-        <servlet-name>WSServlet</servlet-name>
-        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>-->
+
+
+    <!-- NEW CONFIGURATION Dec 2016 -->
+    <!-- Spring MVC Application -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfig</param-name>
+        <param-value>prv.mark.project.stockticker.config.ApplicationConfig</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>prv.mark.project.stockticker.config.StockTickerWebConfig</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <!-- StockTicker Web Service -->
+    <servlet>
+        <servlet-name>stockticker</servlet-name>
+        <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>transformWsdlLocations</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>transformSchemaLocations</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>stockticker</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
+    </servlet-mapping>
 </web-app>
