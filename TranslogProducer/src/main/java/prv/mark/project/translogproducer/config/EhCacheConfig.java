@@ -1,4 +1,4 @@
-package prv.mark.project.stockticker.config;
+package prv.mark.project.translogproducer.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

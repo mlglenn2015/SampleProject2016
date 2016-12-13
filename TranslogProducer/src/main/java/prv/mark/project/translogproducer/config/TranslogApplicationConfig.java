@@ -1,11 +1,7 @@
-package prv.mark.project.stockticker.config;
+package prv.mark.project.translogproducer.config;
 
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableMBeanExport;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
@@ -20,7 +16,8 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 @ComponentScan(basePackages = {"prv.mark.project"})
 @Import(CommonDataConfig.class)
 @EnableMBeanExport
-public class ApplicationConfig {
+@Profile({"local", "dev", "qatest", "staging", "production"})
+public class TranslogApplicationConfig {
 
     @Bean
     public ApplicationMessageSource applicationMessageSource() {

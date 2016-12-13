@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.entity.TransactionTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
@@ -27,20 +28,20 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionTypesRepositoryTests.class);
 
-    @Autowired
+    /*@Autowired TODO
     private TransactionTypesRepository transactionTypesRepository;
 
     @Before
     public void setUp() {
         assertNotNull(transactionTypesRepository);
-    }
+    }*/
 
     @Test
     public void defaultTest() {
         LOGGER.debug("TransactionTypesRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testTransactionTypesRepository() {
         prv.mark.project.common.entity.TransactionTypes entity = buildEntity();
         assertNotNull(entity);
@@ -104,6 +105,6 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }
+    }*/
 
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.domain.StockOrderDto;
 import prv.mark.project.common.exception.ExceptionRouter;
@@ -29,20 +30,20 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockOrderRepositoryTests.class);
 
-    @Autowired
+    /*@Autowired TODO
     private StockOrderRepository stockOrderRepository;
 
     @Before
     public void setUp() {
         assertNotNull(stockOrderRepository);
-    }
+    }*/
 
     @Test
     public void defaultTest() {
         LOGGER.debug("StockOrderRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testStockOrder() {
         StockOrderDto dto = buildDto();
         assertNotNull(dto);
@@ -105,5 +106,5 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }
+    }*/
 }

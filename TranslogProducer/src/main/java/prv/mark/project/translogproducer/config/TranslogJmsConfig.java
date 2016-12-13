@@ -1,4 +1,4 @@
-package prv.mark.project.stockticker.config;
+package prv.mark.project.translogproducer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +24,7 @@ import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stockticker.interceptor.TbdLoggingInterceptor;
+import prv.mark.project.translogproducer.interceptor.TbdLoggingInterceptor;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
@@ -38,7 +38,7 @@ import java.util.Map;
 @Configuration
 @PropertySource(value = {"classpath:/application.properties"})
 @Profile("tbd") //TODO
-public class StockTickerJmsConfig extends JmsConfig {
+public class TranslogJmsConfig extends JmsConfig {
 
     private static final String TBD_CLIENT_ID = "TBDListener";
 

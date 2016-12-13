@@ -1,4 +1,4 @@
-package prv.mark.project.stockticker.config;
+package prv.mark.project.translogproducer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +14,7 @@ import org.springframework.integration.xml.transformer.UnmarshallingTransformer;
 import org.springframework.integration.xml.transformer.XsltPayloadTransformer;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import prv.mark.project.stockticker.interceptor.StocksLoggingInterceptor;
+import prv.mark.project.translogproducer.interceptor.StocksLoggingInterceptor;
 import prv.mark.project.testutils.config.TestDataConfig;
 import prv.mark.project.testutils.config.TestWebServicesConfig;
 

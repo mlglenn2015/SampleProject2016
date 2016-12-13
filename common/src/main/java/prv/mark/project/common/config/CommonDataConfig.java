@@ -18,6 +18,8 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
+import prv.mark.project.common.service.impl.ApplicationMessageSource;
+import prv.mark.project.common.service.impl.ApplicationParameterSource;
 
 import javax.sql.DataSource;
 import java.util.Optional;
@@ -47,6 +49,18 @@ public class CommonDataConfig {
 
     @Autowired
     private Environment env;
+
+
+
+    @Bean
+    public ApplicationMessageSource applicationMessageSource() {
+        return new ApplicationMessageSource();
+    }
+
+    @Bean
+    public ApplicationParameterSource applicationParameterSource() {
+        return new ApplicationParameterSource();
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

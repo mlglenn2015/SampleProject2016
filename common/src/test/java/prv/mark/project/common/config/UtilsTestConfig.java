@@ -29,19 +29,19 @@ public class UtilsTestConfig {
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
-        validatorFactory.setValidationMessageSource(messageSource());
+        //validatorFactory.setValidationMessageSource(messageSource()); TODO
         return validatorFactory;
     }
 
-    @Bean
+    /*@Bean
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
     }
 
-    @Bean
+    @Bean TODO
     public ApplicationParameterSource applicationParameterSource() {
         return new ApplicationParameterSource();
-    }
+    }*/
 
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

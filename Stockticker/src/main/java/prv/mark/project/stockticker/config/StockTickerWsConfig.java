@@ -21,6 +21,7 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
+import org.springframework.xml.xsd.SimpleXsdSchema;
 import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
@@ -40,13 +41,12 @@ import java.util.List;
  * @author mlglenn
  */
 @Configuration
-@ComponentScan({"prv.mark.project", "prv.mark.project.stocks.commontypes.schemas",
+@ComponentScan({"prv.mark.project.stocks.commontypes.schemas",
         "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"})
 @Import(CommonDataConfig.class)
 @PropertySources({
         @PropertySource("classpath:/common.properties"),
-        @PropertySource("classpath:/application.properties"),
-        @PropertySource("classpath:/StockTicker.properties")
+        @PropertySource("classpath:/application.properties")
 })
 @EnableWs
 //@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
@@ -95,15 +95,20 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws*//*");
     }*/
 
-    /*@Bean(name = "CommonTypes") TODO add
+    @Bean(name = "CommonTypes")
     public SimpleXsdSchema commonTypes() {
         return new SimpleXsdSchema(new ClassPathResource("xsd/CommonTypes.xsd"));
-    }*/
+    }
 
-    /*@Bean(name = "Types")
-    public SimpleXsdSchema types() {
-        return new SimpleXsdSchema(new ClassPathResource("xsd/Types.xsd"));
-    }*/
+    @Bean(name = "StockTickerTypes")
+    public SimpleXsdSchema stockTickerTypes() {
+        return new SimpleXsdSchema(new ClassPathResource("xsd/StockTickerTypes.xsd"));
+    }
+
+    @Bean(name = "TransactionLoggerTypes")
+    public SimpleXsdSchema transactionLoggerTypes() {
+        return new SimpleXsdSchema(new ClassPathResource("xsd/TransactionLoggerTypes.xsd"));
+    }
 
     @Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
@@ -184,23 +189,6 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return trustStoreFactory.getObject();
     }*/
 
-    /*@Bean TODO moved to ApplicationConfig
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource());
-        return validator;
-    }*/
-
-    /*@Bean TODO moved to ApplicationConfig
-    public MessageSource messageSource() {
-        return new ApplicationMessageSource();
-    }
-*/
-    /*@Bean TODO moved to ApplicationConfig
-    public MessageSource applicationParameterSource() {
-        return new ApplicationParameterSource();
-    }*/
-
     /*@Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
@@ -231,11 +219,4 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return new SaajSoapMessageFactory();
     }
 
-    /*@Bean TODO moved to JmxConfig
-    public JndiObjectFactoryBean jmxServerRuntime() {
-        JndiObjectFactoryBean runtime = new JndiObjectFactoryBean();
-        runtime.setJndiName("java:comp/env/jmx/runtime");
-        runtime.setProxyInterface(MBeanServer.class);
-        return runtime;
-    }*/
 }

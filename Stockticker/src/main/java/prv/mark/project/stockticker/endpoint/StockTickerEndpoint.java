@@ -13,7 +13,7 @@ import prv.mark.project.common.domain.EnumOrderTypes;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
-import prv.mark.project.common.service.impl.ApplicationParameterSource;
+//import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
@@ -44,8 +44,8 @@ public class StockTickerEndpoint {
 
     @Autowired
     private StockTickerService stockTickerService;
-    @Autowired
-    private ApplicationParameterSource applicationParameterSource;
+    //@Autowired
+    //private ApplicationParameterSource applicationParameterSource; TODO
 
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z0-9]{1,12}", i);
@@ -129,8 +129,8 @@ public class StockTickerEndpoint {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
-        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) {
-        //if (!requestHeader.getSource().equals("STOCKTICKER")) {
+        //if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) { TODO
+        if (!requestHeader.getSource().equals("STOCKTICKER")) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }

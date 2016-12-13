@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import prv.mark.project.common.entity.ApplicationMessages;
 import prv.mark.project.common.repository.ApplicationMessagesRepository;

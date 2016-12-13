@@ -1,10 +1,11 @@
-package prv.mark.project.stockticker.config;
+package prv.mark.project.translogproducer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.interceptor.WireTap;
 import org.springframework.integration.config.EnableIntegration;
@@ -19,7 +20,7 @@ import org.springframework.integration.xml.transformer.ResultToStringTransformer
 import org.springframework.messaging.MessageChannel;
 //import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import prv.mark.project.stockticker.interceptor.StocksLoggingInterceptor;
+import prv.mark.project.translogproducer.interceptor.StocksLoggingInterceptor;
 import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
 
 import javax.jms.ConnectionFactory;
@@ -30,7 +31,7 @@ import java.util.Map;
 /**
  * Spring Bean base configuration for JMS components.
  * This configuration is always active, and contains common JMS components, as well as application-specific
- * components that are shared with the {@link StockTickerJmsConfig}.
+ * components that are shared with the {@link TranslogJmsConfig}.
  *
  * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
  * https://spring.io/guides/gs/messaging-jms/
@@ -41,6 +42,7 @@ import java.util.Map;
 @EnableIntegration
 @IntegrationComponentScan
 @ImportResource(value = {"classpath:/StockTickerJms.xml"})
+@Profile({"local", "dev", "qatest", "staging", "production"})
 public abstract class JmsConfig {
 
     /**

@@ -1,4 +1,4 @@
-package prv.mark.project.stockticker.jms.filter;
+package prv.mark.project.translogproducer.jms.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

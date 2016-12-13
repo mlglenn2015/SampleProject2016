@@ -39,8 +39,8 @@ public class StockTickerRestController {
 
     @Autowired
     private StockTickerService stockTickerService;
-    @Autowired
-    private ApplicationParameterSource applicationParameterSource;
+    //@Autowired
+    //private ApplicationParameterSource applicationParameterSource; TODO
 
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z0-9]{1,12}", i);

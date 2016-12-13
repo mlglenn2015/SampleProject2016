@@ -25,7 +25,7 @@
 
 
     <!-- OLD CONFIGURATION Nov 2016 -->
-    <!--<context-param>
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/stockticker-servlet.xml</param-value>
     </context-param>
@@ -47,18 +47,18 @@
     <servlet-mapping>
         <servlet-name>stockticker</servlet-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
 
 
     <!-- NEW CONFIGURATION Dec 2016 -->
     <!-- Spring MVC Application -->
-    <context-param>
+    <!--<context-param>
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </context-param>
     <context-param>
         <param-name>contextConfig</param-name>
-        <param-value>prv.mark.project.stockticker.config.ApplicationConfig</param-value>
+        <param-value>prv.mark.project.stockticker.config.StockTickerApplicationConfigationConfig</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -79,7 +79,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    <!-- StockTicker Web Service -->
+    &lt;!&ndash; StockTicker Web Service &ndash;&gt;
     <servlet>
         <servlet-name>stockticker</servlet-name>
         <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
@@ -95,5 +95,5 @@
     <servlet-mapping>
         <servlet-name>stockticker</servlet-name>
         <url-pattern>/ws/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 </web-app>

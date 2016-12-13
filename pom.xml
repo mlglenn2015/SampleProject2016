@@ -15,6 +15,7 @@
         <module>common</module>
         <module>Stockticker</module>
         <module>TransactionLogger</module>
+        <module>TranslogProducer</module>
     </modules>
 
     <repositories>

@@ -1,6 +1,8 @@
 package prv.mark.project.stockticker.config;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -11,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  * @author mlglenn on 12/3/2016.
  */
-//@Configuration TODO Error creating bean with name 'defaultServletHandlerMapping' defined in class path resource
+@Configuration //TODO Error creating bean with name 'defaultServletHandlerMapping' defined in class path resource
 /*
 One of your @Configuration classes is obviously annotated with @EnableWebMvc. That's how
 DelegatingWebMvcConfiguration ends up in your stack trace, since it is imported by @EnableWebMvc.
@@ -30,5 +32,6 @@ Sam (author of the Spring TestContext Framework)
  */
 @EnableWebMvc
 @ComponentScan(basePackages = {"prv.mark.project.stockticker.web"})
+@Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerWebConfig extends WebMvcConfigurerAdapter {
 }

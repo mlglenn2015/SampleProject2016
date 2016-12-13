@@ -1,4 +1,4 @@
-package prv.mark.project.stockticker.interceptor;
+package prv.mark.project.translogproducer.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

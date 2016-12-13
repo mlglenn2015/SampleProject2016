@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.entity.OrderTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
@@ -28,20 +29,20 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderTypesRepositoryTests.class);
 
-    @Autowired
+    /*@Autowired TODO
     private OrderTypesRepository orderTypesRepository;
 
     @Before
     public void setUp() {
         assertNotNull(orderTypesRepository);
-    }
+    }*/
 
     @Test
     public void defaultTest() {
         LOGGER.debug("OrderTypesRepositoryTests.defaultTest()");
     }
 
-    @Test
+    /*@Test TODO
     public void testOrderTypesRepository() {
         prv.mark.project.common.entity.OrderTypes entity = buildEntity();
         assertNotNull(entity);
@@ -103,6 +104,6 @@ public class OrderTypesRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }
+    }*/
 
 }

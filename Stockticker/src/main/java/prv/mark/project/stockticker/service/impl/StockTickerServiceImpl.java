@@ -51,14 +51,14 @@ public class StockTickerServiceImpl implements StockTickerService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    @Autowired
-    private ApplicationParameterSource applicationParameterSource;
-    @Autowired
+    //@Autowired
+    //private ApplicationParameterSource applicationParameterSource; TODO
+    /*@Autowired
     private StockPriceService stockPriceService;
     @Autowired
-    private StockOrderService stockOrderService;
+    private StockOrderService stockOrderService; TODO
     @Autowired
-    private TransactionLogService transactionLogService;
+    private TransactionLogService transactionLogService;*/
 
 
     @Override
@@ -87,25 +87,25 @@ public class StockTickerServiceImpl implements StockTickerService {
 
 
 
-        Optional<StockPrice> returnedEntity
-                = stockPriceService.findByStockSymbol(getStockPriceRequest.getTickerSymbol());
+        //Optional<StockPrice> returnedEntity TODO
+        //        = stockPriceService.findByStockSymbol(getStockPriceRequest.getTickerSymbol());
 
         GetStockPriceResponse getStockPriceResponse
                 = new GetStockPriceResponse();
 
-        if (returnedEntity != null && returnedEntity.get() != null) {
-            getStockPriceResponse = buildSuccessfulStockPriceResponse(returnedEntity.get());
-        } else {
+        //if (returnedEntity != null && returnedEntity.get() != null) { TODO
+        //    getStockPriceResponse = buildSuccessfulStockPriceResponse(returnedEntity.get());
+        //} else {
             getStockPriceResponse = buildFailureStockPriceResponse(getStockPriceRequest);
-        }
+        //}
 
         //TODO testing
-        /*StockQuote stockQuote = new StockQuote();
+        StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(1);
         stockQuote.setStatusText("success");
         stockQuote.setTickerSymbol("WMT");
         stockQuote.setStockPrice(NumberUtils.toFloat("68.00"));
-        getStockPriceResponse.setOrder(stockQuote);*/
+        getStockPriceResponse.setQuote(stockQuote);
 
 
 
@@ -141,19 +141,19 @@ public class StockTickerServiceImpl implements StockTickerService {
 
 
 
-        List<StockPrice> returnedEntityList = stockPriceService.findAll();
+        //List<StockPrice> returnedEntityList = stockPriceService.findAll(); TODO
         List<GetStockPriceResponse> getStockPriceResponseList = new ArrayList<>();
-        if (returnedEntityList != null && returnedEntityList.size() > 0) {
-            for (StockPrice stockPrice : returnedEntityList) {
-                GetStockPriceResponse getStockPriceResponse = buildSuccessfulStockPriceResponse(stockPrice);
-                getStockPriceResponseList.add(getStockPriceResponse);
-                logGetStockPriceResponse(getStockPriceResponse);
-            }
-        } else {
+        //if (returnedEntityList != null && returnedEntityList.size() > 0) {
+        //    for (StockPrice stockPrice : returnedEntityList) {
+        //        GetStockPriceResponse getStockPriceResponse = buildSuccessfulStockPriceResponse(stockPrice);
+        //        getStockPriceResponseList.add(getStockPriceResponse);
+        //        logGetStockPriceResponse(getStockPriceResponse);
+        //    }
+        //} else {
             GetStockPriceResponse getStockPriceResponse = buildFailureStockPriceResponse(null);
             getStockPriceResponseList.add(getStockPriceResponse);
             logGetStockPriceResponse(getStockPriceResponse);
-        }
+        //}
 
         return getStockPriceResponseList;
     }
@@ -187,9 +187,9 @@ public class StockTickerServiceImpl implements StockTickerService {
         stockOrder.setAction(submitOrderRequest.getOrder().getAction());
         stockOrder.setStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
         stockOrder.setQuantity(submitOrderRequest.getOrder().getQuantity().longValue());
-        Optional<StockPrice> stockPriceEntity
-                = stockPriceService.findByStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
-        stockOrder.setPrice(stockPriceEntity.get().getCurrentPrice());
+        //Optional<StockPrice> stockPriceEntity TODO
+        //        = stockPriceService.findByStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
+        //stockOrder.setPrice(stockPriceEntity.get().getCurrentPrice());
         stockOrder.setOrderType(submitOrderRequest.getOrder().getOrderType());
         stockOrder.setOrderDate(DateUtils.getDateFromLocalDateTime());
 
@@ -252,8 +252,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
-        //stockQuote.setStatusText("Request Successful");
+        //stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL)); TODO
+        stockQuote.setStatusText("Request Successful");
         if (returnedEntity != null) {
             stockQuote.setTickerSymbol(returnedEntity.getStockSymbol());
             stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
@@ -268,8 +268,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
-        stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
-        //stockQuote.setStatusText("Request Failed");
+        //stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED)); TODO
+        stockQuote.setStatusText("Request Failed");
         if (getStockPriceRequest != null) {
             stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
         }
@@ -307,7 +307,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         StockOrder returnEntity = new StockOrder();
         try {
 
-            returnEntity = stockOrderService.save(entity);
+            //returnEntity = stockOrderService.save(entity); TODO
+            returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockOrder entity " + entity.getId() + ".";
@@ -325,7 +326,8 @@ public class StockTickerServiceImpl implements StockTickerService {
         LOGGER.debug("StockTickerServiceImpl.saveTransactionLogEntity()");
         TransactionLog returnEntity = new TransactionLog();
         try {
-            returnEntity = transactionLogService.save(entity);
+            //returnEntity = transactionLogService.save(entity); TODO
+            returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving TransactionLog entity " + entity.getId() + ".";
