@@ -39,6 +39,13 @@
             <url>https://repository.jboss.org/nexus/content/groups/public</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <!-- Nexus plugin repository -->
     <!--<pluginRepositories>

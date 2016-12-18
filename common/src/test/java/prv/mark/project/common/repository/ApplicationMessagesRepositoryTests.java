@@ -5,15 +5,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import prv.mark.project.common.entity.ApplicationMessages;
-import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -21,17 +15,18 @@ import static org.junit.Assert.assertTrue;
  *
  * @author mlglenn
  */
+//@ContextConfiguration(classes = {TestUtilConfig.class}, initializers = ConfigFileApplicationContextInitializer.class)
 public class ApplicationMessagesRepositoryTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationMessagesRepositoryTests.class);
 
-    /*@Autowired TODO
+    @Autowired
     private ApplicationMessagesRepository applicationMessagesRepository;
 
     @Before
     public void setUp() {
         assertNotNull(applicationMessagesRepository);
-    }*/
+    }
 
     @Test
     public void defaultTest() {
