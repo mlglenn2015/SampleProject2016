@@ -22,32 +22,31 @@ import prv.mark.project.testutils.config.TestDataConfig;
 @Configuration
 @Import({TestDataConfig.class})
 @ComponentScan(basePackages = {"prv.mark.project"})
-@PropertySource("classpath:/common-test.properties")
 @Profile("test")
-public class UtilsTestConfig {
+public class TestCommonConfig {
 
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
-        //validatorFactory.setValidationMessageSource(messageSource()); TODO
+        validatorFactory.setValidationMessageSource(messageSource());
         return validatorFactory;
     }
 
-    /*@Bean
+    @Bean
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
     }
 
-    @Bean TODO
+    @Bean
     public ApplicationParameterSource applicationParameterSource() {
         return new ApplicationParameterSource();
-    }*/
+    }
 
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocation(new ClassPathResource("common-test.properties"));
-        return configurer;
+        PropertySourcesPlaceholderConfigurer cofigurer = new PropertySourcesPlaceholderConfigurer();
+        cofigurer.setLocation(new ClassPathResource("test-common.properties"));
+        return cofigurer;
     }
 
 }

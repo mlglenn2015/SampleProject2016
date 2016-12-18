@@ -11,22 +11,23 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@PropertySource("classpath:/testutils-common.properties")
+@PropertySource("classpath:/TEST.properties")
 @Profile("test")
-public class TestConfig {
+public class TestUtilConfig {
 
-    @Autowired
-    private Environment environment;
+    /*@Autowired
+    private Environment environment; TODO cleanup
 
     @Value("${key.store.password}")
     private String keyStorePassword;
     @Value("${trust.store.password}")
-    private String trustStorePassword;
+    private String trustStorePassword;*/
 
 
     @Bean
@@ -38,12 +39,13 @@ public class TestConfig {
 
     @Bean
     public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        return messageSource;
+        return new ReloadableResourceBundleMessageSource();
     }
 
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
+        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+        configurer.setLocation(new ClassPathResource("TEST.properties"));
+        return configurer;
     }
 }

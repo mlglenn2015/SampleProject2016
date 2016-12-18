@@ -95,9 +95,10 @@ public class TranslogJmsConfig extends JmsConfig {
      */
     @Bean
     public MessageChannel tbdChannel() {
-        return MessageChannels.direct("tbdChannel")
+        /*return MessageChannels.direct("tbdChannel")
                 .interceptor(new TbdLoggingInterceptor())
-                .get();
+                .get();*/
+        return null;
     }
 
     /**
@@ -105,9 +106,10 @@ public class TranslogJmsConfig extends JmsConfig {
      */
     @Bean
     public MessageChannel incomingStocksChannel() {
-        return MessageChannels.queue("incomingStocksChannel")
+        /*return MessageChannels.queue("incomingStocksChannel")
                 .interceptor(new WireTap(jmsLogger))
-                .get();
+                .get();*/
+        return null;
     }
 
     /**
@@ -153,9 +155,10 @@ public class TranslogJmsConfig extends JmsConfig {
      */
     @Bean
     public IntegrationFlow jmsIntegrationFlow() {
-        return IntegrationFlows.from(Jms.messageDriverChannelAdapter(tbdListener()))
+        /*return IntegrationFlows.from(Jms.messageDriverChannelAdapter(tbdListener()))
                 .handle(Jms.outboundAdapter(tbdCF).destination(incomimgStocksQueue))
-                .get();
+                .get();*/
+        return null;
     }
 
     /**
@@ -168,7 +171,7 @@ public class TranslogJmsConfig extends JmsConfig {
                 ? Integer.valueOf(strPollFrequency) : 15000; //seconds
         int msgsPerPoll = (StringUtils.isNotEmpty(messagesPerPoll) && NumberUtils.isNumber(messagesPerPoll))
                 ? Integer.valueOf(messagesPerPoll) : 5000;
-        return IntegrationFlows.from(Jms.inboundAdapter(tbdCF)
+        /*return IntegrationFlows.from(Jms.inboundAdapter(tbdCF)
                     .destination(incomimgStocksQueue),
                 c -> c.poller(Pollers.fixedDelay(pollFrequency).maxMessagesPerPoll(msgsPerPoll)))
                     .transform(tbdNamespaceTransformer())
@@ -177,7 +180,8 @@ public class TranslogJmsConfig extends JmsConfig {
                     .enrichHeaders(s -> s.headerExpressions(
                             h -> h.put("transactionLogNumber", "payload.transactionLogs[0].transLogNumber")))
                     .channel(tbdChannel())
-                    .get();
+                    .get();*/
+        return null;
     }
 
     /**
@@ -186,10 +190,11 @@ public class TranslogJmsConfig extends JmsConfig {
      */
     @Bean
     public IntegrationFlow tbdEventFlow() {
-        return IntegrationFlows.from("tbdChannel")
+        /*return IntegrationFlows.from("tbdChannel")
                 .handle("tbdEventHandler", "handleEvent")  //The handler bean name and main method
                 .transform(stocksTransformer())
                 .channel(stocksChannel())
-                .get();
+                .get();*/
+        return null;
     }
 }

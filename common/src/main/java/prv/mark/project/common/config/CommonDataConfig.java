@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 
@@ -53,7 +55,7 @@ public class CommonDataConfig {
 
 
     @Bean
-    public ApplicationMessageSource applicationMessageSource() {
+    public MessageSource applicationMessageSource() {
         return new ApplicationMessageSource();
     }
 
@@ -62,6 +64,12 @@ public class CommonDataConfig {
         return new ApplicationParameterSource();
     }
 
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource(applicationMessageSource());
+        return validator;
+    }
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         // EclipseLink logging.  Default to SEVERE if not set as a system property or in a property file.
@@ -72,8 +80,8 @@ public class CommonDataConfig {
         emfb.setDataSource(dataSource());
         emfb.setPackagesToScan("prv.mark.project.common.entity");
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
-        jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
-        //jpaVendorAdapter.setShowSql(false);
+        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
+        jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(false);
 
         Properties jpaProperties = new Properties();

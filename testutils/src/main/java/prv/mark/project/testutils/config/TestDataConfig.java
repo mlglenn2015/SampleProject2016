@@ -27,7 +27,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"prv.mark.project"})
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"})
 @EnableTransactionManagement
-@PropertySource("classpath:/testutils-common.properties")
+@PropertySource("classpath:/TEST.properties")
 @Profile({"test"})
 public class TestDataConfig {
 
@@ -49,17 +49,17 @@ public class TestDataConfig {
         return template;
     }
 
-    @Bean
-    public DataSource appDataSource() {
+    /*@Bean
+    public DataSource appDataSource() { TODO cleanup
         return dataSource();
-    }
+    }*/
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
 
         emfb.setDataSource(dataSource());
-        emfb.setPackagesToScan("prv.mark.project");
+        emfb.setPackagesToScan("prv.mark.project.common.entity");
         emfb.setJpaDialect(new EclipseLinkJpaDialect());
 
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();

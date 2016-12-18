@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
-import prv.mark.project.common.config.UtilsTestConfig;
+import prv.mark.project.common.config.TestCommonConfig;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -17,7 +17,7 @@ import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
 
-@ContextConfiguration(classes = {UtilsTestConfig.class})
+@ContextConfiguration(classes = {TestCommonConfig.class})
 public class DateUtilsTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilsTests.class);

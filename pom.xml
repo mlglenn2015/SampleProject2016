@@ -19,9 +19,19 @@
     </modules>
 
     <repositories>
-        <repository>
+        <!--<repository>
             <id>internal</id>
             <url>file://${basedir}/mvnInternal</url>
+        </repository>-->
+        <repository>
+            <id>maven-central</id>
+            <name>Maven Central</name>
+            <url>http://central</url>
+        </repository>
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release</url>
         </repository>
         <repository>
             <id>codelds</id>
@@ -71,35 +81,32 @@
         </license>
     </licenses>-->
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-
-        <springframework.version>3.2.17.RELEASE</springframework.version>
-        <!--<springbatch.version>3.0.6.RELEASE</springbatch.version>-->
-        <hibernate.version>4.3.6.Final</hibernate.version>
-        <javassist.version>3.18.1-GA</javassist.version>
-        <oracle.version>11.2.0.4</oracle.version>
-        <joda-time.version>2.3</joda-time.version>
-        <c3p0.version>0.9.5-pre8</c3p0.version>
-    </properties>
-
-    <!--parent>
+    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.3.5.RELEASE</version>
         <relativePath/>
-    </parent -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <build.number>0</build.number>
+        <maven.build.timestamp.format>MM/dd/yyyy</maven.build.timestamp.format>
+        <build.date>${maven.build.timestamp}</build.date>
+        <spring.batch.core.version>3.0.4.RELEASE</spring.batch.core.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
+            <!--<dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>1.1.1.RELEASE</version><!-- version>2.0.8.RELEASE</version -->
+                <version>1.1.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc6</artifactId>
@@ -111,100 +118,88 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.ws</groupId>
-            <artifactId>spring-ws-core</artifactId>
-            <!--<version>2.4.0.RELEASE</version>-->
-        </dependency>
-
-        <!-- Spring Core -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <!--<version>${springframework.version}</version>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <!--<version>${springframework.version}</version>--><!-- 06-May-2016 -->    <!-- version>3.2.3.RELEASE</version -->
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <!--<version>${springframework.version}</version>--><!-- 06-May-2016 -->   <!-- version>4.3.4.RELEASE</version -->
-        </dependency>
-
-        <!-- Spring TX -->
-        <!--<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>-->
-        <!-- Spring ORM -->
-        <!--<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>-->
-
-        <!-- Spring MVC framework -->
-        <!--<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>3.0.0.RELEASE</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>4.2.3.RELEASE</version>
-        </dependency-->
-
-        <!-- Spring Web - Added Newly -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <!--<version>${springframework.version}</version>-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <!--<version>${springframework.version}</version>--><!-- 06-May-2016 --> <!--version>4.3.3.RELEASE</version--><!-- uncommented 20161203 -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-entitymanager</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <!--<version>${springframework.version}</version>--><!-- 06-May-2016 --> <!--version>4.3.3.RELEASE</version--><!-- uncommented 20161203 -->
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <!--<version>1.10.5.RELEASE</version>-->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.webflow</groupId>
-            <artifactId>spring-binding</artifactId>
-            <!--<version>2.4.4.RELEASE</version>-->
         </dependency>
 
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <!--<version>1.1.0.Final</version>-->
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <!--<version>2.2.4</version>--><!--version>3.0.1-b04</version-->
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.1.Final</version>
         </dependency>
 
+        <!-- Oracle Driver -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <!--<version>2.6.4</version>-->
+            <version>2.5.2</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -218,151 +213,73 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <!--<version>4.3.1.Final</version>--><!-- version>5.3.3.Final</version -->
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <!--<version>4.0.0-b01</version>-->
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.2.0.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <!--<version>3.5</version>-->
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <!--<version>2.9.1</version>--> <!-- uncommented 2016 12 03 -->
-        </dependency>
-
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <!--<version>11.2.0.4</version>-->
-        </dependency>
-
-        <dependency>
-            <groupId>net.sourceforge.jgeocoder</groupId>
-            <artifactId>jgeocoder</artifactId>
-            <version>0.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.18.1-GA</version>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
         </dependency>
 
         <!--<dependency>
             <groupId>javax.xml.soap</groupId>
             <artifactId>saaj-api</artifactId>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
+            <version>1.3.4</version>
         </dependency>-->
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <!--<version>1.0.13</version>--> <!-- uncommented 20161203 -->
+            <groupId>com.sun.xml.wss</groupId>
+            <artifactId>xws-security</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <!-- Spring Integration -->
+        <!--<dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-java-dsl</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-core</artifactId>
+            <version>4.1.6.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-stream</artifactId>
+            <version>4.1.6.RELEASE</version>
         </dependency>
-
-        <!--<dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
-        </dependency>
-
         <dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
-            <version>1.6.3</version>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-file</artifactId>
+            <version>4.1.6.RELEASE</version>
         </dependency>-->
 
-        <!--<dependency>
-            <groupId>javax.xml.soap</groupId>
-            <artifactId>saaj-api</artifactId>
-            <version>1.3.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.xml.ws</groupId>
-            <artifactId>jaxws-rt</artifactId>
-            <version>2.2.10</version>
-        </dependency>-->
-
-        <!-- Jackson JAXB annotations module -->
-        <!--<dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>2.7.2</version>
-            &lt;!&ndash;<version>2.4.0</version>&ndash;&gt;
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>net.sourceforge.jgeocoder</groupId>
-            <artifactId>jgeocoder</artifactId>
-            <version>0.4</version>
-        </dependency>-->
 
 
         <!-- TEST dependencies -->
+        <!-- Jackson JAXB annotations module -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <!--<version>${springframework.version}</version>-->
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>2.7.2</version>
+            <!--<version>2.4.0</version>-->
         </dependency>
 
-        <!--<dependency>
-            <groupId>org.jvnet.staxex</groupId>
-            <artifactId>stax-ex</artifactId>
-            <version>1.7.6</version>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>1.3.5.RELEASE</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <!--<version>4.12</version>-->
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>4.0.2.RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.ws</groupId>
             <artifactId>spring-ws-test</artifactId>
-            <!--<version>2.4.0.RELEASE</version>-->
         </dependency>
-
-        <!--dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>com.springsource.org.junit</artifactId>
-            <version>4.7.0</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.4</version>
-        </dependency>-->
 
 
 
@@ -392,6 +309,15 @@
             <artifactId>smock-springws</artifactId>
             <version>0.5</version>
         </dependency>-->
+
+        <!-- needed for Javadoc -->
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
 
     </dependencies>
 
@@ -425,6 +351,36 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Title>STOCKTICKER</Specification-Title>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Implementation-Version>${build.number}</Implementation-Version>
+                            <Implementation-Date>${build.date}</Implementation-Date>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <bottom>.</bottom>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 	

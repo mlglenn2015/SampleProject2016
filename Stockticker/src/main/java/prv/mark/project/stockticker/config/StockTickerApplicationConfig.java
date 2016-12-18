@@ -19,20 +19,20 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerApplicationConfig {
 
-    /*@Bean
+    /*@Bean defined in CommonDataConfig
     public ApplicationMessageSource applicationMessageSource() {
         return new ApplicationMessageSource();
     }
 
-    @Bean TODO
+    @Bean defined in CommonDataConfig
     public ApplicationParameterSource applicationParameterSource() {
         return new ApplicationParameterSource();
     }*/
 
-    @Bean
+    /*@Bean defined in CommonDataConfig
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         //validator.setValidationMessageSource(applicationMessageSource()); TODO
         return validator;
-    }
+    }*/
 }

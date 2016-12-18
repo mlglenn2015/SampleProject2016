@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import prv.mark.project.common.config.UtilsTestConfig;
+import prv.mark.project.common.config.TestCommonConfig;
 import prv.mark.project.common.domain.USPostalAddress;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  *
  * Created by mlglenn on 11/15/2016.
  */
-@ContextConfiguration(classes = UtilsTestConfig.class)
+@ContextConfiguration(classes = TestCommonConfig.class)
 public class USAddressValidationTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(USAddressValidationTests.class);

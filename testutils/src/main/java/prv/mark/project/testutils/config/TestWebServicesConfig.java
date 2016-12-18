@@ -29,7 +29,7 @@ import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType
         "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"}) //For JAXB classes
 @EnableWs
 @Import(TestDataConfig.class)
-@PropertySource("classpath:/testutils-common.properties")
+@PropertySource("classpath:/TEST.properties")
 @Profile("test")
 public class TestWebServicesConfig {
 

@@ -1,8 +1,8 @@
+prv\mark\project\testutils\config\TestUtilConfig.class
 prv\mark\project\testutils\config\TestDataConfig.class
 prv\mark\project\testutils\config\IntegrationTestConfig.class
 prv\mark\project\testutils\junit\AbstractAppWebServiceEndpointTest.class
 prv\mark\project\testutils\junit\AbstractAppIntegrationTest.class
 prv\mark\project\testutils\junit\AbstractAppTransactionalTest.class
-prv\mark\project\testutils\config\TestConfig.class
 prv\mark\project\testutils\config\TestWebServicesConfig.class
 prv\mark\project\testutils\junit\AbstractAppTest.class
