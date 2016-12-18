@@ -13,6 +13,8 @@ Install xmldigsig
 
 mvn install:install-file -DgroupId=javax.xml.crypto -DartifactId=xmldsig -Dversion=1.0 -Dpackaging=jar -Dfile=xmldsig-1.0.jar -DgeneratePom=true
 
+mvn install:install-file -DgroupId=javax.xml.soap -DartifactId=saaj-api -Dversion=1.3.5 -Dfile=saaj-api-1.3.5.jar -Dpackaging=jar -DgeneratePom=true
+
 
 
 
