@@ -6,20 +6,20 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.config.EnableIntegration;
-import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.dsl.channel.MessageChannels;
-import org.springframework.integration.dsl.jms.Jms;
-import org.springframework.integration.dsl.support.Transformers;
-import org.springframework.integration.xml.transformer.UnmarshallingTransformer;
-import org.springframework.integration.xml.transformer.XsltPayloadTransformer;
+//import org.springframework.integration.dsl.IntegrationFlow;
+//import org.springframework.integration.dsl.channel.MessageChannels;
+//import org.springframework.integration.dsl.jms.Jms;
+//import org.springframework.integration.dsl.support.Transformers;
+//import org.springframework.integration.xml.transformer.UnmarshallingTransformer;
+//import org.springframework.integration.xml.transformer.XsltPayloadTransformer;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import prv.mark.project.translogproducer.interceptor.StocksLoggingInterceptor;
 import prv.mark.project.testutils.config.TestDataConfig;
 import prv.mark.project.testutils.config.TestWebServicesConfig;
 
-import javax.jms.ConnectionFactory;
-import javax.jms.Queue;
+//import javax.jms.ConnectionFactory;
+//import javax.jms.Queue;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +89,7 @@ public class TestJmsConfig {
         return jaxb2Marshaller;
     }
 
-    @Bean
+    /*@Bean
     public UnmarshallingTransformer tbdMsgUnmarshaller() {
         return Transformers.unmarshaller(tbdJmsMarshaller());
     }
@@ -102,6 +102,6 @@ public class TestJmsConfig {
     @Bean
     public XsltPayloadTransformer tbdNamespaceTransformer() {
         return new XsltPayloadTransformer(new ClassPathResource("tbd_strip_namespaces.xsl"));
-    }
+    }*/
 
 }

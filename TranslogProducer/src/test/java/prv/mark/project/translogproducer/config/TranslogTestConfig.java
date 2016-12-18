@@ -22,7 +22,7 @@ import prv.mark.project.testutils.config.TestWebServicesConfig;
 @Profile("test")
 public class TranslogTestConfig {
 
-    @Bean
+    /*@Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
         validatorFactory.setValidationMessageSource(messageSource());
@@ -32,6 +32,6 @@ public class TranslogTestConfig {
     @Bean
     public MessageSource messageSource() {
         return new ApplicationMessageSource();
-    }
+    }*/
 
 }

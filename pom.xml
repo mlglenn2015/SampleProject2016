@@ -14,8 +14,8 @@
         <module>testutils</module>
         <module>common</module>
         <module>Stockticker</module>
-        <module>TransactionLogger</module>
-        <module>TranslogProducer</module>
+        <!--<module>TransactionLogger</module>
+        <module>TranslogProducer</module>-->
     </modules>
 
     <repositories>
@@ -23,11 +23,6 @@
             <id>internal</id>
             <url>file://${basedir}/mvnInternal</url>
         </repository>-->
-        <repository>
-            <id>maven-central</id>
-            <name>Maven Central</name>
-            <url>http://central</url>
-        </repository>
         <repository>
             <id>spring-releases</id>
             <name>Spring Releases</name>
@@ -100,13 +95,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>1.1.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
             <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc6</artifactId>
@@ -114,6 +102,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <dependencies>
 
@@ -183,10 +172,101 @@
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
 
+        <!-- Spring Batch -->
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-core</artifactId>
+            <version>${spring.batch.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-infrastructure</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+            <version>2.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-security</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-test</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
+
+        <!-- Jackson JAXB annotations module -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>2.7.2</version>
+            <!--<version>2.4.0</version>-->
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>1.3.5.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>4.0.2.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Integration -->
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-core</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-stream</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-file</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>com.springsource.org.junit</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+        <!-- HSQLDB for local development and test -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- needed for Javadoc -->
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
 
         <!-- Oracle Driver -->
@@ -213,111 +293,78 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>javax.xml.soap</groupId>
             <artifactId>saaj-api</artifactId>
-            <version>1.3.5</version>
+            <version>1.3.4</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.xml.wss</groupId>
             <artifactId>xws-security</artifactId>
             <version>3.0</version>
-        </dependency>-->
-
-        <!-- Spring Integration -->
-        <!--<dependency>
-            <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-java-dsl</artifactId>
-            <version>1.1.4.RELEASE</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-core</artifactId>
-            <version>4.1.6.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-stream</artifactId>
-            <version>4.1.6.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.integration</groupId>
-            <artifactId>spring-integration-file</artifactId>
-            <version>4.1.6.RELEASE</version>
-        </dependency>-->
-
-
-
-        <!-- TEST dependencies -->
-        <!-- Jackson JAXB annotations module -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>2.7.2</version>
-            <!--<version>2.4.0</version>-->
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.3.5.RELEASE</version>
-            <scope>test</scope>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <version>4.0.2.RELEASE</version>
-            <scope>test</scope>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.1-GA</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.ws</groupId>
-            <artifactId>spring-ws-test</artifactId>
-        </dependency>
-
-
-
-        <!-- Mock utilities -->
-        <!--<dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.2.28</version>
         </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <version>1.5.6</version>
-        </dependency>
+
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
             <version>1.5.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4-common</artifactId>
             <version>1.5.6</version>
         </dependency>
+
         <dependency>
             <groupId>net.javacrumbs</groupId>
             <artifactId>smock-springws</artifactId>
             <version>0.5</version>
-        </dependency>-->
-
-        <!-- needed for Javadoc -->
-        <dependency>
-            <groupId>javax.interceptor</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
-            <version>1.2</version>
         </dependency>
-
-
 
     </dependencies>
 
@@ -349,35 +396,6 @@
                         <soa.system.id>STOCKTICKER</soa.system.id>
                         <logback.configurationFile>../testutils/src/main/resources/logback-test.xml</logback.configurationFile>
                     </systemPropertyVariables>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Specification-Title>STOCKTICKER</Specification-Title>
-                            <Specification-Version>${project.version}</Specification-Version>
-                            <Implementation-Version>${build.number}</Implementation-Version>
-                            <Implementation-Date>${build.date}</Implementation-Date>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.3</version>
-                <configuration>
-                    <failOnError>false</failOnError>
-                    <bottom>.</bottom>
-                    <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
             </plugin>
 
