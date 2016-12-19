@@ -1,5 +1,6 @@
 package prv.mark.project.stockticker.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -19,20 +20,20 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerApplicationConfig {
 
-    /*@Bean defined in CommonDataConfig
-    public ApplicationMessageSource applicationMessageSource() {
+    @Bean
+    public MessageSource applicationMessageSource() {
         return new ApplicationMessageSource();
     }
 
-    @Bean defined in CommonDataConfig
+    @Bean
     public ApplicationParameterSource applicationParameterSource() {
         return new ApplicationParameterSource();
-    }*/
+    }
 
-    /*@Bean defined in CommonDataConfig
+    @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        //validator.setValidationMessageSource(applicationMessageSource()); TODO
+        validator.setValidationMessageSource(applicationMessageSource());
         return validator;
-    }*/
+    }
 }

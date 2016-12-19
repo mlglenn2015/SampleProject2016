@@ -30,3 +30,7 @@ servers in your domain:
     cd C:\Oracle\Middleware\wls12212\user_projects\domains\mydomain\bin
     startManagedWebLogic.cmd stocksMgdServer1 http://localhost:7001
 
+    startManagedWebLogic.cmd managedSvr1 http://localhost:7001
+
+
+

@@ -21,15 +21,16 @@ import java.util.Locale;
 @Component
 public class ApplicationMessageSource implements MessageSource {
 
-    @Autowired
-    private ApplicationMessagesRepository applicationMessagesRepository;
+    //@Autowired TODO
+    //private ApplicationMessagesRepository applicationMessagesRepository;
 
     public String getMessage(String messageKey) throws NoSuchMessageException {
-        ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey(messageKey);
+        /*ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey(messageKey);
         if (applicationMessage == null) {
             throw new NoSuchMessageException("Message with key " + messageKey + " does not exist.");
         }
-        return applicationMessage.getMessage();
+        return applicationMessage.getMessage();*/
+        return "TESTING"; //TODO
     }
 
     @Override

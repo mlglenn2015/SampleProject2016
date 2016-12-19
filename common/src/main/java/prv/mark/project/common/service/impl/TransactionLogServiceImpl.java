@@ -29,45 +29,45 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    @Autowired
-    private TransactionLogRepository transactionLogRepository;
+    //@Autowired
+    //private TransactionLogRepository transactionLogRepository;
 
     @Override
     public Optional<TransactionLog> findById(final Long id) {
         LOGGER.debug("TransactionLogServiceImpl.findById({})", id);
         //return Optional.ofNullable(ordersRepository.findById(id)).get();
-        return Optional.ofNullable(transactionLogRepository.findOne(id));
-        //return Optional.of(new TransactionLog());
+        //return Optional.ofNullable(transactionLogRepository.findOne(id)); TODO
+        return Optional.of(new TransactionLog());
     }
 
     @Override
     public List<TransactionLog> findByLogDateTime(final Date logDateTime) {
         LOGGER.debug("TransactionLogServiceImpl.findByLogDateTime({})", logDateTime);
-        return transactionLogRepository.findByLogDateTime(logDateTime);
-        //return nullList();
+        //return transactionLogRepository.findByLogDateTime(logDateTime); TODO
+        return nullList();
     }
 
 
     @Override
     public List<TransactionLog> findByTransactionType(final String transactionType) {
         LOGGER.debug("TransactionLogServiceImpl.findByTransactionType({})", transactionType);
-        return transactionLogRepository.findByTransactionType(transactionType);
-        //return nullList();
+        //return transactionLogRepository.findByTransactionType(transactionType); TODO
+        return nullList();
     }
 
     @Override
     public List<TransactionLog> findAll() {
         LOGGER.debug("TransactionLogServiceImpl.findAll()");
-        return transactionLogRepository.findAll();
-        //return nullList();
+        //return transactionLogRepository.findAll(); TODO
+        return nullList();
     }
 
     @Override
     @Transactional
     public TransactionLog save(final TransactionLog transactionLog) {
         LOGGER.debug("TransactionLogServiceImpl.save({})", transactionLog.toString());
-        return transactionLogRepository.saveAndFlush(transactionLog);
-        //return new TransactionLog();
+        //return transactionLogRepository.saveAndFlush(transactionLog); TODO
+        return new TransactionLog();
     }
 
     private List<TransactionLog> nullList() {

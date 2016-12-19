@@ -54,7 +54,7 @@ public class CommonDataConfig {
 
 
 
-    @Bean
+    /*@Bean
     public MessageSource applicationMessageSource() {
         return new ApplicationMessageSource();
     }
@@ -69,7 +69,8 @@ public class CommonDataConfig {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(applicationMessageSource());
         return validator;
-    }
+    }*/
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         // EclipseLink logging.  Default to SEVERE if not set as a system property or in a property file.

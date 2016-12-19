@@ -2,6 +2,7 @@ prv\mark\project\stockticker\rest\StockTickerRestController.class
 prv\mark\project\stockticker\config\StockTickerApplicationConfig.class
 prv\mark\project\stockticker\service\impl\StockTickerServiceImpl.class
 prv\mark\project\stockticker\config\StockTickerWsConfig.class
+prv\mark\project\stockticker\StockTickerBootApplication.class
 prv\mark\project\stockticker\service\StockTickerService.class
 prv\mark\project\stockticker\util\MessageBuilderUtils.class
 prv\mark\project\stockticker\config\StockTickerWebConfig.class

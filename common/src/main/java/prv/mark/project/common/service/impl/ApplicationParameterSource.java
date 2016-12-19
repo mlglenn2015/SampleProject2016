@@ -22,8 +22,8 @@ public final class ApplicationParameterSource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationParameterSource.class);
 
-    @Autowired
-    private ApplicationParametersRepository applicationParametersRepository;
+    //@Autowired TODO
+    //private ApplicationParametersRepository applicationParametersRepository;
 
 
     /**
@@ -33,14 +33,14 @@ public final class ApplicationParameterSource {
      * @throws ApplicationException
      */
     public String getParm(final String key) throws ApplicationException {
-
-        ApplicationParameters parameter = applicationParametersRepository.findActiveByKey(key, true);
+        /*ApplicationParameters parameter = applicationParametersRepository.findActiveByKey(key, true);
         if (parameter == null) {
             LOGGER.error(StringUtils.APPLICATION_EXCEPTION);
             throw new ApplicationException("Application parameter with key " + key + " not found.");
         }
-        LOGGER.debug(parameter.toString());
-        return parameter.getProperty();
+        LOGGER.debug(parameter.toString()); TODO
+        return parameter.getProperty();*/
+        return "TESTING";
     }
 
     /**

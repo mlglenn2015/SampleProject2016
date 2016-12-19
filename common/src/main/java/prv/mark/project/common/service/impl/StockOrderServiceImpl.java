@@ -28,37 +28,37 @@ public class StockOrderServiceImpl implements StockOrderService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    @Autowired
-    private StockOrderRepository stockOrderRepository;
+    //@Autowired TODO
+    //private StockOrderRepository stockOrderRepository;
 
     @Override
     public Optional<StockOrder> findById(final Long id) {
         LOGGER.debug("StockOrderServiceImpl.findById({})", id);
         //return Optional.ofNullable(ordersRepository.findById(id)).get();
-        return Optional.ofNullable(stockOrderRepository.findOne(id));
-        //return Optional.of(new StockOrder());
+        //return Optional.ofNullable(stockOrderRepository.findOne(id)); TODO
+        return Optional.of(new StockOrder());
     }
 
     @Override
     public List<StockOrder> findByOrderStatus(final String orderStatus) {
         LOGGER.debug("StockOrderServiceImpl.findByOrderStatus({})", orderStatus);
-        return stockOrderRepository.findByOrderStatus(orderStatus);
-        //return nullList();
+        //return stockOrderRepository.findByOrderStatus(orderStatus); TODO
+        return nullList();
     }
 
     @Override
     public List<StockOrder> findAll() {
         LOGGER.debug("StockOrderServiceImpl.findAll()");
-        return stockOrderRepository.findAll();
-        //return nullList();
+        //return stockOrderRepository.findAll(); TODO
+        return nullList();
     }
 
     @Override
     @Transactional
     public StockOrder save(StockOrder order) {
         LOGGER.debug("StockOrderServiceImpl.save({})", order.toString());
-        return stockOrderRepository.saveAndFlush(order);
-        //return new StockOrder();
+        //return stockOrderRepository.saveAndFlush(order); TODO
+        return new StockOrder();
     }
 
     private List<StockOrder> nullList() {
