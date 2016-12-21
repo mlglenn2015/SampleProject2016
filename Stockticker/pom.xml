@@ -17,13 +17,13 @@
             <groupId>prv.mark.project</groupId>
             <artifactId>common</artifactId>
             <version>${project.parent.version}</version>
-            <scope>compile</scope>
+            <!--<scope>compile</scope>-->
         </dependency>
         <dependency>
             <groupId>prv.mark.project</groupId>
             <artifactId>schemas</artifactId>
             <version>${project.parent.version}</version>
-            <scope>compile</scope>
+            <!--<scope>compile</scope>-->
         </dependency>
         <dependency>
             <groupId>prv.mark.project</groupId>
