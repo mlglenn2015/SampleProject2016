@@ -20,7 +20,7 @@ import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
 import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stockticker.service.StockTickerService;
+//import prv.mark.project.stockticker.service.StockTickerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +37,8 @@ public class StockTickerRestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerRestController.class);
 
-    @Autowired
-    private StockTickerService stockTickerService;
+    //@Autowired
+    //private StockTickerRestService stockTickerRestService;
     //@Autowired
     //private ApplicationParameterSource applicationParameterSource; TODO
 
@@ -63,7 +63,7 @@ public class StockTickerRestController {
         getStockPriceRequest.setTickerSymbol(stockSymbol);
         GetStockPriceResponse getStockPriceResponse;
         try {
-            getStockPriceResponse  = stockTickerService.getStockPrice(getStockPriceRequest);
+            //getStockPriceResponse  = stockTickerService.getStockPrice(getStockPriceRequest); TODO
 
         } catch (SOAPClientException sce) {
 
@@ -100,7 +100,7 @@ public class StockTickerRestController {
 
         List<GetStockPriceResponse> stockPriceResponseList = new ArrayList<>();
         try {
-            stockPriceResponseList  = stockTickerService.getAll();
+            //stockPriceResponseList  = stockTickerService.getAll(); TODO
 
         } catch (SOAPClientException sce) {
 

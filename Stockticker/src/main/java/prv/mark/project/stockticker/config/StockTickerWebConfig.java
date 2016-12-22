@@ -1,5 +1,7 @@
 package prv.mark.project.stockticker.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -31,7 +33,9 @@ Regards,
 Sam (author of the Spring TestContext Framework)
  */
 @EnableWebMvc
-@ComponentScan(basePackages = {"prv.mark.project.stockticker.web"})
+@ComponentScan(basePackages = {"prv.mark.project.stockticker"})
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerWebConfig extends WebMvcConfigurerAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerWebConfig.class);
 }

@@ -21,7 +21,7 @@ import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
 import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
 import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
-import prv.mark.project.stockticker.service.StockTickerService;
+//import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import java.util.Optional;
@@ -59,9 +59,9 @@ public class StockTickerRestControllerTests extends AbstractAppTransactionalTest
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        assertNotNull(stockTickerRestController);
-        assertNotNull(stockTickerService);
-        assertNotNull(applicationParameterSource);
+        Assert.assertNotNull(stockTickerRestController);
+        Assert.assertNotNull(stockTickerService);
+        Assert.assertNotNull(applicationParameterSource);
     }
 
     @Override
@@ -78,16 +78,16 @@ public class StockTickerRestControllerTests extends AbstractAppTransactionalTest
     public void testGetStockPriceRequestValid() {
         LOGGER.debug("StockTickerRestControllerTests.testGetStockPriceRequestValid()");
         GetStockPriceRequest request = buildGetStockPriceRequest();
-        assertNotNull(request);
+        Assert.assertNotNull(request);
 
-        doReturn(buildStockPriceResponse())
+        Mockito.doReturn(buildStockPriceResponse())
                 .when(stockTickerService)
                 .getStockPrice(request);
         StockPriceResponse response = stockTickerRestController.getStockPriceBySymbol("A");
-        verify(stockTickerService).getStockPrice(request);
+        Mockito.verify(stockTickerService).getStockPrice(request);
 
-        assertNotNull(response);
-        assertTrue(Optional.of(response).filter(validResponse).isPresent());
+        Assert.assertNotNull(response);
+        Assert.assertTrue(Optional.of(response).filter(validResponse).isPresent());
     }
 
     //@Test(expected = SOAPGeneralFault.class) TODO

@@ -1,7 +1,11 @@
 package prv.mark.project.stockticker.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +24,8 @@ import org.springframework.ws.server.endpoint.interceptor.PayloadLoggingIntercep
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
+import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor;
+import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import prv.mark.project.common.config.CommonDataConfig;
@@ -49,20 +55,20 @@ import java.util.List;
         @PropertySource("classpath:/application.properties")
 })
 @EnableWs
-//@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
-//        registration = RegistrationPolicy.IGNORE_EXISTING)
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerWsConfig extends WsConfigurerAdapter {
 
-    private static final Class<?>[] CLASSES_TO_BE_BOUND = {
-            GetStockPriceRequest.class,
-            GetStockPriceResponse.class,
-            StockOrder.class,
-            StockQuote.class,
-            SubmitOrderRequest.class,
-            SubmitOrderResponse.class,
-            TransactionLoggerMsgType.class,
-            RequestHeader.class
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerWsConfig.class);
+
+    private static final Class<?>[] WS_CLASSES_TO_BE_BOUND = {
+            prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest.class,
+            prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse.class,
+            prv.mark.project.stocks.stocktickertypes.schemas.StockOrder.class,
+            prv.mark.project.stocks.stocktickertypes.schemas.StockQuote.class,
+            prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest.class,
+            prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse.class,
+            prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType.class,
+            prv.mark.project.stocks.commontypes.schemas.RequestHeader.class
     };
 
     @Autowired
@@ -84,59 +90,67 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     @Bean(name = "StockTicker")
     public SimpleWsdl11Definition stockTicker() {
+        LOGGER.info("StockTickerWsConfig: Returning new SimpleWsdl11Definition...");
         return new SimpleWsdl11Definition(new ClassPathResource("StockTicker.wsdl"));
     }
 
     /*@Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
-        //servlet.seetApplicationContext(applicationContext);
+        servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws*//*");
+        return new ServletRegistrationBean(servlet, "/ws");
     }*/
 
     @Bean(name = "CommonTypes")
     public SimpleXsdSchema commonTypes() {
+        LOGGER.info("StockTickerWsConfig: Returning new SimpleXsdSchema for CommonTypes.xsd...");
         return new SimpleXsdSchema(new ClassPathResource("xsd/CommonTypes.xsd"));
     }
 
     @Bean(name = "StockTickerTypes")
     public SimpleXsdSchema stockTickerTypes() {
+        LOGGER.info("StockTickerWsConfig: Returning new SimpleXsdSchema for StockTickerTypes.xsd...");
         return new SimpleXsdSchema(new ClassPathResource("xsd/StockTickerTypes.xsd"));
     }
 
     @Bean(name = "TransactionLoggerTypes")
     public SimpleXsdSchema transactionLoggerTypes() {
+        LOGGER.info("StockTickerWsConfig: Returning new SimpleXsdSchema for TransactionLoggerTypes.xsd...");
         return new SimpleXsdSchema(new ClassPathResource("xsd/TransactionLoggerTypes.xsd"));
     }
 
     @Override
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
+        LOGGER.info("StockTickerWsConfig: Returning new Interceptors...");
         interceptors.add(payloadLoggingInterceptor());
-        //interceptors.add(payloadValidatingInterceptor());
+        interceptors.add(payloadValidatingInterceptor());
     }
 
     @Bean
     public PayloadLoggingInterceptor payloadLoggingInterceptor() {
+        LOGGER.info("StockTickerWsConfig: Returning new PayloadLoggingInterceptor...");
         final PayloadLoggingInterceptor interceptor = new PayloadLoggingInterceptor();
+        LOGGER.info("StockTickerWsConfig: traceSoapEnvelopes={}", traceSoapEnvelopes);
         final Boolean logEnvelopes = Boolean.valueOf(StringUtils.safeString(traceSoapEnvelopes));
         interceptor.setLogRequest(logEnvelopes);
         interceptor.setLogResponse(logEnvelopes);
         return interceptor;
     }
 
-    /*@Bean
+    @Bean
     public PayloadValidatingInterceptor payloadValidatingInterceptor() {
         final PayloadValidatingInterceptor interceptor = new PayloadValidatingInterceptor();
         final Boolean validatePayloads = Boolean.valueOf(StringUtils.safeString(this.validatePayloads));
         interceptor.setValidateRequest(validatePayloads);
         interceptor.setValidateResponse(validatePayloads);
-        interceptor.setSchema(new ClassPathResource("xsd/Types.xsd"));
+        interceptor.setSchema(new ClassPathResource("xsd/StockTickerTypes.xsd"));
         return interceptor;
-    }*/
+    }
 
     @Bean
     public SoapFaultMappingExceptionResolver exceptionResolver() {
+        LOGGER.info("StockTickerWsConfig: Returning new SoapFaultMappingExceptionResolver...");
         SoapFaultMappingExceptionResolver exceptionResolver = new SoapFaultMappingExceptionResolver();
         SoapFaultDefinition defaultFault = new SoapFaultDefinition();
         defaultFault.setFaultCode(SoapFaultDefinition.CLIENT);
@@ -189,15 +203,9 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return trustStoreFactory.getObject();
     }*/
 
-    /*@Bean
-    public Jaxb2Marshaller marshaller() {
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setPackagesToScan("com..xml.lment");
-        return marshaller;
-    }*/
-
     @Bean
     public WebServiceTemplate webServiceTemplate() {
+        LOGGER.info("StockTickerWsConfig: Returning new WebServiceTemplate...");
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
         webServiceTemplate.setMarshaller(marshaller());
         webServiceTemplate.setUnmarshaller(marshaller());
@@ -206,16 +214,25 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
         return webServiceTemplate;
     }
 
-    @Bean
+    /*@Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setClassesToBeBound(CLASSES_TO_BE_BOUND);
-        //marshaller.setPackagesToScan("prv.mark.project");
+        marshaller.setPackagesToScan("com..xml.lment");
+        return marshaller;
+    }*/
+
+    @Bean
+    public Jaxb2Marshaller marshaller() {
+        LOGGER.info("StockTickerWsConfig: Returning new Jaxb2Marshaller for {}...", WS_CLASSES_TO_BE_BOUND);
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setClassesToBeBound(WS_CLASSES_TO_BE_BOUND);
+        //marshaller.setPackagesToScan("prv.mark.project.stocks");
         return marshaller;
     }
 
     @Bean
     public SaajSoapMessageFactory messageFactory() {
+        LOGGER.info("StockTickerWsConfig: Returning new messageFactory...");
         return new SaajSoapMessageFactory();
     }
 
