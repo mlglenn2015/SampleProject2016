@@ -4,7 +4,9 @@ workspace.xml
 target/*
 common/target/*
 Stockticker/target/*
+StocktickerRest/target/*
 TransactionLogger/target/*
+TranslogProducer/target/*
 schemas/target/*
 testutils/target/*
 
@@ -14,7 +16,7 @@ testutils/target/*
 .mtj.tmp/
 
 # Package Files #
-# *.jar
+*.jar
 *.war
 *.ear
 
