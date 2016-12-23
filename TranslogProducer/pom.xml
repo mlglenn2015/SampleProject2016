@@ -16,7 +16,7 @@
 
         <dependency>
             <groupId>prv.mark.project</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>project2016-common</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>

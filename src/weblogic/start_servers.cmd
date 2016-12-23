@@ -12,6 +12,10 @@ Start Managed Server (Without Node Manager):
 
     2. startManagedWebLogic.cmd [managedSvr1|stocksMgdServer1] http://localhost:7001     weblogic/weblogic123
 
+        startManagedWebLogic.cmd managedSvr1 http://localhost:7001
+
+
+
 
 
 

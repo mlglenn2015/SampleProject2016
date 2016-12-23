@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import prv.mark.project.common.config.CommonDataConfig;
+//import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 
@@ -20,7 +20,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@Import(CommonDataConfig.class)
+@Import(StockTickerDataConfig.class)
 //@EnableMBeanExport
 //@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
 //        registration = RegistrationPolicy.IGNORE_EXISTING)

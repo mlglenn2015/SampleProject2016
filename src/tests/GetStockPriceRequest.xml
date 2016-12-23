@@ -1,0 +1,13 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:stoc="http://prv.mark.project/stocks/schemas/StockTickerTypes"
+        xmlns:com="http://prv.mark.project/stocks/schemas/CommonTypes">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <stoc:GetStockPriceRequest>
+            <stoc:head>
+                <com:source>STOCKTICKER</com:source>
+            </stoc:head>
+            <stoc:tickerSymbol>WMT</stoc:tickerSymbol>
+        </stoc:GetStockPriceRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

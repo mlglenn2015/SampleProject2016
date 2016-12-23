@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
+    <artifactId>project2016-common</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -40,6 +40,6 @@
     </dependencies>
 
     <build>
-        <finalName>common</finalName>
+        <finalName>project2016-common</finalName>
     </build>
 </project>

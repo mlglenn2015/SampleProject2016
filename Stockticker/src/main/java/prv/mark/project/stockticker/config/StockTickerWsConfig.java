@@ -28,7 +28,7 @@ import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidating
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
-import prv.mark.project.common.config.CommonDataConfig;
+//import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
 import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
@@ -49,7 +49,7 @@ import java.util.List;
 @Configuration
 @ComponentScan({"prv.mark.project.stocks.commontypes.schemas",
         "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"})
-@Import(CommonDataConfig.class)
+@Import(StockTickerDataConfig.class)
 @PropertySources({
         @PropertySource("classpath:/common.properties"),
         @PropertySource("classpath:/application.properties")

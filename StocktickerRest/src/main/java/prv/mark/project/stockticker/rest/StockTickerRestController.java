@@ -77,14 +77,14 @@ public class StockTickerRestController {
         }
 
         StockPriceResponse stockPriceResponse = new StockPriceResponse();
-        if (getStockPriceResponse == null) {
+        /*if (getStockPriceResponse == null) {
             stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.FAIL);
         } else {
             stockPriceResponse.setStockSymbol(getStockPriceResponse.getQuote().getTickerSymbol());
             stockPriceResponse.setStockPrice(NumberUtils.toBigDecimal(getStockPriceResponse.getQuote().getStockPrice()));
             stockPriceResponse.setRespStatus(AbstractJsonResponse.RespStatus.OK);
             //stockPriceResponse.setResult();
-        }
+        }*/
 
         LOGGER.debug("Returning response: {}", stockPriceResponse.toString());
         return stockPriceResponse;

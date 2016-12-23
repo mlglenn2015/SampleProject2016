@@ -1,3 +1,4 @@
+prv\mark\project\stockticker\config\StockTickerDataConfig.class
 prv\mark\project\stockticker\config\StockTickerApplicationConfig.class
 prv\mark\project\stockticker\service\impl\StockTickerServiceImpl.class
 prv\mark\project\stockticker\config\StockTickerWsConfig.class
