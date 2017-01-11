@@ -33,7 +33,7 @@ Regards,
 Sam (author of the Spring TestContext Framework)
  */
 @EnableWebMvc
-@ComponentScan(basePackages = {"prv.mark.project.stockticker"})
+//@ComponentScan(basePackages = {"prv.mark.project"})
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class StockTickerWebConfig extends WebMvcConfigurerAdapter {
 

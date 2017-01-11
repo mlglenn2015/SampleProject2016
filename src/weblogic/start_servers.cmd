@@ -14,6 +14,10 @@ Start Managed Server (Without Node Manager):
 
         startManagedWebLogic.cmd managedSvr1 http://localhost:7001
 
+        -Xms512m -Xmx1024m -Dspring.profiles.active=dev -DLOG_LOCATION=/etc/log -DENVIRONMENT=dev -Dapp.jpa.logging=SEVERE
+
+
+
 
 
 
