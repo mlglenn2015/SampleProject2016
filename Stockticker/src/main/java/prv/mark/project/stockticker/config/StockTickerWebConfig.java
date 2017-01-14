@@ -38,4 +38,29 @@ Sam (author of the Spring TestContext Framework)
 public class StockTickerWebConfig extends WebMvcConfigurerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerWebConfig.class);
+
+    /* TODO future to replace web.xml
+    @Bean
+	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+		servlet.setApplicationContext(applicationContext);
+		servlet.setTransformWsdlLocations(true);
+		return new ServletRegistrationBean(servlet, "/ws/*");
+	}
+
+	@Bean(name = "countries")
+	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("CountriesPort");
+		wsdl11Definition.setLocationUri("/ws");
+		wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+		wsdl11Definition.setSchema(countriesSchema);
+		return wsdl11Definition;
+	}
+
+	@Bean
+	public XsdSchema countriesSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("countries.xsd"));
+	}
+     */
 }

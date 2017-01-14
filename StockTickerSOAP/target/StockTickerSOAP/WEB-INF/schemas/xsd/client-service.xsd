@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://prv.mark.project/orders"
+           xmlns:orders="http://prv.mark.project/orders">
+
+
+    <xsd:complexType name="RequestHeader">
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="source" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="StockOrder">
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="orderDate" type="xsd:dateTime" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="quantity" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="stockPrice" type="xsd:float" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="action" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="orderType" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!--<xs:element name="clientDataRequest">
+        <xs:complexType>
+            <xs:attribute name="clientId" use="required" type="xs:string" />
+            <xs:attribute name="productId" use="required" type="xs:string" />
+            <xs:attribute name="quantity" use="required" type="xs:integer" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="clientDataResponse">
+        <xs:complexType>
+            <xs:attribute name="amount" use="required" type="xs:decimal" />
+            <xs:attribute name="confirmationId" use="required" type="xs:string" />
+            <xs:attribute name="orderDate" use="required" type="xs:date" />
+        </xs:complexType>
+    </xs:element>-->
+
+    <xsd:element name="SubmitOrderRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="1" name="head" type="RequestHeader" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="order" type="StockOrder"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SubmitOrderResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:int"/>
+                <xsd:element minOccurs="1" maxOccurs="1" name="statusDesc" type="xsd:string" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

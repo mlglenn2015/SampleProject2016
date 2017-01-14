@@ -123,6 +123,6 @@
     </dependencies>
 
     <build>
-        <finalName>Stockticker</finalName>
+        <finalName>StocktickerSOAP</finalName>
     </build>
 </project>

@@ -79,7 +79,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    &lt;!&ndash; StockTicker Web Service &ndash;&gt;
+
     <servlet>
         <servlet-name>stockticker</servlet-name>
         <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>

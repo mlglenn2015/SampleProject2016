@@ -38,6 +38,7 @@ import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
 import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
 import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
 import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
+import prv.mark.project.stockticker.endpoint.StockTickerEndpoint;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ import java.util.List;
 })
 @EnableWs
 @Profile({"local", "dev", "qatest", "staging", "production"})
-public class StockTickerWsConfig extends WsConfigurerAdapter {
+public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replacement
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerWsConfig.class);
 
@@ -78,9 +79,9 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     private ApplicationParameterSource applicationParameterSource;*/
 
     /*
-    @Value("${path_1}") TODO add
+    @Value("${keyStorePath}") TODO add
     private String keyStorePath;
-    @Value("${path_2}")
+    @Value("${trustStorePath}")
     private String trustStorePath;
      */
     @Value("${StockTicker.service.validatePayloads:false}")
@@ -88,19 +89,26 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
     @Value("${StockTicker.service.trace:false}")
     private String traceSoapEnvelopes;
 
+
+    @Bean
+    public StockTickerEndpoint stockTickerEndpoint() {
+        return new StockTickerEndpoint();
+    }
+
     @Bean(name = "StockTicker")
     public SimpleWsdl11Definition stockTicker() {
         LOGGER.info("StockTickerWsConfig: Returning new SimpleWsdl11Definition...");
         return new SimpleWsdl11Definition(new ClassPathResource("StockTicker.wsdl"));
     }
 
-    /*@Bean
+    @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+        LOGGER.info("StockTickerWsConfig: Returning new MessageDispatcherServlet...");
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws");
-    }*/
+        return new ServletRegistrationBean(servlet, "/ws/*");
+    }
 
     @Bean(name = "CommonTypes")
     public SimpleXsdSchema commonTypes() {
@@ -223,7 +231,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     @Bean
     public Jaxb2Marshaller marshaller() {
-        LOGGER.info("StockTickerWsConfig: Returning new Jaxb2Marshaller for {}...", WS_CLASSES_TO_BE_BOUND);
+        LOGGER.info("StockTickerWsConfig: Returning new Jaxb2Marshaller for WS_CLASSES_TO_BE_BOUND");
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setClassesToBeBound(WS_CLASSES_TO_BE_BOUND);
         //marshaller.setPackagesToScan("prv.mark.project.stocks");

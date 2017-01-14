@@ -54,7 +54,7 @@ public class StockTickerRestController {
      */
     @RequestMapping(value="/bysymbol", method=RequestMethod.GET, params="stockSymbol")
     public StockPriceResponse getStockPriceBySymbol(final @RequestParam("stockSymbol") String stockSymbol) {
-        LOGGER.debug("StockTickerRestController.getStockPriceBySymbol({})", stockSymbol);
+        LOGGER.info("StockTickerRestController.getStockPriceBySymbol({})", stockSymbol);
 
         validateStockPriceRequest(stockSymbol);
         LOGGER.debug("Request is valid: {}", stockSymbol);
@@ -96,7 +96,7 @@ public class StockTickerRestController {
      */
     @RequestMapping(value="/getall", method=RequestMethod.GET)
     public StockPriceResponse getAllStockPrices() {
-        LOGGER.debug("StockTickerRestController.getAllStockPrices()");
+        LOGGER.info("StockTickerRestController.getAllStockPrices()");
 
         List<GetStockPriceResponse> stockPriceResponseList = new ArrayList<>();
         try {
@@ -145,7 +145,8 @@ public class StockTickerRestController {
 
 
     private void validateStockPriceRequest(final String stockSymbol) {
-        LOGGER.debug("*** StockTickerRestController.validateStockPriceRequest()");
+        LOGGER.info("*** StockTickerRestController.validateStockPriceRequest()");
+
         if (StringUtils.isEmpty(stockSymbol)) {
             String message = "*** Stock Symbol IS Empty!!! ***";
             LOGGER.error(message);

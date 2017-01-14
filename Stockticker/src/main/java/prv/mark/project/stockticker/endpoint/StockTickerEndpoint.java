@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 /**
  * SOAP Web Service endpoint for stock ticker service.
  *
- * WSDL http://localhost:13001/Stockticker/StockTicker.wsdl
+ * WSDL http://localhost:12001/Stockticker/ws/StockTicker.wsdl
  *
  * @author mlglenn
  */
@@ -60,7 +60,7 @@ public class StockTickerEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetStockPriceRequest")
     @ResponsePayload
     public GetStockPriceResponse getStockPrice(@RequestPayload GetStockPriceRequest getStockPriceRequest) {
-        LOGGER.debug("*** StockTickerEndpoint.submitOrder() entry ...");
+        LOGGER.info("*** StockTickerEndpoint.getStockPrice() entry ...");
 
         validateGetStockPriceRequest(getStockPriceRequest);
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
@@ -92,7 +92,7 @@ public class StockTickerEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SubmitOrderRequest")
     @ResponsePayload
     public SubmitOrderResponse placeStockOrder(@RequestPayload SubmitOrderRequest submitOrderRequest) {
-        LOGGER.debug("*** StockTickerEndpoint.submitOrder() entry ...");
+        LOGGER.info("*** StockTickerEndpoint.submitOrder() entry ...");
 
         validateSubmitOrderRequest(submitOrderRequest);
         LOGGER.debug("Request is valid: {}", submitOrderRequest.toString());
@@ -120,7 +120,8 @@ public class StockTickerEndpoint {
 
 
     private void validateHeader(final RequestHeader requestHeader) {
-        LOGGER.debug("*** StockTickerEndpoint.validateHeader()");
+        LOGGER.info("*** StockTickerEndpoint.validateHeader()");
+
         if (requestHeader == null) {
             LOGGER.error("*** RequestHeader IS NULL!!! ***");
             throw new SOAPGeneralFault();
@@ -137,7 +138,8 @@ public class StockTickerEndpoint {
     }
 
     private void validateGetStockPriceRequest(final GetStockPriceRequest getStockPriceRequest) {
-        LOGGER.debug("*** StockTickerEndpoint.validateGetStockPriceRequest()");
+        LOGGER.info("*** StockTickerEndpoint.validateGetStockPriceRequest()");
+
         String message = "*** GetStockPriceRequest IS NULL!!! ***";
         if (getStockPriceRequest == null) {
             LOGGER.error(message);
@@ -159,7 +161,8 @@ public class StockTickerEndpoint {
     }
 
     private void validateSubmitOrderRequest(final SubmitOrderRequest submitOrderRequest) {
-        LOGGER.debug("*** StockTickerEndpoint.validateSubmitOrderRequest()");
+        LOGGER.info("*** StockTickerEndpoint.validateSubmitOrderRequest()");
+
         if (submitOrderRequest == null) {
             String message = "*** SubmitOrderRequest IS NULL!!! ***";
             LOGGER.error(message);

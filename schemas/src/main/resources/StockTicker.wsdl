@@ -69,7 +69,7 @@
 
     <wsdl:service name="StocktickerService">
         <wsdl:port binding="tns:Stockticker" name="StocktickerPort">
-            <soap:address location="http://localhost:7001/Stockticker/" />
+            <soap:address location="http://localhost:7001/StocktickerSOAP/ws/" />
         </wsdl:port>
     </wsdl:service>
 
