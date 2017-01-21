@@ -26,10 +26,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         servlet.setApplicationContext(applicationContext);
 
         return new ServletRegistrationBean(servlet,
-                "/codenotfound/ws/*");
+                "/ws/*");
     }
 
-    @Bean(name = "helloworld")
+    @Bean(name = "hello")
     public Wsdl11Definition defaultWsdl11Definition() {
         SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
         wsdl11Definition.setWsdl(

@@ -15,12 +15,12 @@ import prv.mark.project.domain.Person;
  * Created by Owner on 1/13/2017.
  */
 @Endpoint
-public class HelloWorldEndpoint {
+public class HelloEndpoint {
 
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(HelloWorldEndpoint.class);
+            .getLogger(HelloEndpoint.class);
 
-    private static final String NAMESPACE_URI = "http://codenotfound.com/types/helloworld";
+    private static final String NAMESPACE_URI = "http://project.mark.prv/types/hello";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "person")
     @ResponsePayload

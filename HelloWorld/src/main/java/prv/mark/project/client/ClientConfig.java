@@ -16,7 +16,7 @@ public class ClientConfig {
 
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
         jaxb2Marshaller
-                .setContextPath("prv.mark.project.types.helloworld");
+                .setContextPath("prv.mark.project.domain");
         return jaxb2Marshaller;
     }
 
@@ -27,7 +27,7 @@ public class ClientConfig {
         webServiceTemplate.setMarshaller(jaxb2Marshaller());
         webServiceTemplate.setUnmarshaller(jaxb2Marshaller());
         webServiceTemplate.setDefaultUri(
-                "http://localhost:12001/codenotfound/ws/helloworld");
+                "http://localhost:12001/ws/helloworld");
 
         return webServiceTemplate;
     }
