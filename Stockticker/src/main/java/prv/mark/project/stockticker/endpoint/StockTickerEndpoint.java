@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 /**
  * SOAP Web Service endpoint for stock ticker service.
  *
- * WSDL http://localhost:12001/Stockticker/ws/StockTicker.wsdl
+ * WSDL dell-i5:12001/StockTickerSOAP/ws/StockTicker.wsdl
  *
  * @author mlglenn
  */
@@ -48,7 +48,7 @@ public class StockTickerEndpoint {
     //private ApplicationParameterSource applicationParameterSource; TODO
 
     private Predicate<String> validStockSymbolPattern = i -> {
-        return Pattern.matches("[A-Z0-9]{1,12}", i);
+        return Pattern.matches("[A-Z|0-9]{1,12}", i);  //TODO this is incorrect \w
     };
 
 
@@ -80,7 +80,12 @@ public class StockTickerEndpoint {
             throw new SOAPServerException(sse.getMessage());
         }
 
-        LOGGER.debug("Returning response: {}", getStockPriceResponse.toString());
+        if (getStockPriceResponse == null) {
+            LOGGER.debug("Returning null response");
+        } else {
+            LOGGER.debug("Returning response: {}", getStockPriceResponse.getQuote().getTickerSymbol());
+        }
+
         return getStockPriceResponse;
     }
 
@@ -153,10 +158,10 @@ public class StockTickerEndpoint {
             throw new SOAPGeneralFault(message);
         }
 
-        String newMessage = "*** Invalid Ticker Symbol: " + getStockPriceRequest.getTickerSymbol() + " ***";
         String tickerSymbol = Optional.of(getStockPriceRequest.getTickerSymbol())
                                 .filter(validStockSymbolPattern)
-                                .orElseThrow(() -> new SOAPGeneralFault(newMessage));
+                                .orElseThrow(() -> new SOAPGeneralFault("*** Invalid Ticker Symbol: "
+                                        + getStockPriceRequest.getTickerSymbol() + " ***"));
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 
@@ -202,10 +207,10 @@ public class StockTickerEndpoint {
             throw new SOAPGeneralFault(message);
         }
 
-        String newMessage = "*** Invalid Ticker Symbol: " + submitOrderRequest.getOrder().getTickerSymbol() + " ***";
         String tickerSymbol = Optional.of(submitOrderRequest.getOrder().getTickerSymbol())
                 .filter(validStockSymbolPattern)
-                .orElseThrow(() -> new SOAPGeneralFault(newMessage));
+                .orElseThrow(() -> new SOAPGeneralFault("*** Invalid Ticker Symbol: "
+                        + submitOrderRequest.getOrder().getTickerSymbol() + " ***"));
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 

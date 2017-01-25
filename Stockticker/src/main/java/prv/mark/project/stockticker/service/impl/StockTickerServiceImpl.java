@@ -369,7 +369,7 @@ public class StockTickerServiceImpl implements StockTickerService {
         LOGGER.debug("********** RETURNING STOCK PRICE RESPONSE **********");
         LOGGER.debug("Status Code:{}", getStockPriceResponse.getQuote().getStatusCode());
         LOGGER.debug("Status Text:{}", getStockPriceResponse.getQuote().getStatusText());
-        LOGGER.debug("Stock Price:{}", NumberUtils.toBigDecimal(getStockPriceResponse.getQuote().getStockPrice()));
+        LOGGER.debug("Stock Price:{}", NumberUtils.myToBigDecimal(getStockPriceResponse.getQuote().getStockPrice()));
         LOGGER.debug("Ticker Symbol:{}", getStockPriceResponse.getQuote().getTickerSymbol());
     }
 

@@ -40,7 +40,7 @@ public final class ApplicationParameterSource {
         }
         LOGGER.debug(parameter.toString()); TODO
         return parameter.getProperty();*/
-        return "TESTING";
+        return "STOCKTICKER";
     }
 
     /**

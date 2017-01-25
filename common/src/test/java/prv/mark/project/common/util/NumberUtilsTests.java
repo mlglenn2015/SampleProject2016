@@ -27,7 +27,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testBigDecimalWithDouble() {
         Double doubleVal = new Double(123456789);
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(doubleVal);
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(doubleVal);
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -35,7 +35,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testBigDecimalWithFloat() {
         Float floatVal = new Float(123456789.00);
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(floatVal);
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(floatVal);
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -43,7 +43,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testBigDecimalWithLong() {
         Long longVal = new Long(123456789);
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(longVal);
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(longVal);
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -51,7 +51,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     @Test
     public void testBigDecimalWithInteger() {
         Integer intVal = new Integer(123456789);
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(intVal);
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(intVal);
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -60,7 +60,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     public void testToInt() {
         String val = "123";
         assertTrue(NumberUtils.isNumber(val));
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(NumberUtils.toInt(val));
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(NumberUtils.toInt(val));
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -69,7 +69,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     public void testToLong() {
         String val = "456";
         assertTrue(NumberUtils.isNumber(val));
-        BigDecimal bigDecimal = NumberUtils.toBigDecimal(NumberUtils.toLong(val));
+        BigDecimal bigDecimal = NumberUtils.myToBigDecimal(NumberUtils.toLong(val));
         assertNotNull(bigDecimal);
         LOGGER.debug("Value is {}", bigDecimal);
     }
@@ -78,7 +78,7 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     public void testToLongFromInteger() {
         Integer val = new Integer(456);
         Long longVal = 456L;
-        Long longValue = NumberUtils.toLong(val);
+        Long longValue = NumberUtils.myToLong(val);
         assertEquals(longValue, longVal);
         LOGGER.debug("Value is {}", longValue);
     }

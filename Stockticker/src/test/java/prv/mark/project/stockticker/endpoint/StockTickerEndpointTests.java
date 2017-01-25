@@ -26,7 +26,11 @@ import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
 
 @ContextConfiguration(classes = {StockTickerTestConfig.class})
@@ -72,23 +76,29 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         LOGGER.debug("StockTickerSimulatorEndpointTests.dummyTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testGetStockPriceRequestValid() {
         LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestValid()");
         GetStockPriceRequest request = buildGetStockPriceRequest();
         assertNotNull(request);
 
-        doReturn(buildStockPriceResponse())
+        GetStockPriceResponse dummyResponse = buildStockPriceResponse();
+        assertNotNull(dummyResponse);
+
+        doReturn(dummyResponse)
                 .when(stockTickerService)
                 .getStockPrice(request);
+
         GetStockPriceResponse response = stockTickerEndpoint.getStockPrice(request);
         verify(stockTickerService).getStockPrice(request);
 
         assertNotNull(response);
         assertTrue(Optional.of(response).filter(validResponse).isPresent());
+
+        assertEquals(response.getQuote().getTickerSymbol(), dummyResponse.getQuote().getTickerSymbol());
     }
 
-    @Test(expected = SOAPGeneralFault.class)
+    /*@Test(expected = SOAPGeneralFault.class)
     public void testGetStockPriceRequestInvalidStockSymbol2_345() {
         LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestInvalidStockSymbol2_345()");
         GetStockPriceRequest request = buildGetStockPriceRequest();

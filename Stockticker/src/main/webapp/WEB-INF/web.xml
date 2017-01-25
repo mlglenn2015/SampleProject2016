@@ -33,7 +33,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>stockticker</servlet-name>
+        <servlet-name>StockTickerSOAP</servlet-name>
         <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
         <init-param>
             <param-name>transformWsdlLocations</param-name>
@@ -45,8 +45,8 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>stockticker</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>StockTickerSOAP</servlet-name>
+        <url-pattern>/ws/*</url-pattern>
     </servlet-mapping>
 
 
@@ -96,4 +96,5 @@
         <servlet-name>stockticker</servlet-name>
         <url-pattern>/ws/*</url-pattern>
     </servlet-mapping>-->
+
 </web-app>

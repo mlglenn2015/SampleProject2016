@@ -48,8 +48,7 @@ import java.util.List;
  * @author mlglenn
  */
 @Configuration
-@ComponentScan({"prv.mark.project.stocks.commontypes.schemas",
-        "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"})
+@ComponentScan({"prv.mark.project.stocks.commontypes.schemas", "prv.mark.project.stocks.stocktickertypes.schemas"})
 @Import(StockTickerDataConfig.class)
 @PropertySources({
         @PropertySource("classpath:/common.properties"),
@@ -101,14 +100,14 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
         return new SimpleWsdl11Definition(new ClassPathResource("StockTicker.wsdl"));
     }
 
-    @Bean
+    /*@Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         LOGGER.info("StockTickerWsConfig: Returning new MessageDispatcherServlet...");
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws/*");
-    }
+        return new ServletRegistrationBean(servlet, "/ws*//*");
+    }*/
 
     @Bean(name = "CommonTypes")
     public SimpleXsdSchema commonTypes() {
