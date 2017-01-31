@@ -15,10 +15,10 @@ import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
+import prv.mark.project.stockservice.common.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.StockQuote;
 import prv.mark.project.stockticker.config.StockTickerTestConfig;
 import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -60,6 +60,7 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     @Before
     public void setUp() {
+        LOGGER.debug("StockTickerEndpointTests.setUp()");
         MockitoAnnotations.initMocks(this);  //TODO A ServletContext is required to configure default servlet handling
         assertNotNull(stockTickerEndpoint);
         assertNotNull(stockTickerService);
@@ -68,17 +69,19 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
 
     @Override
     public void tearDown() {
+        LOGGER.debug("StockTickerEndpointTests.setUp()");
         super.tearDown();
     }
 
     @Test
     public void dummyTest() {
-        LOGGER.debug("StockTickerSimulatorEndpointTests.dummyTest()");
+        LOGGER.debug("Begin StockTickerSimulatorEndpointTests.dummyTest()");
+        LOGGER.debug("End StockTickerSimulatorEndpointTests.dummyTest()");
     }
 
     @Test
     public void testGetStockPriceRequestValid() {
-        LOGGER.debug("StockTickerEndpointTests.testGetStockPriceRequestValid()");
+        LOGGER.debug("Begin StockTickerEndpointTests.testGetStockPriceRequestValid()");
         GetStockPriceRequest request = buildGetStockPriceRequest();
         assertNotNull(request);
 
@@ -96,6 +99,7 @@ public class StockTickerEndpointTests extends AbstractAppTransactionalTest {
         assertTrue(Optional.of(response).filter(validResponse).isPresent());
 
         assertEquals(response.getQuote().getTickerSymbol(), dummyResponse.getQuote().getTickerSymbol());
+        LOGGER.debug("End StockTickerEndpointTests.testGetStockPriceRequestValid()");
     }
 
     /*@Test(expected = SOAPGeneralFault.class)

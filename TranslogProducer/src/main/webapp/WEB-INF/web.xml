@@ -44,10 +44,10 @@
             <param-name>contextClass</param-name>
             <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
         </init-param>
-        <init-param>
+        <!--<init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>prv.mark.project.stockticker.config.StockTickerWebConfig</param-value>
-        </init-param>
+        </init-param>-->
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>

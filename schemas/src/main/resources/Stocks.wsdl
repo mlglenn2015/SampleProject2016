@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Stocks"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:svc="http://project.mark.prv/stockservice/schemas"
+                  xmlns:tns="http://project.mark.prv/stockservice/schemas"
+                  targetNamespace="http://project.mark.prv/stockservice/schemas">
+
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+            <xsd:import namespace="http://project.mark.prv/stockservice/schemas"
+                        schemaLocation="xsd/StockTickerTypes.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="SubmitOrderRequestMessage">
+        <wsdl:part name="Request" element="svc:SubmitOrderRequest"/>
+    </wsdl:message>
+    <wsdl:message name="SubmitOrderResponseMessage">
+        <wsdl:part name="Response" element="svc:SubmitOrderResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetStockPriceRequestMessage">
+        <wsdl:part name="Request" element="svc:GetStockPriceRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetStockPriceResponseMessage">
+        <wsdl:part name="Response" element="svc:GetStockPriceResponse"/>
+    </wsdl:message>
+
+
+    <wsdl:portType name="StockTickerSoapPortType">
+
+        <wsdl:operation name="SubmitOrder">
+            <wsdl:input message="tns:SubmitOrderRequestMessage"/>
+            <wsdl:output message="tns:SubmitOrderResponseMessage"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetStockPrice">
+            <wsdl:input message="tns:GetStockPriceRequestMessage"/>
+            <wsdl:output message="tns:GetStockPriceResponseMessage"/>
+        </wsdl:operation>
+
+    </wsdl:portType>
+
+
+    <wsdl:binding name="StockTickerSoapBinding" type="tns:StockTickerSoapPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <wsdl:operation name="submitOrder">
+            <wsdl:input name="SubmitOrderRequestMessage">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="SubmitOrderResponseMessage">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="getStockPrice">
+            <wsdl:input name="GetStockPriceRequestMessage">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="GetStockPriceResponseMessage">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+
+    <wsdl:service name="StockTickerService">
+        <wsdl:documentation>WSDL file for Stock Ticker SOAP application</wsdl:documentation>
+        <wsdl:port binding="tns:StockTickerSoapBinding" name="StockTickerSoapPort">
+            <soap:address location="http://localhost:7001/stockservice/schemas" />
+            <!--<soap:address location="http://localhost:7001/stocks" />-->
+            <!--<soap:address location="http://localhost:7001/StockTickerSOAP/soapws" />-->
+            <!--<soap:address location="http://localhost:7001/StocktickerSOAP/ws/" />-->
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

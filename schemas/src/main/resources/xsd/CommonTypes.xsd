@@ -1,6 +1,8 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:tns="http://prv.mark.project/stocks/schemas/CommonTypes"
-            targetNamespace="http://prv.mark.project/stocks/schemas/CommonTypes"
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CommonTypes.xsd -->
+<xsd:schema id="common"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://project.mark.prv/stockservice/common/schemas"
             elementFormDefault="qualified">
 
     <xsd:complexType name="RequestHeader">

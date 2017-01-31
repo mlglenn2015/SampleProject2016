@@ -20,7 +20,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@Import(StockTickerDataConfig.class)
+@Import({StockTickerDataConfig.class, StockTickerWsConfig.class})
 //@EnableMBeanExport
 //@EnableMBeanExport(defaultDomain = "prv.mark.project", server="jmxServerRuntime",
 //        registration = RegistrationPolicy.IGNORE_EXISTING)
@@ -28,6 +28,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 public class StockTickerApplicationConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerApplicationConfig.class);
+
 
     @Bean
     public MessageSource applicationMessageSource() {

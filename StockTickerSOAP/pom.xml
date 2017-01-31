@@ -13,24 +13,23 @@
     <packaging>war</packaging>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>prv.mark.project</groupId>
             <artifactId>project2016-common</artifactId>
             <version>${project.parent.version}</version>
-            <!--<scope>compile</scope>-->
-        </dependency>
-        <dependency>
+            &lt;!&ndash;<scope>compile</scope>&ndash;&gt;
+        </dependency>-->
+        <!--<dependency>
             <groupId>prv.mark.project</groupId>
             <artifactId>schemas</artifactId>
             <version>${project.parent.version}</version>
-            <!--<scope>compile</scope>-->
-        </dependency>
-        <dependency>
+        </dependency>-->
+        <!--<dependency>
             <groupId>prv.mark.project</groupId>
             <artifactId>testutils</artifactId>
             <version>${project.parent.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <!--<dependency>
             <groupId>org.springframework</groupId>
@@ -124,5 +123,28 @@
 
     <build>
         <finalName>StockTickerSOAP</finalName>
+
+        <!-- uncomment to generate new JAXB classes -->
+        <!--<plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/xsd/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </plugin>
+        </plugins>-->
+
     </build>
 </project>

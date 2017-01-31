@@ -1,13 +1,16 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:common="http://prv.mark.project/stocks/schemas/CommonTypes"
-            xmlns:tns="http://prv.mark.project/stocks/schemas/StockTickerTypes"
-            targetNamespace="http://prv.mark.project/stocks/schemas/StockTickerTypes"
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- StockTickerTypes.xsd -->
+<xsd:schema id="stockticker"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:common="http://project.mark.prv/stockservice/common/schemas"
+            xmlns:tns="http://project.mark.prv/stockservice/schemas"
+            targetNamespace="http://project.mark.prv/stockservice/schemas"
             elementFormDefault="qualified">
-    <xsd:import namespace="http://prv.mark.project/stocks/schemas/CommonTypes" schemaLocation="CommonTypes.xsd" />
 
-    <!-- xsd:schema targetNamespace="http://prv.mark.project/stocks" xmlns="http://www.w3.org/2001/XMLSchema" -->
+    <xsd:import namespace="http://project.mark.prv/stockservice/common/schemas" schemaLocation="CommonTypes.xsd" />
 
-    <xsd:element name="SubmitOrderRequest">
+
+    <xsd:element name="submitOrderRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element minOccurs="1" maxOccurs="1" name="head" type="common:RequestHeader" />
@@ -16,7 +19,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="SubmitOrderResponse">
+    <xsd:element name="submitOrderResponse">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:int"/>
@@ -25,7 +28,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="GetStockPriceRequest">
+    <xsd:element name="getStockPriceRequest">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element minOccurs="1" maxOccurs="1" name="head" type="common:RequestHeader" />
@@ -34,13 +37,14 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="GetStockPriceResponse">
+    <xsd:element name="getStockPriceResponse">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element minOccurs="0" maxOccurs="1" name="quote" type="tns:StockQuote"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+
 
     <xsd:complexType name="StockQuote">
         <xsd:sequence>

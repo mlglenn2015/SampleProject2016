@@ -1,25 +1,21 @@
 package prv.mark.project.stockticker.rest;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.domain.json.AbstractJsonResponse;
 import prv.mark.project.common.domain.json.StockPriceResponse;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
+import prv.mark.project.stockservice.common.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.StockQuote;
 //import prv.mark.project.stockticker.config.StockTickerTestConfig;
 //import prv.mark.project.stockticker.service.StockTickerService;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -29,7 +25,6 @@ import java.util.function.Predicate;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 //@ContextConfiguration(classes = {StockTickerTestConfig.class})

@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema id="transactionlogger"
-            xmlns="http://prv.mark.project/stocks/transactionlogger/schemas"
-            targetNamespace="http://prv.mark.project/stocks/transactionlogger/schemas"
+            xmlns="http://project.mark.prv/stocks/transactionlogger/schemas"
+            targetNamespace="http://project.mark.prv/stocks/transactionlogger/schemas"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             elementFormDefault="qualified">
+
     <xsd:element name="TransactionLoggerMsg" type="TransactionLoggerMsgType"/>
+
     <xsd:complexType name="TransactionLoggerMsgType">
         <xsd:sequence>
             <xsd:element name="LogDateTime" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />

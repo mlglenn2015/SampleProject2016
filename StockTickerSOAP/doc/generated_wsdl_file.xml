@@ -1,0 +1,117 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:sch="http://project.mark.prv/stockservice/schemas"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://project.mark.prv/stockservice/schemas"
+                  targetNamespace="http://project.mark.prv/stockservice/schemas">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    elementFormDefault="qualified" id="stockservicetypes" targetNamespace="http://project.mark.prv/stockservice/schemas">
+            <!--
+            <xsd:import namespace="http://project.mark.prv/stockservice/common" schemaLocation="CommonTypes.xsd" />
+            -->
+            <xsd:complexType name="RequestHeader">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="source" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="submitOrderRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="head" type="tns:RequestHeader"/>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="order" type="tns:StockOrder"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="submitOrderResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="status" type="xsd:int"/>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="statusDesc" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getStockPriceRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="head" type="tns:RequestHeader"/>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="tickerSymbol" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getStockPriceResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="quote" type="tns:StockQuote"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="StockQuote">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="statusCode" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="statusText" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="tickerSymbol" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="stockPrice" type="xsd:float"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="StockOrder">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="tickerSymbol" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="orderDate" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="quantity" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="stockPrice" type="xsd:float"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="action" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="orderType" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="submitOrderRequest">
+        <wsdl:part element="tns:submitOrderRequest" name="submitOrderRequest"/>
+    </wsdl:message>
+    <wsdl:message name="submitOrderResponse">
+        <wsdl:part element="tns:submitOrderResponse" name="submitOrderResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getStockPriceRequest">
+        <wsdl:part element="tns:getStockPriceRequest" name="getStockPriceRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getStockPriceResponse">
+        <wsdl:part element="tns:getStockPriceResponse" name="getStockPriceResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="StockServicePort">
+        <wsdl:operation name="submitOrder">
+            <wsdl:input message="tns:submitOrderRequest" name="submitOrderRequest"/>
+            <wsdl:output message="tns:submitOrderResponse" name="submitOrderResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getStockPrice">
+            <wsdl:input message="tns:getStockPriceRequest" name="getStockPriceRequest"/>
+            <wsdl:output message="tns:getStockPriceResponse" name="getStockPriceResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="StockServicePortSoap11" type="tns:StockServicePort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="submitOrder">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="submitOrderRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="submitOrderResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStockPrice">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getStockPriceRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getStockPriceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="StockServicePortService">
+        <wsdl:port binding="tns:StockServicePortSoap11" name="StockServicePortSoap11">
+            <soap:address location="http://dell-i5:12001/StockTickerSOAP/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

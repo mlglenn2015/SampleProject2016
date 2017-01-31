@@ -59,6 +59,7 @@ public class StockTickerDataConfig {
 
     @Bean(name = "entityManager")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LOGGER.info("StockTickerDataConfig: Returning new LocalContainerEntityManagerFactoryBean...");
         // EclipseLink logging.  Default to SEVERE if not set as a system property or in a property file.
         String jpaLogging = Optional.ofNullable(env.getProperty("app.jpa.logging")).orElse("SEVERE");
         LOGGER.info("*** JPA logging set to {} level. ***", jpaLogging);
@@ -69,13 +70,13 @@ public class StockTickerDataConfig {
         emfb.setPackagesToScan("prv.mark.project.common.entity");
             emfb.setJpaDialect(new EclipseLinkJpaDialect());
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
-        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
+        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql)); TODO
         jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(false);
 
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("eclipselink.weaving", "false");
-        //jpaProperties.setProperty("eclipselink.logging.level", jpaLogging);
+        //jpaProperties.setProperty("eclipselink.logging.level", jpaLogging); TODO
             jpaProperties.setProperty("eclipselink.logging.level", "SEVERE");
             jpaProperties.setProperty("eclipselink.persistence-context.flush-mode", "AUTO");
 
@@ -87,6 +88,7 @@ public class StockTickerDataConfig {
 
     /*@Bean(destroyMethod = "") TODO
     public DataSource dataSource() {
+        LOGGER.info("StockTickerDataConfig: Returning new DataSource...");
         LOGGER.info("Application Id:{}", applicationId);
         LOGGER.info("Configuring applicationJndiDataSource:{}", applicationJndiDataSource);
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
@@ -96,7 +98,7 @@ public class StockTickerDataConfig {
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
-        LOGGER.info("Returning new JtaTransactionManager...");
+        LOGGER.info("StockTickerDataConfig: Returning new JtaTransactionManager...");
         return new JtaTransactionManager();
     }
 

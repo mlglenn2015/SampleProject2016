@@ -16,11 +16,11 @@ import prv.mark.project.common.exception.SOAPServerException;
 //import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
+import prv.mark.project.stockservice.common.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
+import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
 import prv.mark.project.stockticker.service.StockTickerService;
 
 import java.util.Optional;
@@ -32,14 +32,14 @@ import java.util.regex.Pattern;
 /**
  * SOAP Web Service endpoint for stock ticker service.
  *
- * WSDL dell-i5:12001/StockTickerSOAP/ws/StockTicker.wsdl
+ * WSDL http://dell-i5:12001/StockTickerSOAP/soapws/StockTicker.wsdl
  *
  * @author mlglenn
  */
 @Endpoint
 public class StockTickerEndpoint {
 
-    private static final String NAMESPACE_URI = "http://prv.mark.project/stocks";
+    private static final String NAMESPACE_URI = "http://project.mark.prv/stocks/stockticker";
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerEndpoint.class);
 
     @Autowired
@@ -57,7 +57,7 @@ public class StockTickerEndpoint {
      * @param getStockPriceRequest {@link GetStockPriceRequest} Request payload
      * @return {@link GetStockPriceResponse}
      */
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetStockPriceRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getStockPrice")
     @ResponsePayload
     public GetStockPriceResponse getStockPrice(@RequestPayload GetStockPriceRequest getStockPriceRequest) {
         LOGGER.info("*** StockTickerEndpoint.getStockPrice() entry ...");

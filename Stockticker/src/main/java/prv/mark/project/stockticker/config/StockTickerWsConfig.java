@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,25 +17,20 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
-import org.springframework.ws.server.EndpointInterceptor;
+//import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
+//import org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor;
-import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 //import prv.mark.project.common.config.CommonDataConfig;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockOrder;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
-import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
+//import prv.mark.project.stocks.common.schemas.RequestHeader;
+//import prv.mark.project.stocks.stockticker.schemas.*;
+import prv.mark.project.stocks.transactionlogger.schemas.TransactionLoggerMsgType;
 import prv.mark.project.stockticker.endpoint.StockTickerEndpoint;
 
 import java.util.List;
@@ -56,19 +49,19 @@ import java.util.List;
 })
 @EnableWs
 @Profile({"local", "dev", "qatest", "staging", "production"})
-public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replacement
+public class StockTickerWsConfig extends WsConfigurerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockTickerWsConfig.class);
 
     private static final Class<?>[] WS_CLASSES_TO_BE_BOUND = {
-            prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest.class,
-            prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse.class,
-            prv.mark.project.stocks.stocktickertypes.schemas.StockOrder.class,
-            prv.mark.project.stocks.stocktickertypes.schemas.StockQuote.class,
-            prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest.class,
-            prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse.class,
-            prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType.class,
-            prv.mark.project.stocks.commontypes.schemas.RequestHeader.class
+            prv.mark.project.stockservice.schemas.GetStockPriceRequest.class,
+            prv.mark.project.stockservice.schemas.GetStockPriceResponse.class,
+            prv.mark.project.stockservice.schemas.StockOrder.class,
+            prv.mark.project.stockservice.schemas.StockQuote.class,
+            prv.mark.project.stockservice.schemas.SubmitOrderRequest.class,
+            prv.mark.project.stockservice.schemas.SubmitOrderResponse.class,
+            //TransactionLoggerMsgType.class, TODO move to TransactionLogger
+            prv.mark.project.stockservice.common.schemas.RequestHeader.class
     };
 
     @Autowired
@@ -91,23 +84,45 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
 
     @Bean
     public StockTickerEndpoint stockTickerEndpoint() {
+        LOGGER.info("StockTickerWsConfig: Returning new StockTickerEndpoint...");
         return new StockTickerEndpoint();
     }
 
-    @Bean(name = "StockTicker")
-    public SimpleWsdl11Definition stockTicker() {
-        LOGGER.info("StockTickerWsConfig: Returning new SimpleWsdl11Definition...");
-        return new SimpleWsdl11Definition(new ClassPathResource("StockTicker.wsdl"));
-    }
 
-    /*@Bean
+
+    /*@Bean //TODO replaces web.xml ... already in WebAppInitializer class
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         LOGGER.info("StockTickerWsConfig: Returning new MessageDispatcherServlet...");
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws*//*");
+        return new ServletRegistrationBean(servlet, "/soapws*//*");
     }*/
+
+    //TODO http://www.concretepage.com/spring-4/spring-4-soap-web-service-producer-consumer-example-with-tomcat
+    /*@Bean(name = "Stocks")
+	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema stockTickerTypes) {
+		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setPortTypeName("StockTickerSOAPPort");
+		wsdl11Definition.setLocationUri("/soapws");
+		wsdl11Definition.setTargetNamespace("http://project.mark.prv/stocks");
+		wsdl11Definition.setSchema(stockTickerTypes);
+		return wsdl11Definition;
+	}*/
+	/*@Bean
+	public XsdSchema studentsSchema() {
+		return new SimpleXsdSchema(new ClassPathResource("students.xsd"));
+	}*/
+
+
+    //@Bean(name = "StockTicker")
+    @Bean(name = "Stocks")
+    public SimpleWsdl11Definition stockTicker() {
+        LOGGER.info("StockTickerWsConfig: Returning new SimpleWsdl11Definition...");
+        return new SimpleWsdl11Definition(new ClassPathResource("Stocks.wsdl"));
+    }
+
+
 
     @Bean(name = "CommonTypes")
     public SimpleXsdSchema commonTypes() {
@@ -121,18 +136,18 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
         return new SimpleXsdSchema(new ClassPathResource("xsd/StockTickerTypes.xsd"));
     }
 
-    @Bean(name = "TransactionLoggerTypes")
+    /*@Bean(name = "TransactionLoggerTypes")  TODO move to TransactionLogger
     public SimpleXsdSchema transactionLoggerTypes() {
         LOGGER.info("StockTickerWsConfig: Returning new SimpleXsdSchema for TransactionLoggerTypes.xsd...");
         return new SimpleXsdSchema(new ClassPathResource("xsd/TransactionLoggerTypes.xsd"));
-    }
+    }*/
 
-    @Override
+    /*@Override TODO
     public void addInterceptors(List<EndpointInterceptor> interceptors) {
         LOGGER.info("StockTickerWsConfig: Returning new Interceptors...");
         interceptors.add(payloadLoggingInterceptor());
         interceptors.add(payloadValidatingInterceptor());
-    }
+    }*/
 
     @Bean
     public PayloadLoggingInterceptor payloadLoggingInterceptor() {
@@ -147,6 +162,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
 
     @Bean
     public PayloadValidatingInterceptor payloadValidatingInterceptor() {
+        LOGGER.info("StockTickerWsConfig: Returning new PayloadValidatingInterceptor...");
         final PayloadValidatingInterceptor interceptor = new PayloadValidatingInterceptor();
         final Boolean validatePayloads = Boolean.valueOf(StringUtils.safeString(this.validatePayloads));
         interceptor.setValidateRequest(validatePayloads);
@@ -169,7 +185,8 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
     public XwsSecurityInterceptor wsSecurityInterceptor() {
         XwsSecurityInterceptor securityInterceptor = new XwsSecurityInterceptor();
         securityInterceptor.setPolicyConfiguration(new ClassPathResource("securityPolicy.xml"));
-        securityInterceptor.setCallbackHandlers(securityCallbackHandlers());
+        securityInterceptor.setSkipValidationIfNoHeaderPresent(true); //TODO need to investigate the ramifications of this
+        //securityInterceptor.setCallbackHandlers(securityCallbackHandlers()); TODO this was here originally
         return securityInterceptor;
     }*/
 
@@ -216,8 +233,8 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
         WebServiceTemplate webServiceTemplate = new WebServiceTemplate();
         webServiceTemplate.setMarshaller(marshaller());
         webServiceTemplate.setUnmarshaller(marshaller());
-        webServiceTemplate.setCheckConnectionForError(true);
-        webServiceTemplate.setCheckConnectionForFault(true);
+        //webServiceTemplate.setCheckConnectionForError(true); TODO
+        //webServiceTemplate.setCheckConnectionForFault(true); TODO
         return webServiceTemplate;
     }
 
@@ -237,6 +254,7 @@ public class StockTickerWsConfig extends WsConfigurerAdapter { //web.xml replace
         return marshaller;
     }
 
+    // <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
     @Bean
     public SaajSoapMessageFactory messageFactory() {
         LOGGER.info("StockTickerWsConfig: Returning new messageFactory...");

@@ -14,14 +14,14 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
-import prv.mark.project.stocks.commontypes.schemas.RequestHeader;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.GetStockPriceResponse;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockOrder;
-import prv.mark.project.stocks.stocktickertypes.schemas.StockQuote;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderRequest;
-import prv.mark.project.stocks.stocktickertypes.schemas.SubmitOrderResponse;
-import prv.mark.project.stocks.transloggertypes.schemas.TransactionLoggerMsgType;
+import prv.mark.project.stockservice.common.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.StockOrder;
+import prv.mark.project.stockservice.schemas.StockQuote;
+import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
+import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
+import prv.mark.project.stocks.transactionlogger.schemas.TransactionLoggerMsgType;
 //import prv.mark.project.xml.stocks.*;
 
 @Configuration
