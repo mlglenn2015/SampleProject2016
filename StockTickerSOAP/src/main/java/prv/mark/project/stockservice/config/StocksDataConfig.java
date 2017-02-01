@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect;
@@ -28,8 +30,10 @@ import java.util.Properties;
  * @author mlglenn.
  */
 @Configuration
+@ComponentScan(basePackages = {"prv.mark.project"})
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"}, entityManagerFactoryRef = "entityManager",
+@EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"},
+        entityManagerFactoryRef = "entityManager",
         transactionManagerRef = "transactionManager")
 //@EnableJpaRepositories("prv.mark.project.common.repository")
 @EntityScan("prv.mark.project.common.entity")
@@ -37,18 +41,27 @@ import java.util.Properties;
 public class StocksDataConfig {
 
     /*
-    @EnableSpringDataWebSupport
+    @EnableSpringDataWebSupport TODO cleanup
 @EnableJpaAuditing
 @PropertySource("classpath:common.properties")
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(StocksDataConfig.class);
 
-    /*@Value("${spring.jpa.show-sql}") TODO
-    private String showSql;*/
+    @Value("${spring.jpa.show-sql}")
+    private String showSql;
+
     @Value("${application.id}")
     private String applicationId;
-    //@Value("${application.jndi.datasource}")
-    //private String applicationJndiDataSource; //private static final String DS_JNDI = "jdbc/stockTickerDataSource";
+
+    @Value("${application.jndi.datasource}")
+    private String applicationJndiDataSource; //private static final String DS_JNDI = "jdbc/stockTickerDataSource";  TODO replace dataSource
+
+    @Value("${key.store.password}")
+    private String keyStorePassword;
+
+    @Value("${trust.store.password}")
+    private String trustStorePassword;
+
     @Autowired
     private DataSource dataSource;
 
@@ -58,25 +71,25 @@ public class StocksDataConfig {
 
     @Bean(name = "entityManager")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LOGGER.info("StockTickerDataConfig: Returning new LocalContainerEntityManagerFactoryBean...");
+        LOGGER.info("StocksDataConfig: Returning new LocalContainerEntityManagerFactoryBean...");
         // EclipseLink logging.  Default to SEVERE if not set as a system property or in a property file.
         String jpaLogging = Optional.ofNullable(env.getProperty("app.jpa.logging")).orElse("SEVERE");
         LOGGER.info("*** JPA logging set to {} level. ***", jpaLogging);
 
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-        //emfb.setDataSource(dataSource()); TODO
-        emfb.setDataSource(dataSource);
+        emfb.setDataSource(dataSource()); //TODO
+        //emfb.setDataSource(dataSource); //TODO
         emfb.setPackagesToScan("prv.mark.project.common.entity");
         emfb.setJpaDialect(new EclipseLinkJpaDialect());
         AbstractJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
-        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql)); TODO
+        //jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
         jpaVendorAdapter.setShowSql(true);
         jpaVendorAdapter.setGenerateDdl(false);
 
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("eclipselink.weaving", "false");
-        //jpaProperties.setProperty("eclipselink.logging.level", jpaLogging); TODO
-        jpaProperties.setProperty("eclipselink.logging.level", "SEVERE");
+        jpaProperties.setProperty("eclipselink.logging.level", jpaLogging);
+        //jpaProperties.setProperty("eclipselink.logging.level", "SEVERE");
         jpaProperties.setProperty("eclipselink.persistence-context.flush-mode", "AUTO");
 
         emfb.setJpaProperties(jpaProperties);
@@ -85,19 +98,19 @@ public class StocksDataConfig {
         return emfb;
     }
 
-    /*@Bean(destroyMethod = "") TODO
+    @Bean(destroyMethod = "") //TODO
     public DataSource dataSource() {
-        LOGGER.info("StockTickerDataConfig: Returning new DataSource...");
+        LOGGER.info("StocksDataConfig: Returning new DataSource...");
         LOGGER.info("Application Id:{}", applicationId);
         LOGGER.info("Configuring applicationJndiDataSource:{}", applicationJndiDataSource);
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
         dsLookup.setResourceRef(true);
         return dsLookup.getDataSource(applicationJndiDataSource);
-    }*/
+    }
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
-        LOGGER.info("StockTickerDataConfig: Returning new JtaTransactionManager...");
+        LOGGER.info("StocksDataConfig: Returning new JtaTransactionManager...");
         return new JtaTransactionManager();
     }
 

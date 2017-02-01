@@ -27,20 +27,20 @@ import java.util.Date;
 @Table(name = "APPLICATION_PARAMETERS")
 @NamedQueries({
         @NamedQuery(name = "ApplicationParameters.findActiveByKey",
-                query = "select s from ApplicationParameters s where s.key = ?1 and s.enabled = ?2")
+                query = "select s from ApplicationParameters s where s.propKey = ?1 and s.enabled = TRUE")
 })
 public class ApplicationParameters implements Serializable {
-
 
     private static final long serialVersionUID = -5961263486065232744L;
 
     private Long id;
-    private String key;
-    private String property;
+    private String propKey;
+    private String propProperty;
     private Boolean enabled;
     private Date created;
 
     @Id
+    @Column(name = "ID", nullable = false)
     @SequenceGenerator(name = "SEQ_APPLICATION_PARAMETERS", sequenceName = "SEQ_APPLICATION_PARAMETERS", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_APPLICATION_PARAMETERS")
     public Long getId() {
@@ -52,23 +52,23 @@ public class ApplicationParameters implements Serializable {
     }
 
     @Basic
-    @Column(name = "KEY", nullable = false, length = 255)
-    public String getKey() {
-        return key;
+    @Column(name = "PROP_KEY", nullable = false, length = 100)
+    public String getPropKey() {
+        return propKey;
     }
 
-    public void setKey(final String key) {
-        this.key = key;
+    public void setPropKey(final String propKey) {
+        this.propKey = propKey;
     }
 
     @Basic
-    @Column(name = "PROPERTY", nullable = false, length = 1024)
-    public String getProperty() {
-        return property;
+    @Column(name = "PROP_PROPERTY", nullable = false, length = 500)
+    public String getPropProperty() {
+        return propProperty;
     }
 
-    public void setProperty(final String property) {
-        this.property = property;
+    public void setPropProperty(final String propProperty) {
+        this.propProperty = propProperty;
     }
 
     @Column(name = "ENABLED", nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
@@ -100,22 +100,22 @@ public class ApplicationParameters implements Serializable {
 
         ApplicationParameters props = (ApplicationParameters) o;
 
-        if (!key.equals(props.key)) { return false; }
+        if (!propKey.equals(props.propKey)) { return false; }
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return key.hashCode();
+        return propKey.hashCode();
     }
 
     @Override
     public String toString() {
         return "ApplicationParameters{" +
                 "id=" + id +
-                ", key='" + key + '\'' +
-                ", property='" + property + '\'' +
+                ", propKey='" + propKey + '\'' +
+                ", propProperty='" + propProperty + '\'' +
                 ", enabled=" + enabled + '\'' +
                 ", created=" + created + '\'' +
                 '}';

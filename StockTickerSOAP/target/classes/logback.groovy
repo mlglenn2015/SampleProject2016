@@ -4,9 +4,11 @@ import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.rolling.RollingFileAppender
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
 
+// logback.groovy
+
 setupAppenders()
 setupLoggers()
-jmxConfigurator()
+//jmxConfigurator() TODO
 
 def setupAppenders() {
     def timestampFmt = "%d{MM-dd-yyyy HH:mm:ss.SSS}"
@@ -17,7 +19,7 @@ def setupAppenders() {
     if (logDir == null) {
         logDir = "/etc/log"
     }
-    def logFileName = "${logDir}/StockTicker.log"
+    def logFileName = "${logDir}/StockTickerSOAP.log"
 
     appender('console', ConsoleAppender) {
         encoder(PatternLayoutEncoder) {

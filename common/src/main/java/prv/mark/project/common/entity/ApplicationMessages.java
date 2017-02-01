@@ -22,6 +22,7 @@ public class ApplicationMessages implements Serializable {
     private static final long serialVersionUID = 5148997916515761856L;
 
     @Id
+    @Column(name = "ID", nullable = false)
     @SequenceGenerator(name = "SEQ_APPLICATION_MESSAGES", sequenceName = "SEQ_APPLICATION_MESSAGES", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_APPLICATION_MESSAGES")
     private Long id;

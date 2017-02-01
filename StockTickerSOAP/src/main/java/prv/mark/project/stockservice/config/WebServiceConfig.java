@@ -58,12 +58,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws*//*");
     }*/
 
+    /* WSDL Definition */
     /*@Bean(name = "stocks")
     public SimpleWsdl11Definition stocks() {
         LOGGER.info("WebServiceConfig: Returning new SimpleWsdl11Definition...");
         return new SimpleWsdl11Definition(new ClassPathResource("Stocks.wsdl"));
     }*/
 
+    /* WSDL Definition */
     @Bean(name = "stockservice")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema stockServiceTypesSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -74,13 +76,6 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return wsdl11Definition;
     }
 
-    /*@Bean(name = "commonTypes")
-    public SimpleXsdSchema commonTypes() {
-        LOGGER.info("WebServiceConfig: Returning new SimpleXsdSchema for CommonTypes.xsd...");
-        return new SimpleXsdSchema(new ClassPathResource("xsd/CommonTypes.xsd"));
-    }*/
-
-    //@Bean(name = "stockServiceTypes")
     @Bean
     public SimpleXsdSchema stockServiceTypesSchema() {
         LOGGER.info("WebServiceConfig: Returning new SimpleXsdSchema for StockServiceTypes.xsd...");

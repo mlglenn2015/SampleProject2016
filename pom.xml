@@ -13,12 +13,11 @@
         <module>schemas</module>
         <module>testutils</module>
         <module>common</module>
-        <module>Stockticker</module>
-        <module>StocktickerRest</module>
+        <!--<module>Stockticker</module>-->
+        <!--<module>StocktickerRest</module>-->
         <module>StockTickerSOAP</module>
         <!--<module>TransactionLogger</module>
         <module>TranslogProducer</module>-->
-        <!--<module>HelloWorld</module>-->
     </modules>
 
     <repositories>

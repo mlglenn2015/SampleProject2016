@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="Stocks"
+<wsdl:definitions name="stocks"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -14,31 +14,31 @@
         </xsd:schema>
     </wsdl:types>
 
-    <wsdl:message name="SubmitOrderRequestMessage">
-        <wsdl:part name="Request" element="svc:SubmitOrderRequest"/>
+    <wsdl:message name="submitOrderRequestMessage">
+        <wsdl:part element="svc:SubmitOrderRequest" name="submitOrderRequest"/>
     </wsdl:message>
-    <wsdl:message name="SubmitOrderResponseMessage">
-        <wsdl:part name="Response" element="svc:SubmitOrderResponse"/>
+    <wsdl:message name="submitOrderResponseMessage">
+        <wsdl:part element="svc:SubmitOrderResponse" name="submitOrderResponse"/>
     </wsdl:message>
 
-    <wsdl:message name="GetStockPriceRequestMessage">
-        <wsdl:part name="Request" element="svc:GetStockPriceRequest"/>
+    <wsdl:message name="getStockPriceRequestMessage">
+        <wsdl:part element="svc:GetStockPriceRequest" name="getStockPriceRequest"/>
     </wsdl:message>
-    <wsdl:message name="GetStockPriceResponseMessage">
-        <wsdl:part name="Response" element="svc:GetStockPriceResponse"/>
+    <wsdl:message name="getStockPriceResponseMessage">
+        <wsdl:part element="svc:GetStockPriceResponse" name="getStockPriceResponse"/>
     </wsdl:message>
 
 
     <wsdl:portType name="StockTickerSoapPortType">
 
-        <wsdl:operation name="SubmitOrder">
-            <wsdl:input message="tns:SubmitOrderRequestMessage"/>
-            <wsdl:output message="tns:SubmitOrderResponseMessage"/>
+        <wsdl:operation name="submitOrder">
+            <wsdl:input message="tns:submitOrderRequestMessage" name="submitOrderRequestMessage"/>
+            <wsdl:output message="tns:submitOrderResponseMessage" name="submitOrderResponseMessage"/>
         </wsdl:operation>
 
-        <wsdl:operation name="GetStockPrice">
-            <wsdl:input message="tns:GetStockPriceRequestMessage"/>
-            <wsdl:output message="tns:GetStockPriceResponseMessage"/>
+        <wsdl:operation name="getStockPrice">
+            <wsdl:input message="tns:getStockPriceRequestMessage" name="getStockPriceRequestMessage"/>
+            <wsdl:output message="tns:getStockPriceResponseMessage" name="getStockPriceResponseMessage"/>
         </wsdl:operation>
 
     </wsdl:portType>
@@ -48,19 +48,19 @@
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
         <wsdl:operation name="submitOrder">
-            <wsdl:input name="SubmitOrderRequestMessage">
+            <wsdl:input name="submitOrderRequestMessage">
                 <soap:body use="literal" />
             </wsdl:input>
-            <wsdl:output name="SubmitOrderResponseMessage">
+            <wsdl:output name="submitOrderResponseMessage">
                 <soap:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="getStockPrice">
-            <wsdl:input name="GetStockPriceRequestMessage">
+            <wsdl:input name="getStockPriceRequestMessage">
                 <soap:body use="literal" />
             </wsdl:input>
-            <wsdl:output name="GetStockPriceResponseMessage">
+            <wsdl:output name="getStockPriceResponseMessage">
                 <soap:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
@@ -68,10 +68,10 @@
     </wsdl:binding>
 
 
-    <wsdl:service name="StockTickerService">
+    <wsdl:service name="StockServicePortService">
         <wsdl:documentation>WSDL file for Stock Ticker SOAP application</wsdl:documentation>
-        <wsdl:port binding="tns:StockTickerSoapBinding" name="StockTickerSoapPort">
-            <soap:address location="http://localhost:7001/stockservice/schemas" />
+        <wsdl:port binding="tns:StockTickerSoapBinding" name="StockServicePortSoap11">
+            <soap:address location="http://dell-i5:12001/StockTickerSOAP/ws" />
             <!--<soap:address location="http://localhost:7001/stocks" />-->
             <!--<soap:address location="http://localhost:7001/StockTickerSOAP/soapws" />-->
             <!--<soap:address location="http://localhost:7001/StocktickerSOAP/ws/" />-->
