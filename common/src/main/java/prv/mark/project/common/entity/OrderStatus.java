@@ -37,7 +37,7 @@ public class OrderStatus implements Serializable {
     private String description;
 
 
-    public OrderStatus() {};
+    public OrderStatus() {}
 
     @Override
     public boolean equals(Object o) {

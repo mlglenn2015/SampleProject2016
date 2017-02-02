@@ -33,16 +33,33 @@ public class ApplicationParameters implements Serializable {
 
     private static final long serialVersionUID = -5961263486065232744L;
 
-    private Long id;
-    private String propKey;
-    private String propProperty;
-    private Boolean enabled;
-    private Date created;
-
     @Id
     @Column(name = "ID", nullable = false)
-    @SequenceGenerator(name = "SEQ_APPLICATION_PARAMETERS", sequenceName = "SEQ_APPLICATION_PARAMETERS", allocationSize = 1)
+    @SequenceGenerator(
+            name = "SEQ_APPLICATION_PARAMETERS", sequenceName = "SEQ_APPLICATION_PARAMETERS", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_APPLICATION_PARAMETERS")
+    private Long id;
+
+    @Basic
+    @Column(name = "PROP_KEY", nullable = false, length = 100)
+    private String propKey;
+
+    @Basic
+    @Column(name = "PROP_PROPERTY", nullable = false, length = 500)
+    private String propProperty;
+
+    @Column(name = "ENABLED", nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
+    @Convert(converter = BooleanToStringConverter.class)
+    private Boolean enabled;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATED", nullable = false)
+    private Date created;
+
+
+    public ApplicationParameters() {}
+
+
     public Long getId() {
         return id;
     }
@@ -51,8 +68,6 @@ public class ApplicationParameters implements Serializable {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "PROP_KEY", nullable = false, length = 100)
     public String getPropKey() {
         return propKey;
     }
@@ -61,8 +76,6 @@ public class ApplicationParameters implements Serializable {
         this.propKey = propKey;
     }
 
-    @Basic
-    @Column(name = "PROP_PROPERTY", nullable = false, length = 500)
     public String getPropProperty() {
         return propProperty;
     }
@@ -71,8 +84,6 @@ public class ApplicationParameters implements Serializable {
         this.propProperty = propProperty;
     }
 
-    @Column(name = "ENABLED", nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
-    @Convert(converter = BooleanToStringConverter.class)
     public Boolean getEnabled() {
         return enabled;
     }
@@ -81,8 +92,6 @@ public class ApplicationParameters implements Serializable {
         this.enabled = enabled;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATED", nullable = false)
     public Date getCreated() {
         return created;
     }

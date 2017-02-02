@@ -14,7 +14,6 @@ import java.util.Optional;
  *
  * @author mlglenn.
  */
-@Profile("INVALID") //TODO
 @Repository
 public interface StockPriceRepository extends JpaRepository<StockPrice, Long> {
 

@@ -23,7 +23,8 @@ public class ApplicationMessages implements Serializable {
 
     @Id
     @Column(name = "ID", nullable = false)
-    @SequenceGenerator(name = "SEQ_APPLICATION_MESSAGES", sequenceName = "SEQ_APPLICATION_MESSAGES", allocationSize = 1)
+    @SequenceGenerator(
+            name = "SEQ_APPLICATION_MESSAGES", sequenceName = "SEQ_APPLICATION_MESSAGES", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_APPLICATION_MESSAGES")
     private Long id;
 
@@ -34,6 +35,7 @@ public class ApplicationMessages implements Serializable {
     @Basic
     @Column(name = "MESSAGE", nullable = false, length = 500)
     private String message;
+
 
     public Long getId() {
         return id;

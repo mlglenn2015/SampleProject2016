@@ -37,7 +37,7 @@ public class TransactionTypes implements Serializable {
     private String description;
 
 
-    public TransactionTypes() {};
+    public TransactionTypes() {}
 
     @Override
     public boolean equals(Object o) {

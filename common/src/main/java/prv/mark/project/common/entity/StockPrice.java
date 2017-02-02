@@ -38,7 +38,7 @@ public class StockPrice implements Serializable {
     private BigDecimal currentPrice;
 
 
-    public StockPrice() {};
+    public StockPrice() {}
 
     @Override
     public boolean equals(Object o) {

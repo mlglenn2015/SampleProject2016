@@ -12,6 +12,8 @@ import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -28,20 +30,20 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionTypesRepositoryTests.class);
 
-    /*@Autowired TODO
+    @Autowired
     private TransactionTypesRepository transactionTypesRepository;
 
     @Before
     public void setUp() {
         assertNotNull(transactionTypesRepository);
-    }*/
+    }
 
     @Test
     public void defaultTest() {
         LOGGER.debug("TransactionTypesRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testTransactionTypesRepository() {
         prv.mark.project.common.entity.TransactionTypes entity = buildEntity();
         assertNotNull(entity);
@@ -56,6 +58,14 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
         assertEquals(newEntity.get().getDescription(), "TEST INQUIRY DESCRIPTION");
         assertEquals(savedEntity.getTransactionType(), newEntity.get().getTransactionType());
+    }
+
+    @Test
+    public void testFindAll() {
+        List<TransactionTypes> entityList = new ArrayList<>();
+        entityList = transactionTypesRepository.findAll();
+        assertNotNull(entityList);
+        assertTrue(entityList.size() > 0);
     }
 
     @Test
@@ -105,6 +115,6 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }*/
+    }
 
 }

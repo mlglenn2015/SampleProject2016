@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.entity.OrderStatus;
+import prv.mark.project.common.entity.OrderTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -29,20 +32,20 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderStatusRepositoryTests.class);
 
-    /*@Autowired  TODO
+    @Autowired
     private OrderStatusRepository orderStatusRepository;
 
     @Before
     public void setUp() {
         assertNotNull(orderStatusRepository);
-    }*/
+    }
 
     @Test
     public void defaultTest() {
         LOGGER.debug("OrderStatusRepositoryTests.defaultTest()");
     }
 
-    /*@Test  TODO
+    @Test
     public void testOrderStatusRepository() {
         prv.mark.project.common.entity.OrderStatus entity = buildEntity();
         assertNotNull(entity);
@@ -57,6 +60,14 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
         assertEquals(newEntity.get().getDescription(), "ORDER IN TESTING STATUS");
         assertEquals(savedEntity.getOrderStatus(), newEntity.get().getOrderStatus());
+    }
+
+    @Test
+    public void testFindAll() {
+        List<OrderStatus> entityList = new ArrayList<>();
+        entityList = orderStatusRepository.findAll();
+        assertNotNull(entityList);
+        assertTrue(entityList.size() > 0);
     }
 
     @Test
@@ -104,5 +115,5 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }*/
+    }
 }

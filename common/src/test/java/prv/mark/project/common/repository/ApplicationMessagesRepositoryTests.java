@@ -5,9 +5,18 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import prv.mark.project.common.entity.ApplicationMessages;
+//import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.common.entity.ApplicationParameters;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -15,7 +24,6 @@ import static org.junit.Assert.assertNotNull;
  *
  * @author mlglenn
  */
-//@ContextConfiguration(classes = {TestUtilConfig.class}, initializers = ConfigFileApplicationContextInitializer.class)
 public class ApplicationMessagesRepositoryTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationMessagesRepositoryTests.class);
@@ -33,15 +41,22 @@ public class ApplicationMessagesRepositoryTests extends AbstractAppTransactional
         LOGGER.debug("ApplicationMessagesRepositoryTests.defaultTest()");
     }
 
-    /*@Test
+    @Test
+    public void testFindAll() {
+        List<ApplicationMessages> entityList = new ArrayList<>();
+        entityList = applicationMessagesRepository.findAll();
+        assertNotNull(entityList);
+        assertTrue(entityList.size() > 0);
+    }
+    @Test
     public void testFindByMessageKey() {
         ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey("error.invalid.usstate");
-        assertTrue(StringUtils.isNotEmpty(applicationMessage.getMessage()));
+        assertTrue(prv.mark.project.common.util.StringUtils.isNotEmpty(applicationMessage.getMessage()));
         assertEquals(applicationMessage.getMessage(), "Input is not a valid US State.");
     }
 
     @Test
     public void testFindByInvalidMessageKey() {
         assertNull(applicationMessagesRepository.findByMessageKey("TEST"));
-    }*/
+    }
 }

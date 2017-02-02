@@ -31,10 +31,10 @@ import java.util.Properties;
  */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
-@EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"prv.mark.project.common.repository"},
         entityManagerFactoryRef = "entityManager",
         transactionManagerRef = "transactionManager")
+@EnableTransactionManagement
 //@EnableJpaRepositories("prv.mark.project.common.repository")
 @EntityScan("prv.mark.project.common.entity")
 @Profile({"local", "dev", "qatest", "staging", "production"})

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.domain.TransactionDto;
 import prv.mark.project.common.entity.TransactionLog;
+import prv.mark.project.common.entity.TransactionTypes;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -32,20 +33,21 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionLogRepositoryTests.class);
 
-    /*@Autowired TODO
+    @Autowired
     private TransactionLogRepository transactionLogRepository;
 
     @Before
     public void setUp() {
         assertNotNull(transactionLogRepository);
-    }*/
+    }
+
 
     @Test
     public void defaultTest() {
         LOGGER.debug("TransactionLogRepositoryTests.defaultTest()");
     }
 
-    /*@Test TODO
+    @Test
     public void testTransactionLog() {
         TransactionDto dto = buildDto();
         assertNotNull(dto);
@@ -62,6 +64,14 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         assertNotNull(newEntity);
 
         assertEquals(savedEntity.getTransactionType(), newEntity.get().getTransactionType());
+    }
+
+    @Test
+    public void testFindAll() {
+        List<TransactionLog> entityList = new ArrayList<>();
+        entityList = transactionLogRepository.findAll();
+        assertNotNull(entityList);
+        assertTrue(entityList.size() > 0);
     }
 
     @Test
@@ -121,6 +131,6 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;
-    }*/
+    }
 
 }

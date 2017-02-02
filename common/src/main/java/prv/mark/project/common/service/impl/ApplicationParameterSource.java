@@ -39,7 +39,7 @@ public final class ApplicationParameterSource {
         }
         LOGGER.debug(parameter.toString());
         return parameter.getPropProperty();
-        //return "STOCKTICKER";  STOCKTICKER_20170131
+        //return "STOCKTICKER";  STOCKTICKER_20170131  TODO cleanup
     }
 
     /**
