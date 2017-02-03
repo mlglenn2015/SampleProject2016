@@ -34,6 +34,7 @@ public class StockOrderServiceImpl implements StockOrderService {
     @Override
     public Optional<StockOrder> findById(final Long id) {
         LOGGER.debug("StockOrderServiceImpl.findById({})", id);
+        LOGGER.debug("ENVIRONMENT:{}", env);
         return Optional.ofNullable(stockOrderRepository.findById(id)).get();
         //return Optional.ofNullable(stockOrderRepository.findOne(id));
     }
@@ -41,12 +42,14 @@ public class StockOrderServiceImpl implements StockOrderService {
     @Override
     public List<StockOrder> findByOrderStatus(final String orderStatus) {
         LOGGER.debug("StockOrderServiceImpl.findByOrderStatus({})", orderStatus);
+        LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.findByOrderStatus(orderStatus);
     }
 
     @Override
     public List<StockOrder> findAll() {
         LOGGER.debug("StockOrderServiceImpl.findAll()");
+        LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.findAll();
     }
 
@@ -54,13 +57,14 @@ public class StockOrderServiceImpl implements StockOrderService {
     @Transactional
     public StockOrder save(StockOrder order) {
         LOGGER.debug("StockOrderServiceImpl.save({})", order.toString());
+        LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.saveAndFlush(order);
     }
 
 
-    private List<StockOrder> nullList() {
+    /*private List<StockOrder> nullList() {
         List<StockOrder> list = new ArrayList<>();
         list.add(new StockOrder());
         return list;
-    }
+    }*/
 }

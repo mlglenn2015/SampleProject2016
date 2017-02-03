@@ -8,7 +8,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
  *
  * @author mlglenn
  */
-@SoapFault(faultCode = FaultCode.CUSTOM, customFaultCode = "{http://prv.mark.project/stocks}100",
+@SoapFault(faultCode = FaultCode.CUSTOM, customFaultCode = "{http://project.mark.prv/stockservice/schemas}100",
         faultStringOrReason = "General Error. This is returned when an error is encountered that does not match a specific code.")
 public class SOAPGeneralFault extends SOAPException {
 

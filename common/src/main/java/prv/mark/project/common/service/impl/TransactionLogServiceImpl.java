@@ -29,50 +29,51 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    //@Autowired
-    //private TransactionLogRepository transactionLogRepository;
+    @Autowired
+    private TransactionLogRepository transactionLogRepository;
 
     @Override
     public Optional<TransactionLog> findById(final Long id) {
         LOGGER.debug("TransactionLogServiceImpl.findById({})", id);
-        //return Optional.ofNullable(ordersRepository.findById(id)).get();
-        //return Optional.ofNullable(transactionLogRepository.findOne(id)); TODO
-        return Optional.of(new TransactionLog());
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return Optional.ofNullable(transactionLogRepository.findById(id)).get();
+        //return Optional.ofNullable(transactionLogRepository.findOne(id));
     }
 
     @Override
     public List<TransactionLog> findByLogDateTime(final Date logDateTime) {
         LOGGER.debug("TransactionLogServiceImpl.findByLogDateTime({})", logDateTime);
-        //return transactionLogRepository.findByLogDateTime(logDateTime); TODO
-        return nullList();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return transactionLogRepository.findByLogDateTime(logDateTime);
     }
 
 
     @Override
     public List<TransactionLog> findByTransactionType(final String transactionType) {
         LOGGER.debug("TransactionLogServiceImpl.findByTransactionType({})", transactionType);
-        //return transactionLogRepository.findByTransactionType(transactionType); TODO
-        return nullList();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return transactionLogRepository.findByTransactionType(transactionType);
     }
 
     @Override
     public List<TransactionLog> findAll() {
         LOGGER.debug("TransactionLogServiceImpl.findAll()");
-        //return transactionLogRepository.findAll(); TODO
-        return nullList();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return transactionLogRepository.findAll();
     }
 
     @Override
     @Transactional
     public TransactionLog save(final TransactionLog transactionLog) {
         LOGGER.debug("TransactionLogServiceImpl.save({})", transactionLog.toString());
-        //return transactionLogRepository.saveAndFlush(transactionLog); TODO
-        return new TransactionLog();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return transactionLogRepository.saveAndFlush(transactionLog);
     }
 
-    private List<TransactionLog> nullList() {
+
+    /*private List<TransactionLog> nullList() {
         List<TransactionLog> list = new ArrayList<>();
         list.add(new TransactionLog());
         return list;
-    }
+    }*/
 }

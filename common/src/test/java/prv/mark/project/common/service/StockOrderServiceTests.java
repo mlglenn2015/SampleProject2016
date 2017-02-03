@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit tests for the {@link StockOrderRepository}.
+ * JUnit tests for the {@link StockOrderService}.
  *
  * @author mlglenn
  */
@@ -74,6 +74,12 @@ public class StockOrderServiceTests extends AbstractAppTransactionalTest {
         assertTrue(entityList.size() > 0);
     }
 
+    @Test
+    public void testFindByOrderStatus() {
+        List<StockOrder> stockOrders = stockOrderService.findByOrderStatus("PENDING");
+        assertNotNull(stockOrders);
+        //assertTrue(stockOrders.size() > 0);
+    }
 
     private StockOrderDto buildDto() {
         StockOrderDto dto = new StockOrderDto();
@@ -119,5 +125,4 @@ public class StockOrderServiceTests extends AbstractAppTransactionalTest {
 
         return returnEntity;
     }
-
 }

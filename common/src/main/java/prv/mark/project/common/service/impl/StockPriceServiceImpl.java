@@ -28,47 +28,47 @@ public class StockPriceServiceImpl implements StockPriceService {
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
 
-    //@Autowired
-    //private StockPriceRepository stockPriceRepository; TODO
+    @Autowired
+    private StockPriceRepository stockPriceRepository;
 
     @Override
     public Optional<StockPrice> findById(final Long id) {
         LOGGER.debug("StockPriceServiceImpl.findById({})", id);
-        //return Optional.ofNullable(ordersRepository.findById(id)).get();
-
-        //return Optional.ofNullable(stockPriceRepository.findOne(id)); TODO
-        return Optional.of(new StockPrice());
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return Optional.ofNullable(stockPriceRepository.findById(id)).get();
+        //return Optional.ofNullable(stockPriceRepository.findOne(id));
     }
 
     @Override
     public Optional<StockPrice> findByStockSymbol(final String stockSymbol) {
         LOGGER.debug("StockPriceServiceImpl.findByStockSymbol({})", stockSymbol);
-
-        //Optional<StockPrice> stockPrice = stockPriceRepository.findByStockSymbol(stockSymbol); TODO
-        //if (stockPrice.get() == null) {
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        Optional<StockPrice> stockPrice = stockPriceRepository.findByStockSymbol(stockSymbol);
+        if (stockPrice.get() == null) {
             return null;
-        //}
-        //return stockPrice;
+        }
+        return stockPrice;
     }
 
     @Override
     public List<StockPrice> findAll() {
         LOGGER.debug("StockPriceServiceImpl.findAll()");
-        //return stockPriceRepository.findAll(); TODO
-        return nullList();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return stockPriceRepository.findAll();
     }
 
     @Override
     @Transactional
     public StockPrice save(StockPrice stockPrice) {
         LOGGER.debug("StockPriceServiceImpl.save({})", stockPrice.toString());
-        //return stockPriceRepository.saveAndFlush(stockPrice); TODO
-        return new StockPrice();
+        LOGGER.debug("ENVIRONMENT:{}", env);
+        return stockPriceRepository.saveAndFlush(stockPrice);
     }
 
-    private List<StockPrice> nullList() {
+
+    /*private List<StockPrice> nullList() {
         List<StockPrice> list = new ArrayList<>();
         list.add(new StockPrice());
         return list;
-    }
+    }*/
 }
