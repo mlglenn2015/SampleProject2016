@@ -56,13 +56,13 @@ public final class ApplicationParameterSource {
      * @return {@link String}
      * @throws ApplicationException
      */
-    public String getParm(final String key, final Object[] objects, final String s1,
+    /*public String getParm(final String key, final Object[] objects, final String s1,
                           final Locale locale)
             throws ApplicationException {
         LOGGER.debug("ApplicationParameterSource.getParm({})", key);
         LOGGER.debug("ENVIRONMENT:{}", env);
         return getParm(key);
-    }
+    }*/
 
     /**
      * Get a parameter based on the input key value.
@@ -72,11 +72,11 @@ public final class ApplicationParameterSource {
      * @return {@link String}
      * @throws ApplicationException
      */
-    public String getParm(final String key, final Object[] objects, final Locale locale)
+    /*public String getParm(final String key, final Object[] objects, final Locale locale)
             throws ApplicationException {
         LOGGER.debug("ApplicationParameterSource.getParm({})", key);
         LOGGER.debug("ENVIRONMENT:{}", env);
         return getParm(key);
-    }
+    }*/
 
 }

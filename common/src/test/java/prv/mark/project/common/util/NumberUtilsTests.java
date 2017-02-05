@@ -7,9 +7,7 @@ import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 /**
@@ -22,7 +20,25 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(NumberUtilsTests.class);
 
     @Test
-    public void defaultTest() {}
+    public void defaultTest() {
+        LOGGER.debug("NumberUtilsTests.defaultTest()");
+    }
+
+    @Test
+    public void testMyToBigDecimal() {
+        LOGGER.debug("NumberUtilsTests.testMyToBigDecimal()");
+        BigDecimal bigDecimalVal = NumberUtils.myToBigDecimal(new String());
+        assertNotNull(bigDecimalVal);
+        assertEquals(bigDecimalVal.toString(), "0.00");
+
+        bigDecimalVal = NumberUtils.myToBigDecimal("X.XX");
+        assertNotNull(bigDecimalVal);
+        assertEquals(bigDecimalVal.toString(), "0.00");
+
+        bigDecimalVal = NumberUtils.myToBigDecimal("12");
+        assertNotNull(bigDecimalVal);
+        assertEquals(bigDecimalVal.toString(), "12.000000000000");
+    }
 
     @Test
     public void testBigDecimalWithDouble() {
@@ -87,5 +103,74 @@ public class NumberUtilsTests extends AbstractAppTransactionalTest {
     public void testLong() {
         long val = 456;
         assertTrue(NumberUtils.isPositiveNumber(val));
+    }
+
+    @Test
+    public void testMyToFloat() {
+        float floatVal = NumberUtils.myToFloat(new String());
+        assertNotNull(floatVal);
+        assertTrue(0.0 == floatVal);
+
+        String inputVal = "";
+        floatVal = NumberUtils.myToFloat(inputVal);
+        assertNotNull(floatVal);
+        assertTrue(0.0 == floatVal);
+
+        inputVal = "1.0";
+        floatVal = NumberUtils.myToFloat(inputVal);
+        assertNotNull(floatVal);
+        assertTrue(1.0 == floatVal);
+    }
+
+    @Test
+    public void testMyToInt() {
+        int intVal = NumberUtils.myToInt(new String());
+        assertNotNull(intVal);
+        assertTrue(0 == intVal);
+
+        String inputVal = "";
+        intVal = NumberUtils.myToInt(inputVal);
+        assertNotNull(intVal);
+        assertTrue(0 == intVal);
+
+        inputVal = "1";
+        intVal = NumberUtils.myToInt(inputVal);
+        assertNotNull(intVal);
+        assertTrue(1 == intVal);
+    }
+
+    @Test
+    public void testMyToLong() {
+        String inputVal = "";
+        long longVal = NumberUtils.myToLong(inputVal);
+        assertNotNull(longVal);
+        assertTrue(0L == longVal);
+
+        inputVal = "0";
+        longVal = NumberUtils.myToLong(inputVal);
+        assertNotNull(longVal);
+        assertTrue(0L == longVal);
+
+        Integer intVal = new Integer("0");
+        longVal = NumberUtils.myToLong(intVal);
+        assertNotNull(longVal);
+        assertTrue(0L == longVal);
+
+        //longVal = NumberUtils.myToLong(new Integer("X"));
+        //assertNotNull(longVal);
+        //assertTrue(0L == longVal);
+
+        intVal = new Integer("1");
+        longVal = NumberUtils.myToLong(intVal);
+        assertNotNull(longVal);
+        assertTrue(1L == intVal);
+    }
+
+    @Test
+    public void testIsPositiveNumber() {
+        long val = 456;
+        assertTrue(NumberUtils.isPositiveNumber(val));
+        val = -456;
+        assertFalse(NumberUtils.isPositiveNumber(val));
     }
 }

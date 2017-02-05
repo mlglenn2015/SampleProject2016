@@ -75,6 +75,18 @@ public class TransactionLogServiceTests extends AbstractAppTransactionalTest {
         assertTrue(entityList.size() > 0);
     }
 
+    @Test
+    public void testFindByTransactionType() {
+        assertNotNull(transactionLogService.findByTransactionType("STOCK PURCHASE"));
+    }
+
+    @Test
+    public void testFindByLogDateTime() {
+        List<TransactionLog> transactionLogList = new ArrayList<>();
+        transactionLogList = transactionLogService.findByLogDateTime(DateUtils.getDate());
+        assertNotNull(transactionLogList);
+    }
+
 
     private TransactionDto buildDto() {
         TransactionDto dto = new TransactionDto();

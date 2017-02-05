@@ -8,7 +8,6 @@ import java.math.BigDecimal;
  * Created by mlglenn on 10/24/2016.
  */
 public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
-//public final class NumberUtils { //extends org.apache.commons.lang.math.NumberUtils {
 
     /**
      * Converts a {@link Double} to {@link BigDecimal}.
@@ -73,7 +72,7 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
      * @return {@link BigDecimal}
      */
     public static BigDecimal myToBigDecimal(final String value) {
-        if (value == null) {
+        if (value == null||"".equals(value)) {
             return new BigDecimal("0.00");
         }
         if (isNumber(value)) {
@@ -89,10 +88,11 @@ public final class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
      * @return float
      */
     public static float myToFloat(final String val) {
-        if (val != null) {
+        if ((val == null)||"".equals(val)) {
+            return 0.0F;
+        } else {
             return org.apache.commons.lang3.math.NumberUtils.toFloat(val);
         }
-        return NumberUtils.toFloat("0.00");
     }
 
     /**

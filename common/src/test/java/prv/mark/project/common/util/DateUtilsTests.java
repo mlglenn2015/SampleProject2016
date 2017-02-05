@@ -25,7 +25,21 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
 
     @Test
     public void defaultTest() {
+        LOGGER.debug("DateUtilsTests.defaultTest()");
+    }
 
+    @Test
+    public void testGetDate() {
+        LOGGER.debug("DateUtilsTests.testGetDate()");
+        Date date = DateUtils.getDate();
+        assertNotNull(date);
+    }
+
+    @Test
+    public void testGetDateFromLocalDateTime() {
+        LOGGER.debug("DateUtilsTests.testGetDateFromLocalDateTime()");
+        Date date = DateUtils.getDateFromLocalDateTime();
+        assertNotNull(date);
     }
 
     @Test
@@ -36,15 +50,15 @@ public class DateUtilsTests extends AbstractAppTransactionalTest {
     }
 
     @Test
-    public void testLocalDateTime() {
-        LOGGER.debug("testLocalDateTime()");
+    public void testGetLocalDateTime() {
+        LOGGER.debug("testGetLocalDateTime()");
         LocalDateTime returnedDate = DateUtils.getLocalDateTime();
         assertNotNull(returnedDate);
     }
 
     @Test
-    public void testLocalDateTimeFromDate() {
-        LOGGER.debug("testLocalDateTimeFromDate()");
+    public void testGetLocalDateTimeFromDate() {
+        LOGGER.debug("testGetLocalDateTimeFromDate()");
         Date date = new Date();
         LocalDateTime returnedDate = DateUtils.getLocalDateTimeFromDate(date);
         assertNotNull(returnedDate);

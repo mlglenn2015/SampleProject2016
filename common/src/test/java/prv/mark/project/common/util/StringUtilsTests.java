@@ -46,6 +46,11 @@ public class StringUtilsTests extends AbstractAppTransactionalTest {
         assertTrue(StringUtils.testRegEx("\\d{16}", "0036003123456789"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testRegExException() {
+        boolean result = StringUtils.testRegEx(null, null);
+    }
+
     @Test
     public void testIsNumeric() {
         assertTrue(StringUtils.isNumeric("12345678"));

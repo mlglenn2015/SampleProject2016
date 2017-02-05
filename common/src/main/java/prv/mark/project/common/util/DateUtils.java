@@ -41,7 +41,7 @@ public class DateUtils {
      */
     public static LocalDateTime getLocalDateTimeFromDate(final Date dateIn) {
         if (dateIn == null) {
-            return null;
+            return getLocalDateTime();
         }
         LocalDateTime ldt = LocalDateTime.ofInstant(dateIn.toInstant(), ZoneId.systemDefault());
         return ldt;
@@ -62,7 +62,7 @@ public class DateUtils {
      */
     public static Date getDateFromLocalDateTime(final LocalDateTime localDateTime) {
         if (localDateTime == null) {
-            return null;
+            return getDate();
         }
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         Date output = Date.from(zdt.toInstant());
@@ -105,7 +105,7 @@ public class DateUtils {
     public static Date xmlGregorianCalendarToDate(XMLGregorianCalendar xmlGregorianCalendar) {
 
         if (xmlGregorianCalendar == null) {
-            return null;
+            return getDate();
         }
         return xmlGregorianCalendar.toGregorianCalendar().getTime();
     }
