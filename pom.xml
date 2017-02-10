@@ -18,6 +18,7 @@
         <module>StockTickerSOAP</module>
         <!--<module>TransactionLogger</module>-->
         <!--<module>TranslogProducer</module>-->
+        <module>BatchClient</module>
     </modules>
 
     <repositories>
@@ -301,17 +302,20 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>2.5.2</version>
+            <version>2.6.4</version>
+            <!--<version>2.5.2</version>-->
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.oracle</artifactId>
-            <version>2.5.2</version>
+            <version>2.6.4</version>
+            <!--<version>2.5.2</version>-->
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.moxy</artifactId>
-            <version>2.5.2</version>
+            <version>2.6.4</version>
+            <!--<version>2.5.2</version>-->
         </dependency>
 
         <dependency>

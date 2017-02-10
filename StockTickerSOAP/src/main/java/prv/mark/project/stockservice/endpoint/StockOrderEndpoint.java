@@ -13,6 +13,7 @@ import prv.mark.project.common.domain.EnumOrderTypes;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
+import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
 //import prv.mark.project.stockservice.schemas.RequestHeader;
@@ -52,6 +53,9 @@ public class StockOrderEndpoint {
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
 
+    //@Autowired
+    //private ApplicationMessageSource applicationMessageSource;
+
     /* Predicate to validate the Ticker Symbol */
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z|0-9]{1,12}", i);
@@ -76,7 +80,7 @@ public class StockOrderEndpoint {
         LOGGER.trace("Application ID: {}", applicationId);
         LOGGER.info("*** StockOrderEndpoint.getStockPrice() entry ...");
 
-        //validateGetStockPriceRequest(getStockPriceRequest); TODO need to fix JPA
+        validateGetStockPriceRequest(getStockPriceRequest); //TODO need to fix JPA
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
 
         //GetStockPriceResponse getStockPriceResponse;
@@ -123,6 +127,8 @@ public class StockOrderEndpoint {
         LOGGER.trace("Application ID: {}", applicationId);
         LOGGER.info("*** StockOrderEndpoint.submitOrder() entry ...");
 
+        //LOGGER.info(applicationMessageSource.getMessage("error.invalid.usstate"));
+
         /*
          TODO
          <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
@@ -135,12 +141,12 @@ Internal Exception: java.sql.SQLSyntaxErrorException: Syntax error: Encountered 
 Error Code: 30000
 Call: SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))
 	bind => [2 parameters bound]
-Query: ReadAllQuery(name="ApplicationParameters.findActiveByKey" referenceClass=ApplicationParameters sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))"); nested exception is javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Query: ReadAllQuery(name="ApplicationParameter.findActiveByKey" referenceClass=ApplicationParameter sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))"); nested exception is javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: java.sql.SQLSyntaxErrorException: Syntax error: Encountered "KEY" at line 1, column 30.
 Error Code: 30000
 Call: SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))
 	bind => [2 parameters bound]
-Query: ReadAllQuery(name="ApplicationParameters.findActiveByKey" referenceClass=ApplicationParameters sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))")</faultstring>
+Query: ReadAllQuery(name="ApplicationParameter.findActiveByKey" referenceClass=ApplicationParameter sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))")</faultstring>
       </env:Fault>
    </env:Body>
 </env:Envelope>
@@ -184,8 +190,8 @@ Query: ReadAllQuery(name="ApplicationParameters.findActiveByKey" referenceClass=
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
-        if (!requestHeader.getSource().equals(applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE))) {
-        //if (!requestHeader.getSource().equals("STOCKTICKER")) {
+        String parameter = applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE);
+        if (!requestHeader.getSource().equals(parameter)) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }

@@ -42,7 +42,7 @@ public class ApplicationParameterSourceTests extends AbstractAppTransactionalTes
         assertEquals(retParm, "Request Successful");
     }
 
-    /*@Test
+    /*@Test TODO
     public void testGetParm() {
         String retParm = applicationParameterSource.getParm("parm.request.successful", new Object[], Locale.ENGLISH);
         assertNotNull(retParm);

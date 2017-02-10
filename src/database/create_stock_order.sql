@@ -15,7 +15,7 @@ CREATE TABLE STOCK_ORDER (
   ORDER_DATE          TIMESTAMP NOT NULL,
   ORDER_TYPE          VARCHAR2(25) NOT NULL,
   ORDER_STATUS        VARCHAR2(25) NOT NULL
-);
+) TABLESPACE tbs_users_01;
 
 CREATE INDEX stock_order_idx01 ON  STOCK_ORDER (order_date);
 CREATE INDEX stock_order_idx02 ON  STOCK_ORDER (order_type);

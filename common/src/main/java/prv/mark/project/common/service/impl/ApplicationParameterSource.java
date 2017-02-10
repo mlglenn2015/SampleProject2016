@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import prv.mark.project.common.entity.ApplicationParameters;
+import prv.mark.project.common.entity.ApplicationParameter;
 import prv.mark.project.common.exception.ApplicationException;
-import prv.mark.project.common.repository.ApplicationParametersRepository;
+import prv.mark.project.common.repository.ApplicationParameterRepository;
 import prv.mark.project.common.util.StringUtils;
-
-import java.util.Locale;
 
 /**
  * Designed to retrieve properties from the database APPLICATION_PARAMETERS table.
@@ -26,10 +24,10 @@ public final class ApplicationParameterSource {
     private String env;
 
     @Autowired
-    private ApplicationParametersRepository applicationParametersRepository;
+    private ApplicationParameterRepository applicationParameterRepository;
 
     /**
-     * Get a parameter based on the input key value.
+     * Get a parameter value based on the input key.
      * @param propKey {@link String}
      * @return {@link String}
      * @throws ApplicationException
@@ -37,13 +35,14 @@ public final class ApplicationParameterSource {
     public String getParm(final String propKey) throws ApplicationException {
         LOGGER.debug("ApplicationParameterSource.getParm({})", propKey);
         LOGGER.debug("ENVIRONMENT:{}", env);
-        ApplicationParameters parameter = applicationParametersRepository.findActiveByPropKey(propKey);
+        //ApplicationParameter parameter = applicationParameterRepository.findActiveByPropKey(propKey);
+        ApplicationParameter parameter = applicationParameterRepository.findEnabledByParameterKey(propKey, true);
         if (parameter == null) {
             LOGGER.error(StringUtils.APPLICATION_EXCEPTION);
             throw new ApplicationException("Application parameter with propKey " + propKey + " not found.");
         }
         LOGGER.debug(parameter.toString());
-        return parameter.getPropProperty();
+        return parameter.getParameterValue();
         //return "STOCKTICKER";  STOCKTICKER_20170131  TODO cleanup
     }
 

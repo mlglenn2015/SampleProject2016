@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import prv.mark.project.common.entity.ApplicationMessages;
 //import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.common.entity.ApplicationParameters;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import java.util.ArrayList;

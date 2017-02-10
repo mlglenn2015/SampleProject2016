@@ -1,0 +1,5 @@
+CREATE TABLESPACE tbs_users_01
+  DATAFILE 'C:\databases\tbs_users_01.dat'
+    SIZE 10M
+    REUSE
+    AUTOEXTEND ON NEXT 10M MAXSIZE 200M;

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -32,6 +33,14 @@ public class DateUtils {
      */
     public static LocalDateTime getLocalDateTime() {
         return LocalDateTime.now();
+    }
+
+    /**
+     * Returns the local date time in this format: '2011-12-03T10:15:30'
+     * @return {@link String}
+     */
+    public static String getDateFormattedAsString() {
+        return getLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     /**

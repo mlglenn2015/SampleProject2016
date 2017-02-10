@@ -62,6 +62,6 @@ def getSoapTracingLevel() {
 
 def getLogLevel() {
     def env = System.getProperty("ENVIRONMENT")
-    (env.equals("prod") ? Level.ERROR : Level.INFO )
+    (env.equals("prod") ? Level.ERROR : Level.TRACE )
 }
 

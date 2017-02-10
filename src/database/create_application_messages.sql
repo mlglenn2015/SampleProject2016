@@ -11,7 +11,7 @@ CREATE TABLE APPLICATION_MESSAGES (
   ID          NUMBER(10)                          NOT NULL PRIMARY KEY,
   MESSAGE_KEY VARCHAR2(100)                       NOT NULL,
   MESSAGE     VARCHAR2(500)                       NOT NULL
-);
+) TABLESPACE tbs_users_01;
 
 CREATE INDEX app_msgs_idx01 ON  APPLICATION_MESSAGES (MESSAGE_KEY);
 
@@ -31,5 +31,11 @@ INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
 INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   VALUES (SEQ_APPLICATION_MESSAGES.nextval,
   'error.invalid.uszip4', 'Input is not a valid US Zip4 code.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'info.status.success', 'Last request successful.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'info.status.fail', 'There was a problem with the last request.');
 
 COMMIT;
