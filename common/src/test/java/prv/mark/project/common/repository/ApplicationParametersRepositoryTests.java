@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import prv.mark.project.common.entity.ApplicationParameter;
+import prv.mark.project.common.entity.ApplicationParameterEntity;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
@@ -38,7 +38,7 @@ public class ApplicationParametersRepositoryTests extends AbstractAppTransaction
 
     @Test
     public void testFindAll() {
-        List<ApplicationParameter> entityList = new ArrayList<>();
+        List<ApplicationParameterEntity> entityList = new ArrayList<>();
         entityList = applicationParameterRepository.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
@@ -46,7 +46,7 @@ public class ApplicationParametersRepositoryTests extends AbstractAppTransaction
 
     @Test
     public void testFindByByParameterKey() {
-        ApplicationParameter applicationMessage =
+        ApplicationParameterEntity applicationMessage =
                 applicationParameterRepository.findEnabledByParameterKey("parm.validation.requestheader.source", true);
         assertTrue(StringUtils.isNotEmpty(applicationMessage.getParameterValue()));
         assertEquals(applicationMessage.getParameterValue(), "STOCKTICKER_20170131");

@@ -1,24 +1,23 @@
 package prv.mark.project.common.repository;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import prv.mark.project.common.entity.TransactionTypes;
+import prv.mark.project.common.entity.TransactionTypesEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * JPA Repository for {@link prv.mark.project.common.entity.TransactionTypes} entities.
+ * JPA Repository for {@link TransactionTypesEntity} entities.
  *
  * @author mlglenn.
  */
 @Repository
-public interface TransactionTypesRepository extends JpaRepository<TransactionTypes, Long> {
+public interface TransactionTypesRepository extends JpaRepository<TransactionTypesEntity, Long> {
 
-    Optional<TransactionTypes> findById(Long id);
+    Optional<TransactionTypesEntity> findById(Long id);
 
-    Optional<TransactionTypes> findByTransactionType(String transactionType);
+    Optional<TransactionTypesEntity> findByTransactionType(String transactionType);
 
-    List<TransactionTypes> findAll();
+    List<TransactionTypesEntity> findAll();
 }

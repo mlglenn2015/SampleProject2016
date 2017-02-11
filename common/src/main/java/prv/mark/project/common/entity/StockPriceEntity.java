@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "STOCK_PRICE")
-public class StockPrice implements Serializable {
+public class StockPriceEntity implements Serializable {
 
     private static final long serialVersionUID = 8663315086156386511L;
 
@@ -38,14 +38,14 @@ public class StockPrice implements Serializable {
     private BigDecimal currentPrice;
 
 
-    public StockPrice() {}
+    public StockPriceEntity() {}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StockPrice that = (StockPrice) o;
+        StockPriceEntity that = (StockPriceEntity) o;
 
         return stockSymbol.equals(that.stockSymbol);
 
@@ -82,7 +82,7 @@ public class StockPrice implements Serializable {
 
     @Override
     public String toString() {
-        return "StockPrice{" +
+        return "StockPriceEntity{" +
                 "id=" + id +
                 ", stockSymbol='" + stockSymbol + '\'' +
                 ", currentPrice=" + currentPrice +

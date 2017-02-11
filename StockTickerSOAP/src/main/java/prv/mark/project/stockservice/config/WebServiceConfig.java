@@ -28,7 +28,6 @@ import org.springframework.xml.xsd.XsdSchema;
 @PropertySources({
         @PropertySource("classpath:/application.properties")
 })
-// @PropertySource("classpath:/common.properties"), TODO
 @EnableWs
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class WebServiceConfig extends WsConfigurerAdapter {
@@ -58,14 +57,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws*//*");
     }*/
 
-    /* WSDL Definition */
+    /* Static WSDL Definition */
     /*@Bean(name = "stocks")
     public SimpleWsdl11Definition stocks() {
         LOGGER.info("WebServiceConfig: Returning new SimpleWsdl11Definition...");
         return new SimpleWsdl11Definition(new ClassPathResource("Stocks.wsdl"));
     }*/
 
-    /* WSDL Definition */
+    /* Dynamic WSDL Definition */
     @Bean(name = "stockservice")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema stockServiceTypesSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();

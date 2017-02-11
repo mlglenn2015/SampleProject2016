@@ -16,14 +16,15 @@ import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.NumberUtils;
-//import prv.mark.project.stockservice.schemas.RequestHeader;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockservice.schemas.*;
+import prv.mark.project.stockservice.service.StockServiceOrderService;
 
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 /*
+//import prv.mark.project.stockservice.schemas.RequestHeader;
 import prv.mark.project.stockservice.common.schemas.RequestHeader;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
 import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
@@ -52,21 +53,16 @@ public class StockOrderEndpoint {
 
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
+    /*@Autowired                                                          TODO could not autowire
+    private ApplicationMessageSource applicationMessageSource;*/
+    @Autowired
+    private StockServiceOrderService stockServiceOrderService;
 
-    //@Autowired
-    //private ApplicationMessageSource applicationMessageSource;
 
     /* Predicate to validate the Ticker Symbol */
     private Predicate<String> validStockSymbolPattern = i -> {
         return Pattern.matches("[A-Z|0-9]{1,12}", i);
     };
-
-    /*@Autowired
-    public StockOrderEndpoint(MyRepository repository) { TODO remove
-        LOGGER.info("*** StockOrderEndpoint() entry ...");
-    }*/
-
-
 
 
     /**
@@ -83,18 +79,18 @@ public class StockOrderEndpoint {
         validateGetStockPriceRequest(getStockPriceRequest); //TODO need to fix JPA
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
 
-        //GetStockPriceResponse getStockPriceResponse;
-        GetStockPriceResponse getStockPriceResponse = new GetStockPriceResponse();
+        GetStockPriceResponse getStockPriceResponse;
 
+        /*GetStockPriceResponse getStockPriceResponse = new GetStockPriceResponse();  //testing only
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(1);
         stockQuote.setStatusText("SUCCESS 20170131");
         stockQuote.setTickerSymbol("WMT");
         stockQuote.setStockPrice(NumberUtils.toFloat("68.00"));
-        getStockPriceResponse.setQuote(stockQuote);
+        getStockPriceResponse.setQuote(stockQuote);*/
 
-        /*try {
-            getStockPriceResponse  = stockTickerService.getStockPrice(getStockPriceRequest);
+        try {
+            getStockPriceResponse  = stockServiceOrderService.getStockPrice(getStockPriceRequest);
 
         } catch (SOAPClientException sce) {
 
@@ -105,7 +101,7 @@ public class StockOrderEndpoint {
 
             LOGGER.error("SoapServerException caught: {}", sse.getMessage());
             throw new SOAPServerException(sse.getMessage());
-        }*/
+        }
 
         if (getStockPriceResponse == null) {
             LOGGER.debug("Returning null response");
@@ -127,30 +123,6 @@ public class StockOrderEndpoint {
         LOGGER.trace("Application ID: {}", applicationId);
         LOGGER.info("*** StockOrderEndpoint.submitOrder() entry ...");
 
-        //LOGGER.info(applicationMessageSource.getMessage("error.invalid.usstate"));
-
-        /*
-         TODO
-         <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
-   <env:Header/>
-   <env:Body>
-      <env:Fault>
-         <faultcode>env:Server</faultcode>
-         <faultstring>Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLSyntaxErrorException: Syntax error: Encountered "KEY" at line 1, column 30.
-Error Code: 30000
-Call: SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))
-	bind => [2 parameters bound]
-Query: ReadAllQuery(name="ApplicationParameter.findActiveByKey" referenceClass=ApplicationParameter sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))"); nested exception is javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: java.sql.SQLSyntaxErrorException: Syntax error: Encountered "KEY" at line 1, column 30.
-Error Code: 30000
-Call: SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))
-	bind => [2 parameters bound]
-Query: ReadAllQuery(name="ApplicationParameter.findActiveByKey" referenceClass=ApplicationParameter sql="SELECT ID, CREATED, ENABLED, KEY, PROPERTY FROM APPLICATION_PARAMETERS WHERE ((KEY = ?) AND (ENABLED = ?))")</faultstring>
-      </env:Fault>
-   </env:Body>
-</env:Envelope>
-         */
         validateSubmitOrderRequest(submitOrderRequest);
         LOGGER.debug("Request is valid: {}", submitOrderRequest.toString());
 
@@ -190,6 +162,7 @@ Query: ReadAllQuery(name="ApplicationParameter.findActiveByKey" referenceClass=A
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
             throw new SOAPGeneralFault();
         }
+
         String parameter = applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE);
         if (!requestHeader.getSource().equals(parameter)) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());

@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "APPLICATION_MESSAGES")
-public class ApplicationMessages implements Serializable {
+public class ApplicationMessagesEntity implements Serializable {
 
     private static final long serialVersionUID = 5148997916515761856L;
 

@@ -1,4 +1,4 @@
-package prv.mark.project.common.repository;
+package prv.mark.project.common.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import prv.mark.project.common.entity.StockPriceEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
-import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import javax.persistence.PersistenceException;
@@ -25,25 +24,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit tests for the {@link StockPriceRepository}.
+ * JUnit tests for the {@link StockPriceEntityService}.
  *
  * @author mlglenn
  */
-public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
+public class StockPriceEntityServiceTests extends AbstractAppTransactionalTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StockPriceRepositoryTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockPriceEntityServiceTests.class);
 
     @Autowired
-    private StockPriceRepository stockPriceRepository;
+    private StockPriceEntityService stockPriceEntityService;
 
     @Before
     public void setUp() {
-        assertNotNull(stockPriceRepository);
+        assertNotNull(stockPriceEntityService);
     }
 
     @Test
     public void defaultTest() {
-        LOGGER.debug("StockPriceRepositoryTests.defaultTest()");
+        LOGGER.debug("StockPriceEntityServiceTests.defaultTest()");
     }
 
     @Test
@@ -59,7 +58,7 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
         assertTrue(retStockPriceEntity.getId() > 0);
 
         Optional<StockPriceEntity> newStockPrice
-                                = stockPriceRepository.findById(retStockPriceEntity.getId());
+                = stockPriceEntityService.findById(retStockPriceEntity.getId());
         assertNotNull(newStockPrice);
 
         assertEquals(retStockPriceEntity.getStockSymbol(), newStockPrice.get().getStockSymbol());
@@ -68,41 +67,26 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
     @Test
     public void testFindAll() {
         List<StockPriceEntity> entityList = new ArrayList<>();
-        entityList = stockPriceRepository.findAll();
+        entityList = stockPriceEntityService.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
     }
 
     @Test
-    public void testFindById() {
-        Optional<StockPriceEntity> stockPrice = stockPriceRepository.findById(1L);
-        assertNotNull(stockPrice);
-        assertTrue(stockPrice.get().getCurrentPrice().intValue() > NumberUtils.myToBigDecimal(0).intValue());
-        assertTrue(StringUtils.isNotEmpty(stockPrice.get().getStockSymbol()));
-    }
-
-    @Test
     public void testFindByStockSymbol() {
-        Optional<StockPriceEntity> stockPrice = stockPriceRepository.findByStockSymbol("X");
+        Optional<StockPriceEntity> stockPrice =  stockPriceEntityService.findByStockSymbol("WMT");
         assertNotNull(stockPrice.get());
-        assertTrue(stockPrice.get().getCurrentPrice().intValue() > NumberUtils.myToBigDecimal(0).intValue());
+        assertEquals(stockPrice.get().getStockSymbol(), "WMT");
     }
-
-    @Test
-    public void testFindByInvalidStockSymbol() {
-        Optional<StockPriceEntity> stockPrice = stockPriceRepository.findByStockSymbol("TEST");
-        assertEquals(stockPrice, Optional.empty());
-    }
-
 
     private StockOrderDto buildDto() {
         StockOrderDto dto = new StockOrderDto();
-        dto.setAction("INQUIRY");
-        dto.setOrderType("NONE");
-        dto.setQuantity(NumberUtils.toLong("0"));
-        dto.setPrice(NumberUtils.myToBigDecimal(9.99));
+        dto.setAction("BUY");
+        dto.setOrderType("LIMIT ORDER");
+        dto.setQuantity(NumberUtils.toLong("300"));
+        dto.setPrice(NumberUtils.myToBigDecimal(9.98));
         dto.setStockSymbol("A");
-        dto.setOrderStatus("NONE");
+        dto.setOrderStatus("PENDING");
         dto.setOrderDate(DateUtils.getLocalDateTime());
         return dto;
     }
@@ -118,10 +102,10 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
     private StockPriceEntity insertStockPrice(
             final StockPriceEntity entity) {
 
-        LOGGER.debug("StockPriceRepositoryTests.insertStockPrice()");
+        LOGGER.debug("StockPriceEntityServiceTests.insertStockPrice()");
         StockPriceEntity returnEntity = new StockPriceEntity();
         try {
-            returnEntity = stockPriceRepository.saveAndFlush(entity);
+            returnEntity = stockPriceEntityService.save(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockPriceEntity entity "
@@ -134,5 +118,4 @@ public class StockPriceRepositoryTests extends AbstractAppTransactionalTest {
 
         return returnEntity;
     }
-
 }

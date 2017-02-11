@@ -1,4 +1,4 @@
-package prv.mark.project.common.repository;
+package prv.mark.project.common.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,26 +23,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit tests for the {@link TransactionLogRepository}.
+ * JUnit tests for the {@link TransactionLogEntityService}.
  *
  * @author mlglenn
  */
-public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest {
+public class TransactionLogEntityServiceTests extends AbstractAppTransactionalTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionLogRepositoryTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionLogEntityServiceTests.class);
 
     @Autowired
-    private TransactionLogRepository transactionLogRepository;
+    private TransactionLogEntityService transactionLogEntityService;
 
     @Before
     public void setUp() {
-        assertNotNull(transactionLogRepository);
+        assertNotNull(transactionLogEntityService);
     }
-
 
     @Test
     public void defaultTest() {
-        LOGGER.debug("TransactionLogRepositoryTests.defaultTest()");
+        LOGGER.debug("TransactionLogEntityServiceTests.defaultTest()");
     }
 
     @Test
@@ -50,77 +49,68 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
         TransactionDto dto = buildDto();
         assertNotNull(dto);
 
-        TransactionLogEntity entity = buildEntity(dto);
+        TransactionLogEntity entity = buildTransactionLog(dto);
         assertNotNull(entity);
 
-        TransactionLogEntity savedEntity = insertEntity(entity);
-        assertNotNull(savedEntity);
-        assertTrue(savedEntity.getId() > 0);
+        TransactionLogEntity retTransactionLogEntity = insertTransactionLog(entity);
+        assertNotNull(retTransactionLogEntity);
+        assertTrue(retTransactionLogEntity.getId() > 0);
 
-        Optional<TransactionLogEntity> newEntity
-                = transactionLogRepository.findById(savedEntity.getId());
-        assertNotNull(newEntity);
+        Optional<TransactionLogEntity> newTransactionLog
+                = transactionLogEntityService.findById(retTransactionLogEntity.getId());
+        assertNotNull(newTransactionLog);
 
-        assertEquals(savedEntity.getTransactionType(), newEntity.get().getTransactionType());
+        assertEquals(retTransactionLogEntity.getTransactionType(), newTransactionLog.get().getTransactionType());
     }
 
     @Test
     public void testFindAll() {
         List<TransactionLogEntity> entityList = new ArrayList<>();
-        entityList = transactionLogRepository.findAll();
+        entityList = transactionLogEntityService.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
     }
 
     @Test
-    public void testFindById() {
-        Optional<TransactionLogEntity> tLog = transactionLogRepository.findById(1L);
-        assertNotNull(tLog);
-        assertNotNull(tLog.get().getLogDateTime());
-    }
-
-    @Test
     public void testFindByTransactionType() {
-        List<TransactionLogEntity> tLog = new ArrayList<>();
-        tLog = transactionLogRepository.findByTransactionType("STOCK PURCHASE");
-        assertNotNull(tLog);
-        assertTrue(tLog.size() > 0);
+        assertNotNull(transactionLogEntityService.findByTransactionType("STOCK PURCHASE"));
     }
 
     @Test
-    public void testFindByInvalidTransactionType() {
-        List<TransactionLogEntity> tLog = new ArrayList<>();
-        tLog = transactionLogRepository.findByTransactionType("TEST");
-        assertTrue(tLog.size() == 0);
+    public void testFindByLogDateTime() {
+        List<TransactionLogEntity> transactionLogEntityList = new ArrayList<>();
+        transactionLogEntityList = transactionLogEntityService.findByLogDateTime(DateUtils.getDate());
+        assertNotNull(transactionLogEntityList);
     }
 
 
     private TransactionDto buildDto() {
         TransactionDto dto = new TransactionDto();
+        dto.setTransactionType("STOCK PURCHASE");
+        dto.setTransactionDetail("STOCK PURCHASE TRANSACTION");
         dto.setLogDateTime(DateUtils.getLocalDateTime());
-        dto.setTransactionType("STOCK PRICE INQUIRY");
-        dto.setTransactionDetail("ADDING STOCK PRICE INQUIRY TRANSACTION DURING JUNIT TESTS");
         return dto;
     }
 
-    private TransactionLogEntity buildEntity(final TransactionDto dto) {
+    private TransactionLogEntity buildTransactionLog(final TransactionDto dto) {
         TransactionLogEntity entity = new TransactionLogEntity();
         entity.setId(null);
         entity.setLogDateTime(DateUtils.getDateFromLocalDateTime(dto.getLogDateTime()));
         entity.setTransactionType(dto.getTransactionType());
+        entity.setTransactionData(dto.getTransactionDetail());
         return entity;
     }
 
-    private TransactionLogEntity insertEntity(
+    private TransactionLogEntity insertTransactionLog(
             final TransactionLogEntity entity) {
 
-        LOGGER.debug("TransactionLogRepositoryTests.insertEntity()");
+        LOGGER.debug("TransactionLogEntityServiceTests.insertTransactionLog()");
         TransactionLogEntity returnEntity = new TransactionLogEntity();
         try {
-            returnEntity = transactionLogRepository.saveAndFlush(entity);
+            returnEntity = transactionLogEntityService.save(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
-            String msg = "Exception caught while saving StockPriceEntity entity "
+            String msg = "Exception caught while saving TransactionLogEntity entity "
                     + entity.getId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
@@ -130,5 +120,4 @@ public class TransactionLogRepositoryTests extends AbstractAppTransactionalTest 
 
         return returnEntity;
     }
-
 }

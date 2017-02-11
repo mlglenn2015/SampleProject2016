@@ -56,7 +56,7 @@
             <xsd:element minOccurs="1" maxOccurs="1" name="statusCode" type="xsd:int" />
             <xsd:element minOccurs="1" maxOccurs="1" name="statusText" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="xsd:string" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="stockPrice" type="xsd:float" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="stockPriceEntity" type="xsd:float" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -65,7 +65,7 @@
             <xsd:element minOccurs="1" maxOccurs="1" name="tickerSymbol" type="xsd:string" />
             <xsd:element minOccurs="1" maxOccurs="1" name="orderDate" type="xsd:dateTime" />
             <xsd:element minOccurs="0" maxOccurs="1" name="quantity" type="xsd:int" />
-            <xsd:element minOccurs="1" maxOccurs="1" name="stockPrice" type="xsd:float" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="stockPriceEntity" type="xsd:float" />
             <xsd:element minOccurs="0" maxOccurs="1" name="action" type="xsd:string" />
             <xsd:element minOccurs="0" maxOccurs="1" name="orderType" type="xsd:string" />
         </xsd:sequence>

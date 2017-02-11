@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import prv.mark.project.common.entity.ApplicationParameter;
+import prv.mark.project.common.entity.ApplicationParameterEntity;
 import prv.mark.project.common.entity.converter.BooleanToStringConverter;
 import prv.mark.project.common.util.StringUtils;
 
@@ -19,12 +19,12 @@ import java.sql.SQLException;
  * @author mlglenn
  */
 @Component
-public class ApplicationParameterRowMapper implements RowMapper<ApplicationParameter> {
+public class ApplicationParameterRowMapper implements RowMapper<ApplicationParameterEntity> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationParameterRowMapper.class);
 
     /**
-     * Maps a row from the APPLICATION_PARAMETER table to @{link ApplicationParameter}.
+     * Maps a row from the APPLICATION_PARAMETER table to @{link ApplicationParameterEntity}.
      *
      * @param resultSet @{link ResultSet}
      * @param rowNumber integer
@@ -32,9 +32,9 @@ public class ApplicationParameterRowMapper implements RowMapper<ApplicationParam
      * @throws SQLException
      */
     @Override
-    public final ApplicationParameter mapRow(final ResultSet resultSet, final int rowNumber) throws SQLException {
+    public final ApplicationParameterEntity mapRow(final ResultSet resultSet, final int rowNumber) throws SQLException {
         BooleanToStringConverter boolConverter = new BooleanToStringConverter();
-        ApplicationParameter entity = new ApplicationParameter();
+        ApplicationParameterEntity entity = new ApplicationParameterEntity();
         entity.setId(resultSet.getLong("id"));
         entity.setParameterKey(StringUtils.safeString(resultSet.getString("parameter_key")));
         entity.setParameterValue(StringUtils.safeString(resultSet.getString("parameter_value")));

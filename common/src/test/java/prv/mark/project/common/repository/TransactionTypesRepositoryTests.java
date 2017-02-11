@@ -5,9 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.entity.TransactionTypes;
+import prv.mark.project.common.entity.TransactionTypesEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
@@ -45,14 +44,14 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
     @Test
     public void testTransactionTypesRepository() {
-        prv.mark.project.common.entity.TransactionTypes entity = buildEntity();
+        TransactionTypesEntity entity = buildEntity();
         assertNotNull(entity);
 
-        prv.mark.project.common.entity.TransactionTypes savedEntity = insertEntity(entity);
+        TransactionTypesEntity savedEntity = insertEntity(entity);
         assertNotNull(savedEntity);
         assertTrue(savedEntity.getId() > 0);
 
-        Optional<TransactionTypes> newEntity
+        Optional<TransactionTypesEntity> newEntity
                 = transactionTypesRepository.findById(savedEntity.getId());
         assertNotNull(newEntity);
 
@@ -62,7 +61,7 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
     @Test
     public void testFindAll() {
-        List<TransactionTypes> entityList = new ArrayList<>();
+        List<TransactionTypesEntity> entityList = new ArrayList<>();
         entityList = transactionTypesRepository.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
@@ -70,48 +69,48 @@ public class TransactionTypesRepositoryTests extends AbstractAppTransactionalTes
 
     @Test
     public void testFindById() {
-        Optional<TransactionTypes> t = transactionTypesRepository.findById(1L);
+        Optional<TransactionTypesEntity> t = transactionTypesRepository.findById(1L);
         assertNotNull(t);
         assertNotNull(t.get().getDescription());
     }
 
     @Test
     public void testFindByTransactionType() {
-        Optional<TransactionTypes> t = transactionTypesRepository.findByTransactionType("STOCK PURCHASE");
+        Optional<TransactionTypesEntity> t = transactionTypesRepository.findByTransactionType("STOCK PURCHASE");
         assertNotNull(t);
         assertEquals(t.get().getDescription(), "STOCK PURCHASE TRANSACTION");
     }
 
     @Test
     public void testFindByInvalidTransactionType() {
-        Optional<TransactionTypes> t = transactionTypesRepository.findByTransactionType("TEST");
+        Optional<TransactionTypesEntity> t = transactionTypesRepository.findByTransactionType("TEST");
         assertEquals(t, Optional.empty());
     }
 
 
 
-    private prv.mark.project.common.entity.TransactionTypes buildEntity() {
-        prv.mark.project.common.entity.TransactionTypes entity = new prv.mark.project.common.entity.TransactionTypes();
+    private TransactionTypesEntity buildEntity() {
+        TransactionTypesEntity entity = new TransactionTypesEntity();
         entity.setId(null);
         entity.setTransactionType("TEST INQUIRY");
         entity.setDescription("TEST INQUIRY DESCRIPTION");
         return entity;
     }
 
-    private prv.mark.project.common.entity.TransactionTypes insertEntity(
-            final prv.mark.project.common.entity.TransactionTypes entity) {
+    private TransactionTypesEntity insertEntity(
+            final TransactionTypesEntity entity) {
 
         LOGGER.debug("TransactionTypesRepositoryTests.insertEntity()");
-        prv.mark.project.common.entity.TransactionTypes returnEntity = new prv.mark.project.common.entity.TransactionTypes();
+        TransactionTypesEntity returnEntity = new TransactionTypesEntity();
         try {
             returnEntity = transactionTypesRepository.saveAndFlush(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
-            String msg = "Exception caught while saving TransactionTypes entity " + entity.getId() + ".";
+            String msg = "Exception caught while saving TransactionTypesEntity entity " + entity.getId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }
-        LOGGER.debug("*** Saved TransactionTypes entity ***");
+        LOGGER.debug("*** Saved TransactionTypesEntity entity ***");
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;

@@ -1,4 +1,4 @@
-package prv.mark.project.common.repository;
+package prv.mark.project.common.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.JpaSystemException;
 import prv.mark.project.common.domain.StockOrderDto;
 import prv.mark.project.common.entity.StockOrderEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
+import prv.mark.project.common.repository.StockOrderRepositoryTests;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -24,25 +25,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit tests for the {@link StockOrderRepository}.
+ * JUnit tests for the {@link StockOrderEntityService}.
  *
  * @author mlglenn
  */
-public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
+public class StockOrderEntityServiceTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockOrderRepositoryTests.class);
 
     @Autowired
-    private StockOrderRepository stockOrderRepository;
+    private StockOrderEntityService stockOrderEntityService;
 
     @Before
     public void setUp() {
-        assertNotNull(stockOrderRepository);
+        assertNotNull(stockOrderEntityService);
     }
 
     @Test
     public void defaultTest() {
-        LOGGER.debug("StockOrderRepositoryTests.defaultTest()");
+        LOGGER.debug("StockOrderEntityServiceTests.defaultTest()");
     }
 
     @Test
@@ -58,7 +59,7 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
         assertTrue(retStockOrderEntity.getId() > 0);
 
         Optional<StockOrderEntity> newStockOrder
-                = stockOrderRepository.findById(retStockOrderEntity.getId());
+                = stockOrderEntityService.findById(retStockOrderEntity.getId());
         assertNotNull(newStockOrder);
 
         assertEquals(retStockOrderEntity.getOrderStatus(), newStockOrder.get().getOrderStatus());
@@ -67,9 +68,16 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
     @Test
     public void testFindAll() {
         List<StockOrderEntity> entityList = new ArrayList<>();
-        entityList = stockOrderRepository.findAll();
+        entityList = stockOrderEntityService.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
+    }
+
+    @Test
+    public void testFindByOrderStatus() {
+        List<StockOrderEntity> stockOrderEntities = stockOrderEntityService.findByOrderStatus("PENDING");
+        assertNotNull(stockOrderEntities);
+        //assertTrue(stockOrderEntities.size() > 0);
     }
 
     private StockOrderDto buildDto() {
@@ -100,10 +108,10 @@ public class StockOrderRepositoryTests extends AbstractAppTransactionalTest {
     private StockOrderEntity insertStockOrder(
             final StockOrderEntity entity) {
 
-        LOGGER.debug("StockOrderRepositoryTests.insertStockOrder()");
+        LOGGER.debug("StockOrderEntityServiceTests.insertStockOrder()");
         StockOrderEntity returnEntity = new StockOrderEntity();
         try {
-            returnEntity = stockOrderRepository.saveAndFlush(entity);
+            returnEntity = stockOrderEntityService.save(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockOrderEntity entity "

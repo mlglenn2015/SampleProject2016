@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "TRANSACTION_TYPES")
-public class TransactionTypes implements Serializable {
+public class TransactionTypesEntity implements Serializable {
 
     private static final long serialVersionUID = -9036028513949225562L;
 
@@ -37,14 +37,14 @@ public class TransactionTypes implements Serializable {
     private String description;
 
 
-    public TransactionTypes() {}
+    public TransactionTypesEntity() {}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TransactionTypes that = (TransactionTypes) o;
+        TransactionTypesEntity that = (TransactionTypesEntity) o;
 
         return transactionType.equals(that.transactionType);
 
@@ -81,7 +81,7 @@ public class TransactionTypes implements Serializable {
 
     @Override
     public String toString() {
-        return "TransactionTypes{" +
+        return "TransactionTypesEntity{" +
                 "id=" + id +
                 ", transactionType='" + transactionType + '\'' +
                 ", description='" + description + '\'' +

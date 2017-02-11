@@ -5,10 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.JpaSystemException;
-import prv.mark.project.common.entity.OrderStatus;
-import prv.mark.project.common.entity.OrderTypes;
+import prv.mark.project.common.entity.OrderStatusEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
@@ -47,14 +45,14 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
     @Test
     public void testOrderStatusRepository() {
-        prv.mark.project.common.entity.OrderStatus entity = buildEntity();
+        OrderStatusEntity entity = buildEntity();
         assertNotNull(entity);
 
-        prv.mark.project.common.entity.OrderStatus savedEntity = insertEntity(entity);
+        OrderStatusEntity savedEntity = insertEntity(entity);
         assertNotNull(savedEntity);
         assertTrue(savedEntity.getId() > 0);
 
-        Optional<OrderStatus> newEntity
+        Optional<OrderStatusEntity> newEntity
                 = orderStatusRepository.findById(savedEntity.getId());
         assertNotNull(newEntity);
 
@@ -64,7 +62,7 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
     @Test
     public void testFindAll() {
-        List<OrderStatus> entityList = new ArrayList<>();
+        List<OrderStatusEntity> entityList = new ArrayList<>();
         entityList = orderStatusRepository.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
@@ -72,46 +70,46 @@ public class OrderStatusRepositoryTests extends AbstractAppTransactionalTest {
 
     @Test
     public void testFindById() {
-        Optional<OrderStatus> orderStatus = orderStatusRepository.findById(1L);
+        Optional<OrderStatusEntity> orderStatus = orderStatusRepository.findById(1L);
         assertTrue(StringUtils.isNotEmpty(orderStatus.get().getOrderStatus()));
     }
 
     @Test
     public void testFindByOrderStatus() {
-        Optional<OrderStatus> orderStatus = orderStatusRepository.findByOrderStatus("PENDING");
+        Optional<OrderStatusEntity> orderStatus = orderStatusRepository.findByOrderStatus("PENDING");
         assertTrue(StringUtils.isNotEmpty(orderStatus.get().getDescription()));
         assertEquals(orderStatus.get().getDescription(), "ORDER IN PENDING STATUS");
     }
 
     @Test
     public void testFindByInvalidOrderStatus() {
-        Optional<OrderStatus> orderStatus = orderStatusRepository.findByOrderStatus("TEST");
+        Optional<OrderStatusEntity> orderStatus = orderStatusRepository.findByOrderStatus("TEST");
         assertEquals(orderStatus, Optional.empty());
     }
 
 
-    private prv.mark.project.common.entity.OrderStatus buildEntity() {
-        prv.mark.project.common.entity.OrderStatus entity = new prv.mark.project.common.entity.OrderStatus();
+    private OrderStatusEntity buildEntity() {
+        OrderStatusEntity entity = new OrderStatusEntity();
         entity.setId(null);
         entity.setOrderStatus("TESTING");
         entity.setDescription("ORDER IN TESTING STATUS");
         return entity;
     }
 
-    private prv.mark.project.common.entity.OrderStatus insertEntity(
-            final prv.mark.project.common.entity.OrderStatus entity) {
+    private OrderStatusEntity insertEntity(
+            final OrderStatusEntity entity) {
 
         LOGGER.debug("OrderStatusRepositoryTests.insertEntity()");
-        prv.mark.project.common.entity.OrderStatus returnEntity = new prv.mark.project.common.entity.OrderStatus();
+        OrderStatusEntity returnEntity = new OrderStatusEntity();
         try {
             returnEntity = orderStatusRepository.saveAndFlush(entity);
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
-            String msg = "Exception caught while saving OrderStatus entity " + entity.getId() + ".";
+            String msg = "Exception caught while saving OrderStatusEntity entity " + entity.getId() + ".";
 
             ExceptionRouter.logAndThrowApplicationException(LOGGER, msg, e.toString());
         }
-        LOGGER.debug("*** Saved OrderStatus entity ***");
+        LOGGER.debug("*** Saved OrderStatusEntity entity ***");
         LOGGER.debug(returnEntity.toString());
 
         return returnEntity;

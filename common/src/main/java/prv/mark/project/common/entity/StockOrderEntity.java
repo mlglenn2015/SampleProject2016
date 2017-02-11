@@ -21,7 +21,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "STOCK_ORDER")
-public class StockOrder implements Serializable {
+public class StockOrderEntity implements Serializable {
 
     private static final long serialVersionUID = 6487242329400213976L;
 
@@ -61,14 +61,14 @@ public class StockOrder implements Serializable {
     private String orderStatus;
 
 
-    public StockOrder() {};
+    public StockOrderEntity() {};
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StockOrder that = (StockOrder) o;
+        StockOrderEntity that = (StockOrderEntity) o;
 
         if (!id.equals(that.id)) return false;
         if (!stockSymbol.equals(that.stockSymbol)) return false;
@@ -160,7 +160,7 @@ public class StockOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "StockOrder{" +
+        return "StockOrderEntity{" +
                 "id=" + id +
                 ", stockSymbol='" + stockSymbol + '\'' +
                 ", action='" + action + '\'' +

@@ -1,19 +1,18 @@
 package prv.mark.project.common.repository;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import prv.mark.project.common.entity.ApplicationMessages;
+import prv.mark.project.common.entity.ApplicationMessagesEntity;
 
 /**
- * DAO Interface for {@link ApplicationMessages} entities.
+ * DAO Interface for {@link ApplicationMessagesEntity} entities.
  *
  * @author mlglenn
  */
 @Repository
-public interface ApplicationMessagesRepository extends JpaRepository<ApplicationMessages, Long> {
+public interface ApplicationMessagesRepository extends JpaRepository<ApplicationMessagesEntity, Long> {
 
     @Cacheable("applicationmessages")
-    ApplicationMessages findByMessageKey(String messageKey);
+    ApplicationMessagesEntity findByMessageKey(String messageKey);
 }

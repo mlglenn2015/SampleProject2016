@@ -3,12 +3,9 @@ package prv.mark.project.batchclient.processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import prv.mark.project.common.entity.StockSymbol;
+import prv.mark.project.common.entity.StockSymbolEntity;
 import prv.mark.project.common.exception.ApplicationException;
-import prv.mark.project.common.service.impl.ApplicationParameterSource;
 
 /**
  * Spring Batch Processor class to process the Stock ticker symbols.
@@ -18,7 +15,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
  * @author mlglenn.
  */
 @Component
-public class StockSymbolProcessor implements ItemProcessor<StockSymbol, StockSymbol> {
+public class StockSymbolProcessor implements ItemProcessor<StockSymbolEntity, StockSymbolEntity> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockSymbolProcessor.class);
 
@@ -30,23 +27,23 @@ public class StockSymbolProcessor implements ItemProcessor<StockSymbol, StockSym
     /**
      * Main method to process ....
      * <p>
-     * @param entity {@link StockSymbol} data transfer object
-     * @return {@link StockSymbol} data transfer object
+     * @param entity {@link StockSymbolEntity} data transfer object
+     * @return {@link StockSymbolEntity} data transfer object
      * @throws ApplicationException
      * </p>
      */
     @Override
-    public StockSymbol process(final StockSymbol entity) throws ApplicationException {
+    public StockSymbolEntity process(final StockSymbolEntity entity) throws ApplicationException {
 
         LOGGER.debug("*** StockSymbolProcessor.process() entry ***");
 
         //TODO validate first and fail fast
 
-        LOGGER.debug("+++++++           StockSymbol.id: [{}] +++++++", entity.getId());
-        LOGGER.debug("+++++++ StockSymbol.tickerSymbol: [{}] +++++++", entity.getTickerSymbol());
+        LOGGER.debug("+++++++           StockSymbolEntity.id: [{}] +++++++", entity.getId());
+        LOGGER.debug("+++++++ StockSymbolEntity.tickerSymbol: [{}] +++++++", entity.getTickerSymbol());
 
         /* Create a working copy of the input object */
-        //StockSymbol newEntity = new StockSymbol();
+        //StockSymbolEntity newEntity = new StockSymbolEntity();
         //BeanUtils.copyProperties(entity, newEntity);
 
         //TODO set values

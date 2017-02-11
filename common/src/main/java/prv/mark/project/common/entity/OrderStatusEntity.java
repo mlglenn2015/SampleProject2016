@@ -11,48 +11,48 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * JPA Entity for the ORDER_TYPES table.
+ * JPA Entity for the ORDER_STATUS table.
  *
  * @author mlglenn.
  */
 @Entity
-@Table(name = "ORDER_TYPES")
-public class OrderTypes implements Serializable {
+@Table(name = "ORDER_STATUS")
+public class OrderStatusEntity implements Serializable {
 
-    private static final long serialVersionUID = -3130128895783673541L;
+    private static final long serialVersionUID = 4514060025207978263L;
 
     @Id
     @Column(name = "ID", nullable = false)
     @SequenceGenerator(
-            name = "SEQ_ORDER_TYPES", sequenceName = "SEQ_ORDER_TYPES", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(generator = "SEQ_ORDER_TYPES", strategy = GenerationType.SEQUENCE)
+            name = "SEQ_ORDER_STATUS", sequenceName = "SEQ_ORDER_STATUS", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_ORDER_STATUS", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Basic
-    @Column(name = "ORDER_TYPE", nullable = false, length = 25)
-    private String orderType;
+    @Column(name = "ORDER_STATUS", nullable = false, length = 25)
+    private String orderStatus;
 
     @Basic
     @Column(name = "DESCRIPTION", nullable = false, length = 100)
     private String description;
 
 
-    public OrderTypes() {};
+    public OrderStatusEntity() {}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderTypes that = (OrderTypes) o;
+        OrderStatusEntity that = (OrderStatusEntity) o;
 
-        return orderType.equals(that.orderType);
+        return orderStatus.equals(that.orderStatus);
 
     }
 
     @Override
     public int hashCode() {
-        return orderType.hashCode();
+        return orderStatus.hashCode();
     }
 
     public Long getId() {
@@ -63,12 +63,12 @@ public class OrderTypes implements Serializable {
         this.id = id;
     }
 
-    public String getOrderType() {
-        return orderType;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getDescription() {
@@ -81,9 +81,9 @@ public class OrderTypes implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderTypes{" +
+        return "OrderStatusEntity{" +
                 "id=" + id +
-                ", orderType='" + orderType + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

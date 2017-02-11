@@ -4,8 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import prv.mark.project.common.entity.StockSymbol;
-import prv.mark.project.common.entity.converter.BooleanToStringConverter;
+import prv.mark.project.common.entity.StockSymbolEntity;
 import prv.mark.project.common.util.StringUtils;
 
 import java.sql.ResultSet;
@@ -19,12 +18,12 @@ import java.sql.SQLException;
  * @author mlglenn
  */
 @Component
-public class StockSymbolRowMapper implements RowMapper<StockSymbol> {
+public class StockSymbolRowMapper implements RowMapper<StockSymbolEntity> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationParameterRowMapper.class);
 
     /**
-     * Maps a row from the STOCK_SYMBOL table to @{link ApplicationParameter}.
+     * Maps a row from the STOCK_SYMBOL table to @{link ApplicationParameterEntity}.
      *
      * @param resultSet @{link ResultSet}
      * @param rowNumber integer
@@ -32,8 +31,8 @@ public class StockSymbolRowMapper implements RowMapper<StockSymbol> {
      * @throws SQLException
      */
     @Override
-    public final StockSymbol mapRow(final ResultSet resultSet, final int rowNumber) throws SQLException {
-        StockSymbol entity = new StockSymbol();
+    public final StockSymbolEntity mapRow(final ResultSet resultSet, final int rowNumber) throws SQLException {
+        StockSymbolEntity entity = new StockSymbolEntity();
         entity.setId(resultSet.getLong("id"));
         entity.setTickerSymbol(StringUtils.safeString(resultSet.getString("ticker_symbol")));
         return entity;

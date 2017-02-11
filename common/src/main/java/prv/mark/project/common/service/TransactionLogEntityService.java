@@ -1,7 +1,5 @@
-package prv.mark.project.common.repository;
+package prv.mark.project.common.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import prv.mark.project.common.entity.TransactionLogEntity;
 
 import java.util.Date;
@@ -9,12 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * JPA Repository for {@link TransactionLogEntity} entities.
+ * Service interface for {@link TransactionLogEntity} entities.
  *
  * @author mlglenn.
  */
-@Repository
-public interface TransactionLogRepository extends JpaRepository<TransactionLogEntity, Long> {
+public interface TransactionLogEntityService {
 
     Optional<TransactionLogEntity> findById(Long id);
 
@@ -23,4 +20,6 @@ public interface TransactionLogRepository extends JpaRepository<TransactionLogEn
     List<TransactionLogEntity> findByTransactionType(String transactionType);
 
     List<TransactionLogEntity> findAll();
+
+    TransactionLogEntity save(TransactionLogEntity transactionLogEntity);
 }

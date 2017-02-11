@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "STOCK_SYMBOL")
-public class StockSymbol implements Serializable {
+public class StockSymbolEntity implements Serializable {
 
     private static final long serialVersionUID = -4054807544419267346L;
 
@@ -47,7 +47,7 @@ public class StockSymbol implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StockSymbol that = (StockSymbol) o;
+        StockSymbolEntity that = (StockSymbolEntity) o;
 
         if (!id.equals(that.id)) return false;
         return tickerSymbol.equals(that.tickerSymbol);
@@ -63,7 +63,7 @@ public class StockSymbol implements Serializable {
 
     @Override
     public String toString() {
-        return "StockSymbol{" +
+        return "StockSymbolEntity{" +
                 "id=" + id +
                 ", tickerSymbol='" + tickerSymbol + '\'' +
                 '}';

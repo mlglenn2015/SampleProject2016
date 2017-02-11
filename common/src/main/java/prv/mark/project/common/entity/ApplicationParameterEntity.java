@@ -14,10 +14,10 @@ import java.util.Date;
 @Entity
 @Table(name = "APPLICATION_PARAMETER")
 @NamedQueries({
-        @NamedQuery(name = "ApplicationParameter.findEnabledByParameterKey",
-                query = "select p from ApplicationParameter p where p.parameterKey = ?1 and p.enabled = ?2")
+        @NamedQuery(name = "ApplicationParameterEntity.findEnabledByParameterKey",
+                query = "select p from ApplicationParameterEntity p where p.parameterKey = ?1 and p.enabled = ?2")
 })
-public class ApplicationParameter implements Serializable {
+public class ApplicationParameterEntity implements Serializable {
 
     private static final long serialVersionUID = -5961263486065232744L;
 
@@ -27,12 +27,12 @@ public class ApplicationParameter implements Serializable {
     private Boolean enabled;
     private Date createDate;
 
-    /*protected ApplicationParameter() {
+    /*protected ApplicationParameterEntity() {
         // no-args constructor required by JPA spec
         // this one is protected since it shouldn't be used directly
     }
 
-    public ApplicationParameter(Long id, String propKey, String propProperty, String enabled, Date created) {
+    public ApplicationParameterEntity(Long id, String propKey, String propProperty, String enabled, Date created) {
         this.id = id;
         this.propKey = propKey;
         this.propProperty = propProperty;
@@ -99,7 +99,7 @@ public class ApplicationParameter implements Serializable {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
 
-        ApplicationParameter that = (ApplicationParameter) o;
+        ApplicationParameterEntity that = (ApplicationParameterEntity) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (parameterKey != null ? !parameterKey.equals(that.parameterKey) : that.parameterKey != null) return false;
@@ -116,7 +116,7 @@ public class ApplicationParameter implements Serializable {
 
     @Override
     public String toString() {
-        return "ApplicationParameter{" +
+        return "ApplicationParameterEntity{" +
                 "id=" + id +
                 ", parameterKey='" + parameterKey + '\'' +
                 ", parameterValue='" + parameterValue + '\'' +

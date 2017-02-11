@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import prv.mark.project.common.entity.ApplicationMessages;
+import org.springframework.stereotype.Service;
+import prv.mark.project.common.entity.ApplicationMessagesEntity;
 import prv.mark.project.common.repository.ApplicationMessagesRepository;
 import prv.mark.project.common.util.StringUtils;
 
@@ -21,7 +21,7 @@ import java.util.Locale;
  *
  * @author mlglenn
  */
-@Component
+@Service
 public class ApplicationMessageSource implements MessageSource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationMessageSource.class);
@@ -35,7 +35,7 @@ public class ApplicationMessageSource implements MessageSource {
     public String getMessage(String messageKey) throws NoSuchMessageException {
         LOGGER.debug("ApplicationMessageSource.getMessage({})", messageKey);
         LOGGER.debug("ENVIRONMENT:{}", env);
-        ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey(messageKey);
+        ApplicationMessagesEntity applicationMessage = applicationMessagesRepository.findByMessageKey(messageKey);
         if (applicationMessage == null) {
             throw new NoSuchMessageException("Message with key " + messageKey + " does not exist.");
         }

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="head" type="{http://project.mark.prv/stockservice/schemas}RequestHeader"/>
- *         &lt;element name="order" type="{http://project.mark.prv/stockservice/schemas}StockOrder" minOccurs="0"/>
+ *         &lt;element name="order" type="{http://project.mark.prv/stockservice/schemas}StockOrderEntity" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

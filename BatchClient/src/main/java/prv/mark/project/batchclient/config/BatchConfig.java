@@ -28,9 +28,8 @@ import prv.mark.project.batchclient.listener.BatchClientJobListener;
 import prv.mark.project.batchclient.listener.BatchClientStepExecutionListener;
 import prv.mark.project.batchclient.processor.StockSymbolProcessor;
 import prv.mark.project.batchclient.tasklet.PreProcessingTasklet;
-//import prv.mark.project.common.entity.ApplicationParameter;
-import prv.mark.project.common.entity.StockSymbol;
-import prv.mark.project.common.service.impl.ApplicationParameterSource;
+//import prv.mark.project.common.entity.ApplicationParameterEntity;
+import prv.mark.project.common.entity.StockSymbolEntity;
 
 import javax.sql.DataSource;
 
@@ -122,7 +121,7 @@ public class BatchConfig {
     @Bean
     public Step myProcessorStep() {
         return stepBuilderFactory.get("MyProcessorStepName")
-                .<StockSymbol, StockSymbol>chunk(1)          //TODO change the chunksize as needed
+                .<StockSymbolEntity, StockSymbolEntity>chunk(1)          //TODO change the chunksize as needed
                 .reader(myExampleJdbcItemStreamReader())
                 .processor(stockSymbolProcessor())
                 .listener(batchClientStepExecutionListener())
@@ -167,8 +166,8 @@ public class BatchConfig {
      */
     @Bean
     @StepScope
-    public ItemStreamReader<StockSymbol> myExampleJdbcItemStreamReader() {
-        JdbcCursorItemReader<StockSymbol> jdbcCursorItemReader = new JdbcCursorItemReader<>();
+    public ItemStreamReader<StockSymbolEntity> myExampleJdbcItemStreamReader() {
+        JdbcCursorItemReader<StockSymbolEntity> jdbcCursorItemReader = new JdbcCursorItemReader<>();
         jdbcCursorItemReader.setRowMapper(stockSymbolRowMapper());
         jdbcCursorItemReader.setDataSource(dataSource);
         jdbcCursorItemReader.setSaveState(false); //necessary when using an indicator in the table to show the record was processed
@@ -185,7 +184,7 @@ public class BatchConfig {
      * @return @{link RowMapper}
      */
     @Bean
-    public RowMapper<StockSymbol> stockSymbolRowMapper() {
+    public RowMapper<StockSymbolEntity> stockSymbolRowMapper() {
         return new StockSymbolRowMapper();
     }
 
@@ -197,7 +196,7 @@ public class BatchConfig {
      * @return {@link org.springframework.batch.item.ItemProcessor}
      */
     @Bean
-    public ItemProcessor<StockSymbol, StockSymbol> stockSymbolProcessor() {
+    public ItemProcessor<StockSymbolEntity, StockSymbolEntity> stockSymbolProcessor() {
         return new StockSymbolProcessor();
     }
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
+import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
@@ -71,9 +72,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         assertNotNull(request);
         GetStockPriceResponse response = buildGetStockPriceResponse(tickerSymbol);
         assertNotNull(response);
-        GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
+        GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request); //0
         assertNotNull(actualResponse);
-        assertTrue(actualResponse.getQuote().getStatusCode() == 1);
+        assertTrue(actualResponse.getQuote().getStatusCode() == EnumStatusCodes.SUCCESS.getStatudCode());
         assertEquals(response.getQuote().getTickerSymbol(), actualResponse.getQuote().getTickerSymbol());
 
         LOGGER.debug("***** Cease StockOrderEndpointTests.testGetStockPrice() *****");
@@ -85,7 +86,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote quote = new StockQuote();
         quote.setTickerSymbol(symbol);
-        quote.setStatusCode(1);
+        quote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
         quote.setStatusText("REQUEST SUCCESSFUL");
         quote.setStockPrice(NumberUtils.toFloat("68.00"));
         response.setQuote(quote);

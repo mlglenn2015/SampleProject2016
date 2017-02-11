@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import prv.mark.project.common.entity.ApplicationMessages;
+import prv.mark.project.common.entity.ApplicationMessagesEntity;
 //import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
@@ -42,14 +42,14 @@ public class ApplicationMessagesRepositoryTests extends AbstractAppTransactional
 
     @Test
     public void testFindAll() {
-        List<ApplicationMessages> entityList = new ArrayList<>();
+        List<ApplicationMessagesEntity> entityList = new ArrayList<>();
         entityList = applicationMessagesRepository.findAll();
         assertNotNull(entityList);
         assertTrue(entityList.size() > 0);
     }
     @Test
     public void testFindByMessageKey() {
-        ApplicationMessages applicationMessage = applicationMessagesRepository.findByMessageKey("error.invalid.usstate");
+        ApplicationMessagesEntity applicationMessage = applicationMessagesRepository.findByMessageKey("error.invalid.usstate");
         assertTrue(prv.mark.project.common.util.StringUtils.isNotEmpty(applicationMessage.getMessage()));
         assertEquals(applicationMessage.getMessage(), "Input is not a valid US State.");
     }

@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "TRANSACTION_LOG")
-public class TransactionLog implements Serializable {
+public class TransactionLogEntity implements Serializable {
 
     private static final long serialVersionUID = -3345464116138634617L;
 
@@ -44,14 +44,14 @@ public class TransactionLog implements Serializable {
     private String transactionData;
 
 
-    public TransactionLog() {};
+    public TransactionLogEntity() {};
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TransactionLog that = (TransactionLog) o;
+        TransactionLogEntity that = (TransactionLogEntity) o;
 
         if (!id.equals(that.id)) return false;
         if (!logDateTime.equals(that.logDateTime)) return false;
@@ -101,7 +101,7 @@ public class TransactionLog implements Serializable {
 
     @Override
     public String toString() {
-        return "TransactionLog{" +
+        return "TransactionLogEntity{" +
                 "id=" + id +
                 ", logDateTime=" + logDateTime +
                 ", transactionType='" + transactionType + '\'' +

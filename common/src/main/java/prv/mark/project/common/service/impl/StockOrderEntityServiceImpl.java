@@ -4,26 +4,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import prv.mark.project.common.entity.StockOrder;
+import prv.mark.project.common.entity.StockOrderEntity;
 import prv.mark.project.common.repository.StockOrderRepository;
-import prv.mark.project.common.service.StockOrderService;
+import prv.mark.project.common.service.StockOrderEntityService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Default implementation of the {@link StockOrderService} interface.
+ * Default implementation of the {@link StockOrderEntityService} interface.
  *
  * @author mlglenn.
  */
 @Service
-public class StockOrderServiceImpl implements StockOrderService {
+public class StockOrderEntityServiceImpl implements StockOrderEntityService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StockOrderServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockOrderEntityServiceImpl.class);
 
     @Value("#{systemProperties['ENVIRONMENT']}")
     private String env;
@@ -32,39 +30,39 @@ public class StockOrderServiceImpl implements StockOrderService {
     private StockOrderRepository stockOrderRepository;
 
     @Override
-    public Optional<StockOrder> findById(final Long id) {
-        LOGGER.debug("StockOrderServiceImpl.findById({})", id);
+    public Optional<StockOrderEntity> findById(final Long id) {
+        LOGGER.debug("StockOrderEntityServiceImpl.findById({})", id);
         LOGGER.debug("ENVIRONMENT:{}", env);
         return Optional.ofNullable(stockOrderRepository.findById(id)).get();
         //return Optional.ofNullable(stockOrderRepository.findOne(id));
     }
 
     @Override
-    public List<StockOrder> findByOrderStatus(final String orderStatus) {
-        LOGGER.debug("StockOrderServiceImpl.findByOrderStatus({})", orderStatus);
+    public List<StockOrderEntity> findByOrderStatus(final String orderStatus) {
+        LOGGER.debug("StockOrderEntityServiceImpl.findByOrderStatus({})", orderStatus);
         LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.findByOrderStatus(orderStatus);
     }
 
     @Override
-    public List<StockOrder> findAll() {
-        LOGGER.debug("StockOrderServiceImpl.findAll()");
+    public List<StockOrderEntity> findAll() {
+        LOGGER.debug("StockOrderEntityServiceImpl.findAll()");
         LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.findAll();
     }
 
     @Override
     @Transactional
-    public StockOrder save(StockOrder order) {
-        LOGGER.debug("StockOrderServiceImpl.save({})", order.toString());
+    public StockOrderEntity save(StockOrderEntity order) {
+        LOGGER.debug("StockOrderEntityServiceImpl.save({})", order.toString());
         LOGGER.debug("ENVIRONMENT:{}", env);
         return stockOrderRepository.saveAndFlush(order);
     }
 
 
-    /*private List<StockOrder> nullList() {
-        List<StockOrder> list = new ArrayList<>();
-        list.add(new StockOrder());
+    /*private List<StockOrderEntity> nullList() {
+        List<StockOrderEntity> list = new ArrayList<>();
+        list.add(new StockOrderEntity());
         return list;
     }*/
 }
