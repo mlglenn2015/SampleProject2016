@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
+import prv.mark.project.common.domain.EnumAction;
+import prv.mark.project.common.domain.EnumOrderStatus;
+import prv.mark.project.common.domain.EnumOrderTypes;
 import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.domain.EnumTransactionTypes;
 import prv.mark.project.common.domain.TransactionDto;
@@ -20,7 +23,12 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stockservice.schemas.*;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.StockQuote;
+import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
+import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
 import prv.mark.project.stockservice.service.StockServiceOrderService;
 
 import javax.persistence.PersistenceException;
@@ -171,16 +179,24 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
 
 
 
+
         StockOrderEntity stockOrder = new StockOrderEntity();
-        //stockOrder.set.setId(null);
+        stockOrder.setOrderStatus(EnumOrderStatus.PENDING.getStatusDesc());
+        stockOrder.setOrderDate(DateUtils.xmlGregorianCalendarToDate(submitOrderRequest.getOrder().getOrderDate()));
         stockOrder.setAction(submitOrderRequest.getOrder().getAction());
+        stockOrder.setQuantity(submitOrderRequest.getOrder().getQuantity().longValue());
         stockOrder.setStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
-        //stockOrder.setQuantity(submitOrderRequest.getOrder().getQuantity().longValue());
-        //Optional<StockPriceEntity> stockPriceEntity TODO
-        //        = stockPriceEntityService.findByStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
-        //stockOrder.setPrice(stockPriceEntity.get().getCurrentPrice());
         stockOrder.setOrderType(submitOrderRequest.getOrder().getOrderType());
-        //stockOrder.setOrderDate(DateUtils.getDateFromLocalDateTime());
+
+        if (submitOrderRequest.getOrder().getOrderType().equals(EnumOrderTypes.MARKET_ORDER.getOrderType())) {
+            Optional<StockPriceEntity> returnedEntity
+                    = stockPriceEntityService.findByStockSymbol(submitOrderRequest.getOrder().getTickerSymbol());
+            if (returnedEntity.isPresent()) {
+                stockOrder.setPrice(returnedEntity.get().getCurrentPrice());
+            } else {
+                //TODO we have a problem
+            }
+        }
 
         StockOrderEntity returnedEntity = saveStockOrderEntity(stockOrder);
 
@@ -220,7 +236,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
     private TransactionDto setTransactionDto(final SubmitOrderRequest submitOrderRequest) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
-        if (submitOrderRequest.getOrder().getAction().equalsIgnoreCase("BUY")) {
+        if (submitOrderRequest.getOrder().getAction().equalsIgnoreCase(EnumAction.BUY.getActionType())) {
             transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PURCHASE.getTransactionTypeDesc());
         } else {
             transactionDto.setTransactionType(EnumTransactionTypes.STOCK_SALE.getTransactionTypeDesc());
@@ -242,7 +258,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode()); //success
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_SUCCESSFUL));
-        //stockQuote.setStatusText("Request Successful");
+
         if (returnedEntity != null) {
             stockQuote.setTickerSymbol(returnedEntity.getStockSymbol());
             stockQuote.setStockPrice(returnedEntity.getCurrentPrice().floatValue());
@@ -258,7 +274,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         StockQuote stockQuote = new StockQuote();
         stockQuote.setStatusCode(EnumStatusCodes.REQUEST_FAILED.getStatudCode()); //failure
         stockQuote.setStatusText(applicationParameterSource.getParm(StringUtils.PARM_REQUEST_FAILED));
-        //stockQuote.setStatusText("Request Failed");
+
         if (getStockPriceRequest != null) {
             stockQuote.setTickerSymbol(getStockPriceRequest.getTickerSymbol());
         }
@@ -296,8 +312,8 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         StockOrderEntity returnEntity = new StockOrderEntity();
         try {
 
-            //returnEntity = stockOrderService.save(entity); TODO
-            returnEntity = entity;
+            returnEntity = stockOrderEntityService.save(entity);
+            //returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockOrderEntity " + entity.getId() + ".";
@@ -315,8 +331,8 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         LOGGER.debug("StockServiceOrderServiceImpl.saveTransactionLogEntity()");
         TransactionLogEntity returnEntity = new TransactionLogEntity();
         try {
-            //returnEntity = transactionLogService.save(entity); TODO
-            returnEntity = entity;
+            returnEntity = transactionLogEntityService.save(entity);
+            //returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving TransactionLogEntity entity " + entity.getId() + ".";

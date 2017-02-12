@@ -1,6 +1,8 @@
 package prv.mark.project.common.domain;
 
 /**
+ * Enum class for stock order types.
+ *
  * Created by Owner on 11/26/2016.
  */
 public enum EnumOrderTypes {

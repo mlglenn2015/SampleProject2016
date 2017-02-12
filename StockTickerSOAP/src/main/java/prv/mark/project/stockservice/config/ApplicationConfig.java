@@ -28,7 +28,7 @@ public class ApplicationConfig {
 
     @Bean
     public MessageSource messageSource() {
-        LOGGER.info("ApplicationConfig: Returning new ApplicationMessageSource...");
+        LOGGER.info("ApplicationConfig: Returning new MessageSource...");
         return new ApplicationMessageSource();
     }
 

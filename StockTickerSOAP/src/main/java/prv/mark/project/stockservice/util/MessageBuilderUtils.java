@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO
+ * SOAP Message utility class.
+ *
  * Created by mlglenn on 11/14/2016.
  */
 public class MessageBuilderUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageBuilderUtils.class);
-    private static final String SERVER_FAULT_STR = "server";
+    public static final String SERVER_FAULT_STR = "server";
     public static final String CHARSET_UTF8 = "UTF-8";
 
     /**

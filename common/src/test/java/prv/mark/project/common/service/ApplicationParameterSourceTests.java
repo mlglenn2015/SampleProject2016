@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import prv.mark.project.common.exception.ApplicationException;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
@@ -35,18 +36,16 @@ public class ApplicationParameterSourceTests extends AbstractAppTransactionalTes
         LOGGER.debug("ApplicationParameterSourceTests.defaultTest()");
     }
 
+    @Test(expected = ApplicationException.class)
+    public void testGetParmInvalid() {
+        String retParm = applicationParameterSource.getParm("invalid");
+    }
+
     @Test
     public void testGetParm() {
         String retParm = applicationParameterSource.getParm("parm.request.successful");
         assertNotNull(retParm);
         assertEquals(retParm, "Request Successful");
     }
-
-    /*@Test TODO
-    public void testGetParm() {
-        String retParm = applicationParameterSource.getParm("parm.request.successful", new Object[], Locale.ENGLISH);
-        assertNotNull(retParm);
-        assertEquals(retParm, "Request Successful");
-    }*/
 
 }
