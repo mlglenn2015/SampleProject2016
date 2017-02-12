@@ -33,6 +33,21 @@ INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   'error.invalid.uszip4', 'Input is not a valid US Zip4 code.');
 INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.header.source', 'Invalid Header Source.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.stocksymbol', 'Invalid Stock Symbol.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.quantity', 'Invalid Quantity.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.orderaction', 'Invalid Order Action.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.ordertype', 'Invalid Order Type.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
   'info.status.success', 'Last request successful.');
 INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   VALUES (SEQ_APPLICATION_MESSAGES.nextval,

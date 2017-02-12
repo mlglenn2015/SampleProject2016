@@ -27,7 +27,7 @@ public class ApplicationConfig {
 
 
     @Bean
-    public MessageSource applicationMessageSource() {
+    public MessageSource messageSource() {
         LOGGER.info("ApplicationConfig: Returning new ApplicationMessageSource...");
         return new ApplicationMessageSource();
     }
@@ -42,7 +42,7 @@ public class ApplicationConfig {
     public LocalValidatorFactoryBean validator() {
         LOGGER.info("ApplicationConfig: Returning new LocalValidatorFactoryBean...");
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(applicationMessageSource());
+        validator.setValidationMessageSource(messageSource());
         return validator;
     }
 

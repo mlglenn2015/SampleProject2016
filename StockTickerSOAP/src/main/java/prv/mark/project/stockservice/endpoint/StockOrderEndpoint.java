@@ -15,9 +15,12 @@ import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
-import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stockservice.schemas.*;
+import prv.mark.project.stockservice.schemas.RequestHeader;
+import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
+import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
+import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
 import prv.mark.project.stockservice.service.StockServiceOrderService;
 
 import java.util.Optional;
@@ -53,8 +56,8 @@ public class StockOrderEndpoint {
 
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
-    /*@Autowired                                                          TODO could not autowire
-    private ApplicationMessageSource applicationMessageSource;*/
+    @Autowired
+    private ApplicationMessageSource applicationMessageSource;
     @Autowired
     private StockServiceOrderService stockServiceOrderService;
 
@@ -127,13 +130,13 @@ public class StockOrderEndpoint {
         LOGGER.debug("Request is valid: {}", submitOrderRequest.toString());
 
         //SubmitOrderResponse submitOrderResponse;
-        SubmitOrderResponse submitOrderResponse = new SubmitOrderResponse();
+        SubmitOrderResponse submitOrderResponse = new SubmitOrderResponse(); //testing
         submitOrderResponse.setStatus(0);
         submitOrderResponse.setStatusDesc("SUCCESS 20170131");
 
 
-        /*try {
-            submitOrderResponse  = stockTickerService.placeOrder(submitOrderRequest);
+        try {
+            submitOrderResponse  = stockServiceOrderService.placeOrder(submitOrderRequest);
 
         } catch (SOAPClientException sce) {
 
@@ -144,6 +147,12 @@ public class StockOrderEndpoint {
 
             LOGGER.error("SoapServerException caught: {}", sse.getMessage());
             throw new SOAPServerException(sse.getMessage());
+        }
+
+        /*if (submitOrderResponse == null) {  TODO
+            LOGGER.debug("Returning null response");
+        } else {
+            LOGGER.debug("Returning response: {}", getStockPriceResponse.getQuote().getTickerSymbol());
         }*/
 
         LOGGER.debug("Returning response: {}", submitOrderResponse.toString());
@@ -151,45 +160,49 @@ public class StockOrderEndpoint {
     }
 
 
+    /* Private methods */
+
     private void validateHeader(final RequestHeader requestHeader) {
         LOGGER.info("*** StockOrderEndpoint.validateHeader()");
 
         if (requestHeader == null) {
             LOGGER.error("*** RequestHeader IS NULL!!! ***");
-            throw new SOAPGeneralFault();
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.header.source"));
         }
         if (StringUtils.isEmpty(requestHeader.getSource())) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
-            throw new SOAPGeneralFault();
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.header.source"));
         }
 
         String parameter = applicationParameterSource.getParm(StringUtils.PARM_VALID_HEADER_SOURCE);
+
         if (!requestHeader.getSource().equals(parameter)) {
             LOGGER.error("*** Invalid Header Source {} ***", requestHeader.getSource());
-            throw new SOAPGeneralFault();
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.header.source"));
         }
     }
 
     private void validateGetStockPriceRequest(final GetStockPriceRequest getStockPriceRequest) {
         LOGGER.info("*** StockOrderEndpoint.validateGetStockPriceRequest()");
 
-        String message = "*** GetStockPriceRequest IS NULL!!! ***";
         if (getStockPriceRequest == null) {
-            LOGGER.error(message);
-            throw new SOAPClientException(message);
+            LOGGER.error("*** GetStockPriceRequest IS NULL!!! ***");
+            throw new SOAPClientException(applicationMessageSource.getMessage("info.status.fail"));
         }
 
         validateHeader(getStockPriceRequest.getHead());
 
         if (getStockPriceRequest.getTickerSymbol().isEmpty()) {
-            LOGGER.error(message);
-            throw new SOAPGeneralFault(message);
+            LOGGER.error("*** Invalid Ticker Symbol {} ***", getStockPriceRequest.getTickerSymbol());
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.stocksymbol"));
         }
 
         String tickerSymbol = Optional.of(getStockPriceRequest.getTickerSymbol())
                 .filter(validStockSymbolPattern)
-                .orElseThrow(() -> new SOAPGeneralFault("*** Invalid Ticker Symbol: "
-                        + getStockPriceRequest.getTickerSymbol() + " ***"));
+                .orElseThrow(() -> new SOAPGeneralFault(
+                        applicationMessageSource.getMessage("error.invalid.stocksymbol")));
+        //"*** Invalid Ticker Symbol: " + getStockPriceRequest.getTickerSymbol() + " ***"
+
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 
@@ -197,48 +210,49 @@ public class StockOrderEndpoint {
         LOGGER.info("*** StockOrderEndpoint.validateSubmitOrderRequest()");
 
         if (submitOrderRequest == null) {
-            String message = "*** SubmitOrderRequest IS NULL!!! ***";
-            LOGGER.error(message);
-            throw new SOAPClientException(message);
+            LOGGER.error("*** SubmitOrderRequest IS NULL!!! ***");
+            throw new SOAPClientException(applicationMessageSource.getMessage("info.status.fail"));
         }
 
         validateHeader(submitOrderRequest.getHead());
 
         if (submitOrderRequest.getOrder() == null) {
-            String message = "*** SubmitOrderRequest.Order IS NULL!!! ***";
-            LOGGER.error(message);
-            throw new SOAPGeneralFault(message);
+            LOGGER.error("*** SubmitOrderRequest.Order IS NULL!!! ***");
+            throw new SOAPClientException(applicationMessageSource.getMessage("info.status.fail"));
         }
 
-        if (StringUtils.isEmpty(submitOrderRequest.getOrder().getAction())
-                || StringUtils.isEmpty(submitOrderRequest.getOrder().getOrderType())
-                || StringUtils.isEmpty(submitOrderRequest.getOrder().getTickerSymbol())) {
+        if (StringUtils.isEmpty(submitOrderRequest.getOrder().getAction())) {
+            LOGGER.error("*** Invalid Order Action ***");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.orderaction"));
+        }
 
-            String message = "Required field is empty:" + submitOrderRequest.getOrder().getAction() + " "
-                    + submitOrderRequest.getOrder().getOrderType() + " "
-                    + submitOrderRequest.getOrder().getTickerSymbol();
-            LOGGER.error(message);
-            throw new SOAPGeneralFault(message);
+        if (StringUtils.isEmpty(submitOrderRequest.getOrder().getOrderType())) {
+            LOGGER.error("*** Invalid Order Type ***");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.ordertype"));
+        }
+
+        if (StringUtils.isEmpty(submitOrderRequest.getOrder().getTickerSymbol())) {
+            LOGGER.error("*** Invalid Ticker Symbol {} ***", submitOrderRequest.getOrder().getTickerSymbol());
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.stocksymbol"));
         }
 
         if (submitOrderRequest.getOrder().getQuantity() == null
                 || submitOrderRequest.getOrder().getQuantity() <= 0) {
-            String message = "Invalid value for submitOrderRequest.getOrder().getQuantity()";
-            LOGGER.error(message);
-            throw new SOAPGeneralFault(message);
+            LOGGER.error("Invalid value for submitOrderRequest.getOrder().getQuantity()");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.quantity"));
         }
 
         if (submitOrderRequest.getOrder().getOrderType().equalsIgnoreCase(EnumOrderTypes.LIMIT_ORDER.getOrderType())
                 && (submitOrderRequest.getOrder().getStockPrice() < 0.00)) {
-            String message = "Invalid value for submitOrderRequest.getOrder().getQuantity()";
-            LOGGER.error(message);
-            throw new SOAPGeneralFault(message);
+            LOGGER.error("Invalid value for submitOrderRequest.getOrder().getQuantity()");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.quantity"));
         }
 
         String tickerSymbol = Optional.of(submitOrderRequest.getOrder().getTickerSymbol())
                 .filter(validStockSymbolPattern)
-                .orElseThrow(() -> new SOAPGeneralFault("*** Invalid Ticker Symbol: "
-                        + submitOrderRequest.getOrder().getTickerSymbol() + " ***"));
+                .orElseThrow(() -> new SOAPGeneralFault(applicationMessageSource.getMessage("error.invalid.stocksymbol")));
+        //"*** Invalid Ticker Symbol: " + submitOrderRequest.getOrder().getTickerSymbol() + " ***"));
+
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 }
