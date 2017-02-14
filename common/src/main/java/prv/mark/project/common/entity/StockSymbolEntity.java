@@ -25,6 +25,7 @@ public class StockSymbolEntity implements Serializable {
     @Column(name = "TICKER_SYMBOL", nullable = false, length = 10)
     private String tickerSymbol;
 
+
     public Long getId() {
         return id;
     }

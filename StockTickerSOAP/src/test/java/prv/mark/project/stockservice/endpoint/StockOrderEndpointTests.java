@@ -96,11 +96,18 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         GetStockPriceRequest request = buildGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
-        GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request); //1
-        assertNotNull(actualResponse);
-        assertTrue(actualResponse.getQuote().getStatusCode() == EnumStatusCodes.REQUEST_FAILED.getStatudCode());
+        GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
+    }
 
-        LOGGER.debug("***** Cease StockOrderEndpointTests.testGetStockPriceInvalidSymbol() *****");
+    @Test(expected = SOAPClientException.class)
+    public void testGetStockPriceSymbolNotInExchange() {
+        LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceSymbolNotInExchange() *****");
+
+        String tickerSymbol = "XXX";
+        GetStockPriceRequest request = buildGetStockPriceRequest(tickerSymbol);
+        assertNotNull(request);
+
+        GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
     }
 
     @Test(expected = SOAPClientException.class)
@@ -211,7 +218,17 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
     }
 
-    //TODO test invalid order type not in Enum
+    @Test(expected = SOAPClientException.class)
+    public void testSubmitOrderInvalidOrderType() {
+        LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderInvalidOrderType() *****");
+
+        String tickerSymbol = "WMT";
+        SubmitOrderRequest request = buildSubmitOrderRequest(tickerSymbol);
+        assertNotNull(request);
+        request.getOrder().setOrderType("MARKET"); //MARKET ORDER is the correct value
+
+        SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
+    }
 
     @Test(expected = SOAPClientException.class)
     public void testSubmitOrderEmptyTickerSymbol() {

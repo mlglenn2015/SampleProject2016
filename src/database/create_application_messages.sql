@@ -39,7 +39,13 @@ INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   'error.invalid.stocksymbol', 'Invalid Stock Symbol.');
 INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.stocksymbolinexchange', 'Stock Symbol Not Found in Exchange.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
   'error.invalid.quantity', 'Invalid Quantity.');
+INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
+  VALUES (SEQ_APPLICATION_MESSAGES.nextval,
+  'error.invalid.price', 'Invalid Price.');
 INSERT INTO APPLICATION_MESSAGES (ID, MESSAGE_KEY, MESSAGE)
   VALUES (SEQ_APPLICATION_MESSAGES.nextval,
   'error.invalid.orderaction', 'Invalid Order Action.');

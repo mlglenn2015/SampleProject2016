@@ -73,6 +73,12 @@ public class StockOrderEndpoint {
         LOGGER.info("*** StockOrderEndpoint.getStockPrice() entry ...");
 
         validateGetStockPriceRequest(getStockPriceRequest);
+
+        if (!stockServiceOrderService.isSymbolInExchange(getStockPriceRequest.getTickerSymbol())) {
+            LOGGER.error("*** Invalid Ticker Symbol {} ***", getStockPriceRequest.getTickerSymbol());
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.stocksymbolinexchange"));
+        }
+
         LOGGER.debug("Request is valid: {}", getStockPriceRequest.toString());
 
         GetStockPriceResponse getStockPriceResponse;
@@ -120,7 +126,16 @@ public class StockOrderEndpoint {
         LOGGER.info("*** StockOrderEndpoint.submitOrder() entry ...");
 
         validateSubmitOrderRequest(submitOrderRequest);
+
+        if (!stockServiceOrderService.isSymbolInExchange(submitOrderRequest.getOrder().getTickerSymbol())) {
+            LOGGER.error("*** Invalid Ticker Symbol {} ***", submitOrderRequest.getOrder().getTickerSymbol());
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.stocksymbolinexchange"));
+        }
+
         LOGGER.debug("Request is valid: {}", submitOrderRequest.toString());
+
+
+
 
         SubmitOrderResponse submitOrderResponse;
 
@@ -194,7 +209,6 @@ public class StockOrderEndpoint {
                 .filter(validStockSymbolPattern)
                 .orElseThrow(() -> new SOAPClientException(
                         applicationMessageSource.getMessage("error.invalid.stocksymbol")));
-        //"*** Invalid Ticker Symbol: " + getStockPriceRequest.getTickerSymbol() + " ***"
 
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
@@ -215,15 +229,14 @@ public class StockOrderEndpoint {
         }
 
         if ( StringUtils.isEmpty(submitOrderRequest.getOrder().getAction())
-                && (! isValidAction(submitOrderRequest.getOrder().getAction())) ) {
+                || (! isValidAction(submitOrderRequest.getOrder().getAction())) ) {
 
             LOGGER.error("*** Invalid Order Action ***");
             throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.orderaction"));
         }
 
-
         if ( StringUtils.isEmpty(submitOrderRequest.getOrder().getOrderType())
-                && (! isValidOrderType(submitOrderRequest.getOrder().getOrderType())) ) {
+                || (! isValidOrderType(submitOrderRequest.getOrder().getOrderType())) ) {
 
             LOGGER.error("*** Invalid Order Type ***");
             throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.ordertype"));
@@ -240,6 +253,11 @@ public class StockOrderEndpoint {
             throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.quantity"));
         }
 
+        if (submitOrderRequest.getOrder().getStockPrice() <= 0.00) {
+            LOGGER.error("Invalid value for submitOrderRequest.getOrder().getStockPrice()");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.price"));
+        }
+
         if (submitOrderRequest.getOrder().getOrderType().equalsIgnoreCase(EnumOrderTypes.LIMIT_ORDER.getOrderType())
                 && (submitOrderRequest.getOrder().getStockPrice() <= 0.00)) {
             LOGGER.error("Invalid value for submitOrderRequest.getOrder().getQuantity()");
@@ -250,28 +268,25 @@ public class StockOrderEndpoint {
                 .filter(validStockSymbolPattern)
                 .orElseThrow(() -> new SOAPClientException(
                         applicationMessageSource.getMessage("error.invalid.stocksymbol")));
-        //"*** Invalid Ticker Symbol: " + submitOrderRequest.getOrder().getTickerSymbol() + " ***"));
 
         LOGGER.debug("tickerSymbol:{}", tickerSymbol);
     }
 
     private boolean isValidAction(final String action) {
-        boolean isValid = false;
         for (EnumAction enumAction : EnumAction.values()) {
             if (action.equalsIgnoreCase(enumAction.getActionType())) {
-                isValid = true;
+                return true;
             }
         }
-        return isValid;
+        return false;
     }
 
     private boolean isValidOrderType(final String orderType) {
-        boolean isValid = false;
         for (EnumOrderTypes enumOrderType : EnumOrderTypes.values()) {
             if (orderType.equalsIgnoreCase(enumOrderType.getOrderType())) {
-                isValid = true;
+                return true;
             }
         }
-        return isValid;
+        return false;
     }
 }

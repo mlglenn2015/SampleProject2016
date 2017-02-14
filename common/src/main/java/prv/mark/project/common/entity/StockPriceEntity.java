@@ -1,5 +1,10 @@
 package prv.mark.project.common.entity;
 
+import org.eclipse.persistence.annotations.Cache;
+import org.eclipse.persistence.annotations.CacheCoordinationType;
+import org.eclipse.persistence.annotations.CacheType;
+import org.eclipse.persistence.config.CacheIsolationType;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +21,19 @@ import java.math.BigDecimal;
  *
  * @author mlglenn.
  */
+
+//TODO may need to revisit caching of this entity
+
 @Entity
 @Table(name = "STOCK_PRICE")
+@Cache(
+        type = CacheType.WEAK,
+        isolation = CacheIsolationType.SHARED,
+        expiry = 1000,
+        alwaysRefresh = true,
+        disableHits = true,
+        coordinationType = CacheCoordinationType.INVALIDATE_CHANGED_OBJECTS
+)
 public class StockPriceEntity implements Serializable {
 
     private static final long serialVersionUID = 8663315086156386511L;

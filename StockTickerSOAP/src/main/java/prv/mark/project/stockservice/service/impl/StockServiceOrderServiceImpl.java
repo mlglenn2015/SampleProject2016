@@ -14,10 +14,13 @@ import prv.mark.project.common.domain.EnumTransactionTypes;
 import prv.mark.project.common.domain.TransactionDto;
 import prv.mark.project.common.entity.StockOrderEntity;
 import prv.mark.project.common.entity.StockPriceEntity;
+import prv.mark.project.common.entity.StockSymbolEntity;
 import prv.mark.project.common.entity.TransactionLogEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
+import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.service.StockOrderEntityService;
 import prv.mark.project.common.service.StockPriceEntityService;
+import prv.mark.project.common.service.StockSymbolEntityService;
 import prv.mark.project.common.service.TransactionLogEntityService;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
@@ -52,6 +55,8 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
 
     @Autowired
     private ApplicationParameterSource applicationParameterSource;
+    @Autowired
+    private StockSymbolEntityService stockSymbolEntityService;
     @Autowired
     private StockPriceEntityService stockPriceEntityService;
     @Autowired
@@ -171,7 +176,6 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         transactionLogEntity.setId(null);
         transactionLogEntity.setTransactionType(transactionDto.getTransactionType());
         transactionLogEntity.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
-        //transactionLogEntity.setLogDateTime(transactionDto.getLogDateTime());
         if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
             transactionLogEntity.setTransactionData(transactionDto.getTransactionDetail());
         }
@@ -212,6 +216,14 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         return submitOrderResponse;
     }
 
+    public boolean isSymbolInExchange(final String symbol) {
+        Optional<StockSymbolEntity> returnedEntity = stockSymbolEntityService.findByTickerSymbol(symbol);
+        if (returnedEntity.isPresent() && returnedEntity.get().getTickerSymbol().equals(symbol)) {
+           return true;
+        } else {
+           return false;
+        }
+    }
 
 
     /* Private methods */
@@ -242,7 +254,8 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
             transactionDto.setTransactionType(EnumTransactionTypes.STOCK_SALE.getTransactionTypeDesc());
         }
         transactionDto.setTransactionDetail(
-                submitOrderRequest.getHead().getSource() + "," + submitOrderRequest.getOrder().getAction() + ","
+                submitOrderRequest.getHead().getSource() + ","
+                        + submitOrderRequest.getOrder().getAction() + ","
                         + submitOrderRequest.getOrder().getQuantity() + ","
                         + submitOrderRequest.getOrder().getTickerSymbol() + ","
                         + submitOrderRequest.getOrder().getStockPrice() + ","
@@ -313,7 +326,6 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         try {
 
             returnEntity = stockOrderEntityService.save(entity);
-            //returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving StockOrderEntity " + entity.getId() + ".";
@@ -332,7 +344,6 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         TransactionLogEntity returnEntity = new TransactionLogEntity();
         try {
             returnEntity = transactionLogEntityService.save(entity);
-            //returnEntity = entity;
 
         } catch (PersistenceException | JpaSystemException | NoSuchElementException e) {
             String msg = "Exception caught while saving TransactionLogEntity entity " + entity.getId() + ".";

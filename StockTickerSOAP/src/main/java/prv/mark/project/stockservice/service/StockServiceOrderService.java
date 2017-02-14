@@ -20,4 +20,5 @@ public interface StockServiceOrderService {
 
     List<GetStockPriceResponse> getAll();
 
+    boolean isSymbolInExchange(String symbol);
 }
