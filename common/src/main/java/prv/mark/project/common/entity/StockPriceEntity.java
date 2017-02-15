@@ -6,6 +6,7 @@ import org.eclipse.persistence.annotations.CacheType;
 import org.eclipse.persistence.config.CacheIsolationType;
 
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,19 +22,9 @@ import java.math.BigDecimal;
  *
  * @author mlglenn.
  */
-
-//TODO may need to revisit caching of this entity
-
 @Entity
 @Table(name = "STOCK_PRICE")
-@Cache(
-        type = CacheType.WEAK,
-        isolation = CacheIsolationType.SHARED,
-        expiry = 1000,
-        alwaysRefresh = true,
-        disableHits = true,
-        coordinationType = CacheCoordinationType.INVALIDATE_CHANGED_OBJECTS
-)
+@Cacheable(false)
 public class StockPriceEntity implements Serializable {
 
     private static final long serialVersionUID = 8663315086156386511L;

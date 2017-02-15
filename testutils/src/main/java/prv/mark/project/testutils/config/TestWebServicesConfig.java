@@ -24,6 +24,9 @@ import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
 import prv.mark.project.stocks.transactionlogger.schemas.TransactionLoggerMsgType;
 //import prv.mark.project.xml.stocks.*;
 
+/**
+ *
+ */
 @Configuration
 @ComponentScan({"prv.mark.project", "prv.mark.project.stocks.commontypes.schemas",
         "prv.mark.project.stocks.stocktickertypes.schemas", "prv.mark.project.stocks.transloggertypes.schemas"}) //For JAXB classes

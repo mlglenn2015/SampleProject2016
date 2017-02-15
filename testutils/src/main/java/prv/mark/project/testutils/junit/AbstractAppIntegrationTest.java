@@ -18,7 +18,7 @@ public abstract class AbstractAppIntegrationTest extends AbstractAppWebServiceEn
     @Override
     @Before
     public void setUp() {
-        LOGGER.debug("@Before:AbstractAppIntegrationTest.setUp()");
+        LOGGER.debug("@Before: AbstractAppIntegrationTest.setUp()");
     }
 
 }

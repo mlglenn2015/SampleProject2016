@@ -14,7 +14,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-
+/**
+ *
+ */
 @Configuration
 @ComponentScan(basePackages = {"prv.mark.project"})
 @PropertySource("classpath:/TEST.properties")

@@ -16,6 +16,7 @@ import prv.mark.project.common.exception.SOAPGeneralFault;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
+import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockservice.schemas.RequestHeader;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
@@ -126,6 +127,8 @@ public class StockOrderEndpoint {
         LOGGER.info("*** StockOrderEndpoint.submitOrder() entry ...");
 
         validateSubmitOrderRequest(submitOrderRequest);
+
+        submitOrderRequest.getOrder().setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
 
         if (!stockServiceOrderService.isSymbolInExchange(submitOrderRequest.getOrder().getTickerSymbol())) {
             LOGGER.error("*** Invalid Ticker Symbol {} ***", submitOrderRequest.getOrder().getTickerSymbol());
@@ -260,8 +263,8 @@ public class StockOrderEndpoint {
 
         if (submitOrderRequest.getOrder().getOrderType().equalsIgnoreCase(EnumOrderTypes.LIMIT_ORDER.getOrderType())
                 && (submitOrderRequest.getOrder().getStockPrice() <= 0.00)) {
-            LOGGER.error("Invalid value for submitOrderRequest.getOrder().getQuantity()");
-            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.quantity"));
+            LOGGER.error("Invalid value for submitOrderRequest.getOrder().getStockPrice()");
+            throw new SOAPClientException(applicationMessageSource.getMessage("error.invalid.price"));
         }
 
         String tickerSymbol = Optional.of(submitOrderRequest.getOrder().getTickerSymbol())

@@ -23,10 +23,9 @@ import javax.annotation.PreDestroy;
 
 /**
  * Generic transactional unit test foundation.
- * <p> Most NBI Unit tests will derive from this class, as it provides database and transactional facilities used by
- * the applciation. </p>
- * <p> NOTE: Classes deriving from this class <b><i>must provide</i></b> the
- * {@link ContextConfiguration} annotation specific to the particular test's Spring configuration. </p>
+ *
+ * Classes deriving from this class must provide the {@link ContextConfiguration} annotation
+ * specific to the particular test's Spring configuration.
  *
  * @author mlglenn
  */
@@ -45,7 +44,7 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @PostConstruct
     public static void postConstruct() {
-        LOGGER.debug("@PostConstruct:AbstractAppTransactionalTest.postConstruct()");
+        LOGGER.debug("@PostConstruct: AbstractAppTransactionalTest.postConstruct()");
     }
 
     /**
@@ -53,7 +52,7 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @BeforeClass
     public static void bootstrap() {
-        LOGGER.debug("@BeforeClass:AbstractAppTransactionalTest.bootstrap()");
+        LOGGER.debug("@BeforeClass: AbstractAppTransactionalTest.bootstrap()");
     }
 
     /**
@@ -61,7 +60,7 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @AfterClass
     public static void destroy() {
-        LOGGER.debug("@AfterClass:AbstractAppTransactionalTest.destroy()");
+        LOGGER.debug("@AfterClass: AbstractAppTransactionalTest.destroy()");
     }
 
     /**
@@ -71,7 +70,7 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @Before
     public void setUp() {
-        LOGGER.debug("@Before:AbstractAppTransactionalTest.setUp()");
+        LOGGER.debug("@Before: AbstractAppTransactionalTest.setUp()");
     }
 
     /**
@@ -79,18 +78,18 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @After
     public void tearDown() {
-        LOGGER.debug("@After:AbstractAppTransactionalTest.tearDown()");
+        LOGGER.debug("@After: AbstractAppTransactionalTest.tearDown()");
     }
 
     @BeforeTransaction
     public void beforeTransaction() {
-        LOGGER.debug("@BeforeTransaction:AbstractAppTransactionalTest.beforeTransaction()");
+        LOGGER.debug("@BeforeTransaction: AbstractAppTransactionalTest.beforeTransaction()");
         LOGGER.trace("Starting transaction");
     }
 
     @AfterTransaction
     public void afterTransaction() {
-        LOGGER.debug("@AfterTransaction:AbstractAppTransactionalTest.afterTransaction()");
+        LOGGER.debug("@AfterTransaction: AbstractAppTransactionalTest.afterTransaction()");
         LOGGER.trace("End of transaction");
     }
 
@@ -99,7 +98,7 @@ public abstract class AbstractAppTransactionalTest extends AbstractTransactional
      */
     @PreDestroy
     public static void preDestroy() {
-        LOGGER.debug("@PreDestroy:AbstractAppTransactionalTest.preDestroy()");
+        LOGGER.debug("@PreDestroy: AbstractAppTransactionalTest.preDestroy()");
     }
 
 }
