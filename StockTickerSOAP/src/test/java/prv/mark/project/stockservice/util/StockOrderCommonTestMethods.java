@@ -1,4 +1,4 @@
-package prv.mark.project.stockservice.endpoint;
+package prv.mark.project.stockservice.util;
 
 import prv.mark.project.common.domain.EnumAction;
 import prv.mark.project.common.domain.EnumOrderTypes;
@@ -18,23 +18,23 @@ import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
  *
  * Created by Owner on 2/14/2017.
  */
-public class StockOrderEndpointCommonTestMethods {
+public class StockOrderCommonTestMethods {
 
-    protected static SubmitOrderResponse buildSubmitOrderResponse(final String symbol) {
+    public static SubmitOrderResponse buildSubmitOrderResponse(final String symbol) {
         SubmitOrderResponse response = new SubmitOrderResponse();
         response.setStatus(EnumStatusCodes.SUCCESS.getStatudCode());
         response.setStatusDesc("REQUEST SUCCESSFUL");
         return response;
     }
 
-    protected static SubmitOrderRequest buildSubmitOrderRequest(final String symbol) {
+    public static SubmitOrderRequest buildSubmitOrderRequest(final String symbol) {
         SubmitOrderRequest request = new SubmitOrderRequest();
         request.setHead(buildRequestHeader());
         request.setOrder(buildStockOrder(symbol));
         return request;
     }
 
-    protected static StockOrder buildStockOrder(final String symbol) {
+    public static StockOrder buildStockOrder(final String symbol) {
         StockOrder stockOrder = new StockOrder();
         stockOrder.setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
         stockOrder.setAction(EnumAction.BUY.getActionType());
@@ -45,7 +45,7 @@ public class StockOrderEndpointCommonTestMethods {
         return stockOrder;
     }
 
-    protected static StockOrder buildStockOrderNullPrice(final String symbol) {
+    public static StockOrder buildStockOrderNullPrice(final String symbol) {
         StockOrder stockOrder = new StockOrder();
         stockOrder.setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
         stockOrder.setAction(EnumAction.BUY.getActionType());
@@ -56,14 +56,14 @@ public class StockOrderEndpointCommonTestMethods {
         return stockOrder;
     }
 
-    protected static SubmitOrderRequest buildSubmitOrderRequestNullOrder(final String symbol) {
+    public static SubmitOrderRequest buildSubmitOrderRequestNullOrder(final String symbol) {
         SubmitOrderRequest request = new SubmitOrderRequest();
         request.setHead(buildRequestHeader());
 
         return request;
     }
 
-    protected static GetStockPriceResponse buildGetStockPriceResponse(final String symbol) {
+    public static GetStockPriceResponse buildGetStockPriceResponse(final String symbol) {
         GetStockPriceResponse response = new GetStockPriceResponse();
         StockQuote quote = new StockQuote();
         quote.setTickerSymbol(symbol);
@@ -74,47 +74,47 @@ public class StockOrderEndpointCommonTestMethods {
         return response;
     }
 
-    protected static GetStockPriceRequest buildGetStockPriceRequest(final String symbol) {
+    public static GetStockPriceRequest buildGetStockPriceRequest(final String symbol) {
         GetStockPriceRequest request = new GetStockPriceRequest();
         request.setHead(buildRequestHeader());
         request.setTickerSymbol(symbol);
         return request;
     }
 
-    protected static GetStockPriceRequest buildInvalidGetStockPriceRequest(final String symbol) {
+    public static GetStockPriceRequest buildInvalidGetStockPriceRequest(final String symbol) {
         GetStockPriceRequest request = new GetStockPriceRequest();
         request.setHead(buildInvalidRequestHeader());
         request.setTickerSymbol(symbol);
         return request;
     }
 
-    protected static GetStockPriceRequest buildEmptyGetStockPriceRequest(final String symbol) {
+    public static GetStockPriceRequest buildEmptyGetStockPriceRequest(final String symbol) {
         GetStockPriceRequest request = new GetStockPriceRequest();
         request.setHead(buildEmptyRequestHeader());
         request.setTickerSymbol(symbol);
         return request;
     }
 
-    protected static GetStockPriceRequest buildNullGetStockPriceRequest(final String symbol) {
+    public static GetStockPriceRequest buildNullGetStockPriceRequest(final String symbol) {
         GetStockPriceRequest request = new GetStockPriceRequest();
 
         request.setTickerSymbol(symbol);
         return request;
     }
 
-    protected static RequestHeader buildRequestHeader() {
+    public static RequestHeader buildRequestHeader() {
         RequestHeader header = new RequestHeader();
         header.setSource("STOCKTICKER_20170131");
         return header;
     }
 
-    protected static RequestHeader buildInvalidRequestHeader() {
+    public static RequestHeader buildInvalidRequestHeader() {
         RequestHeader header = new RequestHeader();
         header.setSource("INVALID");
         return header;
     }
 
-    protected static RequestHeader buildEmptyRequestHeader() {
+    public static RequestHeader buildEmptyRequestHeader() {
         RequestHeader header = new RequestHeader();
         header.setSource("");
         return header;

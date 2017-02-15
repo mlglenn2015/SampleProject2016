@@ -18,6 +18,7 @@ import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
 import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
 import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
 import prv.mark.project.stockservice.service.StockServiceOrderService;
+import prv.mark.project.stockservice.util.StockOrderCommonTestMethods;
 import prv.mark.project.testutils.junit.AbstractAppWebServiceEndpointTest;
 
 import static org.junit.Assert.assertNotNull;
@@ -73,7 +74,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
     @Test(expected = SOAPClientException.class)
     public void testGetStockPriceSOAPClientException() {
         LOGGER.debug("Begin StockOrderMockEndpointTests.testGetStockPriceSOAPClientException()");
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest("WMT");
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest("WMT");
         assertNotNull(request);
 
         doThrow(new SOAPClientException("StockOrderMockEndpointTests.testGetStockPriceSOAPClientException()"))
@@ -86,7 +87,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
     @Test(expected = SOAPClientException.class)
     public void testGetStockPriceSOAPServerException() {
         LOGGER.debug("Begin StockOrderMockEndpointTests.testGetStockPriceSOAPServerException()");
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest("WMT");
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest("WMT");
         assertNotNull(request);
 
         doThrow(new SOAPServerException("StockOrderMockEndpointTests.testGetStockPriceSOAPServerException()"))
@@ -99,7 +100,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
     @Test(expected = SOAPClientException.class)
     public void testSubmitOrderSOAPClientException() {
         LOGGER.debug("Begin StockOrderMockEndpointTests.testSubmitOrderSOAPClientException()");
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest("WMT");
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest("WMT");
         assertNotNull(request);
 
         doThrow(new SOAPClientException("StockOrderMockEndpointTests.testSubmitOrderSOAPClientException()"))
@@ -112,7 +113,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
     @Test(expected = SOAPClientException.class)
     public void testSubmitOrderSOAPServerException() {
         LOGGER.debug("Begin StockOrderMockEndpointTests.testSubmitOrderSOAPServerException()");
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest("WMT");
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest("WMT");
         assertNotNull(request);
 
         doThrow(new SOAPServerException("StockOrderMockEndpointTests.testSubmitOrderSOAPServerException()"))

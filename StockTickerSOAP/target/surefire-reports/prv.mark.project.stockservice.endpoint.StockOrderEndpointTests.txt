@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.stockservice.endpoint.StockOrderEndpointTests
 -------------------------------------------------------------------------------
-Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.19 sec - in prv.mark.project.stockservice.endpoint.StockOrderEndpointTests
+Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.999 sec - in prv.mark.project.stockservice.endpoint.StockOrderEndpointTests

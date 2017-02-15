@@ -9,21 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
-import prv.mark.project.common.domain.EnumAction;
 import prv.mark.project.common.domain.EnumOrderTypes;
 import prv.mark.project.common.domain.EnumStatusCodes;
 import prv.mark.project.common.exception.SOAPClientException;
-import prv.mark.project.common.service.impl.ApplicationMessageSource;
-import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
 import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
-import prv.mark.project.stockservice.schemas.RequestHeader;
-import prv.mark.project.stockservice.schemas.StockOrder;
-import prv.mark.project.stockservice.schemas.StockQuote;
 import prv.mark.project.stockservice.schemas.SubmitOrderRequest;
 import prv.mark.project.stockservice.schemas.SubmitOrderResponse;
+import prv.mark.project.stockservice.util.StockOrderCommonTestMethods;
 import prv.mark.project.testutils.junit.AbstractAppWebServiceEndpointTest;
 
 import static org.junit.Assert.assertEquals;
@@ -76,9 +71,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPrice() *****");
 
         String tickerSymbol = "WMT";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
-        GetStockPriceResponse response = StockOrderEndpointCommonTestMethods.buildGetStockPriceResponse(tickerSymbol);
+        GetStockPriceResponse response = StockOrderCommonTestMethods.buildGetStockPriceResponse(tickerSymbol);
         assertNotNull(response);
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request); //0
         assertNotNull(actualResponse);
@@ -93,7 +88,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceInvalidSymbol() *****");
 
         String tickerSymbol = "@";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -104,7 +99,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceEmptySymbol() *****");
 
         String tickerSymbol = "";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -115,7 +110,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceSymbolNotInExchange() *****");
 
         String tickerSymbol = "XXX";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -126,7 +121,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceInvalidHeader() *****");
 
         String tickerSymbol = "WMT";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildInvalidGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildInvalidGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -137,7 +132,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceEmptyHeader() *****");
 
         String tickerSymbol = "WMT";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildEmptyGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildEmptyGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -148,7 +143,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testGetStockPriceEmptyHeader() *****");
 
         String tickerSymbol = "WMT";
-        GetStockPriceRequest request = StockOrderEndpointCommonTestMethods.buildNullGetStockPriceRequest(tickerSymbol);
+        GetStockPriceRequest request = StockOrderCommonTestMethods.buildNullGetStockPriceRequest(tickerSymbol);
         assertNotNull(request);
 
         GetStockPriceResponse actualResponse = stockOrderEndpoint.getStockPrice(request);
@@ -168,9 +163,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrder() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        SubmitOrderResponse response = StockOrderEndpointCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
+        SubmitOrderResponse response = StockOrderCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
         assertNotNull(response);
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request); //0
         assertNotNull(actualResponse);
@@ -184,9 +179,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderInvalidSymbol() *****");
 
         String tickerSymbol = "@";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        SubmitOrderResponse response = StockOrderEndpointCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
+        SubmitOrderResponse response = StockOrderCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
         assertNotNull(response);
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request); //0
         assertNotNull(actualResponse);
@@ -200,9 +195,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderSymbolNotInExchange() *****");
 
         String tickerSymbol = "XXXXXXXXX";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        SubmitOrderResponse response = StockOrderEndpointCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
+        SubmitOrderResponse response = StockOrderCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
         assertNotNull(response);
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
     }
@@ -212,9 +207,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderEmptySymbol() *****");
 
         String tickerSymbol = "";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        SubmitOrderResponse response = StockOrderEndpointCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
+        SubmitOrderResponse response = StockOrderCommonTestMethods.buildSubmitOrderResponse(tickerSymbol);
         assertNotNull(response);
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
     }
@@ -224,7 +219,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderNullOrder() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequestNullOrder(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequestNullOrder(tickerSymbol);
         assertNotNull(request);
 
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
@@ -235,7 +230,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderEmptyAction() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setAction(StringUtils.EMPTY);
 
@@ -247,7 +242,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderInvalidAction() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setAction("XXXXXXX");
 
@@ -259,7 +254,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderEmptyOrderType() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setOrderType(StringUtils.EMPTY);
 
@@ -271,7 +266,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderInvalidOrderType() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setOrderType("MARKET"); //MARKET ORDER is the correct value
 
@@ -283,7 +278,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderEmptyTickerSymbol() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setTickerSymbol(StringUtils.EMPTY);
 
@@ -295,7 +290,7 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderNullQuantity() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
         request.getOrder().setQuantity(null);
 
@@ -307,9 +302,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderLimitOrderNullPrice() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        request.setOrder(StockOrderEndpointCommonTestMethods.buildStockOrderNullPrice(tickerSymbol));
+        request.setOrder(StockOrderCommonTestMethods.buildStockOrderNullPrice(tickerSymbol));
         request.getOrder().setOrderType(EnumOrderTypes.LIMIT_ORDER.getOrderType());
 
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(request);
@@ -320,9 +315,9 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
         LOGGER.debug("***** Commence StockOrderEndpointTests.testSubmitOrderLimitOrderInvalidPrice() *****");
 
         String tickerSymbol = "WMT";
-        SubmitOrderRequest request = StockOrderEndpointCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
+        SubmitOrderRequest request = StockOrderCommonTestMethods.buildSubmitOrderRequest(tickerSymbol);
         assertNotNull(request);
-        request.setOrder(StockOrderEndpointCommonTestMethods.buildStockOrder(tickerSymbol));
+        request.setOrder(StockOrderCommonTestMethods.buildStockOrder(tickerSymbol));
         request.getOrder().setOrderType(EnumOrderTypes.LIMIT_ORDER.getOrderType());
         request.getOrder().setStockPrice(NumberUtils.toFloat("0.00"));
 
@@ -335,105 +330,4 @@ public class StockOrderEndpointTests extends AbstractAppWebServiceEndpointTest {
 
         SubmitOrderResponse actualResponse = stockOrderEndpoint.submitOrder(null);
     }
-
-
-    /*private SubmitOrderResponse buildSubmitOrderResponse(final String symbol) { TODO cleanup
-        SubmitOrderResponse response = new SubmitOrderResponse();
-        response.setStatus(EnumStatusCodes.SUCCESS.getStatudCode());
-        response.setStatusDesc("REQUEST SUCCESSFUL");
-        return response;
-    }
-
-    private SubmitOrderRequest buildSubmitOrderRequest(final String symbol) {
-        SubmitOrderRequest request = new SubmitOrderRequest();
-        request.setHead(buildRequestHeader());
-        request.setOrder(buildStockOrder(symbol));
-        return request;
-    }
-
-    private StockOrder buildStockOrder(final String symbol) {
-        StockOrder stockOrder = new StockOrder();
-        stockOrder.setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
-        stockOrder.setAction(EnumAction.BUY.getActionType());
-        stockOrder.setQuantity(1);
-        stockOrder.setTickerSymbol(symbol);
-        stockOrder.setOrderType(EnumOrderTypes.MARKET_ORDER.getOrderType());
-        stockOrder.setStockPrice(NumberUtils.toFloat("65.00"));
-        return stockOrder;
-    }
-
-    private StockOrder buildStockOrderNullPrice(final String symbol) {
-        StockOrder stockOrder = new StockOrder();
-        stockOrder.setOrderDate(DateUtils.getCurrentXMLGregorianCalendar());
-        stockOrder.setAction(EnumAction.BUY.getActionType());
-        stockOrder.setQuantity(1);
-        stockOrder.setTickerSymbol(symbol);
-        stockOrder.setOrderType(EnumOrderTypes.MARKET_ORDER.getOrderType());
-
-        return stockOrder;
-    }
-
-    private SubmitOrderRequest buildSubmitOrderRequestNullOrder(final String symbol) {
-        SubmitOrderRequest request = new SubmitOrderRequest();
-        request.setHead(buildRequestHeader());
-
-        return request;
-    }
-
-    private GetStockPriceResponse buildGetStockPriceResponse(final String symbol) {
-        GetStockPriceResponse response = new GetStockPriceResponse();
-        StockQuote quote = new StockQuote();
-        quote.setTickerSymbol(symbol);
-        quote.setStatusCode(EnumStatusCodes.SUCCESS.getStatudCode());
-        quote.setStatusText("REQUEST SUCCESSFUL");
-        quote.setStockPrice(NumberUtils.toFloat("68.00"));
-        response.setQuote(quote);
-        return response;
-    }
-
-    private GetStockPriceRequest buildGetStockPriceRequest(final String symbol) {
-        GetStockPriceRequest request = new GetStockPriceRequest();
-        request.setHead(buildRequestHeader());
-        request.setTickerSymbol(symbol);
-        return request;
-    }
-
-    private GetStockPriceRequest buildInvalidGetStockPriceRequest(final String symbol) {
-        GetStockPriceRequest request = new GetStockPriceRequest();
-        request.setHead(buildInvalidRequestHeader());
-        request.setTickerSymbol(symbol);
-        return request;
-    }
-
-    private GetStockPriceRequest buildEmptyGetStockPriceRequest(final String symbol) {
-        GetStockPriceRequest request = new GetStockPriceRequest();
-        request.setHead(buildEmptyRequestHeader());
-        request.setTickerSymbol(symbol);
-        return request;
-    }
-
-    private GetStockPriceRequest buildNullGetStockPriceRequest(final String symbol) {
-        GetStockPriceRequest request = new GetStockPriceRequest();
-
-        request.setTickerSymbol(symbol);
-        return request;
-    }
-
-    private RequestHeader buildRequestHeader() {
-        RequestHeader header = new RequestHeader();
-        header.setSource("STOCKTICKER_20170131");
-        return header;
-    }
-
-    private RequestHeader buildInvalidRequestHeader() {
-        RequestHeader header = new RequestHeader();
-        header.setSource("INVALID");
-        return header;
-    }
-
-    private RequestHeader buildEmptyRequestHeader() {
-        RequestHeader header = new RequestHeader();
-        header.setSource("");
-        return header;
-    }*/
 }
