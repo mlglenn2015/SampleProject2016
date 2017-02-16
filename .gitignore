@@ -3,10 +3,11 @@ workspace.xml
 *.iml
 target/*
 common/target/*
-Stockticker/target/*
+StockTickerSOAP/target/*
 StocktickerRest/target/*
 TransactionLogger/target/*
 TranslogProducer/target/*
+TranslogJMSProducer/target/*
 schemas/target/*
 testutils/target/*
 
