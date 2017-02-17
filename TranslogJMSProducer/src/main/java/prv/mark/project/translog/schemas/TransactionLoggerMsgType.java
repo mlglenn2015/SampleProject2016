@@ -6,7 +6,7 @@
 //
 
 
-package prv.mark.project.stocks.transactionlogger.schemas;
+package prv.mark.project.translog.schemas;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

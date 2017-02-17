@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>project2016</artifactId>
         <groupId>prv.mark.project</groupId>
@@ -35,7 +36,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>4.3.4.RELEASE</version>
@@ -51,11 +52,11 @@
             <artifactId>spring-integration-jms</artifactId>
             <version>4.3.5.RELEASE</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-jmx</artifactId>
             <version>4.3.5.RELEASE</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-xml</artifactId>
@@ -66,7 +67,7 @@
             <artifactId>spring-integration-java-dsl</artifactId>
             <version>1.2.1.RELEASE</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.ws</groupId>
             <artifactId>spring-ws-security</artifactId>
             <version>2.4.0.RELEASE</version>

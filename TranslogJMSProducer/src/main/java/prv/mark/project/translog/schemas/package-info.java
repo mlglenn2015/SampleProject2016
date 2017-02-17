@@ -5,5 +5,5 @@
 // Generated on: 2017.01.30 at 08:58:08 PM EST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://project.mark.prv/stockservice/schemas", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package prv.mark.project.stockservice.schemas;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://project.mark.prv/stocks/translog/schemas", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package prv.mark.project.translog.schemas;

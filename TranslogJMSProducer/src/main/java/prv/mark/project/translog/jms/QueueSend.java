@@ -46,6 +46,7 @@ public class QueueSend
     private Queue queue;
     private TextMessage msg;
 
+
     /**
      * Creates all the necessary objects for sending
      * messages to a JMS queue.
@@ -55,9 +56,7 @@ public class QueueSend
      * @exception NamingException if operation cannot be performed
      * @exception JMSException if JMS fails to initialize due to internal error
      */
-    public void init(Context ctx, String queueName)
-            throws NamingException, JMSException
-    {
+    public void init(Context ctx, String queueName) throws NamingException, JMSException {
         qconFactory = (QueueConnectionFactory) ctx.lookup(JMS_FACTORY);
         qcon = qconFactory.createQueueConnection();
         qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -87,6 +86,7 @@ public class QueueSend
         qsession.close();
         qcon.close();
     }
+
     /** main() method.
      *
      * @param args WebLogic Server URL
@@ -104,9 +104,8 @@ public class QueueSend
         qs.close();
     }
 
-    private static void readAndSend(QueueSend qs)
-            throws IOException, JMSException
-    {
+
+    private static void readAndSend(QueueSend qs) throws IOException, JMSException {
         BufferedReader msgStream = new BufferedReader(new InputStreamReader(System.in));
         String line=null;
         boolean quitNow = false;
@@ -122,9 +121,7 @@ public class QueueSend
 
     }
 
-    private static InitialContext getInitialContext(String url)
-            throws NamingException
-    {
+    private static InitialContext getInitialContext(String url) throws NamingException {
         Hashtable env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
         env.put(Context.PROVIDER_URL, url);

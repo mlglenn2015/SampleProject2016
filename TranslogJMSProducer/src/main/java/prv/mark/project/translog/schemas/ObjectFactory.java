@@ -6,7 +6,7 @@
 //
 
 
-package prv.mark.project.stocks.transactionlogger.schemas;
+package prv.mark.project.translog.schemas;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -17,7 +17,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the prv.mark.project.stocks.transactionlogger.schemas package. 
+ * generated in the prv.mark.project.stocks.translog.schemas package.
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,10 +31,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _TransactionLoggerMsg_QNAME = new QName("http://project.mark.prv/stocks/transactionlogger/schemas", "TransactionLoggerMsg");
+    private final static QName _TransactionLoggerMsg_QNAME = new QName("http://project.mark.prv/stocks/translog/schemas", "TransactionLoggerMsg");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: prv.mark.project.stocks.transactionlogger.schemas
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: prv.mark.project.stocks.translog.schemas
      * 
      */
     public ObjectFactory() {
@@ -52,7 +52,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link TransactionLoggerMsgType }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://project.mark.prv/stocks/transactionlogger/schemas", name = "TransactionLoggerMsg")
+    @XmlElementDecl(namespace = "http://project.mark.prv/stocks/translog/schemas", name = "TransactionLoggerMsg")
     public JAXBElement<TransactionLoggerMsgType> createTransactionLoggerMsg(TransactionLoggerMsgType value) {
         return new JAXBElement<TransactionLoggerMsgType>(_TransactionLoggerMsg_QNAME, TransactionLoggerMsgType.class, null, value);
     }
