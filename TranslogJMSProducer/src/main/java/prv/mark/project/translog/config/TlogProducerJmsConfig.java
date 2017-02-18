@@ -31,6 +31,7 @@ import java.util.Map;
 /**
  * Spring Bean base configuration for JMS components.
  *
+ * Sources:
  * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
  * https://spring.io/guides/gs/messaging-jms/
  *
@@ -46,7 +47,7 @@ public class TlogProducerJmsConfig {
     private static final Logger logger = LoggerFactory.getLogger(TlogProducerJmsConfig.class);
 
     @Autowired
-    protected ConnectionFactory tlogConnectionFactory;  // TODO JNDI_FACTORY="weblogic.jndi.WLInitialContextFactory";
+    protected ConnectionFactory tlogConnectionFactory;  // TODO? JNDI_FACTORY="weblogic.jndi.WLInitialContextFactory";
 
     @Autowired
     @Qualifier("tlogJMSQueue")
@@ -94,9 +95,9 @@ public class TlogProducerJmsConfig {
     }
 
     /**
-     * Stock Ticker application message integration channel.
+     * Transaction Log Producer message integration channel.
      *
-     * {@link TransactionLoggerMsgType} messages are placed onto this channel to send to the TransactionLogger.
+     * {@link TransactionLoggerMsgType} messages are placed onto this channel to be consumed by the TransactionLogger.
      *
      * @return {@link MessageChannel}
      */
@@ -108,12 +109,12 @@ public class TlogProducerJmsConfig {
     }
 
     /**
-     * Publishes JMS messages to the stocksQueue JMS queue.
+     * Publishes JMS messages to the Transaction Log JMS queue.
      *
      * @return {@link IntegrationFlow}
      */
     @Bean
-    public IntegrationFlow translogProducerFlow() {
+    public IntegrationFlow translogProducerIntegrationFlow() {
         //return f -> f.channel(translogProducerChannel()) TODO ?
         return f -> f.channel("translogProducerChannel")
                 .handle(Jms.outboundAdapter(tlogConnectionFactory).destination(tlogJMSQueue));

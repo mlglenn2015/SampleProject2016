@@ -15,8 +15,11 @@ import javax.jms.TextMessage;
 /**
  * Class to send a JMS message.
  *
+ * Sources:
  * https://bsnyderblog.blogspot.com/2010/02/using-spring-jmstemplate-to-send-jms.html
  * http://www.springbyexample.org/examples/simple-spring-jms.html
+ * https://www.youtube.com/watch?v=GOsyO1LZA5k
+ * https://youtu.be/9WGSVnhlOHE
  *
  * Created by Owner on 2/16/2017.
  */

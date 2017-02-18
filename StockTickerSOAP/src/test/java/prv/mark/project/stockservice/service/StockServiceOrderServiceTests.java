@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import prv.mark.project.stockservice.util.StockOrderCommonTestMethods;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
+import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * Created by Owner on 2/14/2017.
  */
-public class StockServiceOrderServiceTests {
+public class StockServiceOrderServiceTests extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceOrderServiceTests.class);
 
@@ -40,7 +41,7 @@ public class StockServiceOrderServiceTests {
         LOGGER.debug("***** StockServiceOrderServiceTests.defaultTest() *****");
     }
 
-    //@Test
+    //@Test TODO
     public void testGetStockPrice() {
         LOGGER.debug("***** StockServiceOrderServiceTests.testGetStockPrice() *****");
         assertNotNull(StockOrderCommonTestMethods.buildGetStockPriceRequest("WMT"));

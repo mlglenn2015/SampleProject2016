@@ -16,7 +16,7 @@
         <!--<module>Stockticker</module>-->
         <!--<module>StocktickerRest</module>-->
         <module>StockTickerSOAP</module>
-        <!--<module>TransactionLogger</module>-->
+        <module>TransactionLogger</module>
         <!--<module>TranslogProducer</module>-->
         <module>TranslogJMSProducer</module>
         <module>BatchClient</module>

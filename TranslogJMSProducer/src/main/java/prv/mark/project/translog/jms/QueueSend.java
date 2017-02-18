@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Hashtable;
-//import javax.jms.*;
 import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
@@ -24,7 +23,10 @@ import javax.naming.NamingException;
  * witness messages being sent and received, and to browse the queue
  * for messages. The class is used to send messages to the queue.
  *
+ * Sources:
  * https://blogs.oracle.com/soaproactive/entry/jms_step_2_using_the
+ * https://www.youtube.com/watch?v=GOsyO1LZA5k
+ * https://youtu.be/9WGSVnhlOHE
  *
  * @author Copyright (c) 1999-2005 by BEA Systems, Inc. All Rights Reserved.
  */
