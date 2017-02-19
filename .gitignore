@@ -2,9 +2,11 @@
 workspace.xml
 *.iml
 target/*
+BatchClient/target/*
 common/target/*
-StockTickerSOAP/target/*
+Stockticker/target/*
 StocktickerRest/target/*
+StockTickerSOAP/target/*
 TransactionLogger/target/*
 TranslogProducer/target/*
 TranslogJMSProducer/target/*
