@@ -11,7 +11,7 @@
 
     <modules>
         <!--<module>schemas</module>-->
-        <module>testutils</module>
+        <module>testutils</module>got
         <module>common</module>
         <!--<module>Stockticker</module>-->
         <!--<module>StocktickerRest</module>-->
