@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: prv.mark.project.stockservice.service.StockServiceOrderServiceTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in prv.mark.project.stockservice.service.StockServiceOrderServiceTests
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.438 sec - in prv.mark.project.stockservice.service.StockServiceOrderServiceTests
+>>>>>>> dbabfc462c6399df2d088ca127012d51601b20c8

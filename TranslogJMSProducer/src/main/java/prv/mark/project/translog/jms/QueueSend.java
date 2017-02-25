@@ -94,7 +94,7 @@ public class QueueSend
      * @param args WebLogic Server URL
      * @exception Exception if operation fails
      */
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         if (args.length != 1) {
             System.out.println("Usage: java examples.jms.queue.QueueSend WebLogicURL");
             return;
@@ -104,10 +104,10 @@ public class QueueSend
         qs.init(ic, QUEUE);
         readAndSend(qs);
         qs.close();
-    }
+    }*/
 
 
-    private static void readAndSend(QueueSend qs) throws IOException, JMSException {
+    /*private static void readAndSend(QueueSend qs) throws IOException, JMSException {
         BufferedReader msgStream = new BufferedReader(new InputStreamReader(System.in));
         String line=null;
         boolean quitNow = false;
@@ -120,10 +120,17 @@ public class QueueSend
                 quitNow = line.equalsIgnoreCase("quit");
             }
         } while (! quitNow);
+    }*/
 
-    }
+    /*private void readAndSend(QueueSend qs, final String line) throws IOException, JMSException {
 
-    private static InitialContext getInitialContext(String url) throws NamingException {
+            if (line != null && line.trim().length() != 0) {
+                qs.send(line);
+                System.out.println("JMS Message Sent: "+line+"\n");
+            }
+    }*/
+
+    public InitialContext getInitialContext(String url) throws NamingException {
         Hashtable env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
         env.put(Context.PROVIDER_URL, url);

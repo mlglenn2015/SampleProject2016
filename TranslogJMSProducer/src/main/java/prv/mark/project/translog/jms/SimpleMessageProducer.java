@@ -40,12 +40,11 @@ public class SimpleMessageProducer {
     public void sendMessage() throws JMSException {
 
         StringBuilder payload = new StringBuilder();
-        //for (int i = 0; i < numberOfMessages; ++i) {
-            //payload = new StringBuilder();
-            //payload.append("Message [").append(i).append("] sent at: ").append(DateUtils.getDate());
-            payload.append("Message sent at: ").append(DateUtils.getDate());
+        payload.append("Message sent at: ").append(DateUtils.getDate());
 
-            /*jmsTemplate.send(new MessageCreator() {
+        //MessageCreator messageCreator = new MessageCreator();
+
+        /*jmsTemplate.send(new MessageCreator() {
                 public Message createMessage(Session session) throws JMSException {
                     TextMessage message = session.createTextMessage(payload.toString());
                     //message.setIntProperty("messageCount", i);
@@ -60,4 +59,30 @@ public class SimpleMessageProducer {
 
     }
 
+    /**
+     * TODO
+     * @throws JMSException
+     */
+    /*public void sendMessage() throws JMSException {
+
+        StringBuilder payload = new StringBuilder();
+        //for (int i = 0; i < numberOfMessages; ++i) {
+        //payload = new StringBuilder();
+        //payload.append("Message [").append(i).append("] sent at: ").append(DateUtils.getDate());
+        payload.append("Message sent at: ").append(DateUtils.getDate());
+
+        jmsTemplate.send(new MessageCreator() {
+            public Message createMessage(Session session) throws JMSException {
+                TextMessage message = session.createTextMessage(payload.toString());
+                //message.setIntProperty("messageCount", i);
+                message.setIntProperty("messageCount", 1);
+                //logger.info("Sending message number [" + i + "]");
+                logger.info("Sending message number [" + 1 + "]");
+                return message;
+            }
+        });
+
+        //}
+
+    }*/
 }

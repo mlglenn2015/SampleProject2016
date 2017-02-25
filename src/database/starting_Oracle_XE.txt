@@ -3,7 +3,27 @@
 
 2. Start database as Administrator
 
-3. Test with SQL Plus or SQL Developer
+3. Test with SQL Plus or SQL Developer SYSTEM/oracle
+
+
+SQL> sqlplus /nolog
+
+SQL> connect / as sysdba
+
+Connected.
+
+SQL> shutdown abort
+
+ORACLE Instance shut down.
+
+SQL> startup nomount
+
+ORACLE Instance started
+
+SQL> alter database mount;
+
+SQL> alter database open;
+
 
 Destination Folder: C:\Oracle\ExpressDB\
 Oracle Home: C:\Oracle\ExpressDB\app\oracle\product\11.2.0\server\

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.004" tests="2" errors="0" skipped="0" failures="0">
+=======
+<testsuite name="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.013" tests="2" errors="0" skipped="0" failures="0">
+>>>>>>> dbabfc462c6399df2d088ca127012d51601b20c8
   <properties>
     <property name="idea.version" value="2016.2.5"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -17,7 +21,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016"/>
+    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016\StockTickerSOAP"/>
     <property name="java.runtime.version" value="1.8.0_111-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk-8u111\jre\lib\endorsed"/>
@@ -62,6 +66,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
+<<<<<<< HEAD
   <testcase name="defaultTest" classname="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.002"/>
   <testcase name="testGetSoapMessageFromString" classname="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.002"/>
+=======
+  <testcase name="defaultTest" classname="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.006"/>
+  <testcase name="testGetSoapMessageFromString" classname="prv.mark.project.stockservice.util.MessageBuilderUtilsTests" time="0.007"/>
+>>>>>>> dbabfc462c6399df2d088ca127012d51601b20c8
 </testsuite>
