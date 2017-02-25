@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016"/>
+    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016\StockTickerSOAP"/>
     <property name="java.runtime.version" value="1.8.0_111-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_111\jre\lib\endorsed"/>

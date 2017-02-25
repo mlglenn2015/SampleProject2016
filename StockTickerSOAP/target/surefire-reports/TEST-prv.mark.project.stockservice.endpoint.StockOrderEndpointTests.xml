@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.768" tests="23" errors="0" skipped="0" failures="0">
+<testsuite name="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="1.011" tests="23" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2016.2.5"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016"/>
+    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016\StockTickerSOAP"/>
     <property name="java.runtime.version" value="1.8.0_111-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_111\jre\lib\endorsed"/>
@@ -62,27 +62,27 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testSubmitOrderInvalidOrderType" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.213"/>
-  <testcase name="testSubmitOrderEmptyAction" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.023"/>
-  <testcase name="testGetStockPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.09"/>
-  <testcase name="testGetStockPriceEmptyHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.016"/>
-  <testcase name="testGetStockPriceEmptySymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.014"/>
-  <testcase name="testSubmitOrderEmptySymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.036"/>
-  <testcase name="testSubmitOrderInvalidAction" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.026"/>
-  <testcase name="testGetStockPriceNullHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.015"/>
-  <testcase name="testSubmitOrderNullOrder" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.022"/>
-  <testcase name="testSubmitOrderSymbolNotInExchange" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.021"/>
-  <testcase name="testSubmitOrderLimitOrderInvalidPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.019"/>
-  <testcase name="testSubmitOrderInvalidSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.017"/>
-  <testcase name="testSubmitOrderEmptyOrderType" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.009"/>
-  <testcase name="testSubmitOrderEmptyTickerSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.041"/>
-  <testcase name="testSubmitOrder" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.058"/>
-  <testcase name="defaultTest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.007"/>
-  <testcase name="testGetStockPriceNullRequest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.014"/>
-  <testcase name="testSubmitOrderNullRequest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.014"/>
-  <testcase name="testSubmitOrderNullQuantity" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.016"/>
-  <testcase name="testGetStockPriceInvalidHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.016"/>
-  <testcase name="testSubmitOrderLimitOrderNullPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.019"/>
-  <testcase name="testGetStockPriceInvalidSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.042"/>
-  <testcase name="testGetStockPriceSymbolNotInExchange" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.02"/>
+  <testcase name="testSubmitOrderInvalidOrderType" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.196"/>
+  <testcase name="testSubmitOrderEmptyAction" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.036"/>
+  <testcase name="testGetStockPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.072"/>
+  <testcase name="testGetStockPriceEmptyHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.083"/>
+  <testcase name="testGetStockPriceEmptySymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.031"/>
+  <testcase name="testSubmitOrderEmptySymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.033"/>
+  <testcase name="testSubmitOrderInvalidAction" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.022"/>
+  <testcase name="testGetStockPriceNullHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.016"/>
+  <testcase name="testSubmitOrderNullOrder" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.041"/>
+  <testcase name="testSubmitOrderSymbolNotInExchange" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.04"/>
+  <testcase name="testSubmitOrderLimitOrderInvalidPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.038"/>
+  <testcase name="testSubmitOrderInvalidSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.024"/>
+  <testcase name="testSubmitOrderEmptyOrderType" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.028"/>
+  <testcase name="testSubmitOrderEmptyTickerSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.023"/>
+  <testcase name="testSubmitOrder" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.144"/>
+  <testcase name="defaultTest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.014"/>
+  <testcase name="testGetStockPriceNullRequest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.013"/>
+  <testcase name="testSubmitOrderNullRequest" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.016"/>
+  <testcase name="testSubmitOrderNullQuantity" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.018"/>
+  <testcase name="testGetStockPriceInvalidHeader" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.044"/>
+  <testcase name="testSubmitOrderLimitOrderNullPrice" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.013"/>
+  <testcase name="testGetStockPriceInvalidSymbol" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.02"/>
+  <testcase name="testGetStockPriceSymbolNotInExchange" classname="prv.mark.project.stockservice.endpoint.StockOrderEndpointTests" time="0.046"/>
 </testsuite>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.473" tests="5" errors="0" skipped="0" failures="0">
+<testsuite name="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.476" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2016.2.5"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016"/>
+    <property name="user.dir" value="C:\GitHub_Projects\SampleProject2016\StockTickerSOAP"/>
     <property name="java.runtime.version" value="1.8.0_111-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_111\jre\lib\endorsed"/>
@@ -62,9 +62,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="defaultTest" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.362"/>
-  <testcase name="testGetStockPriceSOAPClientException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.052"/>
-  <testcase name="testGetStockPriceSOAPServerException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.018"/>
-  <testcase name="testSubmitOrderSOAPClientException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.02"/>
-  <testcase name="testSubmitOrderSOAPServerException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.021"/>
+  <testcase name="defaultTest" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.352"/>
+  <testcase name="testGetStockPriceSOAPClientException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.063"/>
+  <testcase name="testGetStockPriceSOAPServerException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.017"/>
+  <testcase name="testSubmitOrderSOAPClientException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.022"/>
+  <testcase name="testSubmitOrderSOAPServerException" classname="prv.mark.project.stockservice.endpoint.StockOrderMockEndpointTests" time="0.022"/>
 </testsuite>

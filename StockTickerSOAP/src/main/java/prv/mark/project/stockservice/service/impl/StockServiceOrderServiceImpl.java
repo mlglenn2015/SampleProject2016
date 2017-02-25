@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import prv.mark.project.common.domain.EnumAction;
@@ -26,6 +27,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
+import prv.mark.project.stockservice.jms.TranslogProducerJms;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
 import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
 import prv.mark.project.stockservice.schemas.RequestHeader;
@@ -64,6 +66,12 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
     @Autowired
     private TransactionLogEntityService transactionLogEntityService;
 
+    //Added with TlogProducerJmsConfig
+    //@Autowired
+    //private TranslogProducerJms translogProducerJms;
+    //@Autowired
+    //protected MessageChannel tlogJMSLogger;
+
 
     @Override
     public GetStockPriceResponse getStockPrice(
@@ -77,7 +85,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
 
 
         //TODO place the transaction on the log queue
-        TransactionLogEntity transactionLogEntity = new TransactionLogEntity();
+        /*TransactionLogEntity transactionLogEntity = new TransactionLogEntity();
         transactionLogEntity.setId(null);
         transactionLogEntity.setTransactionType(transactionDto.getTransactionType());
         transactionLogEntity.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
@@ -85,8 +93,9 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
             transactionLogEntity.setTransactionData(transactionDto.getTransactionDetail());
         }
-        saveTransactionLogEntity(transactionLogEntity);
+        saveTransactionLogEntity(transactionLogEntity);*/
 
+        //translogProducerJms.sendMessage("TEST MESSAGE");
 
 
 
