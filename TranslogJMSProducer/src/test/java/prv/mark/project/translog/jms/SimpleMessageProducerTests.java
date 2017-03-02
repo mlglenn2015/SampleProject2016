@@ -15,7 +15,7 @@ import javax.jms.JMSException;
  *
  * Created by Owner on 2/18/2017.
  */
-public class SimpleMessageProducerTests extends AbstractAppTransactionalTest {
+public class SimpleMessageProducerTests { //extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMessageProducerTests.class);
 

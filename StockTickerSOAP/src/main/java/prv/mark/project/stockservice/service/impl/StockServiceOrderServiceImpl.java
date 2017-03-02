@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.messaging.MessageChannel;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import prv.mark.project.common.domain.EnumAction;
@@ -18,7 +17,6 @@ import prv.mark.project.common.entity.StockPriceEntity;
 import prv.mark.project.common.entity.StockSymbolEntity;
 import prv.mark.project.common.entity.TransactionLogEntity;
 import prv.mark.project.common.exception.ExceptionRouter;
-import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.service.StockOrderEntityService;
 import prv.mark.project.common.service.StockPriceEntityService;
 import prv.mark.project.common.service.StockSymbolEntityService;
@@ -27,7 +25,7 @@ import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.common.util.NumberUtils;
 import prv.mark.project.common.util.StringUtils;
-import prv.mark.project.stockservice.jms.TranslogProducerJms;
+import prv.mark.project.stockservice.jms.TransactionLoggerJmsClient;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
 import prv.mark.project.stockservice.schemas.GetStockPriceResponse;
 import prv.mark.project.stockservice.schemas.RequestHeader;
@@ -79,7 +77,17 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         LOGGER.debug("*** StockServiceOrderServiceImpl.getStockPrice() entry ...");
         logGetStockPriceRequest(getStockPriceRequest);
 
-        TransactionDto transactionDto = setTransactionDto(getStockPriceRequest);
+        TransactionLoggerJmsClient tlogClient =
+                new TransactionLoggerJmsClient(setTransactionDto(getStockPriceRequest));
+        tlogClient.sendMessage();
+
+
+
+
+
+
+
+
 
 
 

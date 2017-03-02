@@ -11,7 +11,7 @@ import prv.mark.project.testutils.junit.AbstractAppTransactionalTest;
  * TODO
  * Created by Owner on 2/19/2017.
  */
-public class TranslogProducerTests extends AbstractAppTransactionalTest {
+public class TranslogProducerTests { //extends AbstractAppTransactionalTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TranslogProducerTests.class);
 

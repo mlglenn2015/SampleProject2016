@@ -6,10 +6,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 /**
  * Specialized exception that translates to a SOAP Fault when thrown.
  *
- * <p>
- *  This exception MUST BE THROWN when catching an exception if a SOAP fault needs to
- *  be sent back to the caller of a given web service method.
- * </p>
+ *  This exception is thrown if a SOAP fault needs to be sent back to the WS client.
  *
  * @author mlglenn.
  */

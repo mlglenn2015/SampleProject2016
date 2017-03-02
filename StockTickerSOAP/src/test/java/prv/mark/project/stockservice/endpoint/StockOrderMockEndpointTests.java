@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
+import prv.mark.project.common.entity.StockPriceEntity;
 import prv.mark.project.common.exception.SOAPClientException;
 import prv.mark.project.common.exception.SOAPServerException;
 import prv.mark.project.stockservice.schemas.GetStockPriceRequest;
@@ -22,6 +23,7 @@ import prv.mark.project.stockservice.util.StockOrderCommonTestMethods;
 import prv.mark.project.testutils.junit.AbstractAppWebServiceEndpointTest;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -43,9 +45,9 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
     @Autowired
     private SoapFaultAnnotationExceptionResolver soapFaultExceptionResolver;
 
-    @Autowired
+    /*@Autowired
     @InjectMocks
-    private StockOrderEndpoint stockOrderEndpoint;
+    private StockOrderEndpoint stockOrderEndpoint;*/
 
     @Mock
     private StockServiceOrderService stockServiceOrderService;
@@ -58,7 +60,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
         assertNotNull(env);
         assertNotNull(webServiceTemplate);
         assertNotNull(soapFaultExceptionResolver);
-        assertNotNull(stockOrderEndpoint);
+        //assertNotNull(stockOrderEndpoint);
     }
 
     @After
@@ -71,7 +73,7 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
         LOGGER.debug("***** StockOrderMockEndpointTests.defaultTest() *****");
     }
 
-    @Test(expected = SOAPClientException.class)
+    /*@Test(expected = SOAPClientException.class)
     public void testGetStockPriceSOAPClientException() {
         LOGGER.debug("Begin StockOrderMockEndpointTests.testGetStockPriceSOAPClientException()");
         GetStockPriceRequest request = StockOrderCommonTestMethods.buildGetStockPriceRequest("WMT");
@@ -121,5 +123,5 @@ public class StockOrderMockEndpointTests extends AbstractAppWebServiceEndpointTe
                 .placeOrder(request);
 
         SubmitOrderResponse response = stockOrderEndpoint.submitOrder(request);
-    }
+    }*/
 }

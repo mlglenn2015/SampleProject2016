@@ -61,6 +61,15 @@ public class StockOrderEndpoint {
         //return Pattern.matches("\w", i);
     };
 
+    /* Predicate to validate the response */
+    private Predicate<GetStockPriceResponse> validResponse = response -> Optional.of(response)
+            .filter(r -> Optional.of(r.getQuote()).isPresent())
+            .filter(r -> r.getQuote().getStatusCode() == 0)
+            .filter(r -> Optional.of(r.getQuote().getStockPrice()).isPresent())
+            .filter(r -> Optional.of(r.getQuote().getTickerSymbol()).isPresent())
+            .isPresent();
+
+
 
     /**
      * Endpoint method to accept a {@link GetStockPriceRequest} and return a response.

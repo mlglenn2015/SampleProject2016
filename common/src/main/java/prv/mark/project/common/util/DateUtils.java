@@ -107,6 +107,24 @@ public class DateUtils {
     }
 
     /**
+     * Returns an {@link XMLGregorianCalendar} object.
+     * @return {@link XMLGregorianCalendar}
+     */
+    public static XMLGregorianCalendar getCurrentXMLGregorianCalendarFromLocalDateTime(
+                                                            final LocalDateTime localDateTime) {
+        XMLGregorianCalendar xmlGregorianCalendar;
+
+        try {
+            xmlGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(localDateTime.toString());
+        } catch (DatatypeConfigurationException dce) {
+            LOGGER.error(dce.getMessage());
+            return null;
+        }
+
+        return xmlGregorianCalendar;
+    }
+
+    /**
      * Returns a {@link Date} object.
      * @param xmlGregorianCalendar the object to convert.
      * @return {@link Date}

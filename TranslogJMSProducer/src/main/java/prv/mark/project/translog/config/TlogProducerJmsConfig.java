@@ -5,21 +5,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.integration.annotation.IntegrationComponentScan;
-import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.channel.interceptor.WireTap;
+import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.dsl.jms.Jms;
 import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.xml.transformer.MarshallingTransformer;
 import org.springframework.integration.xml.transformer.ResultToStringTransformer;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MarshallingMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-
 import prv.mark.project.translog.interceptor.TranslogProducerInterceptor;
 import prv.mark.project.translog.schemas.TransactionLoggerMsgType;
 
@@ -34,39 +36,47 @@ import java.util.Map;
  * Sources:
  * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html
  * https://spring.io/guides/gs/messaging-jms/
+ * http://chariotsolutions.com/blog/post/sending-beans-as-xml-with-jmstemplate/
  *
  * @author mlglenn on 2/15/2017.
  */
 @Configuration
-@EnableIntegration
-@IntegrationComponentScan
-@ImportResource(value = {"classpath:/TlogJmsConfig.xml"})
+//@EnableIntegration
+//@IntegrationComponentScan
+//@ImportResource(value = {"classpath:/TlogJmsConfig.xml"}) TODO
+@ComponentScan(basePackages = {"prv.mark.project.translog"})
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class TlogProducerJmsConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(TlogProducerJmsConfig.class);
 
-    @Autowired
-    protected ConnectionFactory tlogConnectionFactory;  // TODO? JNDI_FACTORY="weblogic.jndi.WLInitialContextFactory";
+    //Defined in TlogJmsConfig.xml and accessed via jms/TlogConnectionFactory
+    /*@Autowired(required=false)
+    protected ConnectionFactory tlogConnectionFactory;*/
 
-    @Autowired
+    //Defined in TlogJmsConfig.xml and accessed via jms/tlogJMSQueue
+    /*@Autowired
     @Qualifier("tlogJMSQueue")
-    protected Queue tlogJMSQueue;
+    protected Queue tlogJMSQueue;*/
 
+    //Defined in TlogJmsConfig.xml and accessed via jms/TlogErrorJMSQueue
     /*@Autowired
     @Qualifier("tlogErrorJMSQueue")
     protected Queue tlogErrorJMSQueue;*/
 
     /**
-     * Generic {@link MessageChannel} used to log messages intercepted by {@link WireTap()}.
+     * Generic {@link MessageChannel} used to log messages intercepted by {@link WireTap ()}.
      */
-    @Autowired
-    protected MessageChannel tlogJMSLogger;
+    //Defined in TlogJmsConfig.xml
+    /*@Autowired
+    protected MessageChannel tlogJMSLogger;*/
 
-    @Bean
+    /*@Bean TODO channel must not be null
     public WireTap wireTap() {
+        logger.debug("TlogProducerJmsConfig.wireTap(): Returning a new WireTap instance ...");
         return new WireTap(tlogJMSLogger);
-    }
+    }*/
+
 
     /**
      * JAXB marshaller/unmarshaller for Stock Ticker application JMS messages.
@@ -91,8 +101,38 @@ public class TlogProducerJmsConfig {
      */
     @Bean
     public MarshallingTransformer translogProducerTransformer() {
+        logger.debug("TlogProducerJmsConfig.translogProducerTransformer(): Returning a new MarshallingTransformer instance ...");
         return Transformers.marshaller(translogProducerJmsMarshaller(), new ResultToStringTransformer());
     }
+
+    /**
+     * TODO
+     * @return
+     */
+    @Bean
+    public MarshallingMessageConverter oxmMessageConverter() {
+        MarshallingMessageConverter converter = new MarshallingMessageConverter();
+        converter.setMarshaller(translogProducerJmsMarshaller());
+        converter.setUnmarshaller(translogProducerJmsMarshaller());
+        return converter;
+    }
+
+    /**
+     * TODO
+     * @return
+     */
+    /*@Bean
+    public JmsTemplate jmsTemplate() {
+        logger.debug("TlogProducerJmsConfig.jmsTemplate(): Returning a new JmsTemplate instance ...");
+        JmsTemplate jmsTempl = new JmsTemplate(tlogConnectionFactory);
+        //jmsTempl.setDefaultDestinationName();
+        jmsTempl.setDefaultDestination(tlogJMSQueue);
+        jmsTempl.setMessageConverter(oxmMessageConverter());
+        jmsTempl.setMessageIdEnabled(true);
+        jmsTempl.setMessageTimestampEnabled(true);
+        jmsTempl.setSessionTransacted(true);
+        return jmsTempl;
+    }*/
 
     /**
      * Transaction Log Producer message integration channel.
@@ -101,22 +141,25 @@ public class TlogProducerJmsConfig {
      *
      * @return {@link MessageChannel}
      */
-    @Bean
+    /*@Bean
     public MessageChannel translogProducerChannel() {
+        logger.debug("TlogProducerJmsConfig.translogProducerChannel(): Returning a new MessageChannel instance ...");
         return MessageChannels.queue("translogProducerChannel", 500)
                 .interceptor(new TranslogProducerInterceptor())
                 .get();
-    }
+    }*/
 
     /**
      * Publishes JMS messages to the Transaction Log JMS queue.
      *
      * @return {@link IntegrationFlow}
      */
-    @Bean
+    /*@Bean
     public IntegrationFlow translogProducerIntegrationFlow() {
+        logger.debug("TlogProducerJmsConfig.translogProducerIntegrationFlow(): Returning a new IntegrationFlow instance ...");
         //return f -> f.channel(translogProducerChannel()) TODO ?
         return f -> f.channel("translogProducerChannel")
                 .handle(Jms.outboundAdapter(tlogConnectionFactory).destination(tlogJMSQueue));
-    }
+    }*/
+
 }

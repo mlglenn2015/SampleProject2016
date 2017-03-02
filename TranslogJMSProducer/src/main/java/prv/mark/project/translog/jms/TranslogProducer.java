@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
  * TODO
@@ -21,12 +22,19 @@ public class TranslogProducer {
     @Autowired
     private MessageChannel translogProducerChannel;
 
+    @Autowired
+    private Jaxb2Marshaller translogProducerJmsMarshaller;
+
+
+
 
     public void sendMessage(final String name) {
         LOGGER.info("TranslogProducer.sendMessage()");
 
         //IntegrationFlow integrationFlow = translogProducerIntegrationFlow()
 
+        //translogProducerJmsMarshaller.
+        //MessageBuilder
 
         translogProducerChannel.send(MessageBuilder.withPayload(name).build());
 

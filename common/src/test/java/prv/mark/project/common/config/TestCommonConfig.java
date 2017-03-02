@@ -13,6 +13,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import prv.mark.project.common.service.impl.ApplicationMessageSource;
 import prv.mark.project.common.service.impl.ApplicationParameterSource;
 import prv.mark.project.testutils.config.TestDataConfig;
+import prv.mark.project.testutils.config.TestTlogProducerJmsConfig;
 
 /**
  * Spring Configuration for unit tests.
@@ -20,7 +21,8 @@ import prv.mark.project.testutils.config.TestDataConfig;
  * @author mlglenn
  */
 @Configuration
-@Import({TestDataConfig.class})
+@PropertySource("classpath:/test-common.properties")
+@Import({TestDataConfig.class}) //, TestTlogProducerJmsConfig.class}) //TestTlogProducerJmsConfig added from testutils for JMS tests
 @ComponentScan(basePackages = {"prv.mark.project"})
 @Profile("test")
 public class TestCommonConfig {
@@ -42,11 +44,11 @@ public class TestCommonConfig {
         return new ApplicationParameterSource();
     }
 
-    @Bean
+    /*@Bean TODO remove if it doesnt work
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer cofigurer = new PropertySourcesPlaceholderConfigurer();
         cofigurer.setLocation(new ClassPathResource("test-common.properties"));
         return cofigurer;
-    }
+    }*/
 
 }

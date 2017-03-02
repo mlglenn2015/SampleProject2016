@@ -14,7 +14,6 @@
                      expected-type="javax.jms.ConnectionFactory" lookup-on-startup="false" />
 
     <jee:jndi-lookup id="tlogJMSQueue" jndi-name="jms/TlogJMSQueue" expected-type="javax.jms.Queue" />
-    <!--<jee:jndi-lookup id="tlogErrorJMSQueue" jndi-name="jms/TlogErrorJMSQueue" expected-type="javax.jms.Queue" />-->
 
     <int:logging-channel-adapter id="tlogJMSLogger" level="INFO" />
 </beans>

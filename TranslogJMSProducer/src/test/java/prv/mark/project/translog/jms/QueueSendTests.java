@@ -38,7 +38,7 @@ public class QueueSendTests {
     }
 
 
-    //@Test
+    //@Test TODO all tests are disabled until i can mock JMS
     public void testSendMessage() {
         LOGGER.debug("***** QueueSendTests.testSendMessage() *****");
         String testMessage = "Test Message";
