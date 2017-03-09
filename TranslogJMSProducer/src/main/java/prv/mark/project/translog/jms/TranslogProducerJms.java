@@ -19,21 +19,24 @@ import javax.jms.Session;
  *
  * Created by Owner on 2/19/2017.
  */
-@Component("messageSender")
+@Component("transactionLogMessageSender")
 public class TranslogProducerJms implements TransactionLogMessageSender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TranslogProducerJms.class);
 
-    /* Declared in TlogJmsConfig.xml */
+    /* Declared in TlogProducerJmsConfig and TlogJmsConfig.xml */
     @Autowired(required = false)
     private JmsTemplate jmsTemplate;
 
+
+    public TranslogProducerJms() {}
 
     @Override
     public void sendMessage(final String message) {
         LOGGER.info("TranslogProducerJms.sendMessage(): Entry");
         try {
             if (jmsTemplate != null) {
+                LOGGER.info("TranslogProducerJms.sendMessage(): Sending message: [{}]", message);
                 jmsTemplate.send(new MessageCreator() {
                     @Override
                     public Message createMessage(Session session) throws JMSException {
@@ -55,17 +58,19 @@ public class TranslogProducerJms implements TransactionLogMessageSender {
         LOGGER.info("TranslogProducerJms.sendMessage(): Entry");
         try {
             if (jmsTemplate != null) {
-                jmsTemplate.convertAndSend(new MessagePostProcessor() {
+                LOGGER.info("TranslogProducerJms.sendMessage(): Sending message: [{}]", translogToString(message));
+                jmsTemplate.convertAndSend(message);
+                /*jmsTemplate.convertAndSend(message, new MessagePostProcessor() {
                     @Override
-                    public Message postProcessMessage(Message msg) throws JMSException {
-                        if (msg instanceof TransactionLoggerMsgType) {
-                            TransactionLoggerMsgType newMsg = (TransactionLoggerMsgType) msg;
-                            LOGGER.info("Sending TransactionLoggerMsgType message: date=[{}] type=[{}] text=[{}]",
+                    public Message postProcessMessage(Message message) throws JMSException { TODO
+                        if (message instanceof TransactionLoggerMsgType) {
+                            TransactionLoggerMsgType newMsg = (TransactionLoggerMsgType) message;
+                            LOGGER.info("Sending TransactionLoggerMsgType newMsg: date=[{}] type=[{}] text=[{}]",
                                     newMsg.getLogDateTime(), newMsg.getTransactionType(), newMsg.getTransactionDetail());
                         }
-                        return msg;
+                        return message;
                     }
-                });
+                });*/
             } else {
                 LOGGER.info("TranslogProducerJms.sendMessage(): jmsTemplate is null");
             }
@@ -74,5 +79,20 @@ public class TranslogProducerJms implements TransactionLogMessageSender {
             throw new SOAPClientException(jmse.getMessage());
         }
         LOGGER.info("TranslogProducerJms.sendMessage(): Exit");
+    }
+
+
+    private String translogToString(final TransactionLoggerMsgType message) {
+        StringBuffer buffer = new StringBuffer();
+        if (message != null) {
+            buffer.append("Log Date/Time:[")
+                    .append(message.getLogDateTime())
+                    .append("]  Transaction Type:[")
+                    .append(message.getTransactionType())
+                    .append("]  Transaction Detail:[")
+                    .append(message.getTransactionDetail())
+                    .append("]");
+        }
+        return buffer.toString();
     }
 }

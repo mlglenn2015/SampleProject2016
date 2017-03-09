@@ -43,33 +43,38 @@ import java.util.Map;
 @Configuration
 //@EnableIntegration
 //@IntegrationComponentScan
-//@ImportResource(value = {"classpath:/TlogJmsConfig.xml"}) TODO
+@ImportResource(value = {"classpath:/TlogJmsConfig.xml"}) //TODO fix
 @ComponentScan(basePackages = {"prv.mark.project.translog"})
 @Profile({"local", "dev", "qatest", "staging", "production"})
 public class TlogProducerJmsConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(TlogProducerJmsConfig.class);
 
-    //Defined in TlogJmsConfig.xml and accessed via jms/TlogConnectionFactory
-    /*@Autowired(required=false)
-    protected ConnectionFactory tlogConnectionFactory;*/
+    private static final Class<?>[] MARSHAL_CLASSES_TO_BE_BOUND = {
+            prv.mark.project.translog.schemas.TransactionLoggerMsgType.class
+    };
 
-    //Defined in TlogJmsConfig.xml and accessed via jms/tlogJMSQueue
-    /*@Autowired
+    /* Defined in TlogJmsConfig.xml and accessed via jms/TlogConnectionFactory */
+    @Autowired(required=false)
+    protected ConnectionFactory tlogConnectionFactory;
+
+    /* Defined in TlogJmsConfig.xml and accessed via jms/tlogJMSQueue */
+    @Autowired(required=false)
     @Qualifier("tlogJMSQueue")
-    protected Queue tlogJMSQueue;*/
+    protected Queue tlogJMSQueue;
 
-    //Defined in TlogJmsConfig.xml and accessed via jms/TlogErrorJMSQueue
-    /*@Autowired
+    /* Defined in TlogJmsConfig.xml and accessed via jms/TlogErrorJMSQueue */
+    /*@Autowired(required=false)
     @Qualifier("tlogErrorJMSQueue")
     protected Queue tlogErrorJMSQueue;*/
 
     /**
      * Generic {@link MessageChannel} used to log messages intercepted by {@link WireTap ()}.
      */
-    //Defined in TlogJmsConfig.xml
-    /*@Autowired
-    protected MessageChannel tlogJMSLogger;*/
+    /* Defined in TlogJmsConfig.xml */
+    @Autowired(required=false)
+    protected MessageChannel tlogJMSLogger;
+
 
     /*@Bean TODO channel must not be null
     public WireTap wireTap() {
@@ -87,10 +92,11 @@ public class TlogProducerJmsConfig {
     public Jaxb2Marshaller translogProducerJmsMarshaller() {
         logger.debug("TlogProducerJmsConfig.translogProducerJmsMarshaller(): Returning a Jaxb2Marshaller instance ...");
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("prv.mark.project.translog.schemas");
-        Map<String, Object> props = new HashMap<>();
+        //jaxb2Marshaller.setPackagesToScan("prv.mark.project.translog.schemas"); //TODO
+        jaxb2Marshaller.setClassesToBeBound(MARSHAL_CLASSES_TO_BE_BOUND);
+        /*Map<String, Object> props = new HashMap<>();
         props.put(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxb2Marshaller.setMarshallerProperties(props);
+        jaxb2Marshaller.setMarshallerProperties(props);*/
         return jaxb2Marshaller;
     }
 
@@ -121,18 +127,28 @@ public class TlogProducerJmsConfig {
      * TODO
      * @return
      */
-    /*@Bean
+    @Bean
     public JmsTemplate jmsTemplate() {
         logger.debug("TlogProducerJmsConfig.jmsTemplate(): Returning a new JmsTemplate instance ...");
-        JmsTemplate jmsTempl = new JmsTemplate(tlogConnectionFactory);
-        //jmsTempl.setDefaultDestinationName();
-        jmsTempl.setDefaultDestination(tlogJMSQueue);
+        JmsTemplate jmsTempl = new JmsTemplate();
+        if (tlogConnectionFactory != null) {
+            jmsTempl.setConnectionFactory(tlogConnectionFactory);
+        } else {
+            logger.debug("TlogProducerJmsConfig.jmsTemplate(): tlogConnectionFactory is NULL!");
+        }
+        //jmsTempl.setDefaultDestinationName(); TODO cleanup
+        if (tlogJMSQueue != null) {
+            jmsTempl.setDefaultDestination(tlogJMSQueue);
+        } else {
+            logger.debug("TlogProducerJmsConfig.jmsTemplate(): tlogJMSQueue is NULL!");
+        }
         jmsTempl.setMessageConverter(oxmMessageConverter());
         jmsTempl.setMessageIdEnabled(true);
         jmsTempl.setMessageTimestampEnabled(true);
         jmsTempl.setSessionTransacted(true);
+        jmsTempl.afterPropertiesSet();
         return jmsTempl;
-    }*/
+    }
 
     /**
      * Transaction Log Producer message integration channel.

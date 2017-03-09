@@ -70,6 +70,9 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
     //@Autowired
     //protected MessageChannel tlogJMSLogger;
 
+    @Autowired
+    TransactionLoggerJmsClient tlogClient;
+
 
     @Override
     public GetStockPriceResponse getStockPrice(
@@ -77,9 +80,14 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         LOGGER.debug("*** StockServiceOrderServiceImpl.getStockPrice() entry ...");
         logGetStockPriceRequest(getStockPriceRequest);
 
-        TransactionLoggerJmsClient tlogClient =
-                new TransactionLoggerJmsClient(setTransactionDto(getStockPriceRequest));
-        tlogClient.sendMessage();
+        if (tlogClient != null) {
+            tlogClient.setTransactionDto(setTransactionDtoProperties(getStockPriceRequest));
+            tlogClient.sendMessage();
+        } else {
+            LOGGER.debug("*** StockServiceOrderServiceImpl.getStockPrice() TransactionLoggerJmsClient is NULL!");
+        }
+
+
 
 
 
@@ -139,9 +147,21 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
     public List<GetStockPriceResponse> getAll() {
         LOGGER.debug("*** StockServiceOrderServiceImpl.getAll() entry ...");
         //logGetStockPriceRequest(getStockPriceRequest);
+
+
+
+
+        /*
+        if (tlogClient != null) {
+            tlogClient.setTransactionDto(setTransactionDtoProperties(getStockPriceRequest));
+            tlogClient.sendMessage();
+        } else {
+            LOGGER.debug("*** StockServiceOrderServiceImpl.getStockPrice() TransactionLoggerJmsClient is NULL!");
+        }
+        */
         String trxDetail = "GET ALL STOCK QUOTES";
         LOGGER.debug(trxDetail);
-        TransactionDto transactionDto = setTransactionDto(trxDetail);
+        TransactionDto transactionDto = setTransactionDtoProperties(trxDetail);
 
 
 
@@ -183,20 +203,26 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         LOGGER.debug("*** StockServiceOrderServiceImpl.placeOrder() entry ...");
         logSubmitOrderRequest(submitOrderRequest);
 
-        TransactionDto transactionDto = setTransactionDto(submitOrderRequest);
+        if (tlogClient != null) {
+            tlogClient.setTransactionDto(setTransactionDtoProperties(submitOrderRequest));
+            tlogClient.sendMessage();
+        } else {
+            LOGGER.debug("*** StockServiceOrderServiceImpl.placeOrder() TransactionLoggerJmsClient is NULL!");
+        }
+
 
 
 
 
         //TODO place the tranaction on the log queue (TransactionLogger)
-        TransactionLogEntity transactionLogEntity = new TransactionLogEntity();
+        /*TransactionLogEntity transactionLogEntity = new TransactionLogEntity();
         transactionLogEntity.setId(null);
         transactionLogEntity.setTransactionType(transactionDto.getTransactionType());
         transactionLogEntity.setLogDateTime(DateUtils.getDateFromLocalDateTime(transactionDto.getLogDateTime()));
         if (StringUtils.isNotEmpty(transactionDto.getTransactionDetail())) {
             transactionLogEntity.setTransactionData(transactionDto.getTransactionDetail());
         }
-        saveTransactionLogEntity(transactionLogEntity);
+        saveTransactionLogEntity(transactionLogEntity);*/
 
 
 
@@ -245,7 +271,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
 
     /* Private methods */
 
-    private TransactionDto setTransactionDto(final String detailString) {
+    private TransactionDto setTransactionDtoProperties(final String detailString) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
         transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
@@ -253,7 +279,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         return transactionDto;
     }
 
-    private TransactionDto setTransactionDto(final GetStockPriceRequest getStockPriceRequest) {
+    private TransactionDto setTransactionDtoProperties(final GetStockPriceRequest getStockPriceRequest) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
         transactionDto.setTransactionType(EnumTransactionTypes.STOCK_PRICE_INQUIRY.getTransactionTypeDesc());
@@ -262,7 +288,7 @@ public class StockServiceOrderServiceImpl implements StockServiceOrderService {
         return transactionDto;
     }
 
-    private TransactionDto setTransactionDto(final SubmitOrderRequest submitOrderRequest) {
+    private TransactionDto setTransactionDtoProperties(final SubmitOrderRequest submitOrderRequest) {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setLogDateTime(DateUtils.getLocalDateTime());
         if (submitOrderRequest.getOrder().getAction().equalsIgnoreCase(EnumAction.BUY.getActionType())) {

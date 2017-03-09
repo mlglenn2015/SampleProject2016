@@ -3,6 +3,8 @@ package prv.mark.project.stockservice.jms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.stereotype.Component;
 import prv.mark.project.common.domain.TransactionDto;
 import prv.mark.project.common.util.DateUtils;
 import prv.mark.project.translog.jms.TranslogProducerJms;
@@ -14,6 +16,7 @@ import prv.mark.project.translog.schemas.TransactionLoggerMsgType;
  *
  * Created by Owner on 2/19/2017.
  */
+@Component
 public class TransactionLoggerJmsClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionLoggerJmsClient.class);
@@ -24,10 +27,15 @@ public class TransactionLoggerJmsClient {
     private TranslogProducerJms translogProducerJms;
 
 
+    public TransactionLoggerJmsClient() {}
+
     public TransactionLoggerJmsClient(TransactionDto transactionDto) {
         this.transactionDto = transactionDto;
     }
 
+    /**
+     *
+     */
     public void sendMessage() {
         LOGGER.info("TransactionLoggerJmsClient.sendMessage(): Entry");
 
@@ -44,8 +52,8 @@ public class TransactionLoggerJmsClient {
                 transactionLoggerMsgType.getTransactionDetail());
 
         if (translogProducerJms != null) {
-            translogProducerJms.sendMessage("TEST MESSAGE");
-            //translogProducerJms.send TODO
+            //translogProducerJms.sendMessage("TEST MESSAGE"); //TODO
+            translogProducerJms.sendMessage(transactionLoggerMsgType);
         } else {
             LOGGER.info("TransactionLoggerJmsClient.sendMessage(): translogProducerJms is NULL!");
         }
@@ -57,7 +65,7 @@ public class TransactionLoggerJmsClient {
         return transactionDto;
     }
 
-    /*public void setTransactionDto(TransactionDto transactionDto) {
+    public void setTransactionDto(TransactionDto transactionDto) {
         this.transactionDto = transactionDto;
-    }*/
+    }
 }
